@@ -2,5 +2,5 @@
 ### Desarrolladores de la aplicación:
 #### - Sebastian Pitra.
 #### - Diamela Lares.
-#### - Lizhana Campos
+#### - Lizhana Campos.
 #### - Hernan Rinaldi.
