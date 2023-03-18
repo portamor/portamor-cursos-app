@@ -1,5 +1,6 @@
-import React  from "react";
-import styles from "./CourseDetail.module.css"
+import { NavLink } from "react-router-dom";
+import React       from "react";
+import styles      from "./CourseDetail.module.css"
 
 export const CourseDetail = ({match}) => {
   // const id = match.props.params
@@ -34,10 +35,19 @@ export const CourseDetail = ({match}) => {
             <strong>{courseDetail.instructor}</strong>
           </p>
           <div className={styles["course-buttons-container"]}>
-            <button className={styles["inscription-button"]}>Inscribete Aquí</button>
+            <NavLink 
+              to={`/home`}
+              className={styles["inscription-button"]} >
+                Inscribete Aquí
+            </NavLink>
             <div className={styles["help-container"]}>
               <span>¿Necesitas ayuda?</span>
-              <button className={styles["help-button"]}>Pide ayuda aqui</button>
+              <NavLink 
+                to={`https://wa.me/123456`}
+                className={styles["help-button"]} >
+                  Pide ayuda aqui
+              </NavLink>
+                
             </div>
           </div>
         </div>
