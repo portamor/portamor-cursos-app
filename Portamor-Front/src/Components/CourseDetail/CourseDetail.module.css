@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+.course-detail-main {
+  margin-top: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  padding: 20px 3px 60px;
+}
+
+@media(max-width: 750px) {
+  .course-detail-main {
+    margin-top: 30px;
+  }
+}
+
+.course-detail-image-description {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+@media(max-width: 750px) {
+  .course-detail-image-description {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.course-img-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+@media(max-width: 750px) {
+  .course-img-container {
+    align-items: center;
+  }
+}
+
+.course-img {
+  width: 400px;
+  height: 400px;
+  margin-right: 20px;
+  border-radius: 12px;
+}
+
+@media(max-width: 750px) {
+  .course-img {
+    width: 350px;
+    height: 350px;
+    margin-right: 0;
+  }
+}
+
+.course-genre {
+  width: fit-content;
+  padding: 10px;
+  color: #ffff;
+  background-color: #EB575A;
+  border-radius: 12px;
+}
+
+@media(max-width: 750px) {
+  .right-detail-course {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.course-description {
+  max-width: 617px;
+  padding-bottom: 40px;
+}
+
+@media(max-width: 750px) {
+  .course-description {
+    max-width: 400px;
+    padding: 0 16px;
+  }
+}
+
+.course-buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  gap: 20px;
+  padding-top: 40px;
+}
+
+.inscription-button {
+  height: fit-content;
+  background-color: #EB575A;
+  padding: 10px;
+  color: #ffff;
+  border: none;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 12px;
+}
+
+.help-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: -25px;
+}
+
+.help-button {
+  height: fit-content;
+  background-color: #fff;
+  border: solid 3px #EB575A;
+  padding: 10px;
+  font-size: 18px;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 12px;
+}
+
