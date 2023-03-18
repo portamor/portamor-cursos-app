@@ -180,3 +180,17 @@ margin-left: 10%;
     color: #eb575a;
 }
 }
+@media only screen and (max-width: 335px) {
+  .nav-container {
+    width: 110%;
+  }
+  .nav-container img{
+    margin-left: 3%;
+  }
+}
+@media (max-width: 320px) {
+  .nav-container {
+    width: 150vh;
+  }
+}
+
