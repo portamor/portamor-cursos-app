@@ -96,12 +96,14 @@
 .inscription-button {
   height: fit-content;
   background-color: #EB575A;
-  padding: 10px;
+  padding: 12px;
   color: #ffff;
   border: none;
   font-size: 18px;
   font-family: 'Montserrat', sans-serif;
   border-radius: 12px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .help-container {
@@ -119,5 +121,8 @@
   font-size: 18px;
   font-family: 'Montserrat', sans-serif;
   border-radius: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
 }
 
