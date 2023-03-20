@@ -13,10 +13,15 @@ module.exports = sequelize => {
         type: DataTypes.STRING,
         allowNull: false
       },
+      link:{
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       description: {
         type: DataTypes.STRING,
         allowNull: false
       }
-    }
+    },
+    { timestamps: false }
     )
 }

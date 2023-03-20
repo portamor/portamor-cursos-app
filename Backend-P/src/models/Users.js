@@ -9,11 +9,6 @@ module.exports = sequelize => {
             primaryKey: true,
             allowNull: false
         },
-        email: {
-          type: DataTypes.STRING,
-          allowNull: false,
-          unique: true,
-        },
         name: {
             type: DataTypes.STRING,
             allowNull: false
@@ -28,12 +23,13 @@ module.exports = sequelize => {
         },
         birthday: {
             type: DataTypes.DATEONLY,
-            allowNull: false,
+            allowNull: true,
         },
         admin: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
-        }
-      }
+        },
+        },
+        { timestamps: false }
     )
 }

@@ -17,18 +17,35 @@ module.exports = sequelize => {
             type: DataTypes.STRING,
             allowNull: true
         },
-        description: {
+        typeCourse: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        goals: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: true
         },
         rating: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        genre: {
+        materials: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
+        },
+        testimony: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
+        methodology: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
-    }
+    },
+    { timestamps: false }
     )
 }
