@@ -16,6 +16,18 @@ const getUsers = async (req, res) => {
     } catch (error) {
         console.log('error al obtener usuarios', error)
     }
+    } else if (code) {
+        try {
+            const userCurrent = await Users.findOne({where: { code }})
+            if(userCurrent) {
+                res.status(200).json(userCurrent)
+            } else {
+                res.status(202).json({message: 'No se encontro usuario con ese codigo'})
+            }
+            
+        } catch (error) {
+            console.log('error al obtener el user por code' ,error)
+        }
     }
 }
 
