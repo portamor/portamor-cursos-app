@@ -1,4 +1,4 @@
-const {Users, Comments, Inscription}= require('../database.js')
+const {Users}= require('../database.js')
 
 const getUsers = async (req, res) => {
     const {code} = req.query

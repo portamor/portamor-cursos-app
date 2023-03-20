@@ -31,7 +31,7 @@ module.exports = sequelize => {
         },
         rating: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         },
         materials: {
             type: DataTypes.STRING,
