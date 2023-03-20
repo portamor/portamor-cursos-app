@@ -8,13 +8,13 @@ body {
   top: 0%;
   bottom: 0%;
   height: 20%;
-  background: #EB575A;
+  background: #eb575a;
 }
 
 .nav-menu {
   margin: 0;
-  position: absolute;  
-  top:40px;
+  position: absolute;
+  top: 40px;
   left: 0;
   right: 0;
   display: flex;
@@ -24,7 +24,6 @@ body {
 .nav-container img {
   margin-top: 2%;
   margin-left: 2%;
- 
 }
 
 .nav-menu li {
@@ -41,23 +40,13 @@ body {
 .container-link {
   margin-left: auto;
   display: flex;
-  align-items: center;
-  
-flex-direction: row;
-justify-content: center;
-align-items: center;
-
-
-
-
-width: 866px;
-height: 64px;
-left: 574px;
-top: 16px;
-
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: end;
+  align-items: flex-end;
+  height: 64px;
+  top: 16px;
 }
-
-
 
 .nav-link {
   font-size: 18px;
@@ -71,9 +60,8 @@ top: 16px;
 .nav-link:hover {
   color: black;
 }
-
 /* Estilos para pantallas móviles */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 975px) {
   .nav-menu {
     display: none;
     position: absolute;
@@ -92,22 +80,22 @@ top: 16px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height:350%;
-    width:auto;
+    height: 350%;
+    width: auto;
     padding: 0;
     margin-top: 30%;
   }
-  .nav-menu li{
+  .nav-menu li {
     margin-top: 8%;
   }
 
-  .nav-menu li:hover .nav-link {    
+  .nav-menu li:hover .nav-link {
     color: black;
     height: 44px;
     background: #f9dfdc;
-    width: 100%; 
+    width: 100%;
   }
-  
+
   .nav-link {
     font-family: "Roboto";
     font-style: normal;
@@ -115,9 +103,8 @@ top: 16px;
     font-size: 30.8975px;
     line-height: 44px;
     color: #ffffff;
-    text-align: center; 
+    text-align: center;
   }
-
 
   .bar {
     display: flex;
@@ -129,7 +116,6 @@ top: 16px;
     position: absolute;
     width: 129px;
     height: 57px;
-    left: 115px;
     top: 132px;
     background: #ffffff;
     border: 3px solid #eb575a;
@@ -140,8 +126,10 @@ top: 16px;
     font-size: 25.4302px;
     line-height: 33px;
     color: #eb575a;
+    left: 50%; /* Agregar esta propiedad */
+    transform: translateX(-50%); /* Agregar esta propiedad */
   }
-  .container-link{
+  .container-link {
     margin-left: -10%;
   }
 
@@ -154,10 +142,12 @@ top: 16px;
     height: 30%;
     background: #eb575a;
   }
-  .nav-container img{
-margin-left: 10%;
+  .nav-container img {
+    margin: 0 auto;
+    display: block;
   }
-  .button-salirMenu{
+
+  .button-salirMenu {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -178,19 +168,13 @@ margin-left: 10%;
     font-size: 25.4302px;
     line-height: 33px;
     color: #eb575a;
+  }
 }
-}
-@media only screen and (max-width: 335px) {
+@media screen and (max-width: 300px) {
   .nav-container {
-    width: 110%;
+    width: 105%;
   }
-  .nav-container img{
-    margin-left: 3%;
-  }
-}
-@media (max-width: 320px) {
-  .nav-container {
-    width: 150vh;
+  .nav-container img {
+    transform: scale(0.9);
   }
 }
-
