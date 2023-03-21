@@ -7,43 +7,41 @@ export const NavBar = () => {
   const navMenuRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 975);
+
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        navMenuRef.current &&
-        !navMenuRef.current.contains(event.target) &&
-        hamburguerRef.current &&
-        !hamburguerRef.current.contains(event.target)
-      ) {
-        hamburguerRef.current.classList.remove("active");
-        navMenuRef.current.classList.remove("active");
-      }
-    };
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [hamburguerRef, navMenuRef]);
+    const handleResize = () => setIsMobile(window.innerWidth < 975);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const handleHamburguerClick = () => {
-    hamburguerRef.current.classList.toggle("active");
-    navMenuRef.current.classList.toggle("active");
+    if (menuOpen) {
+      setMenuOpen(false);
+      hamburguerRef.current.classList.remove("active");
+      navMenuRef.current.classList.remove("active");
+    } else {
+      setMenuOpen(true);
+      hamburguerRef.current.classList.add("active");
+      navMenuRef.current.classList.add("active");
+    }
   };
+
+
+
 
   return (
     <nav className={Styles["nav-container"]}>
-     <ul
+      <img
+        src="https://res.cloudinary.com/dsjsbp6qy/image/upload/v1679065705/Dshop/Dise%C3%B1o_sin_t%C3%ADtulo__19_-removebg-preview-removebg-preview_gvpsgd.png"
+        alt="logo"
+        width={300}
+        height={100}
+      />
+      <ul
         className={`${Styles["nav-menu"]} ${menuOpen ? Styles["active"] : ""}`}
         ref={navMenuRef}
       >
-        <img
-          src="https://res.cloudinary.com/dsjsbp6qy/image/upload/v1679065705/Dshop/Dise%C3%B1o_sin_t%C3%ADtulo__19_-removebg-preview-removebg-preview_gvpsgd.png"
-          alt="logo"
-          width={300}
-          height={100}
-        />
         <ul className={Styles["container-link"]}>
           <li>
             <NavLink
@@ -66,15 +64,18 @@ export const NavBar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink
-              className={Styles["nav-link"]}
-              activeClass="active"
-              to=""
-            
-            >
+            <NavLink  activeClassName="active" className={Styles["nav-link"]} to="">
               Solicitar ayuda
             </NavLink>
           </li>
+          {isMobile && (
+            <button
+              className={Styles["button-salirMenu"]}
+              onClick={handleHamburguerClick}
+            >
+              Salir del Menú
+            </button>
+          )}
         </ul>
       </ul>
       <div
@@ -82,12 +83,12 @@ export const NavBar = () => {
           menuOpen ? Styles["active"] : ""
         }`}
         ref={hamburguerRef}
-        onClick={() => setMenuOpen(!menuOpen)}
+        onClick={handleHamburguerClick}
       >
-        <span className={Styles["bar"]}></span>
-        <span className={Styles["bar"]}></span>
-        <span className={Styles["bar"]}></span>
+        {isMobile && <button className={Styles["bar"]}>Menú</button>}
       </div>
+
+      <div></div>
     </nav>
   );
 };
