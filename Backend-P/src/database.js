@@ -52,7 +52,7 @@ Comments.belongsTo(Users);
 Users.hasMany(Inscription);
 Inscription.belongsTo(Users);
 
-Inscription.hasOne(Courses)
+Inscription.hasMany(Courses)
 Courses.belongsTo(Inscription)
 
 Courses.hasMany(Instructor);
