@@ -1,0 +1,147 @@
+body {
+  margin: 0;
+}
+.nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.nav-menu {
+  margin: 0;
+  background-color: #eb575a;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  
+}
+
+.nav-menu img {
+  margin-top: 10px;
+}
+.nav-menu li {
+  list-style-type: none;
+  font-weight: 800;
+}
+.nav-menu li:hover {
+  background-color: rgba(255, 255, 255, 0.708);
+  color: black;
+  border-radius: 5px;
+  transform: scale(1.05);
+}
+
+.container-link {
+  margin-left: auto; 
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 18px;
+  margin: 0 80px;
+  white-space: nowrap;
+  width: 100px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+}
+.nav-link:hover {
+  color: black;
+}
+
+.hamburguer {
+    display: none;
+    cursor: pointer;
+  }
+/* Estilos para pantallas móviles */
+@media screen and (max-width: 768px) {
+    .nav-menu {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background-color: #eb575a;
+      z-index: 1;
+    }
+    .nav-menu.active .container-link {
+        display: block;
+      }
+    
+    .nav-menu.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      width: 100%;
+      padding: 0;
+    }
+   
+    .nav-menu li {
+      margin: 10px;
+      font-size: 24px;
+      color:white;
+    }
+    .nav-menu li:hover {
+        background-color: transparent;
+        color: black;
+        border-radius: 5px;
+        
+      }
+    .nav-link{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: -20%;
+    }
+    
+    .hamburguer {
+      display: block;
+      position: absolute;
+      top: 25px;
+      right: 20px;
+      width: 25px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 2;
+    }
+    
+    .bar {
+      display: block;
+      width: 100%;
+      height: 4px;
+      margin: 3px auto;
+      background-color: rgb(0, 0, 0);
+      border-radius: 5px;
+      transition: transform 0.2s ease-in-out;
+    }
+    
+    .active .bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    
+    .active .bar:nth-child(2) {
+      opacity: 0;
+    }
+    
+    .active .bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+    
+    .container-link {
+      display: none;
+    }
+    
+    .nav-menu img {
+      margin-left: 20px;
+      margin-top: -50%
+    }
+  
+  }
+  
