@@ -9,22 +9,23 @@ module.exports = sequelize => {
             primaryKey: true,
             allowNull: false
       },
-      name: {
+      instructorName: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      score:{
+      instructorScore:{
         type: DataTypes.STRING,
         allowNull: true
       },
-      review: {
+      instructorReview: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      descriptionIns:{
+      instructorDescription:{
         type: DataTypes.STRING,
         allowNull: true
       }
-    }
+    },
+    { timestamps: false }
     )
 }

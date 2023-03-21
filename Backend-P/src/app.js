@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan')
 const session = require('express-session');
 const cors = require('cors');
- const routes = require('./index.js')
+ const router = require('./index.js')
 require('./database.js')
 
 
@@ -36,7 +36,7 @@ server.use((req, res, next) => {
     next();
   });
   
-  server.use("/", routes);
+  server.use("/", router);
 
   // Error catching endware.
 server.use((err, req, res, next) => {

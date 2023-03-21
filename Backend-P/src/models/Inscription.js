@@ -13,10 +13,11 @@ module.exports = sequelize => {
             type: DataTypes.STRING(50),
             allowNull: false,
         },
-        inscription: {
+        inscriptionActive: {
             type: DataTypes.STRING,
             allowNull: false,
         }
-    }
+    },
+    { timestamps: false }
     )
 }
