@@ -9,15 +9,15 @@ module.exports = sequelize => {
             primaryKey: true,
             allowNull: false
       },
-      title: {
+      videoTitle: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      link:{
+      videoLink:{
         type: DataTypes.STRING,
         allowNull: false,
       },
-      description: {
+      videoDescription: {
         type: DataTypes.STRING,
         allowNull: false
       }
