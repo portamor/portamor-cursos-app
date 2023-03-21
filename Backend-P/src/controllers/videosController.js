@@ -37,3 +37,7 @@ const postVideos = async (req, res)  => {
 
 }
 
+module.exports = {
+    getVideos,
+    postVideos
+}
