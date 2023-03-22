@@ -3,14 +3,7 @@ const {Courses} = require('../database.js')
 
 const getCourses = async (req, res) => {
 
-    const { title, typeCourse, genreCourse, page, limit } = req.query
-
-    if(!page){ let  page = 1}
-    if(!limit) {let limit = 5}
-
-    // page = parseInt(page)
-    // limit = parseInt(limit)
-
+    const { title, typeCourse, genreCourse, } = req.query
 
     if(!title && !typeCourse && !genreCourse ) {
         try {
@@ -45,9 +38,57 @@ const getCourses = async (req, res) => {
             }
             
         } catch (error) {
-            console.log('error filtrar curso por title', error)
+            console.log('error buscar curso por title', error)
         }
     }
+    if (!title && typeCourse && !genreCourse) {
+        try {
+            const typeofCourse = await Courses.findAll({
+                where: {
+                typeCourse : {
+                        [Op.iLike]: `%${typeCourse}%`
+                    }
+                },
+                order: [['title', 'ASC']]
+            });
+            if(typeofCourse.length){
+                res.status(200).json({
+                curses : typeofCourse,
+                total: typeofCourse.length
+            })
+            } else {
+                res.status(202).json({message: 'No hay coincidencias'})
+            }
+            
+        } catch (error) {
+            console.log('error filtrar curso por typeCourse', error)
+        }
+    }
+    if (!title && !typeCourse && genreCourse) {
+        try {
+            const genreofCourse = await Courses.findAll({
+                where: {
+                genreCourse : {
+                        [Op.iLike]: `%${genreCourse}%`
+                    }
+                },
+                order: [['title', 'ASC']]
+            });
+            if(genreofCourse.length){
+                res.status(200).json({
+                curses : genreCourse,
+                total: genreofCourse.length
+            })
+            } else {
+                res.status(202).json({message: 'No hay coincidencias'})
+            }
+            
+        } catch (error) {
+            console.log('error filtrar curso por typeCourse', error)
+        }
+    }
+
+
 };
 
 const postCourse = async (req, res)=> {
