@@ -1,13 +1,12 @@
-const { Comments, Courses } = require('../database.js')
-const commentService        = require('../services/commentService')
-const courseService         = require('../services/courseService')
+const commentService = require('../services/commentService')
+const courseService  = require('../services/courseService')
 
 const postComment = async (req, res) => {
   try {
     const { courseId } = req.params;
     const { content, satisfaction } = req.body;
 
-    if(!content || !satisfaction) {
+    if(!content || !satisfaction || !courseId) {
       throw new Error("Estan faltando valores para crear un comentario")
     }
 
@@ -20,14 +19,14 @@ const postComment = async (req, res) => {
     const createdComment = await commentService.createCommentInDatabase({
       content,
       satisfaction,
-      CourseId: courseFound.id
+      courseId: courseFound.id
     })
 
     if(!createdComment) {
       throw new Error("No ha sido posible crear un comentario")
     }
 
-    res.status(200).json({msg: "Comentario creado exitosamente", data: createdComment})
+    res.status(201).json({msg: "Comentario creado exitosamente", data: createdComment})
   } catch (error) {
     res.status(400).json({msg: error.message})
   }
@@ -37,7 +36,7 @@ const getAllCommentsByCourseId = async (req, res) => {
   try {
     const { courseId } = req.params;
     
-    if(!courseId) throw new Error("No se ha enviado un id de un curso para buscar comentarios")
+    if(!courseId) throw new Error("No se ha recibido un id de un curso")
 
     const courseFound = await courseService.getCourseById(courseId)
 
@@ -49,7 +48,7 @@ const getAllCommentsByCourseId = async (req, res) => {
 
     res.status(200).json({msg: "Comentarios encontrados con exito", data: Comments})
   } catch (error) {
-    res.status(400).json({msg: error.message})
+    res.status(404).json({msg: error.message})
   }
 }
 
@@ -57,7 +56,7 @@ const putComment = async (req, res) => {
   try {
     const { commentId } = req.params;
     
-    if(!commentId) throw new Error("No se ha enviado un id para actualizar un comentario")
+    if(!commentId) throw new Error("No se ha recibido un id de un comentario")
 
     const foundComment = await commentService.getCommentById(commentId)
 
@@ -76,8 +75,50 @@ const putComment = async (req, res) => {
   }
 }
 
+const deleteComment = async (req, res) => {
+  try {
+    const { commentId } = req.params;
+    
+    if(!commentId) throw new Error("No se ha recibido un id de un comentario")
+
+    const foundComment = await commentService.getCommentById(commentId)
+
+    if(!foundComment) {
+      throw new Error(`No se ha encontrado ningun comentario con el ID: ${commentId}`)
+    }
+
+    await commentService.deleteCommentFromDB(commentId)
+    
+    res.status(200).json({msg: "Comentario eliminado con exito"})
+  } catch (error) {
+    res.status(400).json({msg: error.message})
+  }
+}
+
+const restoreComment = async (req, res) => {
+  try {
+    const { commentId } = req.params;
+    
+    if(!commentId) throw new Error("No se ha recibido un id de un comentario")
+
+    const foundComment = await commentService.getCommentById(commentId)
+
+    if(!foundComment) {
+      throw new Error(`No se ha encontrado ningun comentario con el ID: ${commentId}`)
+    }
+
+    await commentService.restoreCommentFromDB(commentId)
+    
+    res.status(200).json({ msg: "Comentario restaurado con exito" })
+  } catch (error) {
+    res.status(400).json({msg: error.message})
+  }
+}
+
 module.exports = {
   postComment,
   getAllCommentsByCourseId,
-  putComment
+  putComment,
+  deleteComment,
+  restoreComment
 }
