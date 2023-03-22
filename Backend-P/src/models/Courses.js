@@ -44,6 +44,10 @@ module.exports = sequelize => {
         methodology: {
             type: DataTypes.STRING,
             allowNull: true
+        },
+        genreCourse:{
+            type: DataTypes.STRING,
+            allowNull: true
         }
     },
     { timestamps: false }
