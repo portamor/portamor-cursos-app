@@ -14,7 +14,7 @@ module.exports = sequelize => {
         allowNull: false
       },
       videoLink:{
-        type: DataTypes.STRING,
+        type: DataTypes.STRING, 
         allowNull: false,
       },
       videoDescription: {
@@ -24,4 +24,4 @@ module.exports = sequelize => {
     },
     { timestamps: false }
     )
-}
+  };
