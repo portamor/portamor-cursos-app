@@ -2,9 +2,14 @@ const {Router} = require('express');
 
 const router = Router()
 
-const {getCourses, postCourse} = require('../controllers/coursesController.js');
+const coursesController = require('../controllers/coursesController.js');
+const commentController = require('../controllers/commentController')
 
-router.get('/', getCourses);
-router.post('/', postCourse);
+// ---- POST
+router.post('/',             coursesController.postCourse);
+router.post('/:id/comments', commentController.postComment);
+
+// ---- GET
+router.get('/', coursesController.getCourses);
 
 module.exports = router;
