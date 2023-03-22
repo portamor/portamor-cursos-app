@@ -10,7 +10,12 @@ const createCommentInDatabase = async ({id, content, satisfaction}) => {
   return createdComment;
 }
 
-const getCommentsByCourse = async (id) => {
+const getCommentById = async (id) => {
+  const foundComment = await Comments.findByPk(id);
+  return foundComment;
+}
+
+const getCommentsByCourseId = async (id) => {
   const foundCoursefromDB = Courses.findByPk(id, {
     include: { model: Comments}
   })
@@ -18,7 +23,18 @@ const getCommentsByCourse = async (id) => {
   return foundCoursefromDB;
 }
 
+const updateComment = async ({id, data}) => {
+  const commentToUpdate = await getCommentById(id);
+  
+  commentToUpdate.set(data);
+  await commentToUpdate.save()
+
+  return commentToUpdate;
+}
+
 module.exports = {
   createCommentInDatabase,
-  getCommentsByCourse
+  getCommentById,
+  getCommentsByCourseId,
+  updateComment
 }
