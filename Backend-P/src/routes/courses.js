@@ -1,15 +1,13 @@
-const {Router} = require('express');
+const {Router}          = require('express');
+const coursesController = require('../controllers/coursesController.js');
 
 const router = Router()
 
-const coursesController = require('../controllers/coursesController.js');
-const commentController = require('../controllers/commentController')
-
 // ---- POST
-router.post('/',             coursesController.postCourse);
-router.post('/:id/comments', commentController.postComment);
+router.post('/', coursesController.postCourse);
 
 // ---- GET
-router.get('/', coursesController.getCourses);
+router.get('/',  coursesController.getCourses);
+
 
 module.exports = router;
