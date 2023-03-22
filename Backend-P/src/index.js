@@ -1,17 +1,17 @@
 const {Router } = require('express');
 
-const users = require('./routes/users')
-const courses = require('./routes/courses')
-const videos = require('./routes/videos')
-const instructor = require('./routes/instructor')
-
 const router = Router();
 
-router.use('/users', users)
-router.use('/courses', courses);
-router.use('/videos', videos )
-router.use('/instructor', instructor )
+const usersRouter      = require('./routes/users')
+const coursesRouter    = require('./routes/courses')
+const videosRouter     = require('./routes/videos')
+const instructorRouter = require('./routes/instructor')
+const commentRouter    = require('./routes/comments')
 
-
+router.use('/users',      usersRouter)
+router.use('/courses',    coursesRouter);
+router.use('/videos',     videosRouter)
+router.use('/instructor', instructorRouter)
+router.use('/comments',   commentRouter )
 
 module.exports = router

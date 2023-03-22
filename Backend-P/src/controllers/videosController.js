@@ -10,21 +10,18 @@ const getVideos = async (req, res) => {
             res.status(200).json(allVideos)
         } else {
             res.status(202).json({massage: 'No hay videos en la base de datos'})
-        }
-        
-        
+        }        
     } catch (error) {
         console.log('error al obtener los videos', error)
     }
-    
 }
 
 const postVideos = async (req, res)  => {
-    const { videoTitle, videoLlink, videoDescription  } = req.body;
+    const { videoTitle, videoLink, videoDescription  } = req.body;
 
     try {
         const bodyVideo = {
-            videoTitle, videoLlink, videoDescription
+            videoTitle, videoLink, videoDescription
         }
 
         let createVideo = await Videos.create(bodyVideo)
@@ -34,7 +31,6 @@ const postVideos = async (req, res)  => {
     } catch (error) {
         console.log('error al crear el video', error)
     }
-
 }
 
 module.exports = {
