@@ -10,15 +10,15 @@ const createCommentInDatabase = async ({id, content, satisfaction}) => {
   return createdComment;
 }
 
-// const getAllCommentsFromDatabase = async (req, res) => {
-//     try {
-//       res.status(200).json({msg: "holas"})
-//     } catch (error) {
-//         res.status(400).send('error al obtener commentarios')
-//     }
-// }
+const getCommentsByCourse = async (id) => {
+  const foundCoursefromDB = Courses.findByPk(id, {
+    include: { model: Comments}
+  })
+  
+  return foundCoursefromDB;
+}
 
 module.exports = {
   createCommentInDatabase,
-  // postComment
+  getCommentsByCourse
 }
