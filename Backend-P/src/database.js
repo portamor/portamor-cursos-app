@@ -1,11 +1,9 @@
 require('dotenv').config();
-const {Sequelize} = require('sequelize');
-const fs = require('fs');
+const fs   = require('fs');
 const path = require('path');
+const { Sequelize } = require('sequelize');
 
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } =
-  process.env;
-
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
 const sequelize = new Sequelize(
 `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
@@ -46,28 +44,30 @@ const {
     Videos
 } = sequelize.models;
 
+// ---- Users Relations
 Users.hasMany(Comments);
 Comments.belongsTo(Users);
 
 Users.hasMany(Inscription);
 Inscription.belongsTo(Users);
 
-Inscription.hasMany(Courses)
-Courses.belongsTo(Inscription)
-
+// ---- Courses Relations
 Courses.hasMany(Instructor);
 Instructor.belongsTo(Courses);
 
 Courses.hasMany(Videos);
 Videos.belongsTo(Courses)
 
+Courses.hasMany(Comments);
+Comments.belongsTo(Courses);
+
+// ---- Inscription Relations
+Inscription.hasMany(Courses)
+Courses.belongsTo(Inscription)
+
+// ---- Instructor Relations
 Instructor.hasMany(Videos);
 Videos.belongsTo(Instructor)
-
-
-Videos.hasMany(Comments);
-Comments.belongsTo(Videos);
-
 
 module.exports = {
     ...sequelize.models,
