@@ -10,21 +10,25 @@ module.exports = sequelize => {
         primaryKey: true,
         allowNull: false,
       },
-      instructorName: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      instructorScore: {
+      description: {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      instructorReview: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      instructorDescription: {
+      profile_picture: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      score: {
         type: DataTypes.STRING,
         allowNull: true,
+      },
+      review: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
     },
     {timestamps: false}
