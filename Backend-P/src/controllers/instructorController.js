@@ -1,44 +1,52 @@
-const {Instructor} = require('../database.js')
-
-const getInstructor = async(req, res) =>{
-
-    try {
-
-        const allInstructor = await Instructor.findAll()
-
-        if(allInstructor.length){
-            res.status(200).json(allInstructor)
-        } else {
-            res.status(202).json({message: 'No hay instructores'})
-        }
-        
-    } catch (error) {
-
-        console.log('error al crear Instructor', error)
-
-    }
-
-}
+const courseService     = require("../services/courseService")
+const instructorService = require("../services/instructorService")
 
 const postInstructor = async (req, res) => {
-    
-    const {instructorName, instructorScore, instructorReview, instructorDescription } = req.body;
+  try {
+    const data = req.body;
+    const { courseId } = req.params;
 
-    try {
-        let bodyInstructor = {
-            instructorName, instructorScore, instructorReview, instructorDescription
-        }
-        const createInstructor = await Instructor.create(bodyInstructor)
+    const foundCourse = await courseService.getCourseById(courseId)
 
-        res.status(200).json(createInstructor)
-        
-    } catch (error) {
-        console.log('error al crear instructor', error)
+    if(!foundCourse) {
+      throw new Error(`No se ha encontrado ningun curso con el ID: ${courseId}`)
     }
 
-}
+    if(
+      !data.instructorName   || 
+      !data.instructorScore  || 
+      !data.instructorReview || 
+      !data.instructorDescription
+    ) {
+      throw new Error("Estan faltando valores para crear un comentario")
+    }
+
+    const createdInstructor = await instructorService.createIntructorInDB({
+      courseId: courseId,
+      data: data
+    })
+
+    res.status(200).json({message: "Instructor creado con exito", data: createdInstructor});
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+// const getInstructor = async (req, res) => {
+//   try {
+//     const allInstructor = await Instructor.findAll();
+
+//     if (allInstructor.length) {
+//       res.status(200).json(allInstructor);
+//     } else {
+//       res.status(202).json({message: "No hay instructores"});
+//     }
+//   } catch (error) {
+//     console.log("error al crear Instructor", error);
+//   }
+// };
 
 module.exports = {
-    getInstructor,
-    postInstructor
-}
+  postInstructor,
+  // getInstructor,
+};
