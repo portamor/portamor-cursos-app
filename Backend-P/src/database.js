@@ -52,9 +52,6 @@ Users.hasMany(Inscription);
 Inscription.belongsTo(Users);
 
 // ---- Courses Relations
-Courses.hasMany(Instructor);
-Instructor.belongsTo(Courses);
-
 Courses.hasMany(Videos);
 Videos.belongsTo(Courses)
 
@@ -66,8 +63,8 @@ Inscription.hasMany(Courses)
 Courses.belongsTo(Inscription)
 
 // ---- Instructor Relations
-Instructor.hasMany(Videos);
-Videos.belongsTo(Instructor)
+Instructor.hasMany(Courses, { as: "courses"});
+Courses.belongsTo(Instructor)
 
 module.exports = {
     ...sequelize.models,
