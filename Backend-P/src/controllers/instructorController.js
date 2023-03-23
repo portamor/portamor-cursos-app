@@ -3,7 +3,6 @@ const instructorService = require("../services/instructorService")
 
 const postInstructor = async (req, res) => {
   try {
-    const data = req.body;
     const { courseId } = req.params;
 
     const foundCourse = await courseService.getCourseById(courseId)
@@ -12,41 +11,34 @@ const postInstructor = async (req, res) => {
       throw new Error(`No se ha encontrado ningun curso con el ID: ${courseId}`)
     }
 
-    if(
-      !data.instructorName   || 
-      !data.instructorScore  || 
-      !data.instructorReview || 
-      !data.instructorDescription
-    ) {
+    if( !req.body.name || !req.body.review || !req.body.profile_picture) {
       throw new Error("Estan faltando valores para crear un comentario")
     }
 
     const createdInstructor = await instructorService.createIntructorInDB({
       courseId: courseId,
-      data: data
+      data: req.body
     })
 
-    res.status(200).json({message: "Instructor creado con exito", data: createdInstructor});
+    res.status(201).json({message: "Instructor creado con exito", data: createdInstructor});
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
-// const getInstructor = async (req, res) => {
-//   try {
-//     const allInstructor = await Instructor.findAll();
+const getAllInstructor = async (req, res) => {
+  try {
+    const allInstructors = await instructorService.getAllIntructorFromDB();
 
-//     if (allInstructor.length) {
-//       res.status(200).json(allInstructor);
-//     } else {
-//       res.status(202).json({message: "No hay instructores"});
-//     }
-//   } catch (error) {
-//     console.log("error al crear Instructor", error);
-//   }
-// };
+    if (!allInstructors.length) throw new Error("No se ha encontrado ningun instructor")
+
+    res.status(200).json({ message: "Instructores encontrados con exito", data: allInstructors });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
 
 module.exports = {
   postInstructor,
-  // getInstructor,
+  getAllInstructor,
 };
