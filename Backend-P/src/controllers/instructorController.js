@@ -12,7 +12,7 @@ const postInstructor = async (req, res) => {
     }
 
     if( !req.body.name || !req.body.review || !req.body.profile_picture) {
-      throw new Error("Estan faltando valores para crear un comentario")
+      throw new Error("Estan faltando valores para crear un instructor")
     }
 
     const createdInstructor = await instructorService.createIntructorInDB({
@@ -59,26 +59,33 @@ const putInstructor = async (req, res) => {
   }
 };
 
-// const relationInstructorWithCourse = async (req, res) => {
-//   try {
-//     const { instructorId } = req.params;
+const relationInstructorWithCourse = async (req, res) => {
+  try {
+    const { instructorId, courseId } = req.params;
 
-//     const foundInstructor = await instructorService.getInstructorById(instructorId);
+    const foundInstructor = await instructorService.getInstructorById(instructorId);
+    const foundCourse = await courseService.getCourseById(courseId);
+    
+    if (!foundInstructor) {
+      throw new Error(`No se ha encontrado ningun instructor con el ID: ${instructorId}`)
+    }
+    if (!foundCourse) {
+      throw new Error(`No se ha encontrado ningun curso con el ID: ${courseId}`)
+    }
 
-//     if (!foundInstructor) {
-//       throw new Error(`No se ha encontrado ningun instructor con el ID: ${instructorId}`)
-//     }
+    const updatedInstructor = await instructorService.addCourseToInstructor({
+      instructorId: instructorId,
+      courseId: courseId
+    })
 
-//     const updatedInstructor = await instructorService.updateInstructor({
-//       id: instructorId,
-//       data: req.body
-//     })
-
-//     res.status(200).json({ message: "Instructor actualizado con exito", data: updatedInstructor });
-//   } catch (error) {
-//     res.status(404).json({ message: error.message });
-//   }
-// };
+    res.status(200).json({ 
+      message: `${updatedInstructor.name} será el instructor del curso ${foundCourse.title}`, 
+      data: updatedInstructor 
+    });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
 
 module.exports = {
   postInstructor,
