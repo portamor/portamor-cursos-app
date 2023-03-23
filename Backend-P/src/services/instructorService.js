@@ -17,7 +17,23 @@ const getAllIntructorFromDB = async () => {
   return Instructor.findAll();
 }
 
+const getInstructorById = async (id) => {
+  const foundInstructor = await Instructor.findByPk(id)
+  return foundInstructor;
+}
+
+const updateInstructor = async ({ id, data }) => {
+  const instructorToUpdate = await Instructor.findByPk(id)
+
+  instructorToUpdate.set(data);
+  await instructorToUpdate.save()
+
+  return instructorToUpdate;
+}
+
 module.exports = {
   createIntructorInDB,
-  getAllIntructorFromDB
+  getInstructorById,
+  getAllIntructorFromDB,
+  updateInstructor
 }
