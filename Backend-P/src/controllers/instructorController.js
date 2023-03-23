@@ -38,7 +38,51 @@ const getAllInstructor = async (req, res) => {
   }
 };
 
+const putInstructor = async (req, res) => {
+  try {
+    const { instructorId } = req.params;
+
+    const foundInstructor = await instructorService.getInstructorById(instructorId);
+
+    if (!foundInstructor) {
+      throw new Error(`No se ha encontrado ningun instructor con el ID: ${instructorId}`)
+    }
+
+    const updatedInstructor = await instructorService.updateInstructor({
+      id: instructorId,
+      data: req.body
+    })
+
+    res.status(200).json({ message: "Instructor actualizado con exito", data: updatedInstructor });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+// const relationInstructorWithCourse = async (req, res) => {
+//   try {
+//     const { instructorId } = req.params;
+
+//     const foundInstructor = await instructorService.getInstructorById(instructorId);
+
+//     if (!foundInstructor) {
+//       throw new Error(`No se ha encontrado ningun instructor con el ID: ${instructorId}`)
+//     }
+
+//     const updatedInstructor = await instructorService.updateInstructor({
+//       id: instructorId,
+//       data: req.body
+//     })
+
+//     res.status(200).json({ message: "Instructor actualizado con exito", data: updatedInstructor });
+//   } catch (error) {
+//     res.status(404).json({ message: error.message });
+//   }
+// };
+
 module.exports = {
   postInstructor,
   getAllInstructor,
+  putInstructor,
+  relationInstructorWithCourse
 };
