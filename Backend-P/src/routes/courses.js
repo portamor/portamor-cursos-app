@@ -1,10 +1,13 @@
-const {Router} = require('express');
+const {Router}          = require('express');
+const coursesController = require('../controllers/coursesController.js');
 
 const router = Router()
 
-const {getCourses, postCourse} = require('../controllers/coursesController.js');
+// ---- POST
+router.post('/', coursesController.postCourse);
 
-router.get('/', getCourses);
-router.post('/', postCourse);
+// ---- GET
+router.get('/',  coursesController.getCourses);
+
 
 module.exports = router;
