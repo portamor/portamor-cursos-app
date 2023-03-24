@@ -7,7 +7,7 @@
     position: absolute;
     width: 100%;
     height: 57px;
-    top: 290px;
+    top: 110px;
   }
   
   .ul-filter {
@@ -80,7 +80,32 @@
       position: absolute;
       left: 50%;
       transform: translateX(-50%) translateY(-50%);
-      top: 50%;
+      top: 80%;
+      border: 4px solid #f9dfdc;
+      border-radius: 32px;
+      font-family: "Roboto";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 17.4302px;
+      line-height: 33px;
+      color: #000000;
+    }
+  }
+
+  @media (max-width: 414px) {
+    .button-filter {
+      display: none;
+    }
+    
+    .select-filter {
+      display: block;
+      width: 50%;
+      height: 57px;
+      margin: 0 auto;
+      position: absolute;
+      left: 70%;
+      transform: translateX(-50%) translateY(-50%);
+      top: 80%;
       border: 4px solid #f9dfdc;
       border-radius: 32px;
       font-family: "Roboto";

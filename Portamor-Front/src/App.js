@@ -1,18 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NavBar from "./Components/NavBar/NavBar";
 import CourseDetail from "./Components/CourseDetail/CourseDetail";
-import NavFilter from "./Components/NavFilter/NavFilter";
+import Home from "./Components/Home/Home"
+
 
 function App() {
   return (
     <div>
       <BrowserRouter>
         <NavBar />
-        <NavFilter />
         <Routes>
-          <Route />
+          <Route exact path="/" Component={Home}  />
           <Route exact path="/detalle-curso/:id" Component={CourseDetail} />
-          <Route />
         </Routes>
       </BrowserRouter>
     </div>
