@@ -6,7 +6,6 @@ const createCommentInDatabase = async ({courseId, content, satisfaction}) => {
     satisfaction,
     CourseId: courseId
   })
-
   return createdComment;
 };
 
@@ -19,16 +18,13 @@ const getCommentsByCourseId = async (id) => {
   const foundCoursefromDB = await Courses.findByPk(id, {
     include: { model: Comments}
   })
-
   return foundCoursefromDB;
 };
 
 const updateComment = async ({id, data}) => {
   const commentToUpdate = await getCommentById(id);
-
   commentToUpdate.set(data);
   await commentToUpdate.save()
-
   return commentToUpdate;
 };
 

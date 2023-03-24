@@ -11,6 +11,17 @@ const getCourses = async (req, res) => {
   }
 };
 
+const getCourseById = async (req, res) => {
+  try {
+    const {id} = req.params
+    const courseId = await courseService.getCourseById(id)
+    res.status(200).json(courseId)
+    
+  } catch (error) {
+    res.status(400).json({message: error.message})
+  }
+}
+
 const getCourseTitle = async (req, res) => {
   try {
     const { title } = req.params;
@@ -124,6 +135,7 @@ const restoreCouse = async (req, res) => {
 
 module.exports = {
   getCourses,
+  getCourseById,
   getCourseTitle,
   getCourseType,
   getCourseGenre,

@@ -1,8 +1,13 @@
-const { Courses }= require('../database.js')
+const { Courses, Videos }= require('../database.js')
 const {Op} = require('sequelize')
 
 const getCourseById = async (id) => {
-  const courseFound = await Courses.findByPk(id)
+  const courseFound = await Courses.findOne({
+    where: {id: id},
+    include: { model: Videos }
+  })
+
+  console.log(courseFound,' entro')
   return courseFound;
 };
 
@@ -12,7 +17,6 @@ const getAllCourses = async () => {
 };
 
 const getCourseByTitle = async (title) => {
-  
   const titleCourse = await Courses.findAll({
     where: { title: { [Op.iLike]: `%${title}%` } },
     order: [["title", "ASC"]],
