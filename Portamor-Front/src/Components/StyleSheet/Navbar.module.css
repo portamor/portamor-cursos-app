@@ -60,7 +60,7 @@ body {
 .nav-link:hover {
   color: black;
 }
-/* Estilos para pantallas móviles */
+
 @media screen and (max-width: 975px) {
   .nav-menu {
     display: none;
@@ -70,7 +70,7 @@ body {
     right: 0;
     background-color: #eb575a;
     z-index: 2;
-    text-align: center; /* Agrega esta línea */
+    text-align: center; 
   }
   .nav-menu.active .container-link {
     display: block;

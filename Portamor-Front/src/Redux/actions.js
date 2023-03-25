@@ -13,3 +13,11 @@ export function getCourses() {
       }
     };
   }
+
+  export function postUser (payload){
+    return async function (dispatch){
+        const response = await axios.post('http://localhost:3001/users', payload);
+        return response;
+    }
+  }
+  

@@ -1,9 +1,17 @@
 import { NavLink } from "react-router-dom";
-import React       from "react";
+import React, { useState } from 'react';
 import styles      from "./CourseDetail.module.css"
+import RegisterUser from "../RegisterUser/RegisterUser"
+import Modal from "../Modal/Modal"
 
 export const CourseDetail = ({match}) => {
   // const id = match.props.params
+  const [showModal, setShowModal] = useState(false);
+
+  function handleInscriptionClick(event) {
+    event.preventDefault();
+    setShowModal(true);
+  }
 
   const courseDetail = {
     title: "Crea tus velas",
@@ -35,11 +43,14 @@ export const CourseDetail = ({match}) => {
             <strong>{courseDetail.instructor}</strong>
           </p>
           <div className={styles["course-buttons-container"]}>
-            <NavLink 
-              to={`/home`}
-              className={styles["inscription-button"]} >
-                Inscribete Aquí
-            </NavLink>
+          <NavLink to="#" className={styles["inscription-button"]} onClick={handleInscriptionClick}>
+        Inscribete Aquí
+      </NavLink>
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          {<RegisterUser/>}
+        </Modal>
+      )}
             <div className={styles["help-container"]}>
               <span>¿Necesitas ayuda?</span>
               <NavLink 

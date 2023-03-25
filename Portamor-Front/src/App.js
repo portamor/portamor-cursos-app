@@ -3,7 +3,6 @@ import NavBar from "./Components/NavBar/NavBar";
 import CourseDetail from "./Components/CourseDetail/CourseDetail";
 import Home from "./Components/Home/Home"
 
-
 function App() {
   return (
     <div>

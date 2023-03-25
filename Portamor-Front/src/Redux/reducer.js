@@ -1,5 +1,6 @@
 const initialState = {
-   courses:[]
+   courses:[],
+   user:[]
   };
   
   function rootReducer(state = initialState, action) {
