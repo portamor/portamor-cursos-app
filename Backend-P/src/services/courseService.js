@@ -6,8 +6,6 @@ const getCourseById = async (id) => {
     where: {id: id},
     include: { model: Videos }
   })
-
-  console.log(courseFound,' entro')
   return courseFound;
 };
 
@@ -84,4 +82,4 @@ module.exports = {
   updateCourse,
   deleteACourse,
   restoreACourse
-}
+};
