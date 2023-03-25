@@ -191,13 +191,14 @@ top:1%;
 
 @media screen and (max-width: 414px) {
   .nav-container {
-    width: 135%;
+    width: 130%;
   }
   .nav-container img {
     transform: scale(0.7);
   }
  .nav-menu{
-  top:10%;
+
+  top:25%;
  }
 }
 @media screen and (max-width: 300px) {
