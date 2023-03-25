@@ -40,7 +40,6 @@ const {
     Instructor,
     Courses,
     Comments,
-    Inscription,
     Videos
 } = sequelize.models;
 
@@ -48,8 +47,14 @@ const {
 Users.hasMany(Comments);
 Comments.belongsTo(Users);
 
-Users.hasMany(Inscription);
-Inscription.belongsTo(Users);
+// ---- Inscriptions Relations
+Users.belongsToMany(Courses, {
+  through: 'course_Inscription',
+})
+
+Courses.belongsToMany(Users, {
+  through: 'course_Inscription',
+})
 
 // ---- Courses Relations
 Courses.hasMany(Videos);
@@ -58,9 +63,6 @@ Videos.belongsTo(Courses)
 Courses.hasMany(Comments);
 Comments.belongsTo(Courses);
 
-// ---- Inscription Relations
-Inscription.hasMany(Courses)
-Courses.belongsTo(Inscription)
 
 // ---- Instructor Relations
 Instructor.hasMany(Courses, { as: "courses"});
