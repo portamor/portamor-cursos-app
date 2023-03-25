@@ -23,7 +23,7 @@ module.exports = sequelize => {
             unique: true,
         },
         birthday: {
-            type: DataTypes.DATEONLY,
+            type: DataTypes.STRING,
             allowNull: true,
         },
         admin: {
@@ -31,6 +31,7 @@ module.exports = sequelize => {
             defaultValue: false
         },
         },
-        { timestamps: false }
+        { timestamps: false,
+            paranoid: true, }
     )
 }
