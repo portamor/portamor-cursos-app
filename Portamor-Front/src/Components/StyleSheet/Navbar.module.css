@@ -60,16 +60,17 @@ body {
 .nav-link:hover {
   color: black;
 }
-/* Estilos para pantallas móviles */
+
 @media screen and (max-width: 975px) {
   .nav-menu {
     display: none;
     position: absolute;
-    top: 0;
+    top: -50%;
     left: 0;
     right: 0;
     background-color: #eb575a;
-    z-index: 1;
+    z-index: 2;
+    text-align: center; 
   }
   .nav-menu.active .container-link {
     display: block;
@@ -106,17 +107,13 @@ body {
     text-align: center;
   }
 
-  .bar {
+  .mobile-menu-button {
+    position: absolute;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 12px 28px;
-    gap: 12px;
-    position: absolute;
     width: 129px;
     height: 57px;
-    top: 132px;
     background: #ffffff;
     border: 3px solid #eb575a;
     border-radius: 16px;
@@ -126,9 +123,10 @@ body {
     font-size: 25.4302px;
     line-height: 33px;
     color: #eb575a;
-    left: 50%; /* Agregar esta propiedad */
-    transform: translateX(-50%); /* Agregar esta propiedad */
-  }
+    left: 50%;
+    transform: translateX(-50%);
+}
+
   .container-link {
     margin-left: -10%;
   }
@@ -170,11 +168,64 @@ body {
     color: #eb575a;
   }
 }
-@media screen and (max-width: 300px) {
+@media screen and (max-width:856px) {
+  .nav-menu{
+  top:-28%;
+  }
+  }
+  @media screen and (max-width:710px) {
+    .nav-menu{
+    top:-25%;
+    }
+    }
+@media screen and (max-width: 663px) {
+.nav-menu{
+top:1%;
+}
+}
+@media screen and (max-width: 523px) {
+  .nav-menu{
+  top:15%;
+  }
+  }
+
+@media screen and (max-width: 414px) {
   .nav-container {
-    width: 105%;
+    width: 130%;
   }
   .nav-container img {
-    transform: scale(0.9);
+    transform: scale(0.7);
+  }
+ .nav-menu{
+
+  top:25%;
+ }
+}
+@media screen and (max-width: 300px) {
+  .nav-container {
+    width: 145%;
+  }
+  .nav-container img {
+    transform: scale(0.7);
+  }
+  .nav-menu{
+    top:25%;
+   }
+}
+
+@media screen and (max-width: 270px) {
+  .nav-container {
+    width: 180%;
+  }
+  .nav-container img {
+    transform: scale(0.7);
+  }
+}
+@media screen and (max-width: 205px) {
+  .nav-container {
+    width: 200%;
+  }
+  .nav-container img {
+    transform: scale(0.7);
   }
 }
