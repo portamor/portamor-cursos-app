@@ -1,10 +1,13 @@
-const {Router} = require('express');
+const {Router}             = require("express");
+const instructorRouter     = Router();
+const instructorController = require("../controllers/instructorController");
 
-const router = Router()
+//---- POST
+instructorRouter.post("/:courseId", instructorController.postInstructor);
+//---- GET
+instructorRouter.get ("/", instructorController.getAllInstructor);
+//---- PUT
+instructorRouter.put ("/:instructorId", instructorController.putInstructor);
+instructorRouter.put ("/relation/:instructorId/:courseId", instructorController.relationInstructorWithCourse);
 
-const { getInstructor, postInstructor } = require('../controllers/instructorController');
-
-router.get('/', getInstructor);
-router.post('/', postInstructor);
-
-module.exports = router;
+module.exports = instructorRouter;

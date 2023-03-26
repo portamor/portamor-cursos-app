@@ -6,11 +6,11 @@ export const NavBar = () => {
   const hamburguerRef = useRef(null);
   const navMenuRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 975);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 975);
+    handleResize(); // Llamamos al handler para que se ejecute al inicio
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -18,17 +18,24 @@ export const NavBar = () => {
   const handleHamburguerClick = () => {
     if (menuOpen) {
       setMenuOpen(false);
-      hamburguerRef.current.classList.remove("active");
-      navMenuRef.current.classList.remove("active");
+      if (hamburguerRef.current && navMenuRef.current) {
+        hamburguerRef.current.classList.remove("active");
+        navMenuRef.current.classList.remove("active");
+      }
     } else {
       setMenuOpen(true);
-      hamburguerRef.current.classList.add("active");
-      navMenuRef.current.classList.add("active");
+      if (hamburguerRef.current && navMenuRef.current) {
+        hamburguerRef.current.classList.add("active");
+        navMenuRef.current.classList.add("active");
+      }
     }
   };
-
-
-
+  
+  const handleMenuClick = () => {
+    setMenuOpen(!menuOpen);
+    navMenuRef.current.classList.toggle("active");
+  };
+  
 
   return (
     <nav className={Styles["nav-container"]}>
@@ -78,15 +85,13 @@ export const NavBar = () => {
           )}
         </ul>
       </ul>
-      <div
-        className={`${Styles["hamburguer"]} ${
-          menuOpen ? Styles["active"] : ""
-        }`}
-        ref={hamburguerRef}
-        onClick={handleHamburguerClick}
-      >
-        {isMobile && <button className={Styles["bar"]}>Menú</button>}
+     {isMobile && (
+      <div className={Styles["mobile-menu"]}>
+        <button className={Styles["mobile-menu-button"]} onClick={handleMenuClick}>
+          Menú
+        </button>
       </div>
+    )}
 
       <div></div>
     </nav>

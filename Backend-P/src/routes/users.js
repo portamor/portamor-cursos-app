@@ -4,15 +4,16 @@ const router = Router()
 
 /* ==================== Import Controllers ======================== */
 
-const {
-getUsers,
-postUser
-} = require('../controllers/usersController.js')
+const usersController = require('../controllers/usersController.js')
 
 
-//.-----users
-router.get('/', getUsers )
-router.post('/', postUser)
+//.-----GET
+router.get('/', usersController.getUsers )
 
+// ----POST
+router.post('/', usersController.postUser)
+
+// ----PUT
+router.put('/:id', usersController.userPut)
 
 module.exports = router;
