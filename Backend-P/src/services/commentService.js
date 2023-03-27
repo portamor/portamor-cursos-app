@@ -1,9 +1,10 @@
-const { Comments, Courses }= require('../database.js')
+const { Review, Courses }= require('../database.js')
 
-const createCommentInDatabase = async ({courseId, content, satisfaction}) => {
-  const createdComment = await Comments.create({
-    content,
-    satisfaction,
+const createReviewInDatabase = async ({courseId, comment, title, stars_value}) => {
+  const createdComment = await Review.create({
+    comment,
+    title,
+    stars_value,
     CourseId: courseId
   })
   return createdComment;
@@ -40,7 +41,7 @@ const restoreCommentFromDB = async(id) => {
 };
 
 module.exports = {
-  createCommentInDatabase,
+  createReviewInDatabase,
   getCommentById,
   getCommentsByCourseId,
   updateComment,
