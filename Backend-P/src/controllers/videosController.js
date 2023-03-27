@@ -6,7 +6,7 @@ const getVideos = async (req, res) => {
     const allVideos = await videoService.getAllVideos();
     res.status(200).json(allVideos);
   } catch (error) {
-    console.log("error al obtener los videos", error);
+    res.status(400).json({messege: error.massage});
   }
 };
 
@@ -28,7 +28,7 @@ const postVideos = async (req, res) => {
     });
     res.status(200).json(createVideo);
   } catch (error) {
-    console.log("error al crear el video", error.massage);
+    res.status(400).json({messege: error.massage});
   }
 };
 
