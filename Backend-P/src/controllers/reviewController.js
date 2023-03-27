@@ -7,7 +7,7 @@ const postReview = async (req, res) => {
     const { comment, title, stars_value } = req.body;
 
     if(!comment || !title || !stars_value) {
-      throw new Error("Estan faltando valores para crear un comentario")
+      throw new Error("Estan faltando valores para crear una opinion")
     }
 
     const courseFound = await courseService.getCourseById(courseId)
@@ -24,10 +24,10 @@ const postReview = async (req, res) => {
     })
 
     if(!createdComment) {
-      throw new Error("No ha sido posible crear un comentario")
+      throw new Error("No ha sido posible crear una opinion")
     }
 
-    res.status(201).json({message: "Comentario creado exitosamente", data: createdComment})
+    res.status(201).json({message: "Opinion creada exitosamente", data: createdComment})
   } catch (error) {
     res.status(400).json({message: error.message})
   }
