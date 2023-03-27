@@ -1,7 +1,7 @@
 const commentService = require('../services/reviewService')
 const courseService  = require('../services/courseService')
 
-const postComment = async (req, res) => {
+const postReview = async (req, res) => {
   try {
     const { courseId } = req.params;
     const { comment, title, stars_value } = req.body;
@@ -117,7 +117,7 @@ const restoreComment = async (req, res) => {
 }
 
 module.exports = {
-  postComment,
+  postReview,
   getAllCommentsByCourseId,
   putComment,
   deleteComment,
