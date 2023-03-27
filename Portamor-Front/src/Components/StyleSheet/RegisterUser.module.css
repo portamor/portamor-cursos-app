@@ -1,9 +1,15 @@
 .register-container{
-    width: 600px;
+    width: 400px;
     margin-top: 10%;
     margin-bottom: 10%;
 
 }
+.register-container p {
+    color: red;
+    font-weight: 600;
+    font-size: 0.8em;
+    margin-top: 0.2em;
+  }
 .register-container button{
     display: block;
     justify-content: center;

@@ -47,10 +47,21 @@ body {
   height: 64px;
   top: 16px;
 }
+.container-link-ico{
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: end;
+  align-items: flex-end;
+  height: 64px;
+  top: 16px;
+  color: white;
+}
 
 .nav-link {
   font-size: 18px;
-  margin: 0 80px;
+  margin: 0 50px;
   white-space: nowrap;
   width: 100px;
   text-align: center;
@@ -59,6 +70,9 @@ body {
 }
 .nav-link:hover {
   color: black;
+}
+.nav-link img {
+  display: block !important;
 }
 
 @media screen and (max-width: 975px) {
@@ -106,6 +120,7 @@ body {
     color: #ffffff;
     text-align: center;
   }
+  
 
   .mobile-menu-button {
     position: absolute;
@@ -130,7 +145,16 @@ body {
   .container-link {
     margin-left: -10%;
   }
-
+.container-link-ico{
+  display: block;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 450%;
+  width: auto;
+  padding: 0;
+  margin-top: 30%;
+}
   .nav-container {
     position: absolute;
     left: 0%;
@@ -156,7 +180,7 @@ body {
     width: 90%;
     height: 57px;
     left: 16px;
-    top: 450px;
+    top: 550px;
     background: #ffffff;
     border: 3px solid #eb575a;
     border-radius: 16px;
