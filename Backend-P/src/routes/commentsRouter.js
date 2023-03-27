@@ -1,15 +1,15 @@
-const { Router }        = require('express');
-const commentController = require('../controllers/commentController')
-const commentRouter     = Router()
+const { Router }       = require('express');
+const reviewController = require('../controllers/commentController')
+const reviewRouter     = Router()
 
 // ---- POST
-commentRouter.post('/:courseId', commentController.postComment);
+reviewRouter.post('/:courseId', reviewController.postComment);
 //----- GET
-commentRouter.get('/:courseId',  commentController.getAllCommentsByCourseId)
+reviewRouter.get('/:courseId',  reviewController.getAllCommentsByCourseId)
 //----- PUT
-commentRouter.put('/:commentId', commentController.putComment)
-commentRouter.put('/restore/:commentId', commentController.restoreComment)
+reviewRouter.put('/:commentId', reviewController.putComment)
+reviewRouter.put('/restore/:commentId', reviewController.restoreComment)
 //----- DELETE
-commentRouter.delete('/:commentId', commentController.deleteComment)
+reviewRouter.delete('/:commentId', reviewController.deleteComment)
 
-module.exports = commentRouter;
+module.exports = reviewRouter;
