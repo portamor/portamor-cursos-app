@@ -23,17 +23,17 @@ const getReviewsByCourseId = async (id) => {
 };
 
 const updateReview = async ({ id, data }) => {
-  const commentToUpdate = await getReviewById(id);
+  const reviewToUpdate = await getReviewById(id);
 
-  commentToUpdate.set(data);
-  await commentToUpdate.save()
+  reviewToUpdate.set(data);
+  await reviewToUpdate.save()
   
-  return commentToUpdate;
+  return reviewToUpdate;
 };
 
-const deleteCommentFromDB = async(id) => {
-  const comment = await getReviewById(id);
-  await comment.destroy()
+const deleteReviewFromDB = async(id) => {
+  const foundReview = await getReviewById(id);
+  await foundReview.destroy()
 };
 
 const restoreCommentFromDB = async(id) => {
@@ -47,6 +47,6 @@ module.exports = {
   getReviewById,
   getReviewsByCourseId,
   updateReview,
-  deleteCommentFromDB,
+  deleteReviewFromDB,
   restoreCommentFromDB
 }
