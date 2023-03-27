@@ -6,7 +6,7 @@ const usersRouter      = require('./users')
 const coursesRouter    = require('./courses')
 const videosRouter     = require('./videos')
 const instructorRouter = require('./instructorRouter')
-const reviewRouter    = require('./commentsRouter')
+const reviewRouter     = require('./reviewRouter')
 
 router.use('/users',      usersRouter);
 router.use('/courses',    coursesRouter);
