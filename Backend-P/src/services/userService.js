@@ -15,7 +15,6 @@ const createUser = async (name, lastName, code, birthday) => {
 };
 
 const userInscription = async (userId, courseId) => {
-    console.log(userId, courseId)
     const inscrited =await course_Inscription.create({UserId: userId, CourseId: courseId})
     return inscrited
 }

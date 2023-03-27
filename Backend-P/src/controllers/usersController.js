@@ -9,17 +9,16 @@ const getUsers = async (req, res) => {
         } catch (error) {
     res.status(404).json({message: error.message})
         }
-    } else {
+    }
     try {
       const allUsers = await userService.getAllUsers();
       if (allUsers.length) {
         res.status(200).json(allUsers);
-      } else {
-        res.status(201).json({ message: "No hay registros" });
       }
+        res.status(201).json({ message: "No hay registros" });
     } catch (error) {
       res.status(200).json({ mesagge: "error al obtener usuarios" + error.message });
-    }}
+    }
 };
 
 const getUserByIdCourses = async(req, res)=> {
@@ -57,7 +56,6 @@ const postInscription = async (req, res) => {
         res.status(200).json(inscription)
         
     } catch (error) {
-        console.log(error);
         res.status(400).json({message: error.message})
     }
 }
