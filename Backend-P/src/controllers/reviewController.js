@@ -1,4 +1,4 @@
-const commentService = require('../services/commentService')
+const commentService = require('../services/reviewService')
 const courseService  = require('../services/courseService')
 
 const postComment = async (req, res) => {
