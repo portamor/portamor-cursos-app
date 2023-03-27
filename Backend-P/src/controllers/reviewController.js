@@ -55,24 +55,22 @@ const getAllReviewsByCourseId = async (req, res) => {
   }
 }
 
-const putComment = async (req, res) => {
+const putReview = async (req, res) => {
   try {
-    const { commentId } = req.params;
+    const { reviewId } = req.params;
     
-    if(!commentId) throw new Error("No se ha recibido un id de un comentario")
-
-    const foundComment = await commentService.getCommentById(commentId)
+    const foundComment = await commentService.getReviewById(reviewId)
 
     if(!foundComment) {
-      throw new Error(`No se ha encontrado ningun comentario con el ID: ${commentId}`)
+      throw new Error(`No se ha encontrado ningun comentario con el ID: ${reviewId}`)
     }
 
-    const updatedComment = await commentService.updateComment({
-      id: commentId,
+    const updatedReview = await commentService.updateReview({
+      id: reviewId,
       data: req.body
     })
     
-    res.status(200).json({msg: "Comentario actualizado con exito", data: updatedComment})
+    res.status(200).json({msg: "Comentario actualizado con exito", data: updatedReview})
   } catch (error) {
     res.status(400).json({msg: error.message})
   }
@@ -121,7 +119,7 @@ const restoreComment = async (req, res) => {
 module.exports = {
   postReview,
   getAllReviewsByCourseId,
-  putComment,
+  putReview,
   deleteComment,
   restoreComment
 }

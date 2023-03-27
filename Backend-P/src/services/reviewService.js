@@ -10,9 +10,9 @@ const createReviewInDatabase = async ({courseId, comment, title, stars_value}) =
   return createdReview;
 };
 
-const getCommentById = async (id) => {
-  const foundComment = await Comments.findByPk(id);
-  return foundComment;
+const getReviewById = async (id) => {
+  const foundReview = await Review.findByPk(id);
+  return foundReview;
 };
 
 const getReviewsByCourseId = async (id) => {
@@ -22,15 +22,17 @@ const getReviewsByCourseId = async (id) => {
   return foundCoursefromDB;
 };
 
-const updateComment = async ({id, data}) => {
-  const commentToUpdate = await getCommentById(id);
+const updateReview = async ({ id, data }) => {
+  const commentToUpdate = await getReviewById(id);
+
   commentToUpdate.set(data);
   await commentToUpdate.save()
+  
   return commentToUpdate;
 };
 
 const deleteCommentFromDB = async(id) => {
-  const comment = await getCommentById(id);
+  const comment = await getReviewById(id);
   await comment.destroy()
 };
 
@@ -42,9 +44,9 @@ const restoreCommentFromDB = async(id) => {
 
 module.exports = {
   createReviewInDatabase,
-  getCommentById,
+  getReviewById,
   getReviewsByCourseId,
-  updateComment,
+  updateReview,
   deleteCommentFromDB,
   restoreCommentFromDB
 }
