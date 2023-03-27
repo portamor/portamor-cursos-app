@@ -33,7 +33,7 @@ const postReview = async (req, res) => {
   }
 }
 
-const getAllCommentsByCourseId = async (req, res) => {
+const getAllReviewsByCourseId = async (req, res) => {
   try {
     const { courseId } = req.params;
     
@@ -45,11 +45,13 @@ const getAllCommentsByCourseId = async (req, res) => {
       throw new Error(`No se ha encontrado ningun curso con este ID: ${courseId}`)
     }
 
-    const { Comments } = await commentService.getCommentsByCourseId(courseFound.id)
+    const { Reviews } = await commentService.getReviewsByCourseId(courseFound.id)
 
-    res.status(200).json({msg: "Comentarios encontrados con exito", data: Comments})
+    if(!Reviews.length) throw new Error("No se han encontrado opiniones de este curso");
+
+    res.status(200).json({message: "Opiniones encontradas con exito", data: Reviews})
   } catch (error) {
-    res.status(404).json({msg: error.message})
+    res.status(404).json({message: error.message})
   }
 }
 
@@ -118,7 +120,7 @@ const restoreComment = async (req, res) => {
 
 module.exports = {
   postReview,
-  getAllCommentsByCourseId,
+  getAllReviewsByCourseId,
   putComment,
   deleteComment,
   restoreComment
