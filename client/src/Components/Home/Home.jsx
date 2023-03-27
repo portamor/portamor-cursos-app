@@ -1,9 +1,18 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import NavFilter from "../NavFilter/NavFilter";
-import CourseCard from "../CourseCard/CourseCard";
-import { getCourses } from "../../Redux/actions";
+import React           from "react";
+import { useEffect }   from "react";
+
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { getCourses }  from "../../Redux/actions";
+
+import CourseAccordion from "../CourseAccordion/CourseAccordion";
+import CourseCard      from "../CourseCard/CourseCard";
+import NavFilter       from "../NavFilter/NavFilter";
+
 import Styles from "../StyleSheet/Home.module.css";
+
+// example sections to accordion
+import { courseSections } from "../DataBase/Json";
 
 const Home = () => {
   const courses = useSelector((state) => state.courses);
@@ -24,6 +33,8 @@ const Home = () => {
           return <CourseCard key={el.id} image={el.image} title={el.title} />;
         })}
       </div>
+
+      {/* <CourseAccordion sections={courseSections} /> */}
     </div>
   );
 };
