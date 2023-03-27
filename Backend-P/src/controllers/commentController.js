@@ -4,9 +4,9 @@ const courseService  = require('../services/courseService')
 const postComment = async (req, res) => {
   try {
     const { courseId } = req.params;
-    const { content, satisfaction } = req.body;
+    const { comment, title, stars_value } = req.body;
 
-    if(!content || !satisfaction || !courseId) {
+    if(!comment || !title || !stars_value) {
       throw new Error("Estan faltando valores para crear un comentario")
     }
 
@@ -16,9 +16,10 @@ const postComment = async (req, res) => {
       throw new Error(`No se ha encontrado ningun curso con este ID: ${courseId}`)
     }
 
-    const createdComment = await commentService.createCommentInDatabase({
-      content,
-      satisfaction,
+    const createdComment = await commentService.createReviewInDatabase({
+      comment,
+      title,
+      stars_value,
       courseId: courseFound.id
     })
 
@@ -26,9 +27,9 @@ const postComment = async (req, res) => {
       throw new Error("No ha sido posible crear un comentario")
     }
 
-    res.status(201).json({msg: "Comentario creado exitosamente", data: createdComment})
+    res.status(201).json({message: "Comentario creado exitosamente", data: createdComment})
   } catch (error) {
-    res.status(400).json({msg: error.message})
+    res.status(400).json({message: error.message})
   }
 }
 
