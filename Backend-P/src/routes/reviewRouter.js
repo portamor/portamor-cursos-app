@@ -3,7 +3,7 @@ const reviewController = require('../controllers/reviewController')
 const reviewRouter     = Router()
 
 // ---- POST
-reviewRouter.post('/:courseId', reviewController.postComment);
+reviewRouter.post('/:courseId', reviewController.postReview);
 //----- GET
 reviewRouter.get('/:courseId',  reviewController.getAllCommentsByCourseId)
 //----- PUT
