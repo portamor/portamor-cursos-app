@@ -15,9 +15,9 @@ const getCommentById = async (id) => {
   return foundComment;
 };
 
-const getCommentsByCourseId = async (id) => {
+const getReviewsByCourseId = async (id) => {
   const foundCoursefromDB = await Courses.findByPk(id, {
-    include: { model: Comments}
+    include: { model: Review}
   })
   return foundCoursefromDB;
 };
@@ -43,7 +43,7 @@ const restoreCommentFromDB = async(id) => {
 module.exports = {
   createReviewInDatabase,
   getCommentById,
-  getCommentsByCourseId,
+  getReviewsByCourseId,
   updateComment,
   deleteCommentFromDB,
   restoreCommentFromDB
