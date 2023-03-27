@@ -1,13 +1,13 @@
 const { Review, Courses }= require('../database.js')
 
 const createReviewInDatabase = async ({courseId, comment, title, stars_value}) => {
-  const createdComment = await Review.create({
+  const createdReview = await Review.create({
     comment,
     title,
     stars_value,
     CourseId: courseId
   })
-  return createdComment;
+  return createdReview;
 };
 
 const getCommentById = async (id) => {
