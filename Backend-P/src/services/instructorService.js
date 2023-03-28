@@ -22,7 +22,12 @@ const getAllIntructorFromDB = async () => {
 }
 
 const getInstructorById = async (id) => {
-  const foundInstructor = await Instructor.findByPk(id)
+  const foundInstructor = await Instructor.findOne({
+    where: {id: id}, 
+    include: Courses,
+    paranoid: false
+  });
+
   return foundInstructor;
 }
 
@@ -49,15 +54,15 @@ const deleteIntructorFromDB = async (id) => {
   await foundInstructor.destroy()
 };
 
-// const restoreReviewFromDB = async(id) => {
-//   await Review.restore({ 
-//     where: { id: id } 
-//   });
+const restoreInstructorFromDB = async(id) => {
+  await Instructor.restore({ 
+    where: { id: id } 
+  });
   
-//   const restoredReview = await getReviewById(id);
+  const restoredInstructor = await getInstructorById(id);
 
-//   return restoredReview;
-// };
+  return restoredInstructor;
+};
 
 module.exports = {
   createIntructorInDB,
@@ -65,5 +70,6 @@ module.exports = {
   getAllIntructorFromDB,
   updateInstructor,
   addCourseToInstructor,
-  deleteIntructorFromDB
+  deleteIntructorFromDB,
+  restoreInstructorFromDB
 }
