@@ -26,7 +26,7 @@ const postInstructor = async (req, res) => {
   }
 };
 
-const getAllInstructor = async (req, res) => {
+const getAllInstructors = async (req, res) => {
   try {
     const allInstructors = await instructorService.getAllIntructorFromDB();
 
@@ -89,7 +89,7 @@ const relationInstructorWithCourse = async (req, res) => {
 
 module.exports = {
   postInstructor,
-  getAllInstructor,
+  getAllInstructors,
   putInstructor,
   relationInstructorWithCourse
 };
