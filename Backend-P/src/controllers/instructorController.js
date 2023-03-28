@@ -75,12 +75,13 @@ const putInstructor = async (req, res) => {
   }
 };
 
-const relationInstructorWithCourse = async (req, res) => {
+const addCourseToInstructor = async (req, res) => {
   try {
-    const { instructorId, courseId } = req.params;
+    const { courseId }     = req.body;
+    const { instructorId } = req.params;
 
+    const foundCourse     = await courseService.getCourseById(courseId);
     const foundInstructor = await instructorService.getInstructorById(instructorId);
-    const foundCourse = await courseService.getCourseById(courseId);
     
     if (!foundInstructor) {
       throw new Error(`No se ha encontrado ningun instructor con el ID: ${instructorId}`)
@@ -147,7 +148,7 @@ module.exports = {
   getInstructorById,
   getAllInstructors,
   putInstructor,
-  relationInstructorWithCourse,
+  addCourseToInstructor,
   deleteInstructor,
   restoreInstructor
 };
