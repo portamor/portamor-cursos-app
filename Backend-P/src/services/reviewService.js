@@ -1,17 +1,27 @@
-const { Review, Courses }= require('../database.js')
+const courseService       = require("./courseService");
+const userService         = require("./userService");
+const { Review, Courses } = require('../database.js')
 
-const createReviewInDatabase = async ({courseId, comment, title, stars_value}) => {
+const createReviewInDatabase = async ({courseId, comment, title, userId, stars_value}) => {
+  const foundCourse = await courseService.getCourseById(courseId);
+  const foundUser   = await userService.userById(userId);
+
   const createdReview = await Review.create({
     comment,
     title,
     stars_value,
-    CourseId: courseId
-  })
+  });
+
+  await createdReview.setCourse(foundCourse);
+  await createdReview.setUser(foundUser);
+
   return createdReview;
 };
 
 const getReviewById = async (id) => {
-  const foundReview = await Review.findByPk(id);
+  const foundReview = await Review.findOne({ 
+    where: { id: id }, paranoid: false 
+  });
   return foundReview;
 };
 
@@ -36,10 +46,14 @@ const deleteReviewFromDB = async(id) => {
   await foundReview.destroy()
 };
 
-const restoreCommentFromDB = async(id) => {
-  await Comments.restore({ 
+const restoreReviewFromDB = async(id) => {
+  await Review.restore({ 
     where: { id: id } 
-  })
+  });
+  
+  const restoredReview = await getReviewById(id);
+
+  return restoredReview;
 };
 
 module.exports = {
@@ -48,5 +62,5 @@ module.exports = {
   getReviewsByCourseId,
   updateReview,
   deleteReviewFromDB,
-  restoreCommentFromDB
+  restoreReviewFromDB
 }
