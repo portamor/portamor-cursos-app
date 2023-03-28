@@ -44,10 +44,26 @@ const addCourseToInstructor = async ({ instructorId, courseId }) => {
   return instructorToUpdate;
 }
 
+const deleteIntructorFromDB = async (id) => {
+  const foundInstructor = await getInstructorById(id);
+  await foundInstructor.destroy()
+};
+
+// const restoreReviewFromDB = async(id) => {
+//   await Review.restore({ 
+//     where: { id: id } 
+//   });
+  
+//   const restoredReview = await getReviewById(id);
+
+//   return restoredReview;
+// };
+
 module.exports = {
   createIntructorInDB,
   getInstructorById,
   getAllIntructorFromDB,
   updateInstructor,
-  addCourseToInstructor
+  addCourseToInstructor,
+  deleteIntructorFromDB
 }
