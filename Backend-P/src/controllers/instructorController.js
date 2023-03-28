@@ -121,26 +121,26 @@ const deleteInstructor = async (req, res) => {
   }
 }
 
-// const restoreReview = async (req, res) => {
-//   try {
-//     const { reviewId } = req.params;
+const restoreInstructor = async (req, res) => {
+  try {
+    const { instructorId } = req.params;
     
-//     const foundReview = await reviewService.getReviewById(reviewId);
+    const foundInstructor = await instructorService.getInstructorById(instructorId);
 
-//     if(!foundReview) {
-//       throw new Error(`No se ha encontrado ninguna opinion con el ID: ${reviewId}`);
-//     }
-//     if(foundReview.deletedAt === null) {
-//       throw new Error("La opinion no habia sido eliminada anteriormente");
-//     } 
+    if(!foundInstructor) {
+      throw new Error(`No se ha encontrado ningun instructor con el ID: ${instructorId}`);
+    }
+    if(foundInstructor.deletedAt === null) {
+      throw new Error(`El instructor ${foundInstructor.name} no habia sido eliminado anteriormente`);
+    } 
 
-//     const restoredReview = await reviewService.restoreReviewFromDB(reviewId);
+    const restoredInstructor = await instructorService.restoreInstructorFromDB(instructorId);
     
-//     res.status(200).json({ message: "Opinion restaurada con exito", data: restoredReview });
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// }
+    res.status(200).json({ message: "Instructor restaurada con exito", data: restoredInstructor });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}
 
 module.exports = {
   postInstructor,
@@ -149,4 +149,5 @@ module.exports = {
   putInstructor,
   relationInstructorWithCourse,
   deleteInstructor,
+  restoreInstructor
 };
