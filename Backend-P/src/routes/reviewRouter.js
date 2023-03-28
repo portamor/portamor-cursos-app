@@ -3,13 +3,13 @@ const reviewController = require('../controllers/reviewController')
 const reviewRouter     = Router()
 
 // ---- POST
-reviewRouter.post('/:courseId', reviewController.postReview);
+reviewRouter.post('/', reviewController.postReview);
 //----- GET
-reviewRouter.get('/:courseId',  reviewController.getAllCommentsByCourseId)
+reviewRouter.get('/:courseId',  reviewController.getAllReviewsByCourseId)
 //----- PUT
-reviewRouter.put('/:commentId', reviewController.putComment)
-reviewRouter.put('/restore/:commentId', reviewController.restoreComment)
+reviewRouter.put('/:reviewId', reviewController.putReview)
+reviewRouter.put('/restore/:reviewId', reviewController.restoreReview)
 //----- DELETE
-reviewRouter.delete('/:commentId', reviewController.deleteComment)
+reviewRouter.delete('/:reviewId', reviewController.deleteReview)
 
 module.exports = reviewRouter;
