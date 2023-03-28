@@ -1,5 +1,5 @@
+const courseService           = require("./courseService")
 const { Instructor, Courses } = require("../database")
-const courseService = require("./courseService")
 
 const createIntructorInDB = async ({ courseId, data }) => {
   const foundCourse = await courseService.getCourseById(courseId);
