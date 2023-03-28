@@ -1,31 +1,34 @@
-const reviewService = require('../services/reviewService')
-const courseService  = require('../services/courseService')
+const courseService = require('../services/courseService');
+const reviewService = require('../services/reviewService');
+const userService   = require("../services/userService");
 
 const postReview = async (req, res) => {
   try {
-    const { courseId } = req.params;
-    const { comment, title, stars_value } = req.body;
+    const { comment, title, stars_value, courseId, userId } = req.body;
 
-    if(!comment || !title || !stars_value) {
+    if(!comment || !title || !stars_value || !userId || !courseId) {
       throw new Error("Estan faltando valores para crear una opinion")
     }
 
-    const courseFound = await courseService.getCourseById(courseId)
-
-    if(!courseFound) {
+    const foundCourse = await courseService.getCourseById(courseId)
+    const foundUser = await userService.userById(userId)
+    
+    if(!foundCourse) {
       throw new Error(`No se ha encontrado ningun curso con este ID: ${courseId}`)
+    }
+    if(!foundUser) {
+      throw new Error(`No se ha encontrado ningun usuario con este ID: ${userId}`)
     }
 
     const createdComment = await reviewService.createReviewInDatabase({
       comment,
       title,
       stars_value,
-      courseId: courseFound.id
+      userId: foundUser.id,
+      courseId: foundCourse.id
     })
 
-    if(!createdComment) {
-      throw new Error("No ha sido posible crear una opinion")
-    }
+    if(!createdComment) throw new Error("No ha sido posible crear una opinion")
 
     res.status(201).json({message: "Opinion creada exitosamente", data: createdComment})
   } catch (error) {
@@ -39,13 +42,13 @@ const getAllReviewsByCourseId = async (req, res) => {
     
     if(!courseId) throw new Error("No se ha recibido un id de un curso")
 
-    const courseFound = await courseService.getCourseById(courseId)
+    const foundCourse = await courseService.getCourseById(courseId)
 
-    if(!courseFound) {
+    if(!foundCourse) {
       throw new Error(`No se ha encontrado ningun curso con este ID: ${courseId}`)
     }
 
-    const { Reviews } = await reviewService.getReviewsByCourseId(courseFound.id)
+    const { Reviews } = await reviewService.getReviewsByCourseId(foundCourse.id)
 
     if(!Reviews.length) throw new Error("No se han encontrado opiniones de este curso");
 
@@ -94,23 +97,24 @@ const deleteReview = async (req, res) => {
   }
 }
 
-const restoreComment = async (req, res) => {
+const restoreReview = async (req, res) => {
   try {
-    const { commentId } = req.params;
+    const { reviewId } = req.params;
     
-    if(!commentId) throw new Error("No se ha recibido un id de un comentario")
+    const foundReview = await reviewService.getReviewById(reviewId);
 
-    const foundComment = await reviewService.getCommentById(commentId)
-
-    if(!foundComment) {
-      throw new Error(`No se ha encontrado ningun comentario con el ID: ${commentId}`)
+    if(!foundReview) {
+      throw new Error(`No se ha encontrado ninguna opinion con el ID: ${reviewId}`);
     }
+    if(foundReview.deletedAt === null) {
+      throw new Error("La opinion no habia sido eliminada anteriormente");
+    } 
 
-    await reviewService.restoreCommentFromDB(commentId)
+    const restoredReview = await reviewService.restoreReviewFromDB(reviewId);
     
-    res.status(200).json({ msg: "Comentario restaurado con exito" })
+    res.status(200).json({ message: "Opinion restaurada con exito", data: restoredReview });
   } catch (error) {
-    res.status(400).json({msg: error.message})
+    res.status(400).json({ message: error.message });
   }
 }
 
@@ -119,5 +123,5 @@ module.exports = {
   getAllReviewsByCourseId,
   putReview,
   deleteReview,
-  restoreComment
+  restoreReview
 }
