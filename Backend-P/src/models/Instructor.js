@@ -23,15 +23,17 @@ module.exports = sequelize => {
         allowNull: false,
       },
       score: {
-        type: DataTypes.STRING,
+        type: DataTypes.FLOAT,
         allowNull: true,
       },
-      review: {
-        type: DataTypes.STRING,
+      reviews: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
     },
-    {timestamps: false,
-      paranoid: true,}
+    {
+      timestamps: false,
+      paranoid: true,
+    }
   );
 };
