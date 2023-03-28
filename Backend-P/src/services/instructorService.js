@@ -9,17 +9,17 @@ const createIntructorInDB = async ({ courseId, data }) => {
     name: data.name,
     profile_picture: data.profile_picture,
     score: data.score,
-    review: data.review,
+    reviews: data.reviews,
   });
 
-  await createdInstructor.addCourses(foundCourse)
+  await createdInstructor.addCourse(foundCourse);
 
   return createdInstructor;
 }
 
 const getAllIntructorFromDB = async () => {
   return Instructor.findAll({
-    include: "courses"
+    include: Courses
   });
 }
 
