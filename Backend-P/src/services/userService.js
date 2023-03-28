@@ -15,9 +15,12 @@ const createUser = async (name, lastName, code, birthday) => {
 };
 
 const userInscription = async (userId, courseId) => {
-    const inscrited =await course_Inscription.create({UserId: userId, CourseId: courseId})
-    return inscrited
-}
+  const inscrited = await course_Inscription.create({
+    UserId: userId,
+    CourseId: courseId,
+  });
+  return inscrited;
+};
 
 const getAllUsers = async () => {
   const allUsers = await Users.findAll();
@@ -29,13 +32,13 @@ const userByCode = async (code) => {
     where: {
       code,
     },
-    include: Courses ,
+    include: Courses,
   });
   return userCode;
 };
 
 const userById = async (id) => {
-  const userId = await Users.findByPk(id,{include: Courses});
+  const userId = await Users.findByPk(id, { include: Courses });
   return userId;
 };
 
@@ -55,5 +58,5 @@ module.exports = {
   userById,
   getAllUsers,
   updateUser,
-  userInscription
+  userInscription,
 };

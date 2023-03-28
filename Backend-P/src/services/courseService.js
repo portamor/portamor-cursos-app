@@ -1,17 +1,17 @@
-const { Courses, Videos }= require('../database.js')
-const {Op} = require('sequelize')
+const { Courses, Videos } = require("../database.js");
+const { Op } = require("sequelize");
 
 const getCourseById = async (id) => {
   const courseFound = await Courses.findOne({
-    where: {id: id},
-    include: { model: Videos }
-  })
+    where: { id: id },
+    include: { model: Videos },
+  });
   return courseFound;
 };
 
 const getAllCourses = async () => {
-  const allCoursesFound = await Courses.findAll()
-  return allCoursesFound
+  const allCoursesFound = await Courses.findAll();
+  return allCoursesFound;
 };
 
 const getCourseByTitle = async (title) => {
@@ -71,7 +71,6 @@ const restoreACourse = async (id) => {
   });
 };
 
-
 module.exports = {
   getCourseById,
   getAllCourses,
@@ -81,5 +80,5 @@ module.exports = {
   createACourse,
   updateCourse,
   deleteACourse,
-  restoreACourse
+  restoreACourse,
 };
