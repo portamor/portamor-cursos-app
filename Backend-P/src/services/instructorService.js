@@ -18,9 +18,7 @@ const createIntructorInDB = async ({ courseId, data }) => {
 }
 
 const getAllIntructorFromDB = async () => {
-  return Instructor.findAll({
-    include: Courses
-  });
+  return Instructor.findAll({ include: Courses });
 }
 
 const getInstructorById = async (id) => {
@@ -38,10 +36,10 @@ const updateInstructor = async ({ id, data }) => {
 }
 
 const addCourseToInstructor = async ({ instructorId, courseId }) => {
-  const instructorToUpdate = await Instructor.findByPk(instructorId);
-  const foundCourse = await courseService.getCourseById(courseId);
+  const foundCourse        = await courseService.getCourseById(courseId);
+  const instructorToUpdate = await getInstructorById(instructorId);
 
-  await instructorToUpdate.addCourses(foundCourse)
+  await instructorToUpdate.addCourse(foundCourse);
 
   return instructorToUpdate;
 }
