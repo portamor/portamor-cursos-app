@@ -103,10 +103,50 @@ const relationInstructorWithCourse = async (req, res) => {
   }
 };
 
+const deleteInstructor = async (req, res) => {
+  try {
+    const { instructorId } = req.params;
+    
+    const foundInstructor = await instructorService.getInstructorById(instructorId);
+
+    if(!foundInstructor) {
+      throw new Error(`No se ha encontrado ningun instructor con el ID: ${instructorId}`)
+    }
+
+    await instructorService.deleteIntructorFromDB(instructorId)
+    
+    res.status(200).json({ message: "Instructor eliminado con exito" })
+  } catch (error) {
+    res.status(400).json({ message: error.message })
+  }
+}
+
+// const restoreReview = async (req, res) => {
+//   try {
+//     const { reviewId } = req.params;
+    
+//     const foundReview = await reviewService.getReviewById(reviewId);
+
+//     if(!foundReview) {
+//       throw new Error(`No se ha encontrado ninguna opinion con el ID: ${reviewId}`);
+//     }
+//     if(foundReview.deletedAt === null) {
+//       throw new Error("La opinion no habia sido eliminada anteriormente");
+//     } 
+
+//     const restoredReview = await reviewService.restoreReviewFromDB(reviewId);
+    
+//     res.status(200).json({ message: "Opinion restaurada con exito", data: restoredReview });
+//   } catch (error) {
+//     res.status(400).json({ message: error.message });
+//   }
+// }
+
 module.exports = {
   postInstructor,
   getInstructorById,
   getAllInstructors,
   putInstructor,
-  relationInstructorWithCourse
+  relationInstructorWithCourse,
+  deleteInstructor,
 };
