@@ -8,12 +8,10 @@ const usersController = require('../controllers/usersController.js')
 
 
 //.-----GET
-router.get('/', usersController.getUsers)
-router.get('/:userId', usersController.getUserByIdCourses);
+router.get('/', usersController.getUsers )
 
 // ----POST
 router.post('/', usersController.postUser)
-router.post('/inscription/:userId/:courseId', usersController.postInscription)
 
 // ----PUT
 router.put('/:id', usersController.userPut)

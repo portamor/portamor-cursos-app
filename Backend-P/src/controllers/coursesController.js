@@ -82,7 +82,7 @@ const postCourse = async (req, res) => {
     const createCourse = await courseService.createACourse(newInfoCourse);
     res.status(200).json(createCourse);
   } catch (error) {
-    res.status(400).json({messege: error.massage});
+    console.log("Error al crear el curso", error);
   }
 };
 
