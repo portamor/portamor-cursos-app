@@ -26,6 +26,22 @@ const postInstructor = async (req, res) => {
   }
 };
 
+const getInstructorById = async (req, res) => {
+  try {
+    const { instructorId } = req.params;
+
+    const foundInstructor = await instructorService.getInstructorById(instructorId);
+
+    if (!foundInstructor) {
+      throw new Error(`No se ha encontrado ningun instructor con el ID: ${instructorId}`)
+    }
+
+    res.status(200).json({ message: "Instructor encontrado con exito", data: foundInstructor });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 const getAllInstructors = async (req, res) => {
   try {
     const allInstructors = await instructorService.getAllIntructorFromDB();
@@ -89,6 +105,7 @@ const relationInstructorWithCourse = async (req, res) => {
 
 module.exports = {
   postInstructor,
+  getInstructorById,
   getAllInstructors,
   putInstructor,
   relationInstructorWithCourse
