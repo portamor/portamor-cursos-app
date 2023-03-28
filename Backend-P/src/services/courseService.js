@@ -1,10 +1,10 @@
-const { Courses, Videos }= require('../database.js')
+const { Courses, Videos, Sections }= require('../database.js')
 const {Op} = require('sequelize')
 
 const getCourseById = async (id) => {
   const courseFound = await Courses.findOne({
     where: {id: id},
-    include: { model: Videos }
+    include: { model: Sections }
   })
   return courseFound;
 };

@@ -16,7 +16,6 @@ const getCourseById = async (req, res) => {
     const {id} = req.params
     const courseId = await courseService.getCourseById(id)
     res.status(200).json(courseId)
-    
   } catch (error) {
     res.status(400).json({message: error.message})
   }
@@ -82,7 +81,8 @@ const postCourse = async (req, res) => {
     const createCourse = await courseService.createACourse(newInfoCourse);
     res.status(200).json(createCourse);
   } catch (error) {
-    res.status(400).json({messege: error.massage});
+    console.log(error)
+    res.status(402).json({messege: error.massage});
   }
 };
 
@@ -99,6 +99,7 @@ const putCourse = async (req, res) => {
     });
     res.status(200).json(updateCourse);
   } catch (error) {
+    console.log(error)
     res.status(400).json({ message: error.message });
   }
 };
