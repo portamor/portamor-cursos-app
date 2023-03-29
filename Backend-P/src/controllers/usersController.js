@@ -23,8 +23,6 @@ const getUsers = async (req, res) => {
     }}
 };
 
-<<<<<<< HEAD
-=======
 const getUserByIdCourses = async(req, res)=> {
     try {
         const {userId} = req.params
@@ -37,7 +35,6 @@ const getUserByIdCourses = async(req, res)=> {
     }
 }
 
->>>>>>> 2ac13db74bdbbbd2923ce856fa44172e03d1f556
 const postUser = async (req, res) => {
   const { name, lastName, birthday } = req.body;
   try {
