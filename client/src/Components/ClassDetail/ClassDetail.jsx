@@ -1,13 +1,18 @@
 import React from "react";
-import styles from "./ClassDetail.module.css";
-import CustomButton from "../CustomButton/CustomButton";
-import { StarFill } from "react-bootstrap-icons";
-import certifiedImg from "./certified-portamor.svg"
+
+//----Components
+import CustomButton    from "../CustomButton/CustomButton";
+import CourseAccordion from "../CourseAccordion/CourseAccordion";
+import ReviewCard      from "../ReviewCard/ReviewCard";
+import { StarFill }    from "react-bootstrap-icons";
+import UserCard        from "../UserCard/UserCard";
+import certifiedImg    from "./certified-portamor.svg"
 
 // example sections to accordion
 import { courseSections } from "../DataBase/Json"
-import CourseAccordion from "../CourseAccordion/CourseAccordion";
-import ReviewCard from "../ReviewCard/ReviewCard";
+
+//----Styles
+import styles from "./ClassDetail.module.css";
 
 const ClassDetail = (props) => {
   return (
