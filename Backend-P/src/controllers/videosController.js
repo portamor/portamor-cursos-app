@@ -4,6 +4,7 @@ const videoService = require("../services/videoService.js");
 const getVideos = async (req, res) => {
   try {
     const allVideos = await videoService.getAllVideos();
+    if(!allVideos.length) throw new Error('No hay videos en la base de datos')
     res.status(200).json(allVideos);
   } catch (error) {
     console.log("error al obtener los videos", error);

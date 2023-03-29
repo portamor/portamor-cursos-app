@@ -5,6 +5,7 @@ const getUsers = async (req, res) => {
     if (code) {
         try {
             const aUserCode = await userService.userByCode(code)
+            if (!aUserCode.length) throw new Error(`No se encontro user con el code ${code}`)
             res.status(200).json(aUserCode)
         } catch (error) {
     res.status(404).json({message: error.message})
@@ -22,6 +23,21 @@ const getUsers = async (req, res) => {
     }}
 };
 
+<<<<<<< HEAD
+=======
+const getUserByIdCourses = async(req, res)=> {
+    try {
+        const {userId} = req.params
+        const userAndCourse = await userService.userById(userId)
+        if (!userAndCourse.length) throw new Error(`No se encontro registro de ${userId} `)
+        res.status(200).json(userAndCourse)
+        
+    } catch (error) {
+        res.status(400).json({message: error.message})
+    }
+}
+
+>>>>>>> 2ac13db74bdbbbd2923ce856fa44172e03d1f556
 const postUser = async (req, res) => {
   const { name, lastName, birthday } = req.body;
   try {
