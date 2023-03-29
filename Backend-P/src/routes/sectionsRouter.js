@@ -5,7 +5,7 @@ const sectionController = require('../controllers/sectionsController')
 
 //--- GET
 sectionRouter.get('/:sectionId', sectionController.getASectionById)
-sectionRouter.get('/course/:courseId', sectionController.getSectionsByIdCourses)
+sectionRouter.get('/course/:courseId', sectionController.getSectionsByIdCourse)
 
 // --- POST
 sectionRouter.post('/', sectionController.postSection)

@@ -15,9 +15,9 @@ const getSectionById = async (sectionId) => {
   return sectionById;
 };
 
-const createSection = async ({ nameSection, CourseId }) => {
+const createSection = async ({ name, CourseId }) => {
   const newSection = await Sections.create({
-    nameSection,
+    name,
     CourseId: CourseId,
   });
   return newSection;
