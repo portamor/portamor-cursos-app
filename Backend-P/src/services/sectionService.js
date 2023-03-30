@@ -1,4 +1,15 @@
+const courseService        = require("./courseService.js");
 const { Sections, Videos } = require("../database.js");
+
+const createSection = async (name, courseId) => {
+  const courseFound = await courseService.getCourseById(courseId)
+  
+  const newSection = await Sections.create({ name: name, });
+
+  newSection.setCourse(courseFound)
+
+  return newSection;
+};
 
 const getSectionsByCourseId = async (courseId) => {
   const sections = await Sections.findAll({
@@ -13,14 +24,6 @@ const getSectionById = async (sectionId) => {
     include: [{ model: Videos }],
   });
   return sectionById;
-};
-
-const createSection = async ({ name, CourseId }) => {
-  const newSection = await Sections.create({
-    name,
-    CourseId: CourseId,
-  });
-  return newSection;
 };
 
 const putSection = async ({ id, data }) => {
