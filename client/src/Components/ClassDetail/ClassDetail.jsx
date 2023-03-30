@@ -26,7 +26,7 @@ const ClassDetail = (props) => {
           <img 
           src="https://as01.epimg.net/meristation/imagenes/2020/03/10/betech/1583879055_794070_1583879168_noticia_normal_recorte1.jpg" 
           alt="" 
-          lassName={styles["video"]} />
+          className={styles["video"]} />
 
         </div>
         
@@ -53,10 +53,10 @@ const ClassDetail = (props) => {
 
       <div className={styles["secciones-temario-container"]}>
         <div className={styles["buttons-and-cards-container"]}>
-          <div className={styles["buttons-container"]}>
-            <CustomButton primary={true} content="COMENTARIOS"/>
-            <CustomButton primary={false} content="PARTICIPANTES"/>
+          <div className={styles["buttons-sections-container"]}>
+            <CustomButton primary={true}  content="COMENTARIOS"/>
             <CustomButton primary={false} content="MATERIALES"/>
+            <CustomButton primary={false} content="PARTICIPANTES"/>
             <CustomButton primary={false} content="PREGUNTAS FRECUENTES"/>
           </div>
           <div className={styles["cards-container"]}>
