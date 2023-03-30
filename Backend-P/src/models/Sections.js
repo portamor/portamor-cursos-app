@@ -15,6 +15,6 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
     },
-    { timestamps: false, paranoid: true }
+    { timestamps: true, paranoid: true }
   );
 };
