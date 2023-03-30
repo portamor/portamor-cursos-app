@@ -70,13 +70,13 @@ const getCourseType = async (req, res) => {
   try {
     const { type } = req.params;
 
-    const courseType = await courseService.getCourseByType(type);
+    const foundCourse = await courseService.getCourseByType(type);
 
-    if(!courseType.length) {
+    if(!foundCourse.length) {
       throw new Error(`No se ha encontrado ningun curso con el type ${type}`)
     } 
 
-    res.status(200).json(courseType);
+    res.status(200).json({ message: "Curso encontrado con exito", data: foundCourse });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
