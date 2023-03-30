@@ -24,13 +24,15 @@ const postCourse = async (req, res) => {
   }
 };
 
-const getCourses = async (req, res) => {
+const getAllCourses = async (req, res) => {
   try {
     const courses = await courseService.getAllCourses();
-    if (!courses.length) throw new Error('No se encontraron cursos')
+
+    if (!courses.length) throw new Error('No se ha encontrado ningun curso')
+    
     res.status(200).json(courses);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 
@@ -127,7 +129,7 @@ const restoreCouse = async (req, res) => {
 
 module.exports = {
   postCourse,
-  getCourses,
+  getAllCourses,
   getCourseById,
   getCourseTitle,
   getCourseType,
