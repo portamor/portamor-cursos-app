@@ -3,9 +3,8 @@ const courseService = require("../services/courseService");
 const getCourses = async (req, res) => {
   try {
     const courses = await courseService.getAllCourses();
-    if (courses) {
-      res.status(200).json(courses);
-    }
+    if (!courses.length) throw new Error('No se encontraron cursos')
+    res.status(200).json(courses);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -15,8 +14,8 @@ const getCourseById = async (req, res) => {
   try {
     const {id} = req.params
     const courseId = await courseService.getCourseById(id)
+    if(!courseId.length) throw new Error(`No se encontro curso con el id ${id}`)
     res.status(200).json(courseId)
-    
   } catch (error) {
     res.status(400).json({message: error.message})
   }
@@ -26,6 +25,7 @@ const getCourseTitle = async (req, res) => {
   try {
     const { title } = req.params;
     const courseTitle = await courseService.getCourseByTitle(title);
+    if(!courseTitle.length) throw new Error(`No se encontro curso con el titulo ${title}`)
     res.status(200).json(courseTitle);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -36,6 +36,7 @@ const getCourseType = async (req, res) => {
   try {
     const { typeCourse } = req.query;
     const courseType = await courseService.getCourseByType(typeCourse);
+    if(!courseType.length) throw new Error(`No se encontro curso con el type ${typeCourse}`)
     res.status(200).json(courseType);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -46,6 +47,7 @@ const getCourseGenre = async (req, res) => {
   try {
     const { genreCourse } = req.query;
     const courseGenre = await courseService.getCourseBygenre(genreCourse);
+    if(!courseGenre.length) throw new Error(`No se encontro curso con el genero ${genreCourse}`)
     res.status(200).json(courseGenre);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -82,7 +84,7 @@ const postCourse = async (req, res) => {
     const createCourse = await courseService.createACourse(newInfoCourse);
     res.status(200).json(createCourse);
   } catch (error) {
-    console.log("Error al crear el curso", error);
+    res.status(402).json({messege: error.massage});
   }
 };
 

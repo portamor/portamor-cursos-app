@@ -4,9 +4,10 @@ const videoService = require("../services/videoService.js");
 const getVideos = async (req, res) => {
   try {
     const allVideos = await videoService.getAllVideos();
+    if(!allVideos.length) throw new Error('No hay videos en la base de datos')
     res.status(200).json(allVideos);
   } catch (error) {
-    console.log("error al obtener los videos", error);
+    res.status(400).json({messege: error.massage});
   }
 };
 
@@ -28,7 +29,7 @@ const postVideos = async (req, res) => {
     });
     res.status(200).json(createVideo);
   } catch (error) {
-    console.log("error al crear el video", error.massage);
+    res.status(400).json({messege: error.massage});
   }
 };
 

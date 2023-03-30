@@ -1,0 +1,37 @@
+.course-accordion {
+  width: 350px;
+  background-color: #fcfcfc;
+}
+
+.course-accordion h2{
+  margin: 0;
+}
+
+.course-accordion-summary {
+  background-color: #f4f2f2;
+}
+
+.course-accordion-summary-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.course-accordion-li {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: solid 2px#F5F5F5;
+}
+
+.course-accordion-li-div {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 15px;
+}
+
+.course-accordion-class-link {
+  text-decoration: none;
+  color: #000;
+}
+
