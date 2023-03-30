@@ -42,7 +42,7 @@ const getCourseById = async (id) => {
 };
 
 const getCourseByTitle = async (title) => {
-  const titleCourse = await Courses.findAll({
+  const foundCourse = await Courses.findAll({
     where: { title: { [Op.iLike]: `%${title}%` } },
     order: [["title", "ASC"]],
     include: [
@@ -52,7 +52,7 @@ const getCourseByTitle = async (title) => {
       },
     ]
   });
-  return titleCourse;
+  return foundCourse;
 };
 
 const getCourseByType = async (type) => {
@@ -67,16 +67,13 @@ const getCourseByType = async (type) => {
   return courseType;
 };
 
-const getCourseBygenre = async (genreCourse) => {
-  const coursesGenre = await Courses.findAll({
-    where: {
-      genreCourse: {
-        [Op.iLike]: `%${genreCourse}%`,
-      },
-    },
+const getCourseBygenre = async (genre) => {
+  const foundCourse = await Courses.findAll({
+    where: { genre: genre },
     order: [["title", "ASC"]],
   });
-  return coursesGenre;
+  
+  return foundCourse;
 };
 
 const updateCourse = async ({ id, data }) => {
