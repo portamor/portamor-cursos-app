@@ -31,6 +31,7 @@ const getAllCourses = async () => {
 const getCourseById = async (id) => {
   const courseFound = await Courses.findOne({
     where: {id: id},
+    paranoid: false,
     include: [
       { 
         model: Sections, 
@@ -90,10 +91,12 @@ const deleteACourse = async (id) => {
 
 const restoreACourse = async (id) => {
   await Courses.restore({
-    where: {
-      id: id,
-    },
+    where: { id: id },
   });
+
+  const restoredCourse = await getCourseById(id);
+
+  return restoredCourse;
 };
 
 module.exports = {
