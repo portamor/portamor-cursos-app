@@ -71,12 +71,19 @@ const deleteASection = async (req, res) => {
 const restoreSection = async (req, res) => {
   try {
     const { sectionId } = req.params;
-    const sectionFound = sectionService.getSectionById(sectionId);
-    if (!sectionFound) {
-      throw new Error(`No se encontro la section con el id ${id}`);
-    }
-    await sectionService.restoreSection(id);
-    res.status(200).json({ message: "La section se ha restaurado con éxito" });
+
+    const foundSection = await sectionService.getSectionById(sectionId);
+
+    if (!foundSection) {
+      throw new Error(`No se encontro una seccion con el id ${sectionId}`);
+    } 
+    if(foundSection.deletedAt === null) {
+      throw new Error("La seccion no habia sido eliminada previamente");
+    } 
+
+    const restoredSection = await sectionService.restoreSection(foundSection.id);
+
+    res.status(200).json({ message: "La seccion se ha restaurado con éxito", data: restoredSection });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
