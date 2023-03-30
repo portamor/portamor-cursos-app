@@ -1,24 +1,23 @@
-const { Router } = require("express");
+const { Router }        = require("express");
 const coursesController = require("../controllers/coursesController.js");
-
-const router = Router();
+const courseRouter      = Router();
 
 // ---- POST
-router.post("/", coursesController.postCourse);
+courseRouter.post("/", coursesController.postCourse);
 
 // ---- GET
-router.get("/",             coursesController.getAllCourses);
-router.get("/id/:id",       coursesController.getCourseById)
-router.get("/title/:title", coursesController.getCourseByTitle);
-router.get("/type/:type",   coursesController.getCourseByType);
-router.get("/genre/:genre", coursesController.getCourseByGenre);
+courseRouter.get("/",             coursesController.getAllCourses);
+courseRouter.get("/id/:id",       coursesController.getCourseById)
+courseRouter.get("/title/:title", coursesController.getCourseByTitle);
+courseRouter.get("/type/:type",   coursesController.getCourseByType);
+courseRouter.get("/genre/:genre", coursesController.getCourseByGenre);
 
 // ---- PUT
-router.put("/:id",         coursesController.putCourse);
-router.put("/restore/:id", coursesController.restoreCourse);
+courseRouter.put("/:id",         coursesController.putCourse);
+courseRouter.put("/restore/:id", coursesController.restoreCourse);
 
 // ----DELETE
-router.delete("/:id", coursesController.deleteACourse);
+courseRouter.delete("/:id", coursesController.deleteACourse);
 
 
 
