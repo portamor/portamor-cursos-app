@@ -21,4 +21,4 @@ courseRouter.delete("/:id", coursesController.deleteACourse);
 
 
 
-module.exports = router;
+module.exports = courseRouter;
