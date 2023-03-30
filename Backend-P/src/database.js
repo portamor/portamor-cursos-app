@@ -37,11 +37,12 @@ let capsEntries = entries.map((entry) => [
 sequelize.models = Object.fromEntries(capsEntries);
 
 const {
-  Users,
-  Instructor,
-  Courses,
-  Review,
-  Videos
+    Users,
+    Instructor,
+    Courses,
+    Review,
+    Videos,
+    Sections
 } = sequelize.models;
 
 // ---- Users - Review
@@ -58,11 +59,16 @@ Courses.belongsToMany(Users, {
 })
 
 // ---- Courses Relations
-Courses.hasMany(Videos);
-Videos.belongsTo(Courses)
+Courses.hasMany(Sections);
+Sections.belongsTo(Courses)
 
 Courses.hasMany(Review);
 Review.belongsTo(Courses);
+
+
+// ---Sections Relation
+Sections.hasMany(Videos);
+Videos.belongsTo(Sections)
 
 // ---- Instructor Relations
 Instructor.hasMany(Courses);
