@@ -14,6 +14,7 @@ const createSection = async (name, courseId) => {
 const getSectionById = async (sectionId) => {
   const sectionById = await Sections.findByPk(sectionId, {
     include: [{ model: Videos }],
+    paranoid: false 
   });
   return sectionById;
 };
@@ -34,6 +35,10 @@ const restoreSection = async (id) => {
   await Sections.restore({
     where: { id: id },
   });
+
+  const restoredSection = await getSectionById(id);
+
+  return restoredSection;
 };
 
 module.exports = {
