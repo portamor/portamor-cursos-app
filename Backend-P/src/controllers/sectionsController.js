@@ -47,7 +47,7 @@ const putSection = async (req, res) => {
       data: req.body,
     });
     
-    res.status(200).json(updateSection);
+    res.status(200).json({ message: "Seccion actualizada con exito", data:updateSection });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -56,14 +56,13 @@ const putSection = async (req, res) => {
 const deleteASection = async (req, res) => {
   try {
     const { sectionId } = req.params;
-    const sectionFound = sectionService.getSectionById(sectionId);
-    if (!sectionFound) {
-      throw new Error(`No se encontro la section con el id ${id}`);
-    }
-    await courseService.deleteACourse(id);
-    res
-      .status(200)
-      .json({ message: `Se ha eliminado el curso ${id} correctamente` });
+    const foundSection  = await sectionService.getSectionById(sectionId);
+
+    if (!foundSection) throw new Error(`No se encontro una seccion con el ID: ${id}`);
+
+    await sectionService.deleteSection(foundSection.id);
+    
+    res.status(200).json({ message: `Se ha eliminado el curso ${foundSection.name} correctamente` });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
