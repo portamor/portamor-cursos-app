@@ -1,7 +1,7 @@
 const { Videos } = require("../database.js");
 
 const createVideo = async ({
-  courseId,
+  SectionId,
   videoLink,
   videoTitle,
   videoDescription,
@@ -10,7 +10,7 @@ const createVideo = async ({
     videoTitle,
     videoLink,
     videoDescription,
-    CourseId: courseId,
+    SectionId: SectionId,
   });
   return newVideo;
 };

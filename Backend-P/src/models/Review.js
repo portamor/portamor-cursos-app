@@ -1,7 +1,7 @@
 const {DataTypes, Sequelize} = require('sequelize');
 
 module.exports = sequelize => {
-  sequelize.define( 'Comments',
+  sequelize.define('Review',
     {
       id: {
         type: DataTypes.UUID,
@@ -9,12 +9,16 @@ module.exports = sequelize => {
         primaryKey: true,
         allowNull: false
       },
-      content: {
+      title: {
+        type: DataTypes.ENUM("Excelente", "Recomendado", "Bueno", "No me gusto", "Malo"),
+        allowNull: false
+      },
+      comment: {
         type: DataTypes.STRING,
         allowNull: false
       },
-      satisfaction: {
-        type: DataTypes.STRING,
+      stars_value: {
+        type: DataTypes.INTEGER,
         allowNull: true
       },
     },
