@@ -1,6 +1,20 @@
 const { Courses, Videos, Sections }= require('../database.js')
 const {Op} = require('sequelize')
 
+const createCourse = async (data) => {
+  const createdCourse = await Courses.create({
+    title:       data.title,
+    description: data.description,
+    image:       data.image,
+    genre:       data.genre,
+    type:        data.type,
+    rating:      data.rating,
+    materials:   data.materials,
+  });
+
+  return createdCourse;
+};
+
 const getCourseById = async (id) => {
   const courseFound = await Courses.findOne({
     where: {id: id},
@@ -46,11 +60,6 @@ const getCourseBygenre = async (genreCourse) => {
   return coursesGenre;
 };
 
-const createACourse = async (arg) => {
-  const postCourse = await Courses.create(arg);
-  return postCourse;
-};
-
 const updateCourse = async ({ id, data }) => {
   const upCourse = await getCourseById(id);
   upCourse.set(data);
@@ -77,7 +86,7 @@ module.exports = {
   getCourseByTitle,
   getCourseByType,
   getCourseBygenre,
-  createACourse,
+  createCourse,
   updateCourse,
   deleteACourse,
   restoreACourse,
