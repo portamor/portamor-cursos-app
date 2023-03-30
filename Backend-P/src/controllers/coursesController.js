@@ -1,5 +1,29 @@
 const courseService = require("../services/courseService");
 
+const postCourse = async (req, res) => {
+  try {
+    const { title } = req.body;
+
+    if(!title || !req.body.description || !req.body.image || !req.body.genre) {
+      throw new Error("Estan faltando valores para crear un curso")
+    }
+
+    const foundCourses = await courseService.getCourseByTitle(title);
+
+    if(foundCourses.length) {
+      for (const course of foundCourses) {
+        if(course.title === title) throw new Error("Ya existe un curso con este nombre")
+      }
+    }
+
+    const createdCourse = await courseService.createCourse(req.body);
+
+    res.status(200).json({ message: "Curso creado con exito", data: createdCourse});
+  } catch (error) {
+    res.status(400).json({message: error.message});
+  }
+};
+
 const getCourses = async (req, res) => {
   try {
     const courses = await courseService.getAllCourses();
@@ -54,40 +78,6 @@ const getCourseGenre = async (req, res) => {
   }
 };
 
-const postCourse = async (req, res) => {
-  const {
-    title,
-    image,
-    typeCourse,
-    goals,
-    description,
-    rating,
-    materials,
-    testimony,
-    methodology,
-    genreCourse,
-  } = req.body;
-
-  try {
-    const newInfoCourse = {
-      title,
-      image,
-      typeCourse,
-      goals,
-      description,
-      rating,
-      materials,
-      testimony,
-      methodology,
-      genreCourse,
-    };
-    const createCourse = await courseService.createACourse(newInfoCourse);
-    res.status(200).json(createCourse);
-  } catch (error) {
-    res.status(402).json({messege: error.massage});
-  }
-};
-
 const putCourse = async (req, res) => {
   try {
     const { id } = req.params;
@@ -136,12 +126,12 @@ const restoreCouse = async (req, res) => {
 };
 
 module.exports = {
+  postCourse,
   getCourses,
   getCourseById,
   getCourseTitle,
   getCourseType,
   getCourseGenre,
-  postCourse,
   putCourse,
   deleteACourse,
   restoreCouse
