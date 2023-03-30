@@ -10,6 +10,12 @@
   padding-bottom: 30px;
 }
 
+@media(max-width: 1123px) {
+  .course-title {
+    font-size: 30px;
+  }
+}
+
 .course-title-color {
   color: #EB575A;
 }
@@ -20,9 +26,24 @@
   margin-bottom: 30px;
 }
 
+@media(max-width: 1123px) {
+  .video-description-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+}
+
 .video {
-  width: 300px;
-  height: 466px;
+  width: 700px;
+  height: 420px;
+}
+
+@media(max-width: 1123px) {
+  .video {
+    width: 400px;
+    height: 320px;
+  }
 }
 
 .description-container {
@@ -32,6 +53,13 @@
   gap: 15px;
 }
 
+@media(max-width: 1123px) {
+  .description-container {
+    max-width: 80%;
+    align-items: center;
+  }
+}
+
 .description-title {
   font-size: 40px;
   font-weight: 800;
@@ -39,7 +67,13 @@
 }
 
 .description-text {
-  max-width: 500px;
+  max-width:500px;
+}
+
+@media(max-width: 1123px) {
+  .description-text {
+    max-width: 80%;
+  }
 }
 
 .stars-container {
@@ -59,16 +93,49 @@
   justify-content: space-evenly;
 }
 
+
+@media(max-width: 1123px) {
+  .secciones-temario-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    flex-flow: row wrap-reverse
+  }
+}
+
 .buttons-and-cards-container {
   width: 50%;
 }
 
-.buttons-container {
+@media(max-width: 1123px) {
+  .buttons-and-cards-container {
+    width: 80%;
+  }
+}
+
+.buttons-container,
+.buttons-sections-container {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin-bottom: 20px;
+}
 
+@media(max-width: 1123px) {
+  .buttons-container {
+    width: 80%;
+  }
+}
+
+@media(max-width: 845px) {
+  .buttons-container {
+    width: 400px;
+  }
+  .buttons-sections-container {
+   flex-direction: column;
+   align-items: center;
+   gap: 15px;
+  }
 }
 
 .cards-container {
