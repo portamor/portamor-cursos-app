@@ -125,7 +125,7 @@ const deleteACourse = async (req, res) => {
 
     await courseService.deleteACourse(id);
 
-    res.status(200).json({ message: `Se ha eliminado el curso ${id} correctamente` });
+    res.status(200).json({ message: `Se ha eliminado el curso ${foundCourse.title} correctamente` });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -134,12 +134,22 @@ const deleteACourse = async (req, res) => {
 const restoreCourse = async (req, res) => {
   try {
     const { id } = req.params;
+
     const foundCourse = await courseService.getCourseById(id);
+    
     if (!foundCourse) {
-      throw new Error(`No hay curso con el id ${id}`);
+      throw new Error(`No se ha encontrado un curso con el id ${id}`);
     }
-    await courseService.restoreACourse(id);
-    res.status(200).json({ message: "El curso se ha restaurado con éxito" });
+    if(foundCourse.deletedAt === null) {
+      throw new Error("El curso no habia sido eliminado previamente");
+    } 
+
+    const restoredCourse = await courseService.restoreACourse(id);
+    
+    res.status(200).json({ 
+      message: "El curso se ha restaurado con éxito", 
+      data: restoredCourse 
+    });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
