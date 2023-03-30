@@ -66,7 +66,7 @@ const getCourseByTitle = async (req, res) => {
   }
 };
 
-const getCourseType = async (req, res) => {
+const getCourseByType = async (req, res) => {
   try {
     const { type } = req.params;
 
@@ -78,18 +78,21 @@ const getCourseType = async (req, res) => {
 
     res.status(200).json({ message: "Curso encontrado con exito", data: foundCourse });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 
-const getCourseGenre = async (req, res) => {
+const getCourseByGenre = async (req, res) => {
   try {
-    const { genreCourse } = req.query;
-    const courseGenre = await courseService.getCourseBygenre(genreCourse);
-    if(!courseGenre.length) throw new Error(`No se encontro curso con el genero ${genreCourse}`)
+    const { genre } = req.params;
+
+    const courseGenre = await courseService.getCourseBygenre(genre);
+
+    if(!courseGenre.length) throw new Error(`No se ha encontrado ningun curso con el pilar ${genre}`)
+
     res.status(200).json(courseGenre);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 
@@ -145,8 +148,8 @@ module.exports = {
   getAllCourses,
   getCourseById,
   getCourseByTitle,
-  getCourseType,
-  getCourseGenre,
+  getCourseByType,
+  getCourseByGenre,
   putCourse,
   deleteACourse,
   restoreCouse
