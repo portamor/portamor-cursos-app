@@ -118,20 +118,20 @@ const putCourse = async (req, res) => {
 const deleteACourse = async (req, res) => {
   try {
     const { id } = req.params;
+
     const foundCourse = await courseService.getCourseById(id);
-    if (!foundCourse) {
-      throw new Error(`No hay curso con el id ${id}`);
-    }
+
+    if (!foundCourse) throw new Error(`No se ha encontrado ningun curso con el ID: ${id}`);
+
     await courseService.deleteACourse(id);
-    res
-      .status(200)
-      .json({ message: `Se ha eliminado el curso ${id} correctamente` });
+
+    res.status(200).json({ message: `Se ha eliminado el curso ${id} correctamente` });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
-const restoreCouse = async (req, res) => {
+const restoreCourse = async (req, res) => {
   try {
     const { id } = req.params;
     const foundCourse = await courseService.getCourseById(id);
@@ -154,5 +154,5 @@ module.exports = {
   getCourseByGenre,
   putCourse,
   deleteACourse,
-  restoreCouse
+  restoreCourse
 };
