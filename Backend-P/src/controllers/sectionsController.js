@@ -20,22 +20,13 @@ const postSection = async (req, res) => {
   }
 };
 
-const getSectionsByIdCourse = async (req, res) => {
-  const { courseId } = req.params;
-  try {
-    const sections = await sectionService.getSectionsByCourseId(courseId);
-    if (!sections.length) throw new Error(`La seccion del curso ${courseId} esta vacia`)
-    res.status(200).json(sections);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
 const getASectionById = async (req, res) => {
   const { sectionId } = req.params;
   try {
     const sectionsIdFouns = await sectionService.getSectionById(sectionId);
+
     if(!sectionsIdFouns.length) throw new Error(`No se encontro la seccion con el id ${sectionId}`)
+
     res.status(200).json(sectionsIdFouns);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -91,7 +82,6 @@ const restoreSection = async (req, res) => {
 
 module.exports = {
   getASectionById,
-  getSectionsByIdCourse,
   postSection,
   putSection,
   deleteASection,
