@@ -86,11 +86,11 @@ const getCourseByGenre = async (req, res) => {
   try {
     const { genre } = req.params;
 
-    const courseGenre = await courseService.getCourseBygenre(genre);
+    const foundCourses = await courseService.getCourseBygenre(genre);
 
-    if(!courseGenre.length) throw new Error(`No se ha encontrado ningun curso con el pilar ${genre}`)
+    if(!foundCourses.length) throw new Error(`No se ha encontrado ningun curso con el pilar ${genre}`)
 
-    res.status(200).json(courseGenre);
+    res.status(200).json({message: "Cursos encontrado con exito", data: foundCourses});
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -99,15 +99,17 @@ const getCourseByGenre = async (req, res) => {
 const putCourse = async (req, res) => {
   try {
     const { id } = req.params;
+
     const courseFound = courseService.getCourseById(id);
-    if (!courseFound) {
-      throw new Error(`No se encontro curso con el id ${id}`);
-    }
+    
+    if (!courseFound) throw new Error(`No se encontro curso con el id ${id}`);
+    
     const updateCourse = await courseService.updateCourse({
       id: id,
       data: req.body,
     });
-    res.status(200).json(updateCourse);
+
+    res.status(200).json({message: "Curso actualizado con exito", data: updateCourse});
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
