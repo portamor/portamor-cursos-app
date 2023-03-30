@@ -30,7 +30,7 @@ const getAllCourses = async (req, res) => {
 
     if (!courses.length) throw new Error('No se ha encontrado ningun curso')
     
-    res.status(200).json(courses);
+    res.status(200).json({message: "Cursos encontrados con exito", data: courses});
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -38,10 +38,13 @@ const getAllCourses = async (req, res) => {
 
 const getCourseById = async (req, res) => {
   try {
-    const {id} = req.params
-    const courseId = await courseService.getCourseById(id)
-    if(!courseId.length) throw new Error(`No se encontro curso con el id ${id}`)
-    res.status(200).json(courseId)
+    const {id} = req.params;
+
+    const foundCourse = await courseService.getCourseById(id)
+
+    if(!foundCourse) throw new Error(`No se encontro curso con el ID: ${id}`)
+
+    res.status(200).json({ message: "Curso encontrado con exito", data: foundCourse})
   } catch (error) {
     res.status(400).json({message: error.message})
   }

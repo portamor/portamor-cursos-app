@@ -16,7 +16,15 @@ const createCourse = async (data) => {
 };
 
 const getAllCourses = async () => {
-  const allCoursesFound = await Courses.findAll();
+  const allCoursesFound = await Courses.findAll({
+    include: [
+      { 
+        model: Sections, 
+        include: [ Videos ] 
+      },
+    ]
+  });
+
   return allCoursesFound;
 };
 
