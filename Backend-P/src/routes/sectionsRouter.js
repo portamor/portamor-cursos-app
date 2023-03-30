@@ -1,19 +1,14 @@
-const {Router} = require('express')
-const sectionRouter = Router()
+const {Router}          = require('express')
 const sectionController = require('../controllers/sectionsController')
-
-
-//--- GET
-sectionRouter.get('/:sectionId', sectionController.getASectionById)
-sectionRouter.get('/course/:courseId', sectionController.getSectionsByIdCourse)
+const sectionRouter     = Router()
 
 // --- POST
-sectionRouter.post('/', sectionController.postSection)
-
+sectionRouter.post('/:courseId', sectionController.postSection)
+//--- GET
+sectionRouter.get('/:sectionId', sectionController.getASectionById)
 // --- PUT
-sectionRouter.put('/', sectionController.putSection)
-sectionRouter.put('/restore', sectionController.restoreSection)
-
+sectionRouter.put('/:sectionId',         sectionController.putSection)
+sectionRouter.put('/restore/:sectionId', sectionController.restoreSection)
 //--- DELETE
 sectionRouter.delete('/:sectionId', sectionController.deleteASection)
 
