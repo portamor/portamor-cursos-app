@@ -46,26 +46,36 @@ const getCourseById = async (req, res) => {
 
     res.status(200).json({ message: "Curso encontrado con exito", data: foundCourse})
   } catch (error) {
-    res.status(400).json({message: error.message})
+    res.status(404).json({message: error.message})
   }
 }
 
-const getCourseTitle = async (req, res) => {
+const getCourseByTitle = async (req, res) => {
   try {
     const { title } = req.params;
+
     const courseTitle = await courseService.getCourseByTitle(title);
-    if(!courseTitle.length) throw new Error(`No se encontro curso con el titulo ${title}`)
-    res.status(200).json(courseTitle);
+
+    if(!courseTitle.length) {
+      throw new Error(`No se ha encontrado ningun curso con el titulo ${title}`)
+    } 
+
+    res.status(200).json({ message: "Curso encontrado con exito", data: courseTitle });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 
 const getCourseType = async (req, res) => {
   try {
-    const { typeCourse } = req.query;
-    const courseType = await courseService.getCourseByType(typeCourse);
-    if(!courseType.length) throw new Error(`No se encontro curso con el type ${typeCourse}`)
+    const { type } = req.params;
+
+    const courseType = await courseService.getCourseByType(type);
+
+    if(!courseType.length) {
+      throw new Error(`No se ha encontrado ningun curso con el type ${type}`)
+    } 
+
     res.status(200).json(courseType);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -134,7 +144,7 @@ module.exports = {
   postCourse,
   getAllCourses,
   getCourseById,
-  getCourseTitle,
+  getCourseByTitle,
   getCourseType,
   getCourseGenre,
   putCourse,
