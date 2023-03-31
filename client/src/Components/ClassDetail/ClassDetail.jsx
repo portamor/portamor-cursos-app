@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as actions from "../../Redux/actions"
@@ -13,23 +12,22 @@ import ReviewCard      from "../ReviewCard/ReviewCard";
 import UserCard        from "../UserCard/UserCard";
 import certifiedImg    from "./certified-portamor.svg"
 
-// example sections to accordion
-import { courseSections } from "../DataBase/Json"
-
 //----Styles
 import styles from "./ClassDetail.module.css";
 
 const ClassDetail = (props) => {
   const dispatch = useDispatch();
-  const match    = useMatch('/clase/:id');
-  const courseId = match.params.id;
+  const match    = useMatch('/clase/:courseId/:videoId');
+  const courseId = match.params.courseId;
   
   useEffect(() => {
     dispatch(actions.getCourseDetail(courseId));
+    dispatch(actions.getSectionsByCourseId(courseId));
   }, [courseId, dispatch])
 
-  const courseDetail = useSelector((state) => state.courseDetail);
-  const courseRating = utils.getStarsRating(courseDetail.rating);
+  const courseDetail   = useSelector((state) => state.courseDetail);
+  const courseSections = useSelector((state) => state.courseSections);
+  const courseRating   = utils.getStarsRating(courseDetail.rating);
   // const isWithCertificate = courseDetail.certificate;
 
 
