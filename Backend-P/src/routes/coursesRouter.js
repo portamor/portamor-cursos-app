@@ -1,33 +1,24 @@
-const { Router } = require("express");
+const { Router }        = require("express");
 const coursesController = require("../controllers/coursesController.js");
-
-const router = Router();
+const courseRouter      = Router();
 
 // ---- POST
-router.post("/", coursesController.postCourse);
+courseRouter.post("/", coursesController.postCourse);
 
 // ---- GET
-router.get("/", coursesController.getCourses);
-
-// ---- GET BY ID -- INCLUDE VIDEOS
-router.get("/id/:id", coursesController.getCourseById)
-
-// ---- GET BY TITLE
-router.get("/title/:title", coursesController.getCourseTitle);
-
-// ---- GET BY TYPE
-router.get("/type/:typeCourse", coursesController.getCourseType);
-
-// ---- GET BY GENRE
-router.get("/genre/:genreCourse", coursesController.getCourseGenre);
+courseRouter.get("/",             coursesController.getAllCourses);
+courseRouter.get("/id/:id",       coursesController.getCourseById)
+courseRouter.get("/title/:title", coursesController.getCourseByTitle);
+courseRouter.get("/type/:type",   coursesController.getCourseByType);
+courseRouter.get("/genre/:genre", coursesController.getCourseByGenre);
 
 // ---- PUT
-router.put("/:id", coursesController.putCourse);
-router.put("/restore/:id", coursesController.restoreCouse);
+courseRouter.put("/:id",         coursesController.putCourse);
+courseRouter.put("/restore/:id", coursesController.restoreCourse);
 
 // ----DELETE
-router.delete("/:id", coursesController.deleteACourse);
+courseRouter.delete("/:id", coursesController.deleteACourse);
 
 
 
-module.exports = router;
+module.exports = courseRouter;

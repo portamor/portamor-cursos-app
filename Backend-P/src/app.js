@@ -1,13 +1,11 @@
-require("dotenv").config();
-const express = require('express');
+const express      = require('express');
 const cookieParser = require('cookie-parser');
-const morgan = require('morgan')
-const session = require('express-session');
-const cors = require('cors');
- const router = require('./index.js')
+const morgan       = require('morgan')
+const session      = require('express-session');
+const cors         = require('cors');
+const router       = require('./routes/index')
+require("dotenv").config();
 require('./database.js')
-
-
 
 const server = express()
 
