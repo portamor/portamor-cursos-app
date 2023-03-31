@@ -1,8 +1,9 @@
-import {GET_COURSE_DETAIL} from "./actions";
+import {GET_COURSE_DETAIL, GET_SECTIONS_BY_COURSE_ID} from "./actions";
 
 const initialState = {
   courses: [],
   courseDetail: {},
+  courseSections: [],
   user: [],
 };
 
@@ -13,11 +14,17 @@ function rootReducer(state = initialState, action) {
         ...state,
         courses: action.payload,
       };
+
     case GET_COURSE_DETAIL:
-      console.log(action.payload)
       return {
         ...state,
         courseDetail: action.payload,
+      };
+      
+    case GET_SECTIONS_BY_COURSE_ID:
+      return {
+        ...state,
+        courseSections: action.payload,
       };
 
     default:
