@@ -10,16 +10,7 @@ import styles from "./CourseAccordion.module.css"
 // svg
 import img from "./ver-video.svg"
 
-// Videos
-// : 
-// []
-// name
-// : 
-// "Primeros pasaos"
-
 const CourseAccordion = ({ sections }) => {
-  console.log(sections)
-
   return (
     <div>
       <AccordionSummary
