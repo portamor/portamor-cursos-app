@@ -52,31 +52,29 @@ const postUser = async (req, res) => {
 };
 
 const postInscription = async (req, res) => {
-    const {userId, courseId} = req.params
-    try {
-        const inscription = await userService.userInscription(userId, courseId)
-        res.status(200).json(inscription)
-        
-    } catch (error) {
-        res.status(400).json({message: error.message})
-    }
-}
+  const { userId, courseId } = req.params;
+  try {
+    const inscription = await userService.userInscription(userId, courseId);
+    res.status(200).json(inscription);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
 
 const userPut = async (req, res) => {
-    try {
-        const {id} = req.params;
-        const updateAUser = await userService.updateUser({id, data: req.body})
-        res.status(200).json(updateAUser)
-        
-    } catch (error) {
-        res.status(400).json({message: error.message})
-    }
-}
+  try {
+    const { id } = req.params;
+    const updateAUser = await userService.updateUser({ id, data: req.body });
+    res.status(200).json(updateAUser);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
 
 module.exports = {
   postUser,
   getUsers,
   userPut,
   postInscription,
-  getUserByIdCourses
+  getUserByIdCourses,
 };

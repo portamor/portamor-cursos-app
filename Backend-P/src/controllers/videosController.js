@@ -7,7 +7,7 @@ const getVideos = async (req, res) => {
     if(!allVideos.length) throw new Error('No hay videos en la base de datos')
     res.status(200).json(allVideos);
   } catch (error) {
-    res.status(400).json({messege: error.massage});
+    res.status(400).json({ messege: error.massage });
   }
 };
 
@@ -29,7 +29,7 @@ const postVideos = async (req, res) => {
     });
     res.status(200).json(createVideo);
   } catch (error) {
-    res.status(400).json({messege: error.massage});
+    res.status(400).json({ messege: error.massage });
   }
 };
 
