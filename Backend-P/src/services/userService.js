@@ -1,6 +1,7 @@
 const { Users, Courses, course_Inscription } = require("../database.js");
 
 const createUser = async (name, lastName, code, birthday) => {
+  const searchUser = await userByNameLastNameBirthday(name, lastName, birthday)
   const verificate = await userByCode(code);
   if (verificate.length) {
     code = code + "-P";
@@ -12,6 +13,17 @@ const createUser = async (name, lastName, code, birthday) => {
     code,
   });
   return newUser;
+};
+
+const userByNameLastNameBirthday = async (name, lastName, birthday) => {
+  const userfound = await Users.findAll({
+    where: {
+      name: name,
+      lastName: lastName,
+      birthday: birthday,
+    },
+  });
+  return userfound;
 };
 
 const userInscription = async (userId, courseId) => {
@@ -74,5 +86,6 @@ module.exports = {
   updateUser,
   userInscription,
   deleteUser,
-  restoreUser
+  restoreUser,
+  userByNameLastNameBirthday
 };

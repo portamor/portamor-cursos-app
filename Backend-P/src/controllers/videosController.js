@@ -50,9 +50,9 @@ const postVideos = async (req, res) => {
 // Probar manejo de errores, respuesta exitosa y demnas en insomnia, postman, etc
 const putVideoId = async (req, res) => {
   try {
-    const { idVideo } = req.params; // Desde params NO llega ningun 'idVideo' ??? Recibe 'id'
+    const { idVideo } = req.params; 
     const videoById = await videoService.getVideoById(idVideo);
-    if (!videoById.length) {
+    if (!videoById) {
       throw new Error(`No se encontro el video con id ${idVideo}`);
     }
     const updateVideo = await videoService.putVideo({
@@ -76,7 +76,7 @@ const deleteAVideo = async (req, res) => {
     const { idVideo } = req.params;
     //No se verifica si existe un curso con el id recibido
     const videoById = await videoService.getVideoById(idVideo);
-    if (!videoById.length) {
+    if (!videoById) {
       throw new Error(`No se encontro el video con id ${idVideo}`);
     }
     const deleteVideo = await videoService.deleteVideo(idVideo);
@@ -92,7 +92,7 @@ const restoreAVideo = async (req, res) => {
   try {
     const { idVideo } = req.params; //Aca recibe 'id' y
     const videoById = await videoService.getVideoById(idVideo);
-    if (!videoById.length) {
+    if (!videoById) {
       throw new Error(`No se encontro el video con id ${idVideo}`);
     }
     if (videoById.deleteAt === null) {
@@ -100,7 +100,7 @@ const restoreAVideo = async (req, res) => {
     }
     await videoService.restoreVideo(idVideo);
 
-    res.status(200).json({ msg: "Comentario restaurado con exito" });
+    res.status(200).json({ message: "Video restaurado con exito", data: videoById });
   } catch (error) {
     res.status(400).json({ msg: error.message });
   }

@@ -1,3 +1,4 @@
+const { getCourseById } = require("../services/courseService.js");
 const userService = require("../services/userService.js");
 
 const getUsers = async (req, res) => {
@@ -50,6 +51,18 @@ const postUser = async (req, res) => {
   try {
     let code = name.slice(0, 3) + lastName.slice(0, 3) + birthday.slice(0, 2);
     code = code.toUpperCase();
+    const searchUser = await userService.userByNameLastNameBirthday(
+      name,
+      lastName,
+      birthday
+    );
+    if (searchUser.length) {
+      throw new Error("Ya existe un usuario con esos datos");
+    }
+    const userCode = await userService.userByCode(code);
+    if (userCode.length) {
+      code = code + "-P";
+    }
     const createUser = await userService.createUser(
       name,
       lastName,
@@ -67,6 +80,14 @@ const postUser = async (req, res) => {
 const postInscription = async (req, res) => {
   const { userId, courseId } = req.params;
   try {
+    const userFound = await userService.userById(userId);
+    if (userFound.length) {
+      throw new Error(`No existe usuario con el id ${userId}`);
+    }
+    const courseFound = await getCourseById(courseId);
+    if (courseFound.length) {
+      throw new Error(`No existe curso con el id ${courseId}`);
+    }
     const inscription = await userService.userInscription(userId, courseId);
     res.status(200).json({
       message: `El usuarion con id ${userId} se ha inscrito correctamente al curso con el id ${courseId}`,

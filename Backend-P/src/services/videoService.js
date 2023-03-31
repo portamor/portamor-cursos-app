@@ -7,7 +7,6 @@ const createVideo = async ( sectionId,{
   videoTitle,
   videoDescription,
 }) => {
-  console.log(videoDescription, videoLink, videoTitle, sectionId);
   const foundSection = await sectionService.getSectionById(sectionId)
   const newVideo = await Videos.create({
     videoTitle,
@@ -36,6 +35,17 @@ const getVideoByTitle = async (videoTitle) => {
   return videoByTitle;
 };
 
+const searchVideoByTitle = async (videoTitle) => {
+  const titleNoExactly = await Videos.findAll({
+    where: {
+      videoTitle: {
+        [Op.iLike]: `%${videoTitle}%`,
+      },
+    },
+  });
+  return titleNoExactly;
+};
+
 const putVideo = async ({ id, data }) => {
   const videosForCourse = await getVideoById(id);
   videosForCourse.set(data);
@@ -53,7 +63,7 @@ const restoreVideo = async (id) => {
   await Videos.restore({
     where: { id: id },
   });
-  const videoRestored = getVideoById(id);
+  const videoRestored = await getVideoById(id);
   return videoRestored;
 };
 
@@ -64,5 +74,6 @@ module.exports = {
   deleteVideo,
   restoreVideo,
   getVideoByTitle,
-  getVideoById
+  getVideoById,
+  searchVideoByTitle
 };
