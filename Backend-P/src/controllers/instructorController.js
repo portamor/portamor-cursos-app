@@ -1,13 +1,10 @@
+
 const courseService     = require("../services/courseService");
 const instructorService = require("../services/instructorService");
 
 const postInstructor = async (req, res) => {
   try {
     const { courseId } = req.body;
-
-    if( !req.body.name || !req.body.reviews || !req.body.profile_picture) {
-      throw new Error("Estan faltando valores para crear un instructor")
-    }
 
     const foundCourse = await courseService.getCourseById(courseId);
 
