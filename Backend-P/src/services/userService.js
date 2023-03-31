@@ -52,6 +52,20 @@ const updateUser = async ({ id, data }) => {
   return userUpdate;
 };
 
+const deleteUser = async (userId) => {
+  const userDelete = await userById(userId)
+  await userDelete.destroy()
+  return 'User eliminado correctamene'
+};
+
+const restoreUser =async (userId) => {
+  await Users.restore({
+    where: {id: userId}
+  });
+  const userRestored = userById(userId)
+  return userRestored
+}
+
 module.exports = {
   createUser,
   userByCode,
@@ -59,4 +73,6 @@ module.exports = {
   getAllUsers,
   updateUser,
   userInscription,
+  deleteUser,
+  restoreUser
 };
