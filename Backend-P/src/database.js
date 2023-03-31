@@ -49,8 +49,14 @@ const {
 Users.hasMany(Review);
 Review.belongsTo(Users);
 
-Users.hasMany(Inscription);
-Inscription.belongsTo(Users);
+// ---- Inscriptions Relations
+Users.belongsToMany(Courses, {
+  through: 'course_Inscription',
+})
+
+Courses.belongsToMany(Users, {
+  through: 'course_Inscription',
+})
 
 // ---- Courses Relations
 Courses.hasMany(Sections);

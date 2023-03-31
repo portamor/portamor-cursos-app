@@ -14,6 +14,11 @@ const CourseAccordion = ({ sections }) => {
 
   return (
     <div>
+      <AccordionSummary
+      className={styles["course-accordion-head"]}
+      style={{"background-color": '#f3f1f1'}} >
+        Contenido del curso
+      </AccordionSummary>
       {sections.map(section => {
         //All section's minutes to "AccordionSummary"
         let totalMinutesSection = 0;
@@ -25,7 +30,10 @@ const CourseAccordion = ({ sections }) => {
           <Accordion 
           key={section.id}
           className={styles["course-accordion"]} >
-            <AccordionSummary expandIcon={<ExpandMoreIcon />} className={styles["course-accordion-summary"]}>
+            <AccordionSummary 
+            style={{"background-color": '#f3f1f1'}} 
+            expandIcon={<ExpandMoreIcon />} 
+            className={styles["course-accordion-summary"]} >
               <div className={styles["course-accordion-summary-content"]}>
                 <h2>{section.title}</h2>
                 <span>{section.classes.length} clases</span>
