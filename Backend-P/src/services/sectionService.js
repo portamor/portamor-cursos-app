@@ -35,6 +35,11 @@ const putSection = async ({ id, data }) => {
   return sectionFound;
 };
 
+const getAllSection = async ()=> {
+  const sections = Sections.findAll()
+  return sections
+}
+
 const deleteSection = async (id) => {
   const sectionFound = await getSectionById(id);
   await sectionFound.destroy();
@@ -44,9 +49,7 @@ const restoreSection = async (id) => {
   await Sections.restore({
     where: { id: id },
   });
-
   const restoredSection = await getSectionById(id);
-
   return restoredSection;
 };
 
@@ -56,5 +59,6 @@ module.exports = {
   getSectionsByCourseId,
   putSection,
   deleteSection,
-  restoreSection
+  restoreSection,
+  getAllSection
 };

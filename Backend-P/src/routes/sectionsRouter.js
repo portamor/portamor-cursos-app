@@ -5,6 +5,7 @@ const sectionRouter     = Router()
 // --- POST
 sectionRouter.post('/:courseId', sectionController.postSection);
 //--- GET
+sectionRouter.get('/',                  sectionController.getAllSections)
 sectionRouter.get('/:sectionId',       sectionController.getASectionById);
 sectionRouter.get('/course/:courseId', sectionController.getSectionsByCourseId);
 // --- PUT
