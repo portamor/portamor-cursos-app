@@ -19,6 +19,15 @@ const getSectionById = async (sectionId) => {
   return sectionById;
 };
 
+const getSectionsByCourseId = async (courseId) => {
+  const sections = await Sections.findAll({
+    where: { CourseId: courseId },
+    include: [{ model: Videos }],
+
+  });
+  return sections;
+};
+
 const putSection = async ({ id, data }) => {
   const sectionFound = await getSectionById(id);
   sectionFound.set(data);
@@ -42,8 +51,9 @@ const restoreSection = async (id) => {
 };
 
 module.exports = {
-  getSectionById,
   createSection,
+  getSectionById,
+  getSectionsByCourseId,
   putSection,
   deleteSection,
   restoreSection

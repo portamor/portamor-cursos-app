@@ -34,6 +34,20 @@ const getASectionById = async (req, res) => {
   }
 };
 
+const getSectionsByCourseId = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    
+    const sections = await sectionService.getSectionsByCourseId(courseId);
+    
+    if (!sections.length) throw new Error(`La seccion del curso ${courseId} esta vacia`)
+    
+    res.status(200).json(sections);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 const putSection = async (req, res) => {
   try {
     const { sectionId } = req.params;
@@ -90,8 +104,9 @@ const restoreSection = async (req, res) => {
 };
 
 module.exports = {
-  getASectionById,
   postSection,
+  getASectionById,
+  getSectionsByCourseId,
   putSection,
   deleteASection,
   restoreSection,
