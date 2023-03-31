@@ -1,4 +1,5 @@
-const courseService = require("../services/courseService");
+
+const courseService     = require("../services/courseService");
 const instructorService = require("../services/instructorService");
 
 const postInstructor = async (req, res) => {
@@ -7,8 +8,8 @@ const postInstructor = async (req, res) => {
 
     const foundCourse = await courseService.getCourseById(courseId);
 
-    if(!foundCourse) {
-      throw new Error(`No se ha encontrado ningun curso con el ID: ${courseId}`)
+    if (!foundCourse) {
+      throw new Error(`No se ha encontrado ningun curso con el ID: ${courseId}`);
     }
 
     const createdInstructor = await instructorService.createIntructorInDB({
@@ -16,7 +17,7 @@ const postInstructor = async (req, res) => {
       data: req.body,
     });
 
-    res.status(201).json({message: "Instructor creado con exito", data: createdInstructor});
+    res.status(201).json({message: "Instructor creado con exito", data: createdInstructor });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -65,9 +66,7 @@ const putInstructor = async (req, res) => {
     );
 
     if (!foundInstructor) {
-      throw new Error(
-        `No se ha encontrado ningun instructor con el ID: ${instructorId}`
-      );
+      throw new Error(`No se ha encontrado ningun instructor con el ID: ${instructorId}`);
     }
 
     const updatedInstructor = await instructorService.updateInstructor({

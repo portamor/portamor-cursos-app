@@ -1,4 +1,6 @@
-import React from "react";
+
+import React, { useState } from "react";
+
 
 //----Components
 import CustomButton    from "../CustomButton/CustomButton";
@@ -15,6 +17,7 @@ import { courseSections } from "../DataBase/Json"
 import styles from "./ClassDetail.module.css";
 
 const ClassDetail = (props) => {
+
   return (
     <div className={styles["class-detail-main"]}>
       <div className={styles["video-description-container"]}>
@@ -27,7 +30,6 @@ const ClassDetail = (props) => {
           src="https://as01.epimg.net/meristation/imagenes/2020/03/10/betech/1583879055_794070_1583879168_noticia_normal_recorte1.jpg" 
           alt="" 
           className={styles["video"]} />
-
         </div>
         
         <div className={styles["description-container"]}>
