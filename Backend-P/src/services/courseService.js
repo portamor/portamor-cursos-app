@@ -16,14 +16,7 @@ const createCourse = async (data) => {
 };
 
 const getAllCourses = async () => {
-  const allCoursesFound = await Courses.findAll({
-    include: [
-      { 
-        model: Sections, 
-        include: [ Videos ] 
-      },
-    ]
-  });
+  const allCoursesFound = await Courses.findAll();
 
   return allCoursesFound;
 };
@@ -32,12 +25,6 @@ const getCourseById = async (id) => {
   const courseFound = await Courses.findOne({
     where: {id: id},
     paranoid: false,
-    include: [
-      { 
-        model: Sections, 
-        include: [ Videos ] 
-      },
-    ]
   })
   return courseFound;
 };
@@ -46,12 +33,6 @@ const getCourseByTitle = async (title) => {
   const foundCourse = await Courses.findAll({
     where: { title: { [Op.iLike]: `%${title}%` } },
     order: [["title", "ASC"]],
-    include: [
-      { 
-        model: Sections, 
-        include: [ Videos ] 
-      },
-    ]
   });
   return foundCourse;
 };
