@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import * as actions from "../../Redux/actions"
-import * as utils from "../../utils"
-
-import {useMatch} from "react-router-dom"
-
+import { useDispatch, useSelector }   from "react-redux";
+import { useMatch } from "react-router-dom"
 //----Components
 import CustomButton    from "../CustomButton/CustomButton";
 import CourseAccordion from "../CourseAccordion/CourseAccordion";
-import ReviewCard      from "../ReviewCard/ReviewCard";
-import UserCard        from "../UserCard/UserCard";
+import SelectedData from "../SelectedData/SelectedData";
 import certifiedImg    from "./certified-portamor.svg"
-
 //----Styles
 import styles from "./ClassDetail.module.css";
+//----Actions, Utils, Constants
+import * as actions   from "../../Redux/actions";
+import * as utils     from "../../utils";
+import * as constants from "../../constants";
+
 
 const ClassDetail = (props) => {
   const dispatch = useDispatch();
   const match    = useMatch('/clase/:courseId/:videoId');
   const courseId = match.params.courseId;
-  
+
   useEffect(() => {
     dispatch(actions.getCourseDetail(courseId));
     dispatch(actions.getSectionsByCourseId(courseId));
@@ -27,9 +26,15 @@ const ClassDetail = (props) => {
 
   const courseDetail   = useSelector((state) => state.courseDetail);
   const courseSections = useSelector((state) => state.courseSections);
+  const courseReviews  = useSelector((state) => state.courseReviews);
   const courseRating   = utils.getStarsRating(courseDetail.rating);
   // const isWithCertificate = courseDetail.certificate;
 
+  const [selectedButton, setSelectedButton] = useState(null);
+
+  const handleButtonClick = (selectedButtonContent) => {
+    setSelectedButton(selectedButtonContent);
+  };
 
   return (
     <div className={styles["class-detail-main"]}>
@@ -66,17 +71,35 @@ const ClassDetail = (props) => {
       <div className={styles["secciones-temario-container"]}>
         <div className={styles["buttons-and-cards-container"]}>
           <div className={styles["buttons-sections-container"]}>
-            <CustomButton primary={true}  content="COMENTARIOS"/>
-            <CustomButton primary={false} content="MATERIALES"/>
-            <CustomButton primary={false} content="PARTICIPANTES"/>
-            <CustomButton primary={false} content="PREGUNTAS FRECUENTES"/>
+            <CustomButton 
+            primary={selectedButton === constants.COMENTARIOS ? true : false}  
+            content={constants.COMENTARIOS}
+            onClick={() => handleButtonClick(constants.COMENTARIOS)} />
+            <CustomButton 
+            primary={selectedButton === constants.MATERIALES ? true : false}
+            content={constants.MATERIALES}
+            onClick={() => handleButtonClick(constants.MATERIALES)} />
+            <CustomButton 
+            primary={selectedButton === constants.PARTICIPANTES ? true : false}
+            content={constants.PARTICIPANTES} 
+            onClick={() => handleButtonClick(constants.PARTICIPANTES)} />
+            <CustomButton 
+            primary={selectedButton === constants.PREGUNTAS_FRECUENTES ? true : false}
+            content={constants.PREGUNTAS_FRECUENTES}
+            onClick={() => handleButtonClick(constants.PREGUNTAS_FRECUENTES)} />
           </div>
+
           <div className={styles["cards-container"]}>
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
-            <ReviewCard />
+            {/* {selectedButton && <infoComponent selectedButtonContent={selectedButton} />} */}
+            {
+            selectedButton && 
+            <SelectedData 
+              selectedButtonContent={selectedButton}
+              courseId={courseId}
+              courseReviews={courseReviews}
+              dispatch={dispatch}
+              courseDetail={courseDetail} />
+            }
           </div>
         </div>
         
