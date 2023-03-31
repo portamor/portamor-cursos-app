@@ -7,11 +7,13 @@ const createVideo = async ({
   videoDescription,
 }) => {
   const newVideo = await Videos.create({
+    //CONST FOUNDSECTION = SECTIONSERVICE.GETSECTIONBYID(SECTIONID)->LINEA 16
     videoTitle,
     videoLink,
     videoDescription,
-    SectionId: SectionId,
+    SectionId: SectionId, //Asi no se hace la relacion. Linea 9,
   });
+  // AWAIT NEWVIDEO.SETSECTION(FOUNDSECTION)
   return newVideo;
 };
 
@@ -41,6 +43,7 @@ const restoreVideo = async (id) => {
    await Videos.restore({
     where: {id: id}
    })
+   // Hay que enviar al controller el video restaurado asi lo puede mandar en la response
 };
 
 module.exports = {
