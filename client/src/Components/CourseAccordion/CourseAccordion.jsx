@@ -10,7 +10,7 @@ import styles from "./CourseAccordion.module.css"
 // svg
 import img from "./ver-video.svg"
 
-const CourseAccordion = ({ sections }) => {
+const CourseAccordion = ({ sections, courseId }) => {
   return (
     <div>
       <AccordionSummary
@@ -29,7 +29,7 @@ const CourseAccordion = ({ sections }) => {
             expandIcon={<ExpandMoreIcon />} 
             className={styles["course-accordion-summary"]} >
               <div className={styles["course-accordion-summary-content"]}>
-                <h2>{section.title}</h2>
+                <h2>{section.name}</h2>
                 <span>{section.Videos.length} clases</span>
               </div>
             </AccordionSummary>
@@ -38,12 +38,12 @@ const CourseAccordion = ({ sections }) => {
                 <li key={video.id} className={styles["course-accordion-li"]}>
                   <div className={styles["course-accordion-li-div"]}>
                     <NavLink 
-                      to={`clase/${video.id}`}
+                      to={`clase/${courseId}/${video.id}`}
                       className={styles["course-accordion-class-link"]} >
                         {video.title}
                     </NavLink>
                     <NavLink 
-                      to={`clase/${video.id}`}
+                      to={`clase/${courseId}/${video.id}`}
                       className={styles["course-accordion-class-link"]} >
                         <img src={img} alt="sd"/>
                     </NavLink>
