@@ -2,6 +2,7 @@ import axios from "axios";
 export const GET_COURSE_DETAIL = "GET_COURSE_DETAIL";
 export const GET_SECTIONS_BY_COURSE_ID = "GET_SECTIONS_BY_COURSE_ID";
 export const GET_REVIEWS_BY_COURSE_ID = "GET_REVIEWS_BY_COURSE_ID";
+export const GET_USERS_BY_COURSE_ID = "GET_USERS_BY_COURSE_ID";
 
 export function getCourses() {
   return async function (dispatch) {
@@ -20,7 +21,7 @@ export function getCourses() {
 export function getCourseDetail(id) {
   return async function (dispatch) {
     try {
-      var courseDetail = await axios.get(`http://localhost:3001/courses/id/${id}`);
+      const courseDetail = await axios.get(`http://localhost:3001/courses/id/${id}`);
 
       return dispatch({ type: GET_COURSE_DETAIL, payload: courseDetail.data.data });
     } catch (error) {
@@ -32,7 +33,7 @@ export function getCourseDetail(id) {
 export function getSectionsByCourseId(courseId) {
   return async function (dispatch) {
     try {
-      var foundSections = await axios.get(`http://localhost:3001/section/course/${courseId}`);
+      const foundSections = await axios.get(`http://localhost:3001/section/course/${courseId}`);
 
       return dispatch({ type: GET_SECTIONS_BY_COURSE_ID, payload: foundSections.data });
     } catch (error) {
@@ -44,9 +45,21 @@ export function getSectionsByCourseId(courseId) {
 export function getReviewsByCourseId(courseId) {
   return async function (dispatch) {
     try {
-      var foundReviews = await axios.get(`http://localhost:3001/review/${courseId}`);
+      const foundReviews = await axios.get(`http://localhost:3001/review/${courseId}`);
 
       return dispatch({ type: GET_REVIEWS_BY_COURSE_ID, payload: foundReviews.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function getUsersByCourseId(courseId) {
+  return async function (dispatch) {
+    try {
+      const foundUsers = await axios.get(`http://localhost:3001/users/course/${courseId}`);
+
+      return dispatch({ type: GET_USERS_BY_COURSE_ID, payload: foundUsers.data.data });
     } catch (error) {
       console.log(error.message);
     }
