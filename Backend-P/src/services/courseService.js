@@ -51,7 +51,7 @@ const getCourseByType = async (type) => {
 
 const getCourseBygenre = async (genre) => {
   const foundCourse = await Courses.findAll({
-    where: { genre: genre },
+    where: { genre: { [Op.iLike]: `${genre}`} },
     order: [["title", "ASC"]],
   });
   

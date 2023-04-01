@@ -42,3 +42,5 @@ module.exports = sequelize => {
     { timestamps: true, paranoid: true }
   );
 };
+
+//Se limita genre, si en un futuro se quieren adherir mas generos, se tendria que modificar todo el modelo.

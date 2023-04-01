@@ -3,16 +3,16 @@ const videoRouter      = Router()
 const videoController = require('../controllers/videosController')
 
 // ---- POST
-videoRouter.post('/:courseId', videoController.postVideos)
+videoRouter.post('/:sectionId', videoController.postVideos)
 
 // --- GET
 videoRouter.get('/', videoController.getVideos)
 
 // ---- PUT
-videoRouter.put('/:id',         videoController.putVideoId)
-videoRouter.put('/restore/:id', videoController.restoreAVideo)
+videoRouter.put('/:idVideo',         videoController.putVideoId)
+videoRouter.put('/restore/:idVideo', videoController.restoreAVideo)
 
 // ---- DELETE 
-videoRouter.delete('/:id', videoController.deleteAVideo)
+videoRouter.delete('/:idVideo', videoController.deleteAVideo)
 
 module.exports = videoRouter;
