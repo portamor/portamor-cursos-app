@@ -10,6 +10,7 @@ const usersController = require('../controllers/usersController.js')
 //.-----GET
 router.get('/', usersController.getUsers)
 router.get('/:userId', usersController.getUserById);
+router.get('/course/:courseId', usersController.getUsersByCourseId);
 
 // ----POST
 router.post('/', usersController.postUser)

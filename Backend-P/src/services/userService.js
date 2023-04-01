@@ -54,6 +54,14 @@ const userById = async (id) => {
   return userId;
 };
 
+const getUsersByCourseId = async (id) => {
+  const foundCoursefromDB = await Courses.findByPk(id, {
+    include: { model: Users }
+  });
+
+  return foundCoursefromDB;
+};
+
 const updateUser = async ({ id, data }) => {
   const userUpdate = await userById(id);
   if (!userUpdate) {
@@ -82,6 +90,7 @@ module.exports = {
   createUser,
   userByCode,
   userById,
+  getUsersByCourseId,
   getAllUsers,
   updateUser,
   userInscription,
