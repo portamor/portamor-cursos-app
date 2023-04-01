@@ -103,6 +103,18 @@ const restoreSection = async (req, res) => {
   }
 };
 
+const getAllSections = async (req, res)=> {
+  try {
+    const getSections = await sectionService.getAllSection()
+    if (!getSections.length) {
+      throw new Error('No hay Sections')
+    }
+    res.status(200).json({message: "se encontraron sections", data: getSections})
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+}
+
 module.exports = {
   postSection,
   getASectionById,
@@ -110,4 +122,5 @@ module.exports = {
   putSection,
   deleteASection,
   restoreSection,
+  getAllSections
 };
