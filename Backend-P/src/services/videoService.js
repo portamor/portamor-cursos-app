@@ -7,13 +7,14 @@ const createVideo = async ( sectionId,{
   videoTitle,
   videoDescription,
 }) => {
-  const foundSection = await sectionService.getSectionById(sectionId)
   const newVideo = await Videos.create({
     videoTitle,
     videoLink,
     videoDescription,
+    SectionId : sectionId
   });
-  await newVideo.addSection(foundSection.id)
+  const foundSection = await sectionService.getSectionById(sectionId)
+  await foundSection.addVideo(newVideo)
   return newVideo;
 };
 
