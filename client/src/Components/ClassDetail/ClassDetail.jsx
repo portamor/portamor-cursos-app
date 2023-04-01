@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector }   from "react-redux";
-import { useMatch } from "react-router-dom"
+import { useMatch }                   from "react-router-dom"
 //----Components
 import CustomButton    from "../CustomButton/CustomButton";
-import CourseAccordion from "../CourseAccordion/CourseAccordion";
-import SelectedData from "../SelectedData/SelectedData";
+import SelectedData    from "../SelectedData/SelectedData";
 import certifiedImg    from "./certified-portamor.svg"
 //----Styles
 import styles from "./ClassDetail.module.css";
@@ -13,7 +12,6 @@ import * as actions   from "../../Redux/actions";
 import * as utils     from "../../utils";
 import * as constants from "../../constants";
 
-
 const ClassDetail = (props) => {
   const dispatch = useDispatch();
   const match    = useMatch('/clase/:courseId/:videoId');
@@ -21,19 +19,22 @@ const ClassDetail = (props) => {
 
   useEffect(() => {
     dispatch(actions.getCourseDetail(courseId));
-    dispatch(actions.getSectionsByCourseId(courseId));
   }, [courseId, dispatch])
 
   const courseDetail   = useSelector((state) => state.courseDetail);
   const courseSections = useSelector((state) => state.courseSections);
   const courseReviews  = useSelector((state) => state.courseReviews);
+  const courseUsers    = useSelector((state) => state.courseUsers);
   const courseRating   = utils.getStarsRating(courseDetail.rating);
-  // const isWithCertificate = courseDetail.certificate;
 
-  const [selectedButton, setSelectedButton] = useState(null);
+  const [firstSelectedButton, setFirstSelectedButton] = useState(null);
+  const [secondSelectedButton, setSecondSelectedButton] = useState(null);
 
-  const handleButtonClick = (selectedButtonContent) => {
-    setSelectedButton(selectedButtonContent);
+  const handleFirstSelectData = (selectedButtonContent) => {
+    setFirstSelectedButton(selectedButtonContent);
+  };
+  const handleSecondSelectData = (selectedButtonContent) => {
+    setSecondSelectedButton(selectedButtonContent);
   };
 
   return (
@@ -62,8 +63,14 @@ const ClassDetail = (props) => {
             <img src={certifiedImg} alt="" />
           </div>
           <div className={styles["buttons-container"]}>
-            <CustomButton primary={true} content="VER TEMARIO"/>
-            <CustomButton primary={false} content="SOBRE EL INSTRUCTOR"/>
+            <CustomButton 
+            primary={firstSelectedButton === constants.VER_TEMARIO ? true : false}  
+            content={constants.VER_TEMARIO}
+            onClick={() => handleFirstSelectData(constants.VER_TEMARIO)} />
+            <CustomButton 
+            primary={firstSelectedButton === constants.SOBRE_EL_INSTRUCTOR ? true : false}  
+            content={constants.SOBRE_EL_INSTRUCTOR}
+            onClick={() => handleFirstSelectData(constants.SOBRE_EL_INSTRUCTOR)} />
           </div>
         </div>
       </div>
@@ -72,38 +79,47 @@ const ClassDetail = (props) => {
         <div className={styles["buttons-and-cards-container"]}>
           <div className={styles["buttons-sections-container"]}>
             <CustomButton 
-            primary={selectedButton === constants.COMENTARIOS ? true : false}  
+            primary={secondSelectedButton === constants.COMENTARIOS ? true : false}  
             content={constants.COMENTARIOS}
-            onClick={() => handleButtonClick(constants.COMENTARIOS)} />
+            onClick={() => handleSecondSelectData(constants.COMENTARIOS)} />
             <CustomButton 
-            primary={selectedButton === constants.MATERIALES ? true : false}
+            primary={secondSelectedButton === constants.MATERIALES ? true : false}
             content={constants.MATERIALES}
-            onClick={() => handleButtonClick(constants.MATERIALES)} />
+            onClick={() => handleSecondSelectData(constants.MATERIALES)} />
             <CustomButton 
-            primary={selectedButton === constants.PARTICIPANTES ? true : false}
+            primary={secondSelectedButton === constants.PARTICIPANTES ? true : false}
             content={constants.PARTICIPANTES} 
-            onClick={() => handleButtonClick(constants.PARTICIPANTES)} />
+            onClick={() => handleSecondSelectData(constants.PARTICIPANTES)} />
             <CustomButton 
-            primary={selectedButton === constants.PREGUNTAS_FRECUENTES ? true : false}
+            primary={secondSelectedButton === constants.PREGUNTAS_FRECUENTES ? true : false}
             content={constants.PREGUNTAS_FRECUENTES}
-            onClick={() => handleButtonClick(constants.PREGUNTAS_FRECUENTES)} />
+            onClick={() => handleSecondSelectData(constants.PREGUNTAS_FRECUENTES)} />
           </div>
 
           <div className={styles["cards-container"]}>
-            {/* {selectedButton && <infoComponent selectedButtonContent={selectedButton} />} */}
             {
-            selectedButton && 
+            secondSelectedButton && 
             <SelectedData 
-              selectedButtonContent={selectedButton}
-              courseId={courseId}
-              courseReviews={courseReviews}
               dispatch={dispatch}
-              courseDetail={courseDetail} />
+              courseId={courseId}
+              courseDetail={courseDetail} 
+              courseUsers={courseUsers}
+              courseReviews={courseReviews}
+              selectedButtonContent={secondSelectedButton} />
             }
           </div>
         </div>
         
-        <CourseAccordion sections={courseSections}/>
+        {
+          firstSelectedButton && 
+          <SelectedData 
+            dispatch={dispatch}
+            courseId={courseId}
+            courseSections={courseSections}
+            selectedButtonContent={firstSelectedButton} />
+        }
+        {/* <CourseAccordion sections={courseSections}/> */}
+
       </div>
     </div>
 
