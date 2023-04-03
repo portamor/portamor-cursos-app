@@ -23,7 +23,7 @@ module.exports = sequelize => {
         allowNull: false,
       },
       genre: {
-        type: DataTypes.ENUM("Actividad Fisica", "Participacion Social", "Bienestar Mental", "Alimentacion Saludable"),
+        type: DataTypes.STRING,
         allowNull: true,
       },
       type: {
