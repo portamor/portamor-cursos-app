@@ -1,7 +1,25 @@
+@keyframes opacityin {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .instructor-main {
-  width: 474px;
-  padding: 15px;
+  max-width: 474px;
+  padding: 0 0 15px 15px;
   font-size: 18px;
+  animation-name: opacityin;
+  animation-duration: 1s;
+}
+
+@media(max-width: 750px) {
+  .instructor-main{
+    width: 340px;
+  }
 }
 
 .instructor-title {
@@ -25,4 +43,8 @@
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.instructor-picture {
+  max-width: 236px;
 }
