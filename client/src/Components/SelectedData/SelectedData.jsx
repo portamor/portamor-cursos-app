@@ -1,4 +1,6 @@
-import React from "react";
+import React           from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 //----Components
 import ReviewCard       from "../ReviewCard/ReviewCard";
 import UserCard         from "../UserCard/UserCard";
@@ -9,7 +11,6 @@ import * as constants from "../../constants";
 import * as actions   from "../../Redux/actions";
 //styles
 import styles from "./SelectedData.module.css";
-import { useDispatch, useSelector } from "react-redux";
 
 const SelectedData = ({courseDetail, courseId, selectedButtonContent}) => {
   const dispatch = useDispatch();
