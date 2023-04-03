@@ -1,8 +1,15 @@
-import {GET_COURSE_DETAIL, GET_REVIEWS_BY_COURSE_ID, GET_SECTIONS_BY_COURSE_ID, GET_USERS_BY_COURSE_ID} from "./actions";
+import {
+  GET_COURSE_DETAIL,
+   GET_INSTRUCTOR_BY_ID, 
+   GET_REVIEWS_BY_COURSE_ID, 
+   GET_SECTIONS_BY_COURSE_ID, 
+   GET_USERS_BY_COURSE_ID
+} from "./actions";
 
 const initialState = {
   courses: [],
   courseDetail: {},
+  courseInstructor: {},
   courseSections: [],
   courseUsers: [],
   courseReviews: [],
@@ -39,6 +46,12 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         courseUsers: action.payload,
+      };
+
+    case GET_INSTRUCTOR_BY_ID:
+      return {
+        ...state,
+        courseInstructor: action.payload,
       };
 
     default:
