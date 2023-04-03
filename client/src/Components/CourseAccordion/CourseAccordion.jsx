@@ -8,7 +8,7 @@ import ExpandMoreIcon     from "@mui/icons-material/ExpandMore";
 //Styles
 import styles from "./CourseAccordion.module.css"
 // svg
-import img from "./ver-video.svg"
+import img from "../../images/ver-video.svg"
 
 const CourseAccordion = ({ sections, courseId }) => {
   return (
