@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector }   from "react-redux";
-import { useMatch }                   from "react-router-dom"
+import React           from "react";
+import ReactPlayer     from 'react-player';
+import { useDispatch } from "react-redux";
+import { useEffect }   from "react";
+import { useMatch }    from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useState }    from "react";
 //----Components
+import certifiedImg from "../../images/certified-portamor.svg"
 import CustomButton from "../CustomButton/CustomButton";
 import SelectedData from "../SelectedData/SelectedData";
-import certifiedImg from "../../images/certified-portamor.svg"
 //----Styles
 import styles from "./ClassDetail.module.css";
 //----Actions, Utils, Constants
@@ -16,23 +20,22 @@ const ClassDetail = (props) => {
   const dispatch = useDispatch();
   const match    = useMatch('/clase/:courseId/:videoId');
   const courseId = match.params.courseId;
+  const videoId  = match.params.videoId;
 
   useEffect(() => {
     dispatch(actions.getCourseDetail(courseId));
-  }, [courseId, dispatch])
+    dispatch(actions.getVideoById(videoId));
+  }, [courseId, videoId, dispatch])
 
+  const videoDetail  = useSelector((state) => state.videoDetail);
   const courseDetail = useSelector((state) => state.courseDetail);
   const courseRating = utils.getStarsRating(courseDetail.rating);
 
   const [firstSelectedButton, setFirstSelectedButton]   = useState(constants.VER_TEMARIO);
   const [secondSelectedButton, setSecondSelectedButton] = useState(constants.COMENTARIOS);
 
-  const handleFirstSelectData = (selectedButtonContent) => {
-    setFirstSelectedButton(selectedButtonContent);
-  };
-  const handleSecondSelectData = (selectedButtonContent) => {
-    setSecondSelectedButton(selectedButtonContent);
-  };
+  const handleFirstSelectData  = (selectedButtonContent) => setFirstSelectedButton(selectedButtonContent);
+  const handleSecondSelectData = (selectedButtonContent) => setSecondSelectedButton(selectedButtonContent);
 
   return (
     <div className={styles["class-detail-main"]}>
@@ -42,10 +45,12 @@ const ClassDetail = (props) => {
             Curso de {" "}
             <span className={styles["course-title-color"]}>{courseDetail.title}</span>
           </h1>
-          <img 
-          src="https://as01.epimg.net/meristation/imagenes/2020/03/10/betech/1583879055_794070_1583879168_noticia_normal_recorte1.jpg" 
-          alt="" 
-          className={styles["video"]} />
+          <div className={styles["react-player"]}>
+            <ReactPlayer 
+            url={videoDetail.videoLink} 
+            width='100%'
+            height='100%' />
+          </div>
         </div>
         
         <div className={styles["description-container"]}>
@@ -57,7 +62,7 @@ const ClassDetail = (props) => {
           <div className={styles["certified-container"]}>
             <span>Incluye certificado:</span>
             <strong>Si</strong>
-            <img src={certifiedImg} alt="" />
+            <img src={certifiedImg} alt="certified" />
           </div>
           <div className={styles["buttons-container"]}>
             <CustomButton 
