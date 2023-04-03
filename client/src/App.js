@@ -3,6 +3,7 @@ import NavBar from "./Components/NavBar/NavBar";
 import CourseDetail from "./Components/CourseDetail/CourseDetail";
 import Home from "./Components/Home/Home"
 import ClassDetail from "./Components/ClassDetail/ClassDetail";
+import DownloadCertificate from "./Components/Certificate/DownaldCertificate"
 
 function App() {
   return (
@@ -12,7 +13,9 @@ function App() {
         <Routes>
           <Route exact path="/" Component={Home}  />
           <Route exact path="/detalle-curso/:id" Component={CourseDetail} />
-          <Route exact path="/clase/:id" Component={ClassDetail} />
+          <Route exact path="/clase/:id" Component={ClassDetail} />     
+          <Route exact path="/certificadown" Component={DownloadCertificate} />          
+
         </Routes>
       </BrowserRouter>
     </div>
