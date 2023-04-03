@@ -75,6 +75,18 @@ export function getUsersByCourseId(courseId) {
   };
 }
 
+export function getVideoById(id) {
+  return async function (dispatch) {
+    try {
+      const foundVideo = await axios.get(`http://localhost:3001/videos/${id}`);
+
+      return dispatch({ type: actions.GET_VIDEO_BY_ID, payload: foundVideo.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
 export function postUser(payload) {
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/users", payload);
