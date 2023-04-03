@@ -9,11 +9,11 @@ function App() {
   return (
     <div>
       <BrowserRouter>
-        {/* <NavBar /> */}
+        <NavBar />
         <Routes>
           <Route exact path="/" Component={Home}  />
           <Route exact path="/detalle-curso/:id" Component={CourseDetail} />
-          <Route exact path="/clase/:id" Component={ClassDetail} />     
+          <Route exact path="/clase/:courseId/:videoId" Component={ClassDetail} />     
           <Route exact path="/certificadown" Component={DownloadCertificate} />          
 
         </Routes>

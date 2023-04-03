@@ -1,5 +1,18 @@
+@keyframes opacityin {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .class-detail-main  {
   width: 100%;
+  animation-name: opacityin;
+  animation-duration: 1s;
+  margin-bottom: 70px;
 }
 
 .course-title {
@@ -34,15 +47,18 @@
   }
 }
 
-.video {
-  width: 700px;
-  height: 420px;
+.react-player {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 700px ;
+  height: 423px ;
 }
 
 @media(max-width: 1123px) {
-  .video {
-    width: 400px;
-    height: 320px;
+  .react-player {
+    width: 100%;
+    height: 250px;
   }
 }
 
@@ -64,6 +80,10 @@
   font-size: 40px;
   font-weight: 800;
   margin: 0;
+}
+
+@media(max-width: 1123px) {
+  .description-title { font-size: 30px; }
 }
 
 .description-text {

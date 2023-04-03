@@ -1,13 +1,9 @@
 import styles from "./ReviewCard.module.css";
-import {StarFill} from "react-bootstrap-icons"
+import * as utils from "../../utils/index"
 
 const ReviewCard = (props) => {
-  // Props = name, image, title, content, satisfaction
-
-  const stars = [];
-  for (let i = 1; i <= props.satisfaction; i++) {
-    stars.push(<StarFill key={i} color="red" /> );
-  }
+  // Props = id, image, title, content, stars_value
+  const stars = utils.getStarsRating(props.stars_value);
 
   return (
     <div className={styles["review-card"]}>
@@ -15,13 +11,13 @@ const ReviewCard = (props) => {
 
       <div className={styles["info-review-container"]}>
         <div className={styles["head-info-review"]} >
-          <h2>{props.name}</h2>
+          <h2>{props.title}</h2>
           <div>
             {stars}
             <strong>{props.title}</strong>
           </div>
         </div>
-        <p>{props.content}</p>
+        <p>{props.comment}</p>
       </div>
     </div>
   );

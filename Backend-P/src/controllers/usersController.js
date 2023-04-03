@@ -1,5 +1,6 @@
+const courseService     = require("../services/courseService.js");
 const { getCourseById } = require("../services/courseService.js");
-const userService = require("../services/userService.js");
+const userService       = require("../services/userService.js");
 
 const getUsers = async (req, res) => {
   const { code } = req.query;
@@ -44,6 +45,26 @@ const getUserById = async (req, res) => {
     });
   } catch (error) {
     res.status(400).json({ message: error.message });
+  }
+};
+
+const getUsersByCourseId = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    
+    const foundCourse = await courseService.getCourseById(courseId)
+
+    if(!foundCourse) {
+      throw new Error(`No se ha encontrado ningun curso con este ID: ${courseId}`)
+    }
+
+    const { Users } = await userService.getUsersByCourseId(foundCourse.id)
+
+    if(!Users.length) throw new Error("No se han encontrado opiniones de este curso");
+
+    res.status(200).json({message: "Usuarios encontradas con exito", data: Users})
+  } catch (error) {
+    res.status(404).json({message: error.message})
   }
 };
 
@@ -154,6 +175,7 @@ const restoreAUser = async (req, res) => {
 module.exports = {
   postUser,
   getUsers,
+  getUsersByCourseId,
   userPut,
   postInscription,
   getUserById,
