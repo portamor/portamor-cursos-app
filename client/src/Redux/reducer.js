@@ -1,10 +1,10 @@
 import {
   GET_COURSE_DETAIL,
-   GET_INSTRUCTOR_BY_ID, 
-   GET_REVIEWS_BY_COURSE_ID, 
-   GET_SECTIONS_BY_COURSE_ID, 
-   GET_USERS_BY_COURSE_ID
-} from "./actions";
+  GET_INSTRUCTOR_BY_ID, 
+  GET_REVIEWS_BY_COURSE_ID, 
+  GET_SECTIONS_BY_COURSE_ID, 
+  GET_USERS_BY_COURSE_ID
+} from "../constants";
 
 const initialState = {
   courses: [],
