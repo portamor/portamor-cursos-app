@@ -18,12 +18,13 @@ const getUsers = async (req, res) => {
   }
   try {
     const allUsers = await userService.getAllUsers();
-    if (allUsers.length) {
+    if (allUsers) {
       res
         .status(200)
         .json({ message: `Usuarios encontrados con éxito`, data: allUsers });
+    } else {
+      res.status(201).json({ message: "No hay registros" });
     }
-    res.status(201).json({ message: "No hay registros" });
   } catch (error) {
     res
       .status(200)
