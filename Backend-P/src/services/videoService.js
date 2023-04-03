@@ -11,10 +11,9 @@ const createVideo = async ( sectionId,{
     videoTitle,
     videoLink,
     videoDescription,
-    SectionId : sectionId
   });
   const foundSection = await sectionService.getSectionById(sectionId)
-  await foundSection.addVideo(newVideo)
+  await newVideo.setSection(foundSection)
   return newVideo;
 };
 
