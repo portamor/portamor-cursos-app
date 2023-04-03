@@ -1,6 +1,6 @@
 // React
 import React       from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 //Material-ui
 import {AccordionSummary} from '@mui/material';
 import { Accordion }      from '@mui/material';
@@ -11,6 +11,7 @@ import styles from "./CourseAccordion.module.css"
 import img from "../../images/ver-video.svg"
 
 const CourseAccordion = ({ sections, courseId }) => {
+
   return (
     <div>
       <AccordionSummary
@@ -19,7 +20,7 @@ const CourseAccordion = ({ sections, courseId }) => {
         Contenido del curso
       </AccordionSummary>
       
-      {sections.map(section => {
+      {sections && sections.map(section => {
         return (
           <Accordion 
           key={section.id}
@@ -34,19 +35,19 @@ const CourseAccordion = ({ sections, courseId }) => {
               </div>
             </AccordionSummary>
             <ol>
-              {section.Videos.map((video) => (
+              {section.Videos && section.Videos.map((video) => (
                 <li key={video.id} className={styles["course-accordion-li"]}>
                   <div className={styles["course-accordion-li-div"]}>
-                    <NavLink 
-                      to={`clase/${courseId}/${video.id}`}
+                    <Link 
+                      exact to={`clase/${courseId}/${video.id}`}
                       className={styles["course-accordion-class-link"]} >
-                        {video.title}
-                    </NavLink>
-                    <NavLink 
-                      to={`clase/${courseId}/${video.id}`}
+                        {video.videoTitle}
+                    </Link>
+                    <Link 
+                      exact to={`clase/${courseId}/${video.id}`}
                       className={styles["course-accordion-class-link"]} >
                         <img src={img} alt="sd"/>
-                    </NavLink>
+                    </Link>
                   </div>
                 </li>
               ))}
