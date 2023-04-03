@@ -22,7 +22,7 @@ const getVideoById = async(req,res) => {
     
     const foundVideo = await videoService.getVideoById(idVideo)
 
-    if(!foundVideo) throw new Error(`No se ha encontrado ningun video con el ID: ${courseId}`)
+    if(!foundVideo) throw new Error(`No se ha encontrado ningun video con el ID: ${idVideo}`)
 
     res.status(200).json({message: "Video encontrado con exito", data: foundVideo})
   } catch (error) {
