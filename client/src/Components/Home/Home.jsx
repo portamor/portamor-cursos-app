@@ -17,7 +17,7 @@ import { courseSections } from "../DataBase/Json";
 
 
 const Home = () => {
-  const courses = useSelector((state) => state.courses);
+  const courses = useSelector((state) => state.courses?.courses);
   const dispatch = useDispatch();
 
   useEffect(() => {
