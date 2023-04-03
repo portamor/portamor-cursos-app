@@ -1,8 +1,8 @@
 import React from "react";
 //----Components
-import ReviewCard from "../ReviewCard/ReviewCard";
-import UserCard   from "../UserCard/UserCard";
-import CourseAccordion from "../CourseAccordion/CourseAccordion";
+import ReviewCard       from "../ReviewCard/ReviewCard";
+import UserCard         from "../UserCard/UserCard";
+import CourseAccordion  from "../CourseAccordion/CourseAccordion";
 import InstructorDetail from "../InstructorDetail/InstructorDetail";
 //----Actions, Utils, Constants
 import * as constants from "../../constants";
