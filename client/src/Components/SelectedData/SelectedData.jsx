@@ -4,23 +4,22 @@ import React from "react";
 import ReviewCard from "../ReviewCard/ReviewCard";
 import UserCard   from "../UserCard/UserCard";
 import CourseAccordion from "../CourseAccordion/CourseAccordion";
-
+import InstructorDetail from "../InstructorDetail/InstructorDetail";
 //----Actions, Utils, Constants
 import * as constants from "../../constants";
 import * as actions   from "../../Redux/actions";
 //styles
 import styles from "./SelectedData.module.css";
+import { useDispatch, useSelector } from "react-redux";
 
-const SelectedData = (props) => {
-  const {
-    courseDetail,
-    courseId,
-    courseReviews,
-    courseUsers,
-    courseSections,
-    dispatch,
-    selectedButtonContent, 
-  } = props;
+const SelectedData = ({courseDetail, courseId, selectedButtonContent}) => {
+  const dispatch = useDispatch();
+  
+  const courseSections = useSelector((state) => state.courseSections);
+  const courseReviews = useSelector((state) => state.courseReviews);
+  const courseUsers = useSelector((state) => state.courseUsers);
+  const courseInstructor = useSelector((state) => state.courseInstructor);
+
 
    switch (selectedButtonContent) {
     case constants.VER_TEMARIO:
@@ -29,7 +28,11 @@ const SelectedData = (props) => {
       return <CourseAccordion sections={courseSections}/>
     
     case constants.SOBRE_EL_INSTRUCTOR:
-      return <div>Instructor</div>;
+      // if(!courseInstructor) {
+      //   dispatch(actions.getInstructorById(courseDetail.InstructorId));   
+      // }
+
+      return <InstructorDetail instructorId={courseDetail.InstructorId}/>;
 
     case constants.COMENTARIOS:
       if(!courseReviews.length) dispatch(actions.getReviewsByCourseId(courseId));

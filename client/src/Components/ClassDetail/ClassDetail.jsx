@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector }   from "react-redux";
 import { useMatch }                   from "react-router-dom"
 //----Components
-import CustomButton    from "../CustomButton/CustomButton";
-import SelectedData    from "../SelectedData/SelectedData";
-import certifiedImg    from "./certified-portamor.svg"
+import CustomButton from "../CustomButton/CustomButton";
+import SelectedData from "../SelectedData/SelectedData";
+import certifiedImg from "../../images/certified-portamor.svg"
 //----Styles
 import styles from "./ClassDetail.module.css";
 //----Actions, Utils, Constants
@@ -21,14 +21,11 @@ const ClassDetail = (props) => {
     dispatch(actions.getCourseDetail(courseId));
   }, [courseId, dispatch])
 
-  const courseDetail   = useSelector((state) => state.courseDetail);
-  const courseSections = useSelector((state) => state.courseSections);
-  const courseReviews  = useSelector((state) => state.courseReviews);
-  const courseUsers    = useSelector((state) => state.courseUsers);
-  const courseRating   = utils.getStarsRating(courseDetail.rating);
+  const courseDetail = useSelector((state) => state.courseDetail);
+  const courseRating = utils.getStarsRating(courseDetail.rating);
 
-  const [firstSelectedButton, setFirstSelectedButton] = useState(null);
-  const [secondSelectedButton, setSecondSelectedButton] = useState(null);
+  const [firstSelectedButton, setFirstSelectedButton]   = useState(constants.VER_TEMARIO);
+  const [secondSelectedButton, setSecondSelectedButton] = useState(constants.COMENTARIOS);
 
   const handleFirstSelectData = (selectedButtonContent) => {
     setFirstSelectedButton(selectedButtonContent);
@@ -100,11 +97,8 @@ const ClassDetail = (props) => {
             {
             secondSelectedButton && 
             <SelectedData 
-              dispatch={dispatch}
               courseId={courseId}
               courseDetail={courseDetail} 
-              courseUsers={courseUsers}
-              courseReviews={courseReviews}
               selectedButtonContent={secondSelectedButton} />
             }
           </div>
@@ -113,13 +107,10 @@ const ClassDetail = (props) => {
         {
           firstSelectedButton && 
           <SelectedData 
-            dispatch={dispatch}
             courseId={courseId}
-            courseSections={courseSections}
+            courseDetail={courseDetail} 
             selectedButtonContent={firstSelectedButton} />
         }
-        {/* <CourseAccordion sections={courseSections}/> */}
-
       </div>
     </div>
 
