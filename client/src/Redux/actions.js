@@ -3,6 +3,7 @@ export const GET_COURSE_DETAIL = "GET_COURSE_DETAIL";
 export const GET_SECTIONS_BY_COURSE_ID = "GET_SECTIONS_BY_COURSE_ID";
 export const GET_REVIEWS_BY_COURSE_ID = "GET_REVIEWS_BY_COURSE_ID";
 export const GET_USERS_BY_COURSE_ID = "GET_USERS_BY_COURSE_ID";
+export const GET_INSTRUCTOR_BY_ID = "GET_INSTRUCTOR_BY_ID";
 
 export function getCourses() {
   return async function (dispatch) {
@@ -48,6 +49,18 @@ export function getReviewsByCourseId(courseId) {
       const foundReviews = await axios.get(`http://localhost:3001/review/${courseId}`);
 
       return dispatch({ type: GET_REVIEWS_BY_COURSE_ID, payload: foundReviews.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function getInstructorById(id) {
+  return async function (dispatch) {
+    try {
+      const foundInstructor = await axios.get(`http://localhost:3001/instructor/${id}`);
+
+      return dispatch({ type: GET_INSTRUCTOR_BY_ID, payload: foundInstructor.data.data });
     } catch (error) {
       console.log(error.message);
     }
