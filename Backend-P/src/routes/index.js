@@ -2,12 +2,12 @@ const {Router } = require('express');
 
 const router = Router();
 
-const usersRouter      = require('./users')
-const coursesRouter    = require('./courses')
-const videosRouter     = require('./videos')
+const usersRouter      = require('./usersRouter')
+const coursesRouter    = require('./coursesRouter')
+const videosRouter     = require('./videosRouter')
 const instructorRouter = require('./instructorRouter')
 const reviewRouter     = require('./reviewRouter')
-const sectionRouter    = require('./routes/sectionsRouter')
+const sectionRouter    = require('./sectionsRouter')
 
 router.use('/users',      usersRouter);
 router.use('/courses',    coursesRouter);

@@ -1,0 +1,19 @@
+.custom-button-main-important,
+.custom-button-main-secondary {
+  background-color: #EB575A;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  height: fit-content;
+  width: fit-content;
+  padding: 13px 20px;
+}
+
+.custom-button-main-secondary{
+  background-color: transparent;
+  border: solid 2px #EB575A ;
+  color: #EB575A;
+}

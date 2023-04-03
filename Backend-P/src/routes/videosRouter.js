@@ -1,20 +1,18 @@
-const { Router } = require('express')
-
-const router = Router()
-
-const videosController = require('../controllers/videosController')
-
-// --- GET
-router.get('/', videosController.getVideos)
+const { Router }       = require('express')
+const videoRouter      = Router()
+const videoController = require('../controllers/videosController')
 
 // ---- POST
-router.post('/:courseId', videosController.postVideos)
+videoRouter.post('/:sectionId', videoController.postVideos)
+
+// --- GET
+videoRouter.get('/', videoController.getVideos)
 
 // ---- PUT
-router.put('/:id', videosController.putVideoId)
-router.put('/restore/:id', videosController.restoreAVideo)
+videoRouter.put('/:idVideo',         videoController.putVideoId)
+videoRouter.put('/restore/:idVideo', videoController.restoreAVideo)
 
 // ---- DELETE 
-router.delete('/:id', videosController.deleteAVideo)
+videoRouter.delete('/:idVideo', videoController.deleteAVideo)
 
-module.exports = router;
+module.exports = videoRouter;

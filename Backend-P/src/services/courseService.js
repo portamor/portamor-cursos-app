@@ -1,32 +1,47 @@
 const { Courses, Videos, Sections }= require('../database.js')
 const {Op} = require('sequelize')
 
+const createCourse = async (data) => {
+  const createdCourse = await Courses.create({
+    title:       data.title,
+    description: data.description,
+    image:       data.image,
+    genre:       data.genre,
+    type:        data.type,
+    rating:      data.rating,
+    materials:   data.materials,
+  });
+
+  return createdCourse;
+};
+
+const getAllCourses = async () => {
+  const allCoursesFound = await Courses.findAll();
+
+  return allCoursesFound;
+};
+
 const getCourseById = async (id) => {
   const courseFound = await Courses.findOne({
     where: {id: id},
-    include: { model: Sections }
+    paranoid: false,
   })
   return courseFound;
 };
 
-const getAllCourses = async () => {
-  const allCoursesFound = await Courses.findAll()
-  return allCoursesFound
-};
-
 const getCourseByTitle = async (title) => {
-  const titleCourse = await Courses.findAll({
+  const foundCourse = await Courses.findAll({
     where: { title: { [Op.iLike]: `%${title}%` } },
     order: [["title", "ASC"]],
   });
-  return titleCourse;
+  return foundCourse;
 };
 
-const getCourseByType = async (typeCourse) => {
+const getCourseByType = async (type) => {
   const courseType = await Courses.findAll({
     where: {
-      typeCourse: {
-        [Op.iLike]: `%${typeCourse}%`,
+      type: {
+        [Op.iLike]: `%${type}%`,
       },
     },
     order: [["title", "ASC"]],
@@ -34,21 +49,13 @@ const getCourseByType = async (typeCourse) => {
   return courseType;
 };
 
-const getCourseBygenre = async (genreCourse) => {
-  const coursesGenre = await Courses.findAll({
-    where: {
-      genreCourse: {
-        [Op.iLike]: `%${genreCourse}%`,
-      },
-    },
+const getCourseBygenre = async (genre) => {
+  const foundCourse = await Courses.findAll({
+    where: { genre: { [Op.iLike]: `${genre}`} },
     order: [["title", "ASC"]],
   });
-  return coursesGenre;
-};
-
-const createACourse = async (arg) => {
-  const postCourse = await Courses.create(arg);
-  return postCourse;
+  
+  return foundCourse;
 };
 
 const updateCourse = async ({ id, data }) => {
@@ -65,12 +72,13 @@ const deleteACourse = async (id) => {
 
 const restoreACourse = async (id) => {
   await Courses.restore({
-    where: {
-      id: id,
-    },
+    where: { id: id },
   });
-};
 
+  const restoredCourse = await getCourseById(id);
+
+  return restoredCourse;
+};
 
 module.exports = {
   getCourseById,
@@ -78,8 +86,8 @@ module.exports = {
   getCourseByTitle,
   getCourseByType,
   getCourseBygenre,
-  createACourse,
+  createCourse,
   updateCourse,
   deleteACourse,
-  restoreACourse
+  restoreACourse,
 };
