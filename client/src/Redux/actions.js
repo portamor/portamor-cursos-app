@@ -1,5 +1,5 @@
 import axios        from "axios";
-import * as actions from "../constants"
+import * as actions from "../constants/actionsContants"
 
 export function getCourses() {
   return async function (dispatch) {
@@ -107,3 +107,18 @@ export function postCourse(payload) {
   }
   }
 };
+
+
+export function createReview(payload) {
+  return async (dispatch) => {
+    try {
+      const createdReview = await axios.post("http://localhost:3001/review", payload);
+
+      console.log("action",createReview)
+
+      dispatch({ type: actions.CREATE_REVIEW, payload: createdReview.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
