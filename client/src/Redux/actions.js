@@ -92,4 +92,11 @@ export function postUser(payload) {
     const response = await axios.post("http://localhost:3001/users", payload);
     return response;
   };
-}
+};
+
+export function postCourse(payload) {
+  return async function (dispatch) {
+    const response = await axios.post("http://localhost:3001/courses", payload)
+    return response;
+  }
+};
