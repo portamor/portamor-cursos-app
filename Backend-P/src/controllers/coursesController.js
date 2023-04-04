@@ -52,7 +52,7 @@ const getCourseById = async (req, res) => {
 
 const getCourseByTitle = async (req, res) => {
   try {
-    const { title } = req.params;
+    const { title } = req.body;
 
     const courseTitle = await courseService.getCourseByTitle(title);
 
@@ -68,7 +68,7 @@ const getCourseByTitle = async (req, res) => {
 
 const getCourseByType = async (req, res) => {
   try {
-    const { type } = req.params;
+    const { type } = req.body;
 
     const foundCourse = await courseService.getCourseByType(type);
 
@@ -84,7 +84,7 @@ const getCourseByType = async (req, res) => {
 
 const getCourseByGenre = async (req, res) => {
   try {
-    const { genre } = req.params;
+    const { genre } = req.body;
 
     const foundCourses = await courseService.getCourseBygenre(genre);
 

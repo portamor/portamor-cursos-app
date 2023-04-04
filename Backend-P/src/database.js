@@ -76,5 +76,5 @@ Courses.belongsTo(Instructor)
 
 module.exports = {
   ...sequelize.models,
-  conn: sequelize, 
+  conn: sequelize, 
 }

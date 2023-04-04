@@ -1,16 +1,16 @@
 // React
 import React       from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 //Material-ui
 import {AccordionSummary} from '@mui/material';
 import { Accordion }      from '@mui/material';
 import ExpandMoreIcon     from "@mui/icons-material/ExpandMore";
 //Styles
 import styles from "./CourseAccordion.module.css"
-// svf
-import img from "./ver-video.svg"
+// svg
+import img from "../../images/ver-video.svg"
 
-const CourseAccordion = ({ sections }) => {
+const CourseAccordion = ({ sections, courseId }) => {
 
   return (
     <div>
@@ -19,6 +19,7 @@ const CourseAccordion = ({ sections }) => {
       style={{"background-color": '#f3f1f1'}} >
         Contenido del curso
       </AccordionSummary>
+<<<<<<< HEAD
       {sections.map(section => {
         //All section's minutes to "AccordionSummary"
         let totalMinutesSection = 0;
@@ -26,6 +27,10 @@ const CourseAccordion = ({ sections }) => {
           if(cls.minutes !== undefined) totalMinutesSection += cls.minutes
         }
 
+=======
+      
+      {sections && sections.map(section => {
+>>>>>>> testing
         return (
           <Accordion 
           key={section.id}
@@ -35,31 +40,31 @@ const CourseAccordion = ({ sections }) => {
             expandIcon={<ExpandMoreIcon />} 
             className={styles["course-accordion-summary"]} >
               <div className={styles["course-accordion-summary-content"]}>
-                <h2>{section.title}</h2>
-                <span>{section.classes.length} clases</span>
-                <span>{totalMinutesSection} min</span>
+                <h2>{section.name}</h2>
+                <span>{section.Videos.length} clases</span>
               </div>
             </AccordionSummary>
             <ol>
-              {section.classes.map((cls) => (
-                <li key={cls.id} className={styles["course-accordion-li"]}>
+              {section.Videos && section.Videos.map((video) => (
+                <li key={video.id} className={styles["course-accordion-li"]}>
                   <div className={styles["course-accordion-li-div"]}>
-                    <NavLink 
-                      to={`clase/${cls.id}`}
+                    <Link 
+                      exact to={`clase/${courseId}/${video.id}`}
                       className={styles["course-accordion-class-link"]} >
-                        {cls.title}
-                    </NavLink>
-                    <NavLink 
-                      to={`clase/${cls.id}`}
+                        {video.videoTitle}
+                    </Link>
+                    <Link 
+                      exact to={`clase/${courseId}/${video.id}`}
                       className={styles["course-accordion-class-link"]} >
                         <img src={img} alt="sd"/>
-                    </NavLink>
+                    </Link>
                   </div>
                 </li>
               ))}
             </ol>
           </Accordion>
       )})}
+
     </div>
   );
 };

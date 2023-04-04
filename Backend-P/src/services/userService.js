@@ -1,4 +1,4 @@
-const { Users, Inscription } = require("../database.js");
+const { Users, Courses, course_Inscription } = require("../database.js");
 
 const createUser = async (name, lastName, code, birthday) => {
   const searchUser = await userByNameLastNameBirthday(name, lastName, birthday)
@@ -44,14 +44,22 @@ const userByCode = async (code) => {
     where: {
       code,
     },
-    include: { model: Inscription },
+    include: Courses,
   });
   return userCode;
 };
 
 const userById = async (id) => {
-  const userId = await Users.findByPk(id);
+  const userId = await Users.findByPk(id, { include: Courses });
   return userId;
+};
+
+const getUsersByCourseId = async (id) => {
+  const foundCoursefromDB = await Courses.findByPk(id, {
+    include: { model: Users }
+  });
+
+  return foundCoursefromDB;
 };
 
 const updateUser = async ({ id, data }) => {
@@ -82,6 +90,7 @@ module.exports = {
   createUser,
   userByCode,
   userById,
+  getUsersByCourseId,
   getAllUsers,
   updateUser,
   userInscription,

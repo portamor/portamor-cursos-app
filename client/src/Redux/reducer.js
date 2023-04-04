@@ -1,8 +1,22 @@
+<<<<<<< HEAD
 const initialState = {
   courses: [],
   isLoggedIn: false,
   user: null,
   error: null,
+=======
+import * as actions from "../constants";
+
+const initialState = {
+  courses: [],
+  courseDetail: {},
+  courseInstructor: {},
+  courseSections: [],
+  courseUsers: [],
+  courseReviews: [],
+  videoDetail: {},
+  user: [],
+>>>>>>> testing
 };
 
 function rootReducer(state = initialState, action) {
@@ -12,6 +26,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         courses: action.payload,
       };
+<<<<<<< HEAD
     case "LOGIN_SUCCESS":
       return {
         ...state,
@@ -33,6 +48,45 @@ function rootReducer(state = initialState, action) {
         user: null,
         error: null,
       };
+=======
+
+    case actions.GET_COURSE_DETAIL:
+      return {
+        ...state,
+        courseDetail: action.payload,
+      };
+      
+    case actions.GET_SECTIONS_BY_COURSE_ID:
+      return {
+        ...state,
+        courseSections: action.payload,
+      };
+      
+    case actions.GET_REVIEWS_BY_COURSE_ID:
+      return {
+        ...state,
+        courseReviews: action.payload,
+      };
+      
+    case actions.GET_USERS_BY_COURSE_ID:
+      return {
+        ...state,
+        courseUsers: action.payload,
+      };
+
+    case actions.GET_INSTRUCTOR_BY_ID:
+      return {
+        ...state,
+        courseInstructor: action.payload,
+      };
+    
+    case actions.GET_VIDEO_BY_ID:
+      return {
+        ...state,
+        videoDetail: action.payload,
+      };
+
+>>>>>>> testing
     default:
       return state;
   }
