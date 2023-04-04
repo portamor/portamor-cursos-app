@@ -1,4 +1,4 @@
-import * as actions from "../constants";
+import * as actions from "../constants/actionsContants";
 
 const initialState = {
   courses: [],
@@ -31,12 +31,6 @@ function rootReducer(state = initialState, action) {
         courseSections: action.payload,
       };
       
-    case actions.GET_REVIEWS_BY_COURSE_ID:
-      return {
-        ...state,
-        courseReviews: action.payload,
-      };
-      
     case actions.GET_USERS_BY_COURSE_ID:
       return {
         ...state,
@@ -55,6 +49,19 @@ function rootReducer(state = initialState, action) {
         videoDetail: action.payload,
       };
 
+    case actions.GET_REVIEWS_BY_COURSE_ID:
+      return {
+        ...state,
+        courseReviews: action.payload,
+      };
+
+    case actions.CREATE_REVIEW:
+      console.log("reducer", action.payload)
+      
+      return {
+        ...state,
+        courseReviews: [...state.courseReviews, action.payload],
+      };
     default:
       return state;
   }
