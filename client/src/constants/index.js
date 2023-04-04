@@ -1,3 +1,4 @@
+
 // To ClassDetail
 export const COMENTARIOS          = "COMENTARIOS"; 
 export const MATERIALES           = "MATERIALES";
@@ -15,3 +16,7 @@ export const GET_SECTIONS_BY_COURSE_ID = "GET_SECTIONS_BY_COURSE_ID";
 export const GET_USERS_BY_COURSE_ID    = "GET_USERS_BY_COURSE_ID";
 export const GET_VIDEO_BY_ID           = "GET_VIDEO_BY_ID";
 export const GET_COURSE_CREATE         = "GET_COURSE_CREATE"
+
+//to validate
+export const REVIEW = "REVIEW";
+
