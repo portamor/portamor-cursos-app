@@ -3,32 +3,24 @@ const { getCourseById } = require("../services/courseService.js");
 const userService       = require("../services/userService.js");
 
 const getUsers = async (req, res) => {
-  const { code } = req.query;
-  if (code) {
-    try {
-      const aUserCode = await userService.userByCode(code);
-      if (!aUserCode.length)
-        throw new Error(`No se encontro user con el code ${code}`);
-      res.status(200).json({
-        message: `El usuario con el codigo ${code} ha sido encontrado`,
-        data: aUserCode,
-      });
-    } catch (error) {
-      res.status(404).json({ message: error.message });
-    }
-  }
   try {
+    const { code } = req.query;
+
+    if(code) {
+      const aUserCode = await userService.userByCode(code);
+
+      if (!aUserCode.length) throw new Error(`No se encontro user con el code ${code}`);
+      
+      return res.status(200).json({ message: `Usuario encontrado con exito`, data: aUserCode, });
+    } 
+    
     const allUsers = await userService.getAllUsers();
-    if (allUsers.length) {
-      res
-        .status(200)
-        .json({ message: `Usuarios encontrados con éxito`, data: allUsers });
-    }
-    res.status(201).json({ message: "No hay registros" });
+
+    if (!allUsers.length) throw new Error(`No se encontro user con el code ${code}`);
+    
+    res.status(200).json({ message: `Usuarios encontrados con exito`, data: allUsers });
   } catch (error) {
-    res
-      .status(200)
-      .json({ mesagge: "error al obtener usuarios" + error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 
