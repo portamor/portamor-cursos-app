@@ -39,14 +39,14 @@ const CourseAccordion = ({ sections, courseId }) => {
                 <li key={video.id} className={styles["course-accordion-li"]}>
                   <div className={styles["course-accordion-li-div"]}>
                     <Link 
-                      exact to={`clase/${courseId}/${video.id}`}
-                      className={styles["course-accordion-class-link"]} >
-                        {video.videoTitle}
+                    to={`/clase/${courseId}/${video.id}`}
+                    className={styles["course-accordion-class-link"]} >
+                      {video.videoTitle}
                     </Link>
                     <Link 
-                      exact to={`clase/${courseId}/${video.id}`}
-                      className={styles["course-accordion-class-link"]} >
-                        <img src={img} alt="sd"/>
+                    to={`/clase/${courseId}/${video.id}`}
+                    className={styles["course-accordion-class-link"]} >
+                      <img src={img} alt="sd"/>
                     </Link>
                   </div>
                 </li>
