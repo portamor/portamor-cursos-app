@@ -100,7 +100,7 @@ export function postCourse(payload) {
 
       const response = await axios.post("http://localhost:3001/courses", payload)
 
-      return dispatch({ type: actions.GET_COURSE_DETAIL, payload: response.data.data })
+      return dispatch({ type: actions.GET_COURSE_CREATE , payload: response.data.data })
     
   } catch (error) {
     console.log(error.message);
