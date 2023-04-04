@@ -11,7 +11,6 @@ const FormCourse = () => {
     const [materialesCount, setMaterialesCount] = useState(1);
   
     const onSubmit = async (data) => {
-      console.log(data);
       const response = await dispatch(postCourse(data))
       console.log(response.data)
     alert('Se ha creado el curso correctamente')

@@ -96,7 +96,14 @@ export function postUser(payload) {
 
 export function postCourse(payload) {
   return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/courses", payload)
-    return response;
+  try {
+
+      const response = await axios.post("http://localhost:3001/courses", payload)
+
+      return dispatch({ type: actions.GET_COURSE_DETAIL, payload: response.data.data })
+    
+  } catch (error) {
+    console.log(error.message);
+  }
   }
 };
