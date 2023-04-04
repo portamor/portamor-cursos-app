@@ -9,6 +9,7 @@ const initialState = {
   courseReviews: [],
   videoDetail: {},
   user: [],
+  courseCreate: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -48,6 +49,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         videoDetail: action.payload,
       };
+      case actions.GET_COURSE_CREATE:
+        return {
+          ...state,
+          courseCreate: action.payload,
+        };
 
     case actions.GET_REVIEWS_BY_COURSE_ID:
       return {

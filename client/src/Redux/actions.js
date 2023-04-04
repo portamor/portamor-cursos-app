@@ -92,6 +92,23 @@ export function postUser(payload) {
     const response = await axios.post("http://localhost:3001/users", payload);
     return response;
   };
+
+
+
+export function postCourse(payload) {
+  return async function (dispatch) {
+  try {
+
+      const response = await axios.post("http://localhost:3001/courses", payload)
+
+      return dispatch({ type: actions.GET_COURSE_CREATE , payload: response.data.data })
+    
+  } catch (error) {
+    console.log(error.message);
+  }
+  }
+};
+
 }
 
 export function createReview(payload) {
@@ -107,3 +124,4 @@ export function createReview(payload) {
     }
   };
 }
+
