@@ -3,6 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+<<<<<<< HEAD:Portamor-Front/package.json
+=======
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.14",
+    "@react-pdf/renderer": "^3.1.9",
+>>>>>>> bb3010adbddc2121648fa59af993d4c9f5def0b9:client/package.json
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -10,6 +18,8 @@
     "react": "^18.2.0",
     "react-bootstrap-icons": "^1.10.2",
     "react-dom": "^18.2.0",
+    "react-pdf": "^6.2.2",
+    "react-player": "^2.12.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.9.0",
     "react-scripts": "^5.0.1",
