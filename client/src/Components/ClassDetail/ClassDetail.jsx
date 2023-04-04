@@ -14,7 +14,7 @@ import styles from "./ClassDetail.module.css";
 //----Actions, Utils, Constants
 import * as actions   from "../../Redux/actions";
 import * as utils     from "../../utils";
-import * as constants from "../../constants";
+import * as constants from "../../constants/classDetailConstants";
 
 const ClassDetail = (props) => {
   const dispatch = useDispatch();

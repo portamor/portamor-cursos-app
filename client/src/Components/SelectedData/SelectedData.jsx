@@ -23,7 +23,7 @@ const SelectedData = ({courseDetail, courseId, selectedButtonContent}) => {
     case constants.VER_TEMARIO:
       if(!courseSections.length) dispatch(actions.getSectionsByCourseId(courseId)) 
 
-      return <CourseAccordion sections={courseSections}/>
+      return <CourseAccordion sections={courseSections} courseId={courseId}/>
     
     case constants.SOBRE_EL_INSTRUCTOR:
       return <InstructorDetail instructorId={courseDetail.InstructorId}/>;
