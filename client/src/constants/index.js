@@ -1,3 +1,13 @@
+//to validate
+export const REVIEW = "REVIEW";
+
+// To create comment
+export const EXCELENTE    = "Excelente";
+export const RECOMENDADO = "Recomendado";
+export const BUENO       = "Bueno";
+export const NO_ME_GUSTO = "No me gusto";
+export const MALO        = "Malo";
+
 // To ClassDetail
 export const COMENTARIOS          = "COMENTARIOS"; 
 export const MATERIALES           = "MATERIALES";
