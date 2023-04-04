@@ -92,7 +92,12 @@ export function postUser(payload) {
     const response = await axios.post("http://localhost:3001/users", payload);
     return response;
   };
+<<<<<<< HEAD
 };
+=======
+
+
+>>>>>>> 244d73277df8109be71e0698b1ec11939ff468ec
 
 export function postCourse(payload) {
   return async function (dispatch) {
@@ -108,6 +113,10 @@ export function postCourse(payload) {
   }
 };
 
+<<<<<<< HEAD
+=======
+}
+>>>>>>> 244d73277df8109be71e0698b1ec11939ff468ec
 
 export function createReview(payload) {
   return async (dispatch) => {
@@ -122,3 +131,7 @@ export function createReview(payload) {
     }
   };
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 244d73277df8109be71e0698b1ec11939ff468ec
