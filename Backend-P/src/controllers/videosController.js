@@ -1,65 +1,106 @@
-const { getCourseById } = require("../services/courseService");
+const { getSectionById } = require("../services/sectionService");
 const videoService = require("../services/videoService.js");
 
+
+// Probar manejo de errores, respuesta exitosa y demnas en insomnia, postman, etc
 const getVideos = async (req, res) => {
   try {
     const allVideos = await videoService.getAllVideos();
-    res.status(200).json(allVideos);
+    if (!allVideos.length) {
+      throw new Error("No ha encontrado ningun video");
+    }
+    res
+      .status(200)
+      .json({ message: "Videos obtenidos con éxito", data: allVideos });
   } catch (error) {
     res.status(400).json({ messege: error.massage });
   }
 };
 
+// Probar manejo de errores, respuesta exitosa y demnas en insomnia, postman, etc
 const postVideos = async (req, res) => {
   try {
     const { videoTitle, videoLink, videoDescription } = req.body;
-    const { courseId } = req.params;
-    const courseFound = await getCourseById(courseId);
-    if (!courseFound) {
+    const { sectionId } = req.params;
+    const videoByTitle = await videoService.getVideoByTitle(videoTitle);
+    if (videoByTitle.length) {
+      throw new Error("Ya existe un video con ese titulo");
+    }
+    const sectionFound = await getSectionById(sectionId);
+
+    if (!sectionFound) {
       throw new Error(
-        `No se ha encontrado ningun curso con este ID: ${courseId}`
+        `No se ha encontrado ninguna section con este ID: ${sectionId}`
       );
     }
-    const createVideo = await videoService.createVideo({
+
+    const createVideo = await videoService.createVideo( sectionId, {
       videoTitle,
       videoLink,
       videoDescription,
-      courseId: courseFound.id,
     });
-    res.status(200).json(createVideo);
+    res
+      .status(200)
+      .json({ message: "Video posteado con éxtio", data: createVideo });
   } catch (error) {
-    res.status(400).json({ messege: error.massage });
+    res.status(402).json({ messege: error.message });
   }
 };
 
+// Probar manejo de errores, respuesta exitosa y demnas en insomnia, postman, etc
 const putVideoId = async (req, res) => {
   try {
-    const { idVideo } = req.params;
+    const { idVideo } = req.params; 
+    const videoById = await videoService.getVideoById(idVideo);
+    if (!videoById) {
+      throw new Error(`No se encontro el video con id ${idVideo}`);
+    }
     const updateVideo = await videoService.putVideo({
       id: idVideo,
       data: req.body,
     });
-    res.status(200).json(updateVideo);
+    res
+      .status(200)
+      .json({
+        message: `El video con el id ${idVideo} se ha actualizado`,
+        data: updateVideo,
+      });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
+// Probar manejo de errores, respuesta exitosa y demnas en insomnia, postman, etc
 const deleteAVideo = async (req, res) => {
   try {
-    const { id } = req.params;
-    const deleteVideo = await videoService.deleteVideo(id);
+    const { idVideo } = req.params;
+    //No se verifica si existe un curso con el id recibido
+    const videoById = await videoService.getVideoById(idVideo);
+    if (!videoById) {
+      throw new Error(`No se encontro el video con id ${idVideo}`);
+    }
+    const deleteVideo = await videoService.deleteVideo(idVideo);
+
     res.status(200).json({ message: "Video eliminado con éxito" });
   } catch (error) {
     req.status(400).json({ message: error.message });
   }
 };
 
+// Probar manejo de errores, respuesta exitosa y demnas en insomnia, postman, etc
 const restoreAVideo = async (req, res) => {
   try {
-    const { id } = req.params;
-    await videoService.restoreVideo(id);
-    res.status(200).json({ msg: "Comentario restaurado con exito" });
+    const { idVideo } = req.params; //Aca recibe 'id' y
+    const videoById = await videoService.getVideoById(idVideo);
+    if (!videoById) {
+      throw new Error(`No se encontro el video con id ${idVideo}`);
+    }
+    if (videoById.deleteAt === null) {
+      throw new Error(`El video con el id ${idVideo} no habia sido eliminado`);
+    }
+    await videoService.restoreVideo(idVideo);
+
+    res.status(200).json({ message: "Video restaurado con exito", data: videoById });
   } catch (error) {
     res.status(400).json({ msg: error.message });
   }

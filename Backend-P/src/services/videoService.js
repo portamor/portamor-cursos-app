@@ -1,17 +1,19 @@
-const { Videos } = require("../database.js");
+const { Videos, Sections } = require("../database.js");
+const sectionService = require('../services/sectionService.js')
+const {Op} = require('sequelize')
 
-const createVideo = async ({
-  courseId,
+const createVideo = async ( sectionId,{
   videoLink,
   videoTitle,
   videoDescription,
 }) => {
+  const foundSection = await sectionService.getSectionById(sectionId)
   const newVideo = await Videos.create({
     videoTitle,
     videoLink,
     videoDescription,
-    CourseId: courseId,
   });
+  await newVideo.addSection(foundSection.id)
   return newVideo;
 };
 
@@ -25,6 +27,25 @@ const getVideoById = async (id) => {
   return videoId;
 };
 
+const getVideoByTitle = async (videoTitle) => {
+  const videoByTitle = await Videos.findAll({
+    where: { videoTitle: videoTitle },
+    order: [["videoTitle", "ASC"]],
+  });
+  return videoByTitle;
+};
+
+const searchVideoByTitle = async (videoTitle) => {
+  const titleNoExactly = await Videos.findAll({
+    where: {
+      videoTitle: {
+        [Op.iLike]: `%${videoTitle}%`,
+      },
+    },
+  });
+  return titleNoExactly;
+};
+
 const putVideo = async ({ id, data }) => {
   const videosForCourse = await getVideoById(id);
   videosForCourse.set(data);
@@ -35,12 +56,15 @@ const putVideo = async ({ id, data }) => {
 const deleteVideo = async (id) => {
   const videosForCourse = await getVideoById(id);
   await videosForCourse.destroy();
+  return 'Video eliminado correctamente'
 };
 
 const restoreVideo = async (id) => {
-   await Videos.restore({
-    where: {id: id}
-   })
+  await Videos.restore({
+    where: { id: id },
+  });
+  const videoRestored = await getVideoById(id);
+  return videoRestored;
 };
 
 module.exports = {
@@ -48,5 +72,8 @@ module.exports = {
   getAllVideos,
   putVideo,
   deleteVideo,
-  restoreVideo
+  restoreVideo,
+  getVideoByTitle,
+  getVideoById,
+  searchVideoByTitle
 };

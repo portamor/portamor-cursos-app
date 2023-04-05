@@ -1,16 +1,16 @@
-require('dotenv').config();
 const fs   = require('fs');
 const path = require('path');
 const { Sequelize } = require('sequelize');
+require('dotenv').config();
 
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env; 
 
 const sequelize = new Sequelize(
-`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
-    {
-    logging: false,
-    native: false,
-    }
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+  {
+  logging: false,
+  native: false,
+  }
 );
 
 const basename = path.basename(__filename);
@@ -33,19 +33,21 @@ let capsEntries = entries.map((entry) => [
   entry[0][0].toUpperCase() + entry[0].slice(1),
   entry[1],
 ]);
+
 sequelize.models = Object.fromEntries(capsEntries);
 
 const {
     Users,
     Instructor,
     Courses,
-    Comments,
-    Videos
+    Review,
+    Videos,
+    Sections
 } = sequelize.models;
 
-// ---- Users Relations
-Users.hasMany(Comments);
-Comments.belongsTo(Users);
+// ---- Users - Review
+Users.hasMany(Review);
+Review.belongsTo(Users);
 
 // ---- Inscriptions Relations
 Users.belongsToMany(Courses, {
@@ -57,18 +59,22 @@ Courses.belongsToMany(Users, {
 })
 
 // ---- Courses Relations
-Courses.hasMany(Videos);
-Videos.belongsTo(Courses)
+Courses.hasMany(Sections);
+Sections.belongsTo(Courses)
 
-Courses.hasMany(Comments);
-Comments.belongsTo(Courses);
+Courses.hasMany(Review);
+Review.belongsTo(Courses);
 
+
+// ---Sections Relation
+Sections.hasMany(Videos);
+Videos.belongsTo(Sections)
 
 // ---- Instructor Relations
-Instructor.hasMany(Courses, { as: "courses"});
+Instructor.hasMany(Courses);
 Courses.belongsTo(Instructor)
 
 module.exports = {
-    ...sequelize.models,
-    conn: sequelize, 
+  ...sequelize.models,
+  conn: sequelize, 
 }
