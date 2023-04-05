@@ -1,16 +1,18 @@
-import React from "react";
-import { useState } from "react";
+import React           from "react";
+import { useState }    from "react";
 import { useDispatch } from "react-redux";
-import * as actions from "../../Redux/actions"
-import * as utils from "../../utils"
-import styles from './CreateVideo.module.css'
+//---Components
 import CustomButton from "../CustomButton/CustomButton";
-import { VIDEO } from "../../constants";
+//---actions, utils, constatns
+import * as actions from "../../Redux/actions"
+import * as utils   from "../../utils"
+import { VIDEO }    from "../../constants";
+//---styles
+import styles from './CreateVideo.module.css'
 
 const CreateVideo = () => {
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
-
   const [formValues, setFormValues] = useState({
     videoTitle: "",
     videoLink: "",
@@ -19,13 +21,19 @@ const CreateVideo = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+    const formErrors = utils.validate(formValues, VIDEO);
 
     setFormValues({
       ...formValues,
       [name]: value,
     });
 
-    console.log(formValues)
+    if (Object.keys(formErrors).length !== 0) {
+      setErrors(formErrors);
+      return;
+    } 
+    
+    setErrors({})
   };
 
   const handleSubmit = (event) => {
@@ -38,7 +46,10 @@ const CreateVideo = () => {
       return;
     } 
 
-    // dispatch(actions.createReview(formValues))
+
+    /* Hardcode */
+    const sectionId = "c43e4d03-b096-4cea-96b0-67f5d5cd6c4a"
+    dispatch(actions.createVideo(formValues, sectionId))
 
     setFormValues({
       videoTitle: "",
@@ -47,9 +58,10 @@ const CreateVideo = () => {
     })
   };
 
-
   return (
-    <form onSubmit={handleSubmit} className={styles["create-video-main"]}>
+    <form 
+    onSubmit={handleSubmit} 
+    className={styles["create-video-main"]} >
       <div className={styles["create-video-input-container"]}>
         <label htmlFor="videoTitle">Titulo del video:</label>
         <input
@@ -82,7 +94,7 @@ const CreateVideo = () => {
           id="videoDescription"
           name="videoDescription"
           rows="4"
-          value={formValues.comment}
+          value={formValues.videoDescription}
           onChange={handleChange}
           className={styles["video-textarea"]}
         ></textarea>
