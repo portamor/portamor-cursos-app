@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 //---Components
 import { StarFill } from 'react-bootstrap-icons';
 import CustomButton from "../CustomButton/CustomButton";
-//--Styles
+//---Styles
 import styles from "./CreateReview.module.css"
-//--utils,constants
+//---utils,constants
 import * as actions   from "../../Redux/actions"
 import * as constants from "../../constants/createReviewConstants";
 import { REVIEW }     from "../../constants";
