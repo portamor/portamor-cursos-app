@@ -1,0 +1,43 @@
+.create-video-main {
+  width: 350px;
+  margin-bottom: 40px;
+}
+
+@media(max-width: 670px) {
+  .create-video-main {
+    width: 100%;
+  }
+}
+
+.create-video-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.create-video-input-container label {
+  height: fit-content;
+  padding: 10px;
+  font-size: 20px;
+  font-family: 700;
+}
+
+.video-input,
+.video-textarea {
+  border-radius: 5px;
+  outline: none;
+  resize: none;
+  appearance: none;
+  padding: 10px;
+  font-size: 18px;
+  width: 100%;
+  border: none;
+  margin-bottom: 40px;
+  box-shadow: 0px 6px 10px 0.3px #bcbbbb; 
+}
+
+@media(max-width: 670px) {
+  .video-textarea {
+    width: 340px;
+  }
+}
