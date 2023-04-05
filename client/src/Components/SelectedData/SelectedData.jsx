@@ -2,10 +2,11 @@ import React           from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 //----Components
+import CourseAccordion  from "../CourseAccordion/CourseAccordion";
+import CreateReview     from "../CreateReview/CreateReview";
+import InstructorDetail from "../InstructorDetail/InstructorDetail";
 import ReviewCard       from "../ReviewCard/ReviewCard";
 import UserCard         from "../UserCard/UserCard";
-import CourseAccordion  from "../CourseAccordion/CourseAccordion";
-import InstructorDetail from "../InstructorDetail/InstructorDetail";
 //----Actions, Utils, Constants
 import * as constants from "../../constants/classDetailConstants";
 import * as actions   from "../../Redux/actions";
@@ -40,7 +41,14 @@ const SelectedData = ({courseDetail, courseId, selectedButtonContent}) => {
         stars_value = {review.stars_value} />
       );
 
-      return reviews;
+      return (
+        <div>
+          <CreateReview courseId={courseId}/>
+          <div className={styles["reviews-container"]} >
+            {reviews}
+          </div>
+        </div>
+      )
     
     case constants.MATERIALES:
       if(!courseDetail) dispatch(actions.getCourseDetail(courseId));

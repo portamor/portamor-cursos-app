@@ -1,4 +1,5 @@
-import styles from "./ReviewCard.module.css";
+import usersImg   from "../../images/users-icon.svg"
+import styles     from "./ReviewCard.module.css";
 import * as utils from "../../utils/index"
 
 const ReviewCard = (props) => {
@@ -7,7 +8,7 @@ const ReviewCard = (props) => {
 
   return (
     <div className={styles["review-card"]}>
-      <img className={styles["picture"]} src={props.image} alt="user-card"/>
+      <img className={styles["picture"]} src={usersImg} alt="user-card"/>
 
       <div className={styles["info-review-container"]}>
         <div className={styles["head-info-review"]} >
