@@ -122,13 +122,22 @@ export function createSection({id, name}) {
   }
 };
 
+export function createVideo(payload, sectionId) {
+  return async (dispatch) => {
+    try {
+      const createdVideo = await axios.post(`http://localhost:3001/videos/${sectionId}`, payload);
+
+      dispatch({ type: actions.CREATE_VIDEO, payload: createdVideo.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
 
 export function createReview(payload) {
   return async (dispatch) => {
     try {
       const createdReview = await axios.post("http://localhost:3001/review", payload);
-
-      console.log("action",createReview)
 
       dispatch({ type: actions.CREATE_REVIEW, payload: createdReview.data.data });
     } catch (error) {
