@@ -7,7 +7,7 @@ export function getCourses() {
       var json = await axios.get("http://localhost:3001/courses");
       return dispatch({
         type: "GET_COURSES",
-        payload: json.data,
+        payload: json.data.data,
       });
     } catch (error) {
       console.log("Error en getCourses/actions", error);
@@ -92,7 +92,36 @@ export function postUser(payload) {
     const response = await axios.post("http://localhost:3001/users", payload);
     return response;
   };
-}
+};
+
+export function createCourse(payload) {
+  return async function (dispatch) {
+  try {
+
+      const response = await axios.post("http://localhost:3001/courses", payload)
+
+      return dispatch({ type: actions.GET_COURSE_CREATE , payload: response.data.data })
+    
+  } catch (error) {
+    console.log(error.message);
+  }
+  }
+};
+
+export function createSection({id, name}) {
+  return async function (dispatch) {
+  try {
+
+      const response = await axios.post(`http://localhost:3001/section/${id}`,{name} )
+
+      return dispatch({ type: actions.GET_SECTION_CREATE, payload: response.data.data })
+    
+  } catch (error) {
+    console.log(error.message);
+  }
+  }
+};
+
 
 export function createReview(payload) {
   return async (dispatch) => {
