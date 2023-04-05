@@ -37,6 +37,7 @@
 }
 
 @media(max-width: 670px) {
+  .video-input,
   .video-textarea {
     width: 340px;
   }
