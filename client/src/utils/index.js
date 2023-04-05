@@ -25,9 +25,9 @@ export const validate = (values, type) => {
     case constants.VIDEO: 
       const { videoTitle, videoLink, videoDescription } = values;
 
-      if (!videoTitle.trim())       errors.videoTitle  = "El titulo del video es necesario";
-      if (!videoLink.trim())        errors.videoLink   = "El video debe tener una URL"; 
-      if (!videoDescription.trim()) errors.stars_value = "La descripcion del video es necesaria";
+      if (!videoTitle.trim())       errors.videoTitle       = "El titulo del video es necesario";
+      if (!videoLink.trim())        errors.videoLink        = "El video debe tener una URL";
+      if (!videoDescription.trim()) errors.videoDescription = "La descripcion del video es necesaria";
 
       return errors;
 
