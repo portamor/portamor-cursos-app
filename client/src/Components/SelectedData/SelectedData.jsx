@@ -7,7 +7,7 @@ import UserCard         from "../UserCard/UserCard";
 import CourseAccordion  from "../CourseAccordion/CourseAccordion";
 import InstructorDetail from "../InstructorDetail/InstructorDetail";
 //----Actions, Utils, Constants
-import * as constants from "../../constants";
+import * as constants from "../../constants/classDetailConstants";
 import * as actions   from "../../Redux/actions";
 //styles
 import styles from "./SelectedData.module.css";
