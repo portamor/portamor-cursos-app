@@ -19,7 +19,6 @@ const FormSectionCreate = () => {
   }, [dispatch]);
 
   const onSubmit = (data) => {
-    console.log(data.name, "data");
     const response = dispatch(createSection(data));
     alert("La sección se ha creado con éxito");
     reset();
