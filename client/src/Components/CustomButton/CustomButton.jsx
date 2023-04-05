@@ -5,6 +5,8 @@ const CustomButton = ({content, primary, type, name, disabled, onClick}) => {
   let customCssClassName = primary === true ? "important" : "secondary";
 
   if(type === "submit") customCssClassName += "-submit";
+
+  if(type === "submit" && primary === false) customCssClassName += "-secondary";
   
   return (
     <button

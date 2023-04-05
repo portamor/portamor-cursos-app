@@ -3,12 +3,6 @@
   margin-bottom: 40px;
 }
 
-@media(max-width: 670px) {
-  .create-video-main {
-    width: 100%;
-  }
-}
-
 .create-video-input-container {
   display: flex;
   flex-direction: column;
@@ -39,6 +33,15 @@
 @media(max-width: 670px) {
   .video-input,
   .video-textarea {
-    width: 340px;
+    width: 100%;
   }
+}
+
+.buttons-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
 }
