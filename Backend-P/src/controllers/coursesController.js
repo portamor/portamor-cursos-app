@@ -8,7 +8,7 @@ const postCourse = async (req, res) => {
       throw new Error("Estan faltando valores para crear un curso")
     }
 
-    const foundCourses = await courseService.getCourseByTitle(title);
+    const foundCourses = await courseService.getCourseByTitleExactly(title);
 
     if(foundCourses.length) {
       for (const course of foundCourses) {
