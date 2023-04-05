@@ -46,7 +46,6 @@ const CreateVideo = () => {
       return;
     } 
 
-
     /* Hardcode */
     const sectionId = "c43e4d03-b096-4cea-96b0-67f5d5cd6c4a"
     dispatch(actions.createVideo(formValues, sectionId))
@@ -101,12 +100,19 @@ const CreateVideo = () => {
         {errors.videoDescription && <p>{errors.videoDescription}</p>}
       </div>
 
-
-      <CustomButton
+      <div className={styles["buttons-container"]}>
+        <CustomButton
         disabled={errors.videoTitle || errors.videoLink || errors.videoDescription ? true : false}
         type={"submit"}
-        content={"Añadir video"}
+        content={"AÑADIR VIDEO"}
         primary={true} />
+
+        <CustomButton 
+        primary={false}
+        type={"submit"}
+        content={"VOLVER"} />
+      </div>
+
     </form>
   );
 };

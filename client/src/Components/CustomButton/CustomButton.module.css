@@ -1,6 +1,7 @@
 .custom-button-main-important,
+.custom-button-main-secondary,
 .custom-button-main-important-submit,
-.custom-button-main-secondary {
+.custom-button-main-secondary-submit-secondary {
   background-color: #EB575A;
   border: none;
   border-radius: 8px;
@@ -13,12 +14,14 @@
   padding: 13px 20px;
 }
 
-.custom-button-main-secondary{
+.custom-button-main-secondary,
+.custom-button-main-secondary-submit-secondary{
   background-color: transparent;
   border: solid 2px #EB575A ;
   color: #EB575A;
 }
 
-.custom-button-main-important-submit {
+.custom-button-main-important-submit,
+.custom-button-main-secondary-submit-secondary {
   width: 100%;
 }
