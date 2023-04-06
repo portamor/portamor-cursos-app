@@ -1,5 +1,6 @@
-import axios        from "axios";
-import * as actions from "../constants/actionsContants"
+import axios          from "axios";
+import * as actions   from "../constants/actionsContants"
+import * as constants from "../constants";
 
 export function getCourses() {
   return async function (dispatch) {
@@ -94,31 +95,32 @@ export function postUser(payload) {
   };
 };
 
-export function createCourse(payload) {
+export function createCourse(payload, setActualForm) {
   return async function (dispatch) {
-  try {
-
+    try {
       const response = await axios.post("http://localhost:3001/courses", payload)
 
-      return dispatch({ type: actions.GET_COURSE_CREATE , payload: response.data.data })
-    
-  } catch (error) {
-    console.log(error.message);
-  }
+      alert('Se ha creado el curso correctamente')
+      
+      //Change form in dashboard
+      setActualForm(constants.SELECT_SECTION_FORM);
+
+      return dispatch({ type: actions.CREATE_COURSE , payload: response.data.data })
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 };
 
 export function createSection({id, name}) {
   return async function (dispatch) {
-  try {
-
+    try {
       const response = await axios.post(`http://localhost:3001/section/${id}`,{name} )
 
       return dispatch({ type: actions.GET_SECTION_CREATE, payload: response.data.data })
-    
-  } catch (error) {
-    console.log(error.message);
-  }
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 };
 

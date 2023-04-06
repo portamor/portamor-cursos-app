@@ -1,6 +1,7 @@
 import * as actions from "../constants/actionsContants";
 
 const initialState = {
+  createdCourse:    {},
   courses:          [],
   courseDetail:     {},
   courseInstructor: {},
@@ -48,12 +49,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         videoDetail: action.payload,
       };
-    
-    case actions.GET_COURSE_CREATE:
-      return {
-        ...state,
-        courses: [...state.courses, action.payload]
-      };
       
     case actions.GET_SECTION_CREATE:
       return {
@@ -65,6 +60,13 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         courseReviews: action.payload,
+      };
+
+    case actions.CREATE_COURSE:
+      return {
+        ...state,
+        createdCourse: action.payload,
+        courses:       [...state.courses, action.payload]
       };
 
     case actions.CREATE_VIDEO:
