@@ -11,7 +11,7 @@ import { INSTRUCTOR }    from "../../constants";
 //---styles
 import styles from './CreateInstructor.module.css'
 
-const CreateInstructor = () => {
+const CreateInstructor = ({ courseId }) => {
   const dispatch = useDispatch();
   
   const [isDisabledSubmit, setIsDisabledSubmit] = useState(true);
@@ -22,6 +22,7 @@ const CreateInstructor = () => {
     profile_picture: "",
     score: 0,
     reviews: 0,
+    courseId: "f033734d-34de-48a1-aaee-9b1c2de6ba78"
   });
 
   const handleChange = (event) => {
@@ -46,7 +47,6 @@ const CreateInstructor = () => {
     const formErrors = utils.validate(formValues, INSTRUCTOR);
     
     if (Object.keys(formErrors).length === 0) setIsDisabledSubmit(false);
-
 
     reader.onloadend = () => {
       setFormValues({
@@ -84,6 +84,7 @@ const CreateInstructor = () => {
       return;
     } 
 
+    dispatch(actions.createInstructor(formValues));
 
     setIsDisabledSubmit(true);
 
@@ -93,6 +94,7 @@ const CreateInstructor = () => {
       profile_picture: "",
       score: 0,
       reviews: 0,
+      courseId: "f033734d-34de-48a1-aaee-9b1c2de6ba78"
     })
   };
 
@@ -100,6 +102,7 @@ const CreateInstructor = () => {
     <form 
     onSubmit={handleSubmit} 
     className={styles["create-instructor-main"]} >
+      <h1>Crear Instructor</h1>
       <div className={styles["create-instructor-input-container"]}>
         <label htmlFor="videoTitle">Nombre del instructor:</label>
         <input
