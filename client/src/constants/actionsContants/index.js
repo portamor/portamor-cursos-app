@@ -5,11 +5,11 @@ export const GET_REVIEWS_BY_COURSE_ID  = "GET_REVIEWS_BY_COURSE_ID";
 export const GET_SECTIONS_BY_COURSE_ID = "GET_SECTIONS_BY_COURSE_ID";
 export const GET_USERS_BY_COURSE_ID    = "GET_USERS_BY_COURSE_ID";
 export const GET_VIDEO_BY_ID           = "GET_VIDEO_BY_ID";
-export const GET_COURSE_CREATE         = "GET_COURSE_CREATE"
 export const GET_SECTION_CREATE        = "GET_SECTION_CREATE"
 
 
 //POST 
+export const CREATE_COURSE      = "CREATE_COURSE"
 export const CREATE_REVIEW      = "CREATE_REVIEW";
 export const CREATE_VIDEO       = "CREATE_VIDEO";
 export const CREATE_INSTRUCTOR  = "CREATE_INSTRUCTOR";
