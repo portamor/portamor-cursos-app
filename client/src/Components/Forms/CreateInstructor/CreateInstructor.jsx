@@ -1,18 +1,20 @@
 import React           from "react";
 import { useState }    from "react";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 //---Components
 import CustomButton from "../../CustomButton/CustomButton";
 import { StarFill } from 'react-bootstrap-icons';
 //---actions, utils, constatns
-import * as actions from "../../../Redux/actions"
-import * as utils   from "../../../utils"
-import { INSTRUCTOR }    from "../../../constants";
+import * as actions   from "../../../Redux/actions"
+import * as utils     from "../../../utils"
+import { INSTRUCTOR } from "../../../constants";
 //---styles
 import styles from './CreateInstructor.module.css'
 
-const CreateInstructor = ({ courseId }) => {
-  const dispatch = useDispatch();
+const CreateInstructor = ({ setActualForm, courseId }) => {
+  const dispatch       = useDispatch();
+  const createdCourse  = useSelector((state) => state.createdCourse);
   
   const [isDisabledSubmit, setIsDisabledSubmit] = useState(true);
   const [errors, setErrors] = useState({});
@@ -22,8 +24,9 @@ const CreateInstructor = ({ courseId }) => {
     profile_picture: "",
     score: 0,
     reviews: 0,
-    courseId: "f033734d-34de-48a1-aaee-9b1c2de6ba78"
+    courseId: createdCourse.id
   });
+
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -84,7 +87,7 @@ const CreateInstructor = ({ courseId }) => {
       return;
     } 
 
-    dispatch(actions.createInstructor(formValues));
+    dispatch(actions.createInstructor(formValues, setActualForm));
 
     setIsDisabledSubmit(true);
 
