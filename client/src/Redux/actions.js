@@ -7,7 +7,7 @@ export function getCourses() {
         var json = await axios.get("http://localhost:3001/courses");
         return dispatch({
           type: "GET_COURSES",
-          payload: json.data,
+          payload: json.data.data,
         });
       } catch (error) {
         console.log("Error en getCourses/actions", error);

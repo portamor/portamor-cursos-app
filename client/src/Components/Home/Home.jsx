@@ -17,8 +17,9 @@ import { courseSections } from "../DataBase/Json";
 
 
 const Home = () => {
-  const courses = useSelector((state) => state.courses?.courses);
+  const courses = useSelector((state) => state?.courses);
   const dispatch = useDispatch();
+  
 
   useEffect(() => {
     dispatch(getCourses());
@@ -31,7 +32,7 @@ const Home = () => {
         <NavFilter />
       </div>
       <div className={Styles["cards-home"]}>
-  {Array.isArray(courses) && courses?.map((el) => {
+  {Array.isArray(courses) && courses.map((el) => {
     return <CourseCard key={el.id} id={el.id} image={el.image} title={el.title} />;
   })}
 </div>
