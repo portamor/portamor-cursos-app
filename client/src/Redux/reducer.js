@@ -1,14 +1,14 @@
 import * as actions from "../constants/actionsContants";
 
 const initialState = {
-  courses: [],
-  courseDetail: {},
+  courses:          [],
+  courseDetail:     {},
   courseInstructor: {},
-  courseSections: [],
-  courseUsers: [],
-  courseReviews: [],
-  videoDetail: {},
-  sectionVideos: [],
+  courseSections:   [],
+  courseUsers:      [],
+  courseReviews:    [],
+  videoDetail:      {},
+  sectionVideos:    [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -74,10 +74,15 @@ function rootReducer(state = initialState, action) {
       };
 
     case actions.CREATE_REVIEW:
-      
       return {
         ...state,
         courseReviews: [...state.courseReviews, action.payload],
+      };
+    
+    case actions.CREATE_INSTRUCTOR:
+      return {
+        ...state,
+        courseInstructor: action.payload,
       };
 
     default:

@@ -134,6 +134,25 @@ export function createVideo(payload, sectionId) {
   };
 }
 
+export function createInstructor(payload) {
+  return async (dispatch) => {
+    try {
+      const createdInstructor = await axios.post(`http://localhost:3001/instructor`, {
+        name:            payload.name,
+        description:     payload.description,
+        profile_picture: payload.profile_picture,
+        score:           payload.score,
+        reviews:         payload.reviews,
+        courseId:        payload.courseId
+      });
+
+      dispatch({ type: actions.CREATE_INSTRUCTOR, payload: createdInstructor.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
 export function createReview(payload) {
   return async (dispatch) => {
     try {
