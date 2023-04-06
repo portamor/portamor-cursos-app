@@ -1,20 +1,19 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch } from 'react-redux'
+import React            from "react";
+import { useState }     from "react";
+import { useForm }      from "react-hook-form";
+import { useDispatch }  from 'react-redux'
 import { createCourse } from '../../../Redux/actions'
-import styles from "./formCourse.module.css";
+import styles           from "./formCourse.module.css";
 
-const FormCourse = () => {
-
+const FormCourse = ({ setActualForm }) => {
     const dispatch = useDispatch()
     const { register, handleSubmit, reset } = useForm();
     const [materialesCount, setMaterialesCount] = useState(1);
   
-    const onSubmit =(data) => {
-      const response = dispatch(createCourse(data))
-    alert('Se ha creado el curso correctamente')
-    reset()
+    const onSubmit = (data) => {
+      dispatch(createCourse(data, setActualForm))
+            
+      reset()
     };
   
     const agregarMaterial = () => {
