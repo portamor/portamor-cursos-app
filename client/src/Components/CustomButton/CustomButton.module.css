@@ -1,4 +1,5 @@
 .custom-button-main-important,
+.custom-button-main-important-submit,
 .custom-button-main-secondary {
   background-color: #EB575A;
   border: none;
@@ -16,4 +17,8 @@
   background-color: transparent;
   border: solid 2px #EB575A ;
   color: #EB575A;
+}
+
+.custom-button-main-important-submit {
+  width: 100%;
 }

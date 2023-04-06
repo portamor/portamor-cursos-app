@@ -8,7 +8,7 @@ const postCourse = async (req, res) => {
       throw new Error("Estan faltando valores para crear un curso")
     }
 
-    const foundCourses = await courseService.getCourseByTitle(title);
+    const foundCourses = await courseService.getCourseByTitleExactly(title);
 
     if(foundCourses.length) {
       for (const course of foundCourses) {
@@ -84,11 +84,11 @@ const getCourseByType = async (req, res) => {
 
 const getCourseByGenre = async (req, res) => {
   try {
-    const { genre } = req.body;
+    const { genre } = req.params;
 
     const foundCourses = await courseService.getCourseBygenre(genre);
 
-    if(!foundCourses.length) throw new Error(`No se ha encontrado ningun curso con el pilar ${genre}`)
+    if(!foundCourses) throw new Error(`No se ha encontrado ningun curso con el pilar ${genre}`)
 
     res.status(200).json({message: "Cursos encontrado con exito", data: foundCourses});
   } catch (error) {

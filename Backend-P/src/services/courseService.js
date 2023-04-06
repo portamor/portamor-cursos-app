@@ -37,6 +37,14 @@ const getCourseByTitle = async (title) => {
   return foundCourse;
 };
 
+const getCourseByTitleExactly = async (title) => {
+  const foundCourse = await Courses.findAll({
+    where: { title: title },
+    order: [["title", "ASC"]],
+  });
+  return foundCourse;
+};
+
 const getCourseByType = async (type) => {
   const courseType = await Courses.findAll({
     where: {
@@ -90,5 +98,6 @@ module.exports = {
   createCourse,
   updateCourse,
   deleteACourse,
-  restoreACourse
+  restoreACourse,
+  getCourseByTitleExactly
 };

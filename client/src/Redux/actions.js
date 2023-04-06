@@ -1,4 +1,5 @@
-import axios from "axios"
+import axios        from "axios";
+import * as actions from "../constants/actionsContants"
 
 export function getCourses() {
     return async function (dispatch) {
@@ -14,12 +15,6 @@ export function getCourses() {
     };
   }
 
-  export function postUser (payload){
-    return async function (dispatch){
-        const response = await axios.post('http://localhost:3001/users', payload);
-        return response;
-    }
-  }
   export const getUserByCode = (code) => async (dispatch) => {
     try {
       const response = await axios.get(`http://localhost:3001/users?code=${code}`);
@@ -59,23 +54,19 @@ export function getCourses() {
   });
 
 
-  
-import axios        from "axios";
-import * as actions from "../constants"
-
-export function getCourses() {
-  return async function (dispatch) {
+  export const getCoursesByGenre = (genre) => async (dispatch) => {
+    console.log(genre)
     try {
-      var json = await axios.get("http://localhost:3001/courses");
-      return dispatch({
-        type: "GET_COURSES",
-        payload: json.data,
+      const res = await axios.get(`http://localhost:3001/courses/genre/${genre}`);  
+      dispatch({
+        type: 'GET_COURSES_BY_GENRE',
+        payload: res.data.data
       });
-    } catch (error) {
-      console.log("Error en getCourses/actions", error);
-    }
-  };
-}
+      } catch (error) {
+        console.log("Error en getCoursesByGenre/actions", error);
+      }
+    };
+
 
 export function getCourseDetail(id) {
   return async function (dispatch) {
@@ -153,5 +144,48 @@ export function postUser(payload) {
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/users", payload);
     return response;
+  };
+};
+
+export function createCourse(payload) {
+  return async function (dispatch) {
+  try {
+
+      const response = await axios.post("http://localhost:3001/courses", payload)
+
+      return dispatch({ type: actions.GET_COURSE_CREATE , payload: response.data.data })
+    
+  } catch (error) {
+    console.log(error.message);
+  }
+  }
+};
+
+export function createSection({id, name}) {
+  return async function (dispatch) {
+  try {
+
+      const response = await axios.post(`http://localhost:3001/section/${id}`,{name} )
+
+      return dispatch({ type: actions.GET_SECTION_CREATE, payload: response.data.data })
+    
+  } catch (error) {
+    console.log(error.message);
+  }
+  }
+};
+
+
+export function createReview(payload) {
+  return async (dispatch) => {
+    try {
+      const createdReview = await axios.post("http://localhost:3001/review", payload);
+
+      console.log("action",createReview)
+
+      dispatch({ type: actions.CREATE_REVIEW, payload: createdReview.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 }

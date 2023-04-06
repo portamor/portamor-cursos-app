@@ -19,18 +19,8 @@ const CourseAccordion = ({ sections, courseId }) => {
       style={{"background-color": '#f3f1f1'}} >
         Contenido del curso
       </AccordionSummary>
-<<<<<<< HEAD
-      {sections.map(section => {
-        //All section's minutes to "AccordionSummary"
-        let totalMinutesSection = 0;
-        for (const cls of section.classes) {
-          if(cls.minutes !== undefined) totalMinutesSection += cls.minutes
-        }
-
-=======
       
       {sections && sections.map(section => {
->>>>>>> testing
         return (
           <Accordion 
           key={section.id}
@@ -49,14 +39,14 @@ const CourseAccordion = ({ sections, courseId }) => {
                 <li key={video.id} className={styles["course-accordion-li"]}>
                   <div className={styles["course-accordion-li-div"]}>
                     <Link 
-                      exact to={`clase/${courseId}/${video.id}`}
-                      className={styles["course-accordion-class-link"]} >
-                        {video.videoTitle}
+                    to={`/clase/${courseId}/${video.id}`}
+                    className={styles["course-accordion-class-link"]} >
+                      {video.videoTitle}
                     </Link>
                     <Link 
-                      exact to={`clase/${courseId}/${video.id}`}
-                      className={styles["course-accordion-class-link"]} >
-                        <img src={img} alt="sd"/>
+                    to={`/clase/${courseId}/${video.id}`}
+                    className={styles["course-accordion-class-link"]} >
+                      <img src={img} alt="sd"/>
                     </Link>
                   </div>
                 </li>

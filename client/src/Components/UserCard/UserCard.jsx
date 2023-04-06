@@ -1,4 +1,5 @@
-import styles       from "./UserCard.module.css";
+import styles  from "./UserCard.module.css";
+import usersImg  from "../../images/users-icon.svg";
 
 const UserCard = (props) => {
   // props = name, image, description, phoneNumber
@@ -7,7 +8,7 @@ const UserCard = (props) => {
     <div className={styles["user-card"]}>
       <img 
       className={styles["picture"]} 
-      src={props.image} 
+      src={usersImg} 
       alt="user-card" />
 
       <div className={styles["info-user-container"]}>

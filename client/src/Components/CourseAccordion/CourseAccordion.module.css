@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 @keyframes opacityin {
   from {
     opacity: 0;
@@ -10,17 +8,13 @@
   }
 }
 
->>>>>>> testing
 .course-accordion-head{
   font-size: 24px;
   text-align: center;
   height: 85px;
   font-weight: 700;
-<<<<<<< HEAD
-=======
   animation-name: opacityin;
   animation-duration: 1s;
->>>>>>> testing
 }
 
 .course-accordion {

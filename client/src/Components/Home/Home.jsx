@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import NavFilter from "../NavFilter/NavFilter";
-import CourseCard from "../CourseCard/CourseCard";
-import { getCourses } from "../../Redux/actions";
-import Styles from "../StyleSheet/Home.module.css";
-
-const Home = () => {
-  const courses = useSelector((state) => state.courses);
-=======
 import React           from "react";
 import { useEffect }   from "react";
 
@@ -29,7 +18,6 @@ import { courseSections } from "../DataBase/Json";
 
 const Home = () => {
   const courses = useSelector((state) => state.courses?.courses);
->>>>>>> testing
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,13 +31,10 @@ const Home = () => {
         <NavFilter />
       </div>
       <div className={Styles["cards-home"]}>
-        {courses?.map((el) => {
-          return <CourseCard key={el.id} image={el.image} title={el.title} />;
-        })}
-      </div>
-<<<<<<< HEAD
-=======
-
+  {Array.isArray(courses) && courses?.map((el) => {
+    return <CourseCard key={el.id} id={el.id} image={el.image} title={el.title} />;
+  })}
+</div>
       {/* <ReviewCard 
       image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2BetQecEPZPH1770yc9Wtm2_yr90fGe1S0JkPrDXLnA&s"
       name="Wilmer Rafael Castro"
@@ -66,7 +51,6 @@ const Home = () => {
       satisfaction={5} /> */}
 
       {/* <CourseAccordion sections={courseSections} /> */}
->>>>>>> testing
     </div>
   );
 };

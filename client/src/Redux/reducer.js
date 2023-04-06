@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-const initialState = {
-  courses: [],
-  isLoggedIn: false,
-  user: null,
-  error: null,
-=======
-import * as actions from "../constants";
+import * as actions from "../constants/actionsContants";
+
 
 const initialState = {
   courses: [],
@@ -16,7 +10,12 @@ const initialState = {
   courseReviews: [],
   videoDetail: {},
   user: [],
->>>>>>> testing
+  isLoggedIn: false,
+  user: null,
+  error: null,
+  courseCreate: [],
+  sectionCreate: []
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -26,7 +25,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         courses: action.payload,
       };
-<<<<<<< HEAD
+
     case "LOGIN_SUCCESS":
       return {
         ...state,
@@ -48,7 +47,12 @@ function rootReducer(state = initialState, action) {
         user: null,
         error: null,
       };
-=======
+
+      case 'GET_COURSES_BY_GENRE':
+        return {
+          ...state,
+          courses: action.payload
+        };
 
     case actions.GET_COURSE_DETAIL:
       return {
@@ -60,12 +64,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         courseSections: action.payload,
-      };
-      
-    case actions.GET_REVIEWS_BY_COURSE_ID:
-      return {
-        ...state,
-        courseReviews: action.payload,
       };
       
     case actions.GET_USERS_BY_COURSE_ID:
@@ -85,8 +83,30 @@ function rootReducer(state = initialState, action) {
         ...state,
         videoDetail: action.payload,
       };
+      case actions.GET_COURSE_CREATE:
+        return {
+          ...state,
+          courseCreate: action.payload,
+        };
+        case actions.GET_SECTION_CREATE:
+          return {
+            ...state,
+            sectionCreate: action.payload,
+          };
+    case actions.GET_REVIEWS_BY_COURSE_ID:
+      return {
+        ...state,
+        courseReviews: action.payload,
+      };
 
->>>>>>> testing
+    case actions.CREATE_REVIEW:
+      console.log("reducer", action.payload)
+      
+      return {
+        ...state,
+        courseReviews: [...state.courseReviews, action.payload],
+      };
+
     default:
       return state;
   }
