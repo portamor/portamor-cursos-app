@@ -1,0 +1,34 @@
+@keyframes opacityin {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.reviews-container {
+  padding: 20px 10px ;
+  max-height: 500px;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media(max-width: 750px) {
+  .reviews-container {
+    max-height: fit-content;
+    overflow-y: hidden;
+  }
+}
+
+.info-component-material-title {
+  font-size: 30px;
+  font-weight: 500;
+  animation-name: opacityin;
+  animation-duration: 1s;
+}

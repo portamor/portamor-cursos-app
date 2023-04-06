@@ -37,6 +37,14 @@ const getCourseByTitle = async (title) => {
   return foundCourse;
 };
 
+const getCourseByTitleExactly = async (title) => {
+  const foundCourse = await Courses.findAll({
+    where: { title: title },
+    order: [["title", "ASC"]],
+  });
+  return foundCourse;
+};
+
 const getCourseByType = async (type) => {
   const courseType = await Courses.findAll({
     where: {
@@ -51,10 +59,10 @@ const getCourseByType = async (type) => {
 
 const getCourseBygenre = async (genre) => {
   const foundCourse = await Courses.findAll({
-    where: { genre: { [Op.iLike]: `${genre}`} },
+    where: { genre: genre },
     order: [["title", "ASC"]],
   });
-  
+
   return foundCourse;
 };
 
@@ -90,4 +98,5 @@ module.exports = {
   updateCourse,
   deleteACourse,
   restoreACourse,
+  getCourseByTitleExactly
 };

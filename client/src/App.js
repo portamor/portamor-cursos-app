@@ -4,18 +4,19 @@ import CourseDetail from "./Components/CourseDetail/CourseDetail";
 import Home from "./Components/Home/Home"
 import ClassDetail from "./Components/ClassDetail/ClassDetail";
 import DownloadCertificate from "./Components/Certificate/DownaldCertificate"
+import Dashboard from "./Components/Dashboard/Dashboard";
 
 function App() {
   return (
     <div>
       <BrowserRouter>
-        {/* <NavBar /> */}
+        <NavBar />
         <Routes>
           <Route exact path="/" Component={Home}  />
           <Route exact path="/detalle-curso/:id" Component={CourseDetail} />
-          <Route exact path="/clase/:id" Component={ClassDetail} />     
+          <Route exact path="/clase/:courseId/:videoId" Component={ClassDetail} />     
           <Route exact path="/certificadown" Component={DownloadCertificate} />          
-
+          <Route exact path="/dashboard" Component={Dashboard} />          
         </Routes>
       </BrowserRouter>
     </div>
