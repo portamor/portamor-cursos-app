@@ -31,6 +31,19 @@ export const validate = (values, type) => {
 
       return errors;
 
+    case constants.INSTRUCTOR: 
+      if (!values.name.trim()) errors.name = "El titulo del video es necesario";
+
+      if (!values.score) errors.score = "El instructor debe tener una calificacion";
+      
+      if (!values.reviews)          errors.reviews = "Debe tener un numero de reseñas";
+      else if(values.reviews < 0)   errors.reviews = "El numero de reseñas no puede ser menor a 0";
+      else if(values.reviews > 100) errors.reviews = "El numero de reseñas no puede ser mayor a 100";
+      
+      if (!values.profile_picture) errors.profile_picture = "El instructor debe tener una foto";
+
+      return errors;
+
     default:
       return errors;
   }
