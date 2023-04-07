@@ -9,10 +9,13 @@ export const GET_SECTION_CREATE        = "GET_SECTION_CREATE"
 export const GET_ALL_INSTRUCTORS       = "GET_ALL_INSTRUCTORS"
 
 
-//POST 
+//---- POST 
 export const CREATE_COURSE      = "CREATE_COURSE"
 export const CREATE_REVIEW      = "CREATE_REVIEW";
 export const CREATE_VIDEO       = "CREATE_VIDEO";
 export const CREATE_INSTRUCTOR  = "CREATE_INSTRUCTOR";
+
+//---- PUT
+export const ADD_INSTRUCTOR_TO_COURSE = "ADD_INSTRUCTOR_TO_COURSE";
 
 

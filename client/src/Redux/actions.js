@@ -154,9 +154,27 @@ export function createInstructor(payload, setActualForm) {
 
       alert(`Instructor ${createdInstructor.data.data.name} creado con exito`)
 
-      setActualForm(constants.SELECT_SECTION_FORM)
+      setActualForm(constants.SELECT_SECTION_FORM);
 
       dispatch({ type: actions.CREATE_INSTRUCTOR, payload: createdInstructor.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function addInstructorToCourse(instructorId, courseId, setActualForm) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`http://localhost:3001/instructor/add-course/${instructorId}`, {
+        courseId: courseId 
+      })
+
+      alert(response.data.message)
+
+      setActualForm(constants.SELECT_SECTION_FORM);
+
+      dispatch({ type: actions.ADD_INSTRUCTOR_TO_COURSE, payload: response.data.data });
     } catch (error) {
       console.log(error.message);
     }
