@@ -12,7 +12,7 @@ import { INSTRUCTOR } from "../../../constants";
 //---styles
 import styles from './CreateInstructor.module.css'
 
-const CreateInstructor = ({ setActualForm, courseId }) => {
+const CreateInstructor = ({ setActualForm }) => {
   const dispatch       = useDispatch();
   const createdCourse  = useSelector((state) => state.createdCourse);
   

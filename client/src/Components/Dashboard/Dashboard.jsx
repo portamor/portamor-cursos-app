@@ -5,7 +5,9 @@ import { CreateSection }    from "../Forms";
 import { CreateVideo }      from "../Forms";
 import * as constants       from "../../constants";
 
-import styles from "../Forms/CreateCourse/formCourse.module.css"
+// import styles from "../Forms/CreateCourse/formCourse.module.css"
+import styles from "./Dashboard.module.css"
+import ChooseInstructor from "../ChooseInstructor/ChooseInstructor";
 
 
 const Dashboard = () => {
@@ -29,14 +31,22 @@ const Dashboard = () => {
   // 4) Dependiendo que indica el estado, se mostrara el form para crear un curso, section o los otros
 
   const [actualForm, setActualForm] = useState(constants.SELECT_COURSE_FORM);
+  // const [actualForm, setActualForm] = useState(constants.SELECT_INSTRUCTOR_FORM);
 
   return (
     <div className={styles.div_dashboard} >
-      { actualForm === constants.SELECT_COURSE_FORM     && <CreateCourse     setActualForm={setActualForm} /> }
-      { actualForm === constants.SELECT_INSTRUCTOR_FORM && <CreateInstructor setActualForm={setActualForm} /> }
-      {/* Faltan estos dos */}
-      { actualForm === constants.SELECT_SECTION_FORM    && <CreateSection    setActualForm={setActualForm} /> }
-      { actualForm === constants.SELECT_VIDEO_FORM      && <CreateVideo      setActualForm={setActualForm} /> }
+      { actualForm === constants.SELECT_COURSE_FORM     && <CreateCourse setActualForm={setActualForm} /> }
+
+      { actualForm === constants.SELECT_INSTRUCTOR_FORM && (
+        <div className={styles["instructor-container"]}>
+          <CreateInstructor setActualForm={setActualForm} /> 
+          <ChooseInstructor setActualForm={setActualForm} />
+        </div>
+      )}
+
+      { actualForm === constants.SELECT_SECTION_FORM && <CreateSection setActualForm={setActualForm} /> }
+      
+      { actualForm === constants.SELECT_VIDEO_FORM   && <CreateVideo   setActualForm={setActualForm} /> }
     </div>
   )
 }
