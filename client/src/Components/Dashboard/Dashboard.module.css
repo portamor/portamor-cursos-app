@@ -1,0 +1,18 @@
+.div_dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.instructor-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+@media(max-width: 900px) {
+  .instructor-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
