@@ -1,5 +1,5 @@
 const { conn } = require('./src/database.js')
-const server   = require('./src/app');
+const serverApp   = require('./src/app');
 
 require('dotenv').config();
 
