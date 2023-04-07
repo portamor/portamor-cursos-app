@@ -3,6 +3,7 @@ import * as actions from "../constants/actionsContants";
 const initialState = {
   allInstructors:   [],
   createdCourse:    {},
+  createdSections:  [],
   courses:          [],
   courseDetail:     {},
   courseInstructor: {},
@@ -10,6 +11,7 @@ const initialState = {
   courseUsers:      [],
   courseReviews:    [],
   videoDetail:      {},
+  sectionToAddVideo:{},
   sectionVideos:    [],
 };
 
@@ -32,6 +34,16 @@ function rootReducer(state = initialState, action) {
         ...state,
         courseSections: action.payload,
       };
+
+    case actions.GET_SECTION_IN_CREATED_SECTIONS:
+      const sectionId = action.payload;
+
+      const foundSection = state.createdSections.find((section) => section.id === sectionId)
+
+      return {
+        ...state,
+        sectionToAddVideo: foundSection,
+      };
       
     case actions.GET_USERS_BY_COURSE_ID:
       return {
@@ -50,12 +62,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         videoDetail: action.payload,
       };
-      
-    case actions.GET_SECTION_CREATE:
-      return {
-        ...state,
-        courseSections: [...state.courseSections, action.payload],
-      };
 
     case actions.GET_REVIEWS_BY_COURSE_ID:
       return {
@@ -70,18 +76,6 @@ function rootReducer(state = initialState, action) {
         courses:       [...state.courses, action.payload]
       };
 
-    case actions.CREATE_VIDEO:
-      return {
-        ...state,
-        sectionVideos: [...state.sectionVideos, action.payload]
-      };
-
-    case actions.CREATE_REVIEW:
-      return {
-        ...state,
-        courseReviews: [...state.courseReviews, action.payload],
-      };
-    
     case actions.CREATE_INSTRUCTOR:
       return {
         ...state,
@@ -92,6 +86,24 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         allInstructors: action.payload,
+      };
+    
+    case actions.CREATE_SECTION:
+      return {
+        ...state,
+        createdSections: [...state.createdSections, action.payload],
+      };
+
+    case actions.CREATE_VIDEO:
+      return {
+        ...state,
+        sectionVideos: [...state.sectionVideos, action.payload]
+      };
+
+    case actions.CREATE_REVIEW:
+      return {
+        ...state,
+        courseReviews: [...state.courseReviews, action.payload],
       };
     
     default:

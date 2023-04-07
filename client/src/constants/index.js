@@ -1,4 +1,6 @@
 //SELECT FORM IN DASHBOARD
+export { CREATE_NEW_SECTION }     from './SelectFormConstants';
+export { CHOOSE_A_SECTION }       from './SelectFormConstants';
 export { SELECT_COURSE_FORM }     from './SelectFormConstants';
 export { SELECT_SECTION_FORM }    from './SelectFormConstants';
 export { SELECT_VIDEO_FORM }      from './SelectFormConstants';
