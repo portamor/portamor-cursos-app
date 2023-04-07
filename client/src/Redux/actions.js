@@ -39,6 +39,19 @@ export function getSectionsByCourseId(courseId) {
   };
 }
 
+export const getCoursesByGenre = (genre) => async (dispatch) => {
+  try {
+    const res = await axios.get(`http://localhost:3001/courses/genre/${genre}`);  
+    dispatch({
+      type: 'GET_COURSES_BY_GENRE',
+      payload: res.data.data
+    });
+    } catch (error) {
+      console.log("Error en getCoursesByGenre/actions", error);
+    }
+  };
+
+
 export function getReviewsByCourseId(courseId) {
   return async function (dispatch) {
     try {
