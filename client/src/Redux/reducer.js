@@ -1,16 +1,14 @@
 import * as actions from "../constants/actionsContants";
 
 const initialState = {
-  courses: [],
-  courseDetail: {},
+  courses:          [],
+  courseDetail:     {},
   courseInstructor: {},
-  courseSections: [],
-  courseUsers: [],
-  courseReviews: [],
-  videoDetail: {},
-  user: [],
-  courseCreate: [],
-  sectionCreate: []
+  courseSections:   [],
+  courseUsers:      [],
+  courseReviews:    [],
+  videoDetail:      {},
+  sectionVideos:    [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -56,16 +54,18 @@ function rootReducer(state = initialState, action) {
         ...state,
         videoDetail: action.payload,
       };
-      case actions.GET_COURSE_CREATE:
-        return {
-          ...state,
-          courseCreate: action.payload,
-        };
-        case actions.GET_SECTION_CREATE:
-          return {
-            ...state,
-            sectionCreate: action.payload,
-          };
+    
+    case actions.GET_COURSE_CREATE:
+      return {
+        ...state,
+        courses: [...state.courses, action.payload]
+      };
+      
+    case actions.GET_SECTION_CREATE:
+      return {
+        ...state,
+        courseSections: [...state.courseSections, action.payload],
+      };
 
     case actions.GET_REVIEWS_BY_COURSE_ID:
       return {
@@ -73,13 +73,24 @@ function rootReducer(state = initialState, action) {
         courseReviews: action.payload,
       };
 
+    case actions.CREATE_VIDEO:
+      return {
+        ...state,
+        sectionVideos: [...state.sectionVideos, action.payload]
+      };
+
     case actions.CREATE_REVIEW:
-      console.log("reducer", action.payload)
-      
       return {
         ...state,
         courseReviews: [...state.courseReviews, action.payload],
       };
+    
+    case actions.CREATE_INSTRUCTOR:
+      return {
+        ...state,
+        courseInstructor: action.payload,
+      };
+
     default:
       return state;
   }
