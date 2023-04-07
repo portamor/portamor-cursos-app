@@ -32,6 +32,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         courseSections: action.payload,
       };
+
+      case 'GET_COURSES_BY_GENRE':
+        return {
+          ...state,
+          courses: action.payload
+        };
       
     case actions.GET_USERS_BY_COURSE_ID:
       return {
