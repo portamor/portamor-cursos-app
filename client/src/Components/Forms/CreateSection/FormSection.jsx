@@ -1,15 +1,14 @@
-/* eslint-disable no-unused-vars */
-import React, { useEffect } from "react";
-import { useForm, Controller } from "react-hook-form";
+import React           from "react";
+import { useEffect }   from "react";
+import { useForm }     from "react-hook-form";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { getCourses } from "../../../Redux/actions";
-import { createSection } from "../../../Redux/actions";
-import styles from '../CreateCourse/formCourse.module.css'
+import {createSection} from "../../../Redux/actions";
+import { getCourses }  from "../../../Redux/actions";
+import styles          from '../CreateCourse/formCourse.module.css'
 
-const FormSectionCreate = () => {
+const FormSectionCreate = ({ setActualForm }) => {
   const courses = useSelector((state) => state?.courses);
-  console.log(courses, "cursos");
   const { handleSubmit, register, reset } = useForm();
 
   const dispatch = useDispatch();
@@ -19,8 +18,8 @@ const FormSectionCreate = () => {
   }, [dispatch]);
 
   const onSubmit = (data) => {
-    const response = dispatch(createSection(data));
-    alert("La sección se ha creado con éxito");
+    dispatch(createSection(data, setActualForm));
+    
     reset();
   };
 
