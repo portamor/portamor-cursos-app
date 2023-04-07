@@ -1,6 +1,7 @@
 import * as actions from "../constants/actionsContants";
 
 const initialState = {
+  allInstructors:   [],
   createdCourse:    {},
   courses:          [],
   courseDetail:     {},
@@ -87,6 +88,12 @@ function rootReducer(state = initialState, action) {
         courseInstructor: action.payload,
       };
 
+    case actions.GET_ALL_INSTRUCTORS:
+      return {
+        ...state,
+        allInstructors: action.payload,
+      };
+    
     default:
       return state;
   }

@@ -174,3 +174,15 @@ export function createReview(payload) {
     }
   };
 }
+
+export function getAllInstructors(payload) {
+  return async (dispatch) => {
+    try {
+      const foundInstructors = await axios.get("http://localhost:3001/instructor")
+
+      dispatch({ type: actions.GET_ALL_INSTRUCTORS, payload: foundInstructors.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
