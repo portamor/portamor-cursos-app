@@ -19,7 +19,7 @@ module.exports = sequelize => {
         allowNull: false,
       },
       profile_picture: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       score: {

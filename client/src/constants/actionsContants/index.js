@@ -10,5 +10,8 @@ export const GET_SECTION_CREATE        = "GET_SECTION_CREATE"
 
 
 //POST 
-export const CREATE_REVIEW = "CREATE_REVIEW";
+export const CREATE_REVIEW      = "CREATE_REVIEW";
+export const CREATE_VIDEO       = "CREATE_VIDEO";
+export const CREATE_INSTRUCTOR  = "CREATE_INSTRUCTOR";
+
 
