@@ -13,11 +13,11 @@ import ReviewCard from "../ReviewCard/ReviewCard";
 import Styles from "../StyleSheet/Home.module.css";
 
 // example sections to accordion
-import { courseSections } from "../DataBase/Json";
+// import { courseSections } from "../DataBase/Json";
 
 
 const Home = () => {
-  const courses = useSelector((state) => state.courses?.courses);
+  const courses = useSelector((state) => state?.courses);
   const dispatch = useDispatch();
 
   useEffect(() => {
