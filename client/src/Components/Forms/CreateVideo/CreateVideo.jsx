@@ -55,7 +55,7 @@ const CreateVideo = ({ setActualForm }) => {
       videoDescription: "",
     })
 
-    setActualForm(constants.SELECT_COURSE_FORM);
+    setActualForm(constants.SELECT_SECTION_FORM);
   };
 
   const handleBackButton = () => setActualForm(constants.SELECT_SECTION_FORM);

@@ -112,16 +112,12 @@ export function createCourse(payload, setActualForm) {
   }
 };
 
-export function createSection({id, name}, setActualForm) {
+export function createSection(name, courseId) {
   return async function (dispatch) {
     try {
-      const createdSection = await axios.post(`http://localhost:3001/section/${id}`,{name} )
+      const createdSection = await axios.post(`http://localhost:3001/section/${courseId}`,{name} )
 
-      alert(`La sección ${name} se ha creado con éxito`);
-
-      // setActualForm(constants.SELECT_VIDEO_FORM)
-
-      console.log(createdSection.data.data)
+      alert(`La sección ${createdSection.data.data.name} se ha creado con éxito`);
 
       return dispatch({ type: actions.CREATE_SECTION, payload: createdSection.data.data })
     } catch (error) {
