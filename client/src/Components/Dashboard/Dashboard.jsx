@@ -11,20 +11,21 @@ import ChooseSectionToAddVideo from "../ChooseSection/ChooseSection";
 
 const Dashboard = () => {
   const [actualForm, setActualForm] = useState(constants.SELECT_COURSE_FORM);
-  // const [actualForm, setActualForm] = useState(constants.SELECT_SECTION_FORM);
 
   return (
     <div className={styles.div_dashboard} >
       { actualForm === constants.SELECT_COURSE_FORM && <CreateCourse setActualForm={setActualForm} /> }
 
-      { actualForm === constants.SELECT_INSTRUCTOR_FORM && (
+      { 
+        actualForm === constants.SELECT_INSTRUCTOR_FORM && (
         <div className={styles["instructor-container"]}>
           <CreateInstructor setActualForm={setActualForm} /> 
           <ChooseInstructor setActualForm={setActualForm} />
         </div>
       )}
 
-      { actualForm === constants.SELECT_SECTION_FORM && (
+      { 
+        actualForm === constants.SELECT_SECTION_FORM && (
         <div className={styles["instructor-container"]}>
           <CreateSection           setActualForm={setActualForm} />
           <ChooseSectionToAddVideo setActualForm={setActualForm} />

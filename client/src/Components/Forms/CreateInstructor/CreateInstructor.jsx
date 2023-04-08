@@ -1,16 +1,13 @@
+import * as actions    from "../../../Redux/actions"
+import CustomButton    from "../../CustomButton/CustomButton";
+import { INSTRUCTOR }  from "../../../constants";
 import React           from "react";
-import { useState }    from "react";
+import { StarFill }    from 'react-bootstrap-icons';
+import styles          from './CreateInstructor.module.css'
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-//---Components
-import CustomButton from "../../CustomButton/CustomButton";
-import { StarFill } from 'react-bootstrap-icons';
-//---actions, utils, constatns
-import * as actions   from "../../../Redux/actions"
-import * as utils     from "../../../utils"
-import { INSTRUCTOR } from "../../../constants";
-//---styles
-import styles from './CreateInstructor.module.css'
+import { useState }    from "react";
+import * as utils      from "../../../utils"
 
 const CreateInstructor = ({ setActualForm }) => {
   const dispatch       = useDispatch();
@@ -182,13 +179,8 @@ const CreateInstructor = ({ setActualForm }) => {
         <CustomButton
         disabled={isDisabledSubmit}
         type={"submit"}
-        content={"AÑADIR VIDEO"}
+        content={"CREAR INSTRUCTOR"}
         primary={true} />
-
-        <CustomButton 
-        primary={false}
-        type={"button"}
-        content={"VOLVER"} />
       </div>
 
     </form>
