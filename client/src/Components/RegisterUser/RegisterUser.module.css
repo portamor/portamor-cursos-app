@@ -1,6 +1,18 @@
+@keyframes opacityin {
+  from {
+      opacity: 0;
+  }
+
+  to {
+      opacity: 1;
+  }
+}
+
 .register-container {
   width: 400px;
   margin-bottom: 10%;
+  animation-name: opacityin;
+  animation-duration: 1s;
 }
 
 @media(max-width: 670px) {

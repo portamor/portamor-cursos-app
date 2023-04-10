@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getUserByCode, loginSuccess } from "../../Redux/actions"; 
-import styles from "../StyleSheet/Login.module.css";
-import Swal from 'sweetalert2';
+import CustomButton      from "../CustomButton/CustomButton";
+import { getUserByCode } from "../../Redux/actions"; 
+import { loginSuccess }  from "../../Redux/actions"; 
+import React             from "react";
+import styles            from "./Login.module.css";
+import Swal              from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-
+import { useState }      from "react";
+import { useDispatch }   from "react-redux";
 
 function Login() {
   const [code, setCode] = useState("");
@@ -19,7 +21,7 @@ function Login() {
     event.preventDefault();
     try {
       const user = await dispatch(getUserByCode(code));
-      console.log(user);
+
       if (user !== null) {
         dispatch(loginSuccess(user));
         setShowModal(false);
@@ -53,9 +55,7 @@ function Login() {
                 <label htmlFor="code">Ingresa tu código:</label>
                 <input type="text" id="code" value={code} onChange={handleCodeChange} />
               </div>
-              <button className={styles["login-button"]} type="submit">
-                Ingresar
-              </button>
+              <CustomButton type={"submit"} content={"Ingresar"} primary={true} disabled={false} />
             </form>
           </div>
         </div>

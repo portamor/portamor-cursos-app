@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import Login from '../Login/Login';
-import RegisterUser from '../RegisterUser/RegisterUser';
-import styles from './Modal.module.css';
 import CustomButton from '../CustomButton/CustomButton';
+import Login        from '../Login/Login';
+import React        from 'react';
+import RegisterUser from '../RegisterUser/RegisterUser';
+import styles       from './Modal.module.css';
+import { useState } from 'react';
 
 function Modal({ onClose }) {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -36,7 +37,7 @@ function Modal({ onClose }) {
         {!showContent && (
           <div className={styles.buttonsContainer}>
             {!showLoginForm    && <CustomButton content={"Registrarme"} primary={false} onClick={onRegister} /> }
-            {!showRegisterForm && <CustomButton content={"Iniciar sesion"} primary={true} onClick={onLogin} />  }
+            {!showRegisterForm && <CustomButton content={"Iniciar sesion"} primary={true} onClick={onLogin}  />  }
           </div>
         )}
       </div>
