@@ -24,6 +24,11 @@ const getAllCourses = async (page, size) => {
   return allCoursesFound;
 };
 
+const getTotalOfCourses = async (page, size) => {
+  const totalCourses = await Courses.count();
+  return totalCourses;
+};
+
 const getCourseById = async (id) => {
   const courseFound = await Courses.findOne({
     where: {id: id},
@@ -94,6 +99,7 @@ const restoreACourse = async (id) => {
 module.exports = {
   getCourseById,
   getAllCourses,
+  getTotalOfCourses,
   getCourseByTitle,
   getCourseByType,
   getCourseBygenre,

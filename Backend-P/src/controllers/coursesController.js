@@ -30,9 +30,21 @@ const getAllCourses = async (req, res) => {
 
     const courses = await courseService.getAllCourses(page, size);
 
-    if (!courses.length) throw new Error('No se ha encontrado ningun curso')
+    if (!courses.length) throw new Error('No se ha encontrado ningun curso');
+
+    const totalCourses = await courseService.getTotalOfCourses();
+    const totalPages = Math.ceil(totalCourses / size);
     
-    res.status(200).json({message: "Cursos encontrados con exito", data: courses});
+    res.status(200).json({
+      message: "Cursos encontrados con exito", 
+      data: courses,
+      meta: {
+        currentPage: page,
+        totalCourses,
+        totalPages,
+        pageSize: size
+      }
+    });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
