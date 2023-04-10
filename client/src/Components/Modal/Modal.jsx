@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import Login from '../Login/Login';
+import CustomButton from '../CustomButton/CustomButton';
+import Login        from '../Login/Login';
+import React        from 'react';
 import RegisterUser from '../RegisterUser/RegisterUser';
-import styles from '../StyleSheet/Modal.module.css';
+import styles       from './Modal.module.css';
+import { useState } from 'react';
 
 function Modal({ onClose }) {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -23,33 +25,19 @@ function Modal({ onClose }) {
   const registerForm = showRegisterForm ? <RegisterUser /> : null;
   const loginForm = showLoginForm ? <Login /> : null;
   const content = showContent ? (registerForm || loginForm) : null;
-  const buttonText = showRegisterForm ? 'Registrarme' : 'Iniciar sesión';
 
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
         <button className={styles.closeButton} onClick={onClose}>
-          ❌
+          X
         </button>
         <h1>Bienvenidos!</h1>
         {content && <div className={styles.modalContent}>{content}</div>}
         {!showContent && (
           <div className={styles.buttonsContainer}>
-            {!showLoginForm && (
-              <button className={styles.registerButton} onClick={onRegister}>
-                Registrarme
-              </button>
-            )}
-            {!showRegisterForm && (
-              <button className={styles.registerButton} onClick={onLogin}>
-                Iniciar sesión
-              </button>
-            )}
-          </div>
-        )}
-        {showContent && (
-          <div className={styles.buttonsContainer}>
-           
+            {!showLoginForm    && <CustomButton content={"Registrarme"} primary={false} onClick={onRegister} /> }
+            {!showRegisterForm && <CustomButton content={"Iniciar sesion"} primary={true} onClick={onLogin}  />  }
           </div>
         )}
       </div>

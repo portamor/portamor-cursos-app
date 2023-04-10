@@ -1,11 +1,14 @@
-import React, { useRef, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { logout}       from "../../Redux/actions";
+import {loginSuccess}  from "../../Redux/actions";
+import Modal           from "../Modal/Modal";
+import {NavLink}       from "react-router-dom";
+import React           from "react";
+import Styles          from "./Navbar.module.css";
 import { useDispatch } from "react-redux";
-import Styles from "../StyleSheet/Navbar.module.css";
-import { Link } from "react-router-dom";
-import { logout, loginSuccess } from "../../Redux/actions";
-import Modal from "../Modal/Modal";
+import { useEffect }   from "react";
+import { useRef }      from "react";
+import { useState }    from "react";
+import { useSelector } from "react-redux";
 
 export const NavBar = () => {
   const hamburguerRef = useRef(null);
@@ -37,19 +40,11 @@ export const NavBar = () => {
     return window.location.replace("/");
   };
 
-  const handleLoginButtonClick = () => {
-    console.log("User clicked login button.");
-    setShowModal(true);
-  };
+  const handleLoginButtonClick = () =>setShowModal(true);
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
+  const handleCloseModal = () => setShowModal(false);
 
-  const handleRegisterButtonClick = () => {
-    console.log("User clicked register button.");
-    setShowModal(false);
-  };
+  const handleRegisterButtonClick = () => setShowModal(false); 
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 975);
@@ -77,100 +72,67 @@ export const NavBar = () => {
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
     navMenuRef.current.classList.toggle("active");
-  };
-
+  }
 
   return (
-    <nav className={Styles["nav-container"]}>
+    <nav className={`${Styles["nav-container"]} ${menuOpen ? Styles["active"] : ""}`}>
       <img
         src="https://res.cloudinary.com/dsjsbp6qy/image/upload/v1679065705/Dshop/Dise%C3%B1o_sin_t%C3%ADtulo__19_-removebg-preview-removebg-preview_gvpsgd.png"
         alt="logo"
-        width={300}
-        height={100}
+        width={200}
+        height={60}
       />
-      <ul
+      <div
         className={`${Styles["nav-menu"]} ${menuOpen ? Styles["active"] : ""}`}
-        ref={navMenuRef}
-      >
-        <ul className={Styles["container-link"]}>
-          <li>
-            <Link
-              className={Styles["nav-link"]}
-              exact
-              to="/"
-              activeClassName="active"
-            >
-              Inicio
-            </Link>
-          </li>
-          <li>
-            <NavLink
-              className={Styles["nav-link"]}
-              exact
-              to="/cursos"
-              activeClassName="active"
-            >
-              Cursos
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              activeClassName="active"
-              className={Styles["nav-link"]}
-              to=""
-            >
-              Solicitar ayuda
-            </NavLink>
-          </li>
-  {isLoggedIn ? (
-  <li className={Styles["container-link-ico"]}>
-    <img
-      src="https://cdn-icons-png.flaticon.com/512/5509/5509651.png"
-      alt="cerrar sesion"
-      width={40}
-      height={40}
-      onClick={handleLogout}
-    />
-    <span>Cerrar sesión</span>
-  </li>
-) : (
-  <li className={Styles["container-link-ico"]}>
-    <img
-      src="https://cdn-icons-png.flaticon.com/512/747/747376.png"
-      alt="iniciar sesion"
-      width={40}
-      height={40}
-      onClick={() => setShowModal(true)}
-    />
-    <span >Iniciar sesión</span>
-  </li>
-)}
-     {showModal && (
+        ref={navMenuRef} > 
+        <NavLink
+          className={Styles["nav-link"]}
+          exact
+          to="/"
+          activeClassName="active" >
+          Inicio
+        </NavLink>
+        <NavLink
+          className={Styles["nav-link"]}
+          exact
+          to="/cursos"
+          activeClassName="active" >
+          Mis cursos
+        </NavLink>
+
+
+        {isLoggedIn ? (
+        <span onClick={handleLogout} className={Styles["nav-link"]}>Cerrar sesión</span>
+        ) 
+        : 
+        <span onClick={() => setShowModal(true)} className={Styles["nav-link"]}>Iniciar sesión</span>
+        }
+        
+        {showModal && (
           <Modal onClose={handleCloseModal} onRegister={handleRegisterButtonClick} onLogin={handleLoginButtonClick}>
           </Modal>
         )}
-          {isMobile && (
-            <button
-              className={Styles["button-salirMenu"]}
-              onClick={handleHamburguerClick}
-            >
-              Salir del Menú
-            </button>
-          )}
-        </ul>
-      </ul>
-      {isMobile && (
-        <div className={Styles["mobile-menu"]}>
-          <button
-            className={Styles["mobile-menu-button"]}
-            onClick={handleMenuClick}
-          >
-            Menú
-          </button>
-        </div>
-      )}
 
-      <div></div>
+
+
+
+        {isMobile && (
+          <button
+            className={Styles["button-salirMenu"]}
+            onClick={handleHamburguerClick}
+          >
+            Salir del Menú
+          </button>
+        )}
+      </div>
+
+      {isMobile && (
+        <button
+          className={`${Styles["mobile-menu-button"]} ${menuOpen ? Styles["active"] : ""}`}
+          onClick={handleMenuClick} >
+          Menú
+        </button>
+      )}
     </nav>
   );
 };

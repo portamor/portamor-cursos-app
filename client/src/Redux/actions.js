@@ -16,10 +16,10 @@ export function getCourses() {
   };
 }
 
-export function getCourseDetail(id) {
+export function getCourseDetail(courseId) {
   return async function (dispatch) {
     try {
-      const courseDetail = await axios.get(`http://localhost:3001/courses/id/${id}`);
+      const courseDetail = await axios.get(`http://localhost:3001/courses/id/${courseId}`);
 
       return dispatch({ type: actions.GET_COURSE_DETAIL, payload: courseDetail.data.data });
     } catch (error) {
@@ -47,9 +47,9 @@ export const getCoursesByGenre = (genre) => async (dispatch) => {
       type: 'GET_COURSES_BY_GENRE',
       payload: res.data.data
     });
-    } catch (error) {
-      console.log("Error en getCoursesByGenre/actions", error);
-    }
+  } catch (error) {
+    console.log("Error en getCoursesByGenre/actions", error);
+  }
 };
 
 export function getReviewsByCourseId(courseId) {
