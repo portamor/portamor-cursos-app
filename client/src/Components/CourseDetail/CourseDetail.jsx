@@ -12,9 +12,10 @@ import {useSelector}from "react-redux";
 
 export const CourseDetail = () => {
   const [showModal, setShowModal] = useState(false);
+  const isLoggedInInLocalStorage  = localStorage.getItem("isLoggedIn");
 
-  const match    = useMatch('/detalle-curso/:courseId');
   const dispatch = useDispatch();
+  const match    = useMatch('/detalle-curso/:courseId');
   const courseId = match.params.courseId;
 
   useEffect(() => {
@@ -49,10 +50,17 @@ export const CourseDetail = () => {
             Tallerista: {" "}
             <strong>{courseDetail.instructor}</strong>
           </p>
+
           <div className={styles["course-buttons-container"]}>
             <NavLink to="#" className={styles["inscription-button"]} onClick={handleInscriptionClick}>
               Inscribete Aquí
             </NavLink>
+            
+            {isLoggedInInLocalStorage && 
+            <NavLink to={`/clase/${courseId}/0`} className={styles["inscription-button"]} >
+              Ir a las clases
+            </NavLink>
+            }
 
             {showModal && (
               <Modal onClose={() => setShowModal(false)}>
