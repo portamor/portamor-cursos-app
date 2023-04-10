@@ -2,13 +2,20 @@ import axios          from "axios";
 import * as actions   from "../constants/actionsContants"
 import * as constants from "../constants";
 
-export function getCourses() {
+export function getCourses(page, size) {
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/courses");
+      const { data } = await axios.get(`http://localhost:3001/courses?page=${page}&size=${size}`);
+
       return dispatch({
-        type: "GET_COURSES",
-        payload: json.data.data,
+        type: actions.GET_COURSES,
+        payload: {
+          data:         data.data,
+          currentPage:  data.meta.currentPage,
+          pageSize:     data.meta.pageSize,
+          totalCourses: data.meta.totalCourses,
+          totalPages:   data.meta.totalPages,
+        },
       });
     } catch (error) {
       console.log("Error en getCourses/actions", error);
