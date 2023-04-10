@@ -20,13 +20,15 @@ const postCourse = async (req, res) => {
 
     res.status(200).json({ message: "Curso creado con exito", data: createdCourse});
   } catch (error) {
-    res.status(400).json({message: 'error al postear '+ error.message});
+    res.status(400).json({message: 'El servidor ha respondido con el siguiente error '+ error.message});
   }
 };
 
 const getAllCourses = async (req, res) => {
   try {
-    const courses = await courseService.getAllCourses();
+    const { page, size } = req.query;
+
+    const courses = await courseService.getAllCourses(page, size);
 
     if (!courses.length) throw new Error('No se ha encontrado ningun curso')
     

@@ -15,8 +15,11 @@ const createCourse = async (data) => {
   return createdCourse;
 };
 
-const getAllCourses = async () => {
-  const allCoursesFound = await Courses.findAll();
+const getAllCourses = async (page, size) => {
+  const allCoursesFound = await Courses.findAll({
+    limit: size,
+    offset: (page - 1) * size
+  });
 
   return allCoursesFound;
 };
