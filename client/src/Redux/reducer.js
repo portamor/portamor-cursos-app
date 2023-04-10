@@ -1,20 +1,24 @@
 import * as actions from "../constants/actionsContants";
 
 const initialState = {
-  courses:          [],
-  courseDetail:     {},
-  courseInstructor: {},
-  courseSections: [],
-  courseUsers: [],
-  courseReviews: [],
-  videoDetail: {},
-  user: [],
-  courseCreate: [],
-  sectionCreate: [],
-  isLoggedIn: false,
-  user: null,
-  error: null,
-  sectionVideos:    [],
+  allInstructors:         [],
+  createdCourse:          {},
+  createdSections:        [],
+  createdVideos:          [],
+  videosOfCreatedSection: [],
+  courses:                [],
+  courseDetail:           {},
+  courseInstructor:       {},
+  courseSections:         [],
+  courseUsers:            [],
+  courseReviews:          [],
+  videoDetail:            {},
+  user:                   [],
+  isLoggedIn:             false,
+  user:                   null,
+  error:                  null,
+  sectionToAddVideo:      {},
+  sectionVideos:          [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -47,6 +51,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         courses: action.payload,
       };
+    case 'GET_COURSES_BY_GENRE':
+      return {
+        ...state,
+        courses: action.payload
+      };
 
     case actions.GET_COURSE_DETAIL:
       return {
@@ -59,13 +68,23 @@ function rootReducer(state = initialState, action) {
         ...state,
         courseSections: action.payload,
       };
-
-      case 'GET_COURSES_BY_GENRE':
+      case actions.GET_SECTION_IN_CREATED_SECTIONS:
+        const sectionId = action.payload;
+  
+        const foundSection = state.createdSections.find((section) => section.id === sectionId)
+  
         return {
           ...state,
-          courses: action.payload
+          sectionToAddVideo: foundSection,
         };
-      
+        
+      case actions.GET_VIDEOS_OF_CREATED_SECTION:
+        const foundVideos = state.createdVideos.filter(video => video.SectionId === action.payload);
+    
+        return {
+          ...state,
+          videosOfCreatedSection: foundVideos,
+        };
     case actions.GET_USERS_BY_COURSE_ID:
       return {
         ...state,
@@ -83,18 +102,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         videoDetail: action.payload,
       };
-    
-    case actions.GET_COURSE_CREATE:
-      return {
-        ...state,
-        courses: [...state.courses, action.payload]
-      };
-      
-    case actions.GET_SECTION_CREATE:
-      return {
-        ...state,
-        courseSections: [...state.courseSections, action.payload],
-      };
 
     case actions.GET_REVIEWS_BY_COURSE_ID:
       return {
@@ -102,10 +109,35 @@ function rootReducer(state = initialState, action) {
         courseReviews: action.payload,
       };
 
+    case actions.CREATE_COURSE:
+      return {
+        ...state,
+        createdCourse: action.payload,
+        courses:       [...state.courses, action.payload]
+      };
+
+    case actions.CREATE_INSTRUCTOR:
+      return {
+        ...state,
+        courseInstructor: action.payload,
+      };
+
+    case actions.GET_ALL_INSTRUCTORS:
+      return {
+        ...state,
+        allInstructors: action.payload,
+      };
+    
+    case actions.CREATE_SECTION:
+      return {
+        ...state,
+        createdSections: [...state.createdSections, action.payload],
+      };
+
     case actions.CREATE_VIDEO:
       return {
         ...state,
-        sectionVideos: [...state.sectionVideos, action.payload]
+        createdVideos: [...state.createdVideos, action.payload]
       };
 
     case actions.CREATE_REVIEW:
@@ -114,12 +146,6 @@ function rootReducer(state = initialState, action) {
         courseReviews: [...state.courseReviews, action.payload],
       };
     
-    case actions.CREATE_INSTRUCTOR:
-      return {
-        ...state,
-        courseInstructor: action.payload,
-      };
-
     default:
       return state;
   }

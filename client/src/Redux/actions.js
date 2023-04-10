@@ -1,5 +1,6 @@
-import axios        from "axios";
-import * as actions from "../constants/actionsContants"
+import axios          from "axios";
+import * as actions   from "../constants/actionsContants"
+import * as constants from "../constants";
 
 export function getCourses() {
   return async function (dispatch) {
@@ -49,8 +50,7 @@ export const getCoursesByGenre = (genre) => async (dispatch) => {
     } catch (error) {
       console.log("Error en getCoursesByGenre/actions", error);
     }
-  };
-
+};
 
 export function getReviewsByCourseId(courseId) {
   return async function (dispatch) {
@@ -108,6 +108,7 @@ export function postUser(payload) {
 };
 
 export const getUserByCode = (code) => async (dispatch) => {
+  
   try {
     const response = await axios.get(`http://localhost:3001/users?code=${code}`);
     const user = response.data.data[0];
@@ -145,38 +146,53 @@ export const loginFail = (error) => ({
   payload: error,
 });
 
-export function createCourse(payload) {
+export function createCourse(payload, setActualForm) {
   return async function (dispatch) {
-  try {
-
+    try {
       const response = await axios.post("http://localhost:3001/courses", payload)
 
-      return dispatch({ type: actions.GET_COURSE_CREATE , payload: response.data.data })
-    
-  } catch (error) {
-    console.log(error.message);
-  }
+      alert('Se ha creado el curso correctamente')
+      
+      //Change form in dashboard
+      setActualForm(constants.SELECT_INSTRUCTOR_FORM);
+
+      return dispatch({ type: actions.CREATE_COURSE , payload: response.data.data })
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 };
 
-export function createSection({id, name}) {
+export function createSection(name, courseId) {
   return async function (dispatch) {
-  try {
+    try {
+      const createdSection = await axios.post(`http://localhost:3001/section/${courseId}`,{name} )
 
-      const response = await axios.post(`http://localhost:3001/section/${id}`,{name} )
+      alert(`La sección ${createdSection.data.data.name} se ha creado con éxito`);
 
-      return dispatch({ type: actions.GET_SECTION_CREATE, payload: response.data.data })
-    
-  } catch (error) {
-    console.log(error.message);
-  }
+      return dispatch({ type: actions.CREATE_SECTION, payload: createdSection.data.data })
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 };
 
-export function createVideo(payload, sectionId) {
+export function getSectionInCreatedSections (sectionId) {
+  return async function (dispatch) {
+    try {
+      return dispatch({ type: actions.GET_SECTION_IN_CREATED_SECTIONS, payload: sectionId })
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+};
+
+export function createVideo(payload, sectionId, setActualForm) {
   return async (dispatch) => {
     try {
       const createdVideo = await axios.post(`http://localhost:3001/videos/${sectionId}`, payload);
+
+      alert(`El video ${createdVideo.data.data.videoTitle} fue creado con exito`);
 
       dispatch({ type: actions.CREATE_VIDEO, payload: createdVideo.data.data });
     } catch (error) {
@@ -185,7 +201,17 @@ export function createVideo(payload, sectionId) {
   };
 }
 
-export function createInstructor(payload) {
+export function getVideosOfCreatedSection(sectionId) {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: actions.GET_VIDEOS_OF_CREATED_SECTION, payload: sectionId });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function createInstructor(payload, setActualForm) {
   return async (dispatch) => {
     try {
       const createdInstructor = await axios.post(`http://localhost:3001/instructor`, {
@@ -197,7 +223,29 @@ export function createInstructor(payload) {
         courseId:        payload.courseId
       });
 
+      alert(`Instructor ${createdInstructor.data.data.name} creado con exito`)
+
+      setActualForm(constants.SELECT_SECTION_FORM);
+
       dispatch({ type: actions.CREATE_INSTRUCTOR, payload: createdInstructor.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function addInstructorToCourse(instructorId, courseId, setActualForm) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`http://localhost:3001/instructor/add-course/${instructorId}`, {
+        courseId: courseId 
+      })
+
+      alert(response.data.message)
+
+      setActualForm(constants.SELECT_SECTION_FORM);
+
+      dispatch({ type: actions.ADD_INSTRUCTOR_TO_COURSE, payload: response.data.data });
     } catch (error) {
       console.log(error.message);
     }
@@ -210,6 +258,18 @@ export function createReview(payload) {
       const createdReview = await axios.post("http://localhost:3001/review", payload);
 
       dispatch({ type: actions.CREATE_REVIEW, payload: createdReview.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function getAllInstructors(payload) {
+  return async (dispatch) => {
+    try {
+      const foundInstructors = await axios.get("http://localhost:3001/instructor")
+
+      dispatch({ type: actions.GET_ALL_INSTRUCTORS, payload: foundInstructors.data.data });
     } catch (error) {
       console.log(error.message);
     }

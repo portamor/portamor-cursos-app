@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+@keyframes opacityin {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.video-card {
+  display: flex;
+  height: fit-content;
+  min-width: 300px;
+  max-width: 500px;
+  padding: 10px 10px 10px;
+  border-radius: 10px;
+  box-shadow: 0px 6px 10px 0.3px #bcbbbb; 
+  font-family: 'Montserrat', sans-serif;
+  animation-name: opacityin;
+  animation-duration: 1s;
+}
+
+@media(max-width: 750px) {
+  .video-card {
+    width: 340px;
+  }
+}
