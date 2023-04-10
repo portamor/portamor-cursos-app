@@ -1,0 +1,18 @@
+.show-videos-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 0 10px 20px ;
+  max-height: 790px;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+@media(max-width: 900px) {
+  .show-videos-main {
+    overflow-y: hidden;
+    max-height: fit-content;
+  }
+}
