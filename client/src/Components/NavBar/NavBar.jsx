@@ -40,19 +40,11 @@ export const NavBar = () => {
     return window.location.replace("/");
   };
 
-  const handleLoginButtonClick = () => {
-    console.log("User clicked login button.");
-    setShowModal(true);
-  };
+  const handleLoginButtonClick = () =>setShowModal(true);
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
+  const handleCloseModal = () => setShowModal(false);
 
-  const handleRegisterButtonClick = () => {
-    console.log("User clicked register button.");
-    setShowModal(false);
-  };
+  const handleRegisterButtonClick = () => setShowModal(false); 
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 975);
@@ -110,21 +102,11 @@ export const NavBar = () => {
 
 
         {isLoggedIn ? (
-        <li className={Styles["container-link-ico"]}>
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/5509/5509651.png"
-            alt="cerrar sesion"
-            width={40}
-            height={40}
-            onClick={handleLogout}
-          />
-          <span>Cerrar sesión</span>
-        </li>
+        <span onClick={handleLogout} className={Styles["nav-link"]}>Cerrar sesión</span>
         ) 
         : 
-        (
-          <span onClick={() => setShowModal(true)} className={Styles["nav-link"]}>Iniciar sesión</span>
-        )}
+        <span onClick={() => setShowModal(true)} className={Styles["nav-link"]}>Iniciar sesión</span>
+        }
         
         {showModal && (
           <Modal onClose={handleCloseModal} onRegister={handleRegisterButtonClick} onLogin={handleLoginButtonClick}>
@@ -146,7 +128,6 @@ export const NavBar = () => {
 
       {isMobile && (
         <button
-          // className={Styles["mobile-menu-button"]}
           className={`${Styles["mobile-menu-button"]} ${menuOpen ? Styles["active"] : ""}`}
           onClick={handleMenuClick} >
           Menú

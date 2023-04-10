@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Styles from "../StyleSheet/NavFilter.module.css";
+import Styles from "./NavFilter.module.css";
 import { getCoursesByGenre, getCourses } from "../../Redux/actions";
+import CustomButton from "../CustomButton/CustomButton";
 
 const NavFilter = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const NavFilter = () => {
     } else {
       dispatch(getCoursesByGenre(e));
     }
+    setSelectedGenre(e)
   }
   function handleSelectChange(event) {
     setSelectedGenre(event.target.value);
@@ -43,66 +45,38 @@ const NavFilter = () => {
   return (
     <div className={Styles["filter-container"]}>
       <ul className={Styles["ul-filter"]}>
-        <li className={Styles["li-filter"]}>
-          <button
-            className={Styles["button-filter"]}
-            value=""
-            onClick={() => handleFilterClick("")}
-          >
-            Todos
-          </button>
-        </li>
-        <li className={Styles["li-filter"]}>
-          <button
-            className={Styles["button-filter"]}
-            value="Actividad Fisica"
-            onClick={() => handleFilterClick("Actividad Fisica")}
-          >
-            Actividad Física
-          </button>
-        </li>
-        <li className={Styles["li-filter"]}>
-          <button
-            className={Styles["button-filter"]}
-            value="Participacion Social"
-            onClick={() => handleFilterClick("Participacion Social")}
-          >
-            Participación Social
-          </button>
-        </li>
-        <li className={Styles["li-filter"]}>
-          <button
-            className={Styles["button-filter"]}
-            value="Bienestar Mental"
-            onClick={() => handleFilterClick("Bienestar Mental")}
-          >
-            Bienestar Mental
-          </button>
-        </li>
-        <li className={Styles["li-filter"]}>
-          <button
-            className={Styles["button-filter"]}
-            value="Alimentacion Saludable"
-            onClick={() => handleFilterClick("Alimentacion Saludable")}
-          >
-            Alimentación Saludable
-          </button>
-        </li>
+        <CustomButton 
+        content={"Todos los cursos"}
+        primary={selectedGenre === "" ? true : false}
+        onClick={() => handleFilterClick("")} />
+        <CustomButton 
+        content={"Actividad Fisica"}
+        primary={selectedGenre === "Actividad Fisica" ? true : false}
+        onClick={() => handleFilterClick("Actividad Fisica")} />
+        <CustomButton 
+        content={"Participacion Social"}
+        primary={selectedGenre === "Participacion Social" ? true : false}
+        onClick={() => handleFilterClick("Participacion Social")} />
+        <CustomButton 
+        content={"Bienestar Mental"}
+        primary={selectedGenre === "Bienestar Mental" ? true : false}
+        onClick={() => handleFilterClick("Bienestar Mental")} />
+        <CustomButton 
+        content={"Alimentacion Saludable"}
+        primary={selectedGenre === "Alimentacion Saludable" ? true : false}
+        onClick={() => handleFilterClick("Alimentacion Saludable")} />
       </ul>
 
-      <div>
-        <select
-          className={Styles["select-filter"]}
-          value={selectedGenre}
-          onChange={handleSelectChange}
-        >
-          <option value="">Todos</option>
-          <option value="Actividad Fisica">Actividad Física</option>
-          <option value="Participacion Social">Participación Social</option>
-          <option value="Bienestar Mental">Bienestar Mental</option>
-          <option value="Alimentacion Saludable">Alimentación Saludable</option>
-        </select>
-      </div>
+      <select
+        className={Styles["select-filter"]}
+        value={selectedGenre}
+        onChange={handleSelectChange} >
+        <option value="">Todos</option>
+        <option value="Actividad Fisica">Actividad Física</option>
+        <option value="Participacion Social">Participación Social</option>
+        <option value="Bienestar Mental">Bienestar Mental</option>
+        <option value="Alimentacion Saludable">Alimentación Saludable</option>
+      </select>
     </div>
   );
 };

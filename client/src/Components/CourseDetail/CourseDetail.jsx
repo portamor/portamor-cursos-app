@@ -1,24 +1,31 @@
-import { NavLink } from "react-router-dom";
-import React, { useState } from 'react';
-import styles      from "./CourseDetail.module.css"
+import * as actions from "../../Redux/actions";
+import Modal        from "../Modal/Modal";
+import { NavLink }  from "react-router-dom";
+import React        from 'react';
 import RegisterUser from "../RegisterUser/RegisterUser"
-import Modal from "../Modal/Modal"
+import styles       from "./CourseDetail.module.css"
+import { useState } from 'react';
+import {useEffect}  from 'react';
+import { useMatch } from "react-router-dom";
+import {useDispatch}from "react-redux";
+import {useSelector}from "react-redux";
 
-export const CourseDetail = ({match}) => {
-  // const id = match.props.params
+export const CourseDetail = () => {
   const [showModal, setShowModal] = useState(false);
+
+  const match    = useMatch('/detalle-curso/:courseId');
+  const dispatch = useDispatch();
+  const courseId = match.params.courseId;
+
+  useEffect(() => {
+    dispatch(actions.getCourseDetail(courseId));
+  }, [courseId, dispatch])
+
+  const courseDetail = useSelector((state) => state.courseDetail)
 
   function handleInscriptionClick(event) {
     event.preventDefault();
     setShowModal(true);
-  }
-
-  const courseDetail = {
-    title: "Crea tus velas",
-    image: "https://www.aromasdeandalucia.com/wp-content/uploads/2019/08/mujer-vela.jpg",
-    genre: "Alimentacion saludable",
-    description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio enim hic molestiae itaque obcaecati, esse ipsam perspiciatis minus architecto iusto voluptate? Iure sequi mollitia corrupti molestias odit tempore, harum corporis! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio enim hic molestiae itaque obcaecati, esse ipsam perspiciatis minus architecto iusto voluptate? Iure sequi mollitia corrupti molestias odit tempore, harum corporis!Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio enim hic molestiae itaque obcaecati, esse ipsam perspiciatis minus architecto iusto voluptate? Iure sequi mollitia corrupti molestias odit tempore, harum corporis!",
-    instructor: "Juanito Perez"
   }
 
   return (
@@ -43,14 +50,16 @@ export const CourseDetail = ({match}) => {
             <strong>{courseDetail.instructor}</strong>
           </p>
           <div className={styles["course-buttons-container"]}>
-          <NavLink to="#" className={styles["inscription-button"]} onClick={handleInscriptionClick}>
-        Inscribete Aquí
-      </NavLink>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          {<RegisterUser/>}
-        </Modal>
-      )}
+            <NavLink to="#" className={styles["inscription-button"]} onClick={handleInscriptionClick}>
+              Inscribete Aquí
+            </NavLink>
+
+            {showModal && (
+              <Modal onClose={() => setShowModal(false)}>
+                {<RegisterUser/>}
+              </Modal>
+            )}
+
             <div className={styles["help-container"]}>
               <span>¿Necesitas ayuda?</span>
               <NavLink 
@@ -58,12 +67,11 @@ export const CourseDetail = ({match}) => {
                 className={styles["help-button"]} >
                   Pide ayuda aqui
               </NavLink>
-                
             </div>
           </div>
         </div>
       </div>
-    </div>
+  </div>
   )
 };
 
