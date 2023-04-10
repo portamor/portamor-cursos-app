@@ -6,6 +6,12 @@ const CustomButton = ({content, primary, type, name, disabled, onClick}) => {
 
   if(type === "submit") customCssClassName += "-submit";
   
+  if(type === "submit" && primary === false) customCssClassName += "-secondary";
+
+  if(disabled) customCssClassName += "-secondary";
+
+  if(content === "VOLVER") customCssClassName = "undisabled"
+
   return (
     <button
     name      = {name}

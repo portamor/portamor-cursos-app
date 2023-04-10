@@ -39,6 +39,19 @@ export function getSectionsByCourseId(courseId) {
   };
 }
 
+export const getCoursesByGenre = (genre) => async (dispatch) => {
+  try {
+    const res = await axios.get(`http://localhost:3001/courses/genre/${genre}`);  
+    dispatch({
+      type: 'GET_COURSES_BY_GENRE',
+      payload: res.data.data
+    });
+    } catch (error) {
+      console.log("Error en getCoursesByGenre/actions", error);
+    }
+  };
+
+
 export function getReviewsByCourseId(courseId) {
   return async function (dispatch) {
     try {
@@ -94,6 +107,44 @@ export function postUser(payload) {
   };
 };
 
+export const getUserByCode = (code) => async (dispatch) => {
+  try {
+    const response = await axios.get(`http://localhost:3001/users?code=${code}`);
+    const user = response.data.data[0];
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+      dispatch(loginSuccess(user));
+      return user;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    dispatch(loginFail(error.message));
+    throw error;
+  }
+};
+
+export const loginSuccess = (user) => {
+  localStorage.setItem('isLoggedIn', 'true');
+  localStorage.setItem('user', JSON.stringify(user));
+  return {
+    type: 'LOGIN_SUCCESS',
+    payload: user,
+  };
+};
+
+export const logout = () => {
+  localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('user');
+  return {
+    type: 'LOGOUT',
+  };
+};
+export const loginFail = (error) => ({
+  type: 'LOGIN_FAIL',
+  payload: error,
+});
+
 export function createCourse(payload) {
   return async function (dispatch) {
   try {
@@ -122,13 +173,41 @@ export function createSection({id, name}) {
   }
 };
 
+export function createVideo(payload, sectionId) {
+  return async (dispatch) => {
+    try {
+      const createdVideo = await axios.post(`http://localhost:3001/videos/${sectionId}`, payload);
+
+      dispatch({ type: actions.CREATE_VIDEO, payload: createdVideo.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function createInstructor(payload) {
+  return async (dispatch) => {
+    try {
+      const createdInstructor = await axios.post(`http://localhost:3001/instructor`, {
+        name:            payload.name,
+        description:     payload.description,
+        profile_picture: payload.profile_picture,
+        score:           payload.score,
+        reviews:         payload.reviews,
+        courseId:        payload.courseId
+      });
+
+      dispatch({ type: actions.CREATE_INSTRUCTOR, payload: createdInstructor.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
 
 export function createReview(payload) {
   return async (dispatch) => {
     try {
       const createdReview = await axios.post("http://localhost:3001/review", payload);
-
-      console.log("action",createReview)
 
       dispatch({ type: actions.CREATE_REVIEW, payload: createdReview.data.data });
     } catch (error) {

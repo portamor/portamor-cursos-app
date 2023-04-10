@@ -10,10 +10,48 @@ export const NavBar = () => {
   const navMenuRef = useRef(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+
+  useEffect(() => {
+    const isLoggedInInLocalStorage = localStorage.getItem("isLoggedIn");
+    if (isLoggedInInLocalStorage === "true") {
+      const userFromLocalStorage = localStorage.getItem("user");
+      if (userFromLocalStorage) {
+        try {
+          const parsedUser = JSON.parse(userFromLocalStorage);
+          dispatch(loginSuccess(parsedUser));
+        } catch (e) {
+          console.error("Error parsing user from local storage:", e);
+        }
+      }
+    }
+  }, []);
+  
+
+  const handleLogout = () => {
+    dispatch(logout());
+    return window.location.replace("/");
+  };
+
+  const handleLoginButtonClick = () => {
+    console.log("User clicked login button.");
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleRegisterButtonClick = () => {
+    console.log("User clicked register button.");
+    setShowModal(false);
+  };
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 975);
-    handleResize(); // Llamamos al handler para que se ejecute al inicio
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -33,6 +71,7 @@ export const NavBar = () => {
       }
     }
   };
+
 
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
