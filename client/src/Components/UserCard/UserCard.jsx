@@ -1,14 +1,15 @@
 import styles  from "./UserCard.module.css";
 import usersImg  from "../../images/users-icon.svg";
+import CustomButton from "../CustomButton/CustomButton";
 
 const UserCard = (props) => {
-  // props = name, image, description, phoneNumber
+  // props = name, image, description, instructor
 
   return (
     <div className={styles["user-card"]}>
       <img 
       className={styles["picture"]} 
-      src={usersImg} 
+      src={props.image ? props.image : usersImg} 
       alt="user-card" />
 
       <div className={styles["info-user-container"]}>
@@ -16,6 +17,7 @@ const UserCard = (props) => {
         <p className={styles["user-description"]}>
           {props.description} 
         </p>
+        {props.instructor && <CustomButton onClick={props.onClick} content={"SELECCIONAR"} primary={true}/>}
       </div>
 
     </div>

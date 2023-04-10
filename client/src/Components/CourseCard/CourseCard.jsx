@@ -1,19 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Styles from "../StyleSheet/CourseCard.module.css";
+import Styles from "./CourseCard.module.css";
 
 const CourseCard = ({ id, title, image }) => {
   return (
-    <div className={Styles["course-container"]}>
+    <Link to={`/detalle-curso/${id}`} className={Styles["button-link"]}>
       <div className={Styles["course-card"]}>
-        <img src={image} height={200} width={399} alt="Curso" />
-
+        <img src={image} alt="course-card" height={200} width={399} />
         <h3>{title}</h3>
-        <Link to={`/detalle-curso/${id}`} className={Styles["button-link"]}>
-          <button className={Styles["card-button"]}>Ver Más ✓</button>
-        </Link>
+        <button className={Styles["card-button"]}>Ver Más</button>
       </div>
-    </div>
+    </Link>
   );
 };
 

@@ -84,7 +84,7 @@ const getCourseByType = async (req, res) => {
 
 const getCourseByGenre = async (req, res) => {
   try {
-    const { genre } = req.body;
+    const { genre } = req.params;
 
     const foundCourses = await courseService.getCourseBygenre(genre);
 

@@ -1,24 +1,60 @@
 import * as actions from "../constants/actionsContants";
 
 const initialState = {
-  courses: [],
-  courseDetail: {},
-  courseInstructor: {},
-  courseSections: [],
-  courseUsers: [],
-  courseReviews: [],
-  videoDetail: {},
-  user: [],
-  courseCreate: [],
-  sectionCreate: []
+  allInstructors:         [],
+  createdCourse:          {},
+  createdSections:        [],
+  createdVideos:          [],
+  videosOfCreatedSection: [],
+  courses:                [],
+  courseDetail:           {},
+  courseInstructor:       {},
+  courseSections:         [],
+  courseUsers:            [],
+  courseReviews:          [],
+  videoDetail:            {},
+  user:                   [],
+  isLoggedIn:             false,
+  user:                   null,
+  error:                  null,
+  sectionToAddVideo:      {},
+  sectionVideos:          [],
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+
+    case "LOGIN_SUCCESS":
+      return {
+        ...state,
+        isLoggedIn: true,
+        user: action.payload,
+        error: null,
+      };
+    case "LOGIN_FAIL":
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: null,
+        error: action.payload,
+      };
+    case "LOGOUT":
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: null,
+        error: null,
+      };
+
     case "GET_COURSES":
       return {
         ...state,
         courses: action.payload,
+      };
+    case 'GET_COURSES_BY_GENRE':
+      return {
+        ...state,
+        courses: action.payload
       };
 
     case actions.GET_COURSE_DETAIL:
@@ -32,7 +68,23 @@ function rootReducer(state = initialState, action) {
         ...state,
         courseSections: action.payload,
       };
-      
+      case actions.GET_SECTION_IN_CREATED_SECTIONS:
+        const sectionId = action.payload;
+  
+        const foundSection = state.createdSections.find((section) => section.id === sectionId)
+  
+        return {
+          ...state,
+          sectionToAddVideo: foundSection,
+        };
+        
+      case actions.GET_VIDEOS_OF_CREATED_SECTION:
+        const foundVideos = state.createdVideos.filter(video => video.SectionId === action.payload);
+    
+        return {
+          ...state,
+          videosOfCreatedSection: foundVideos,
+        };
     case actions.GET_USERS_BY_COURSE_ID:
       return {
         ...state,
@@ -50,16 +102,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         videoDetail: action.payload,
       };
-      case actions.GET_COURSE_CREATE:
-        return {
-          ...state,
-          courseCreate: action.payload,
-        };
-        case actions.GET_SECTION_CREATE:
-          return {
-            ...state,
-            sectionCreate: action.payload,
-          };
 
     case actions.GET_REVIEWS_BY_COURSE_ID:
       return {
@@ -67,13 +109,43 @@ function rootReducer(state = initialState, action) {
         courseReviews: action.payload,
       };
 
+    case actions.CREATE_COURSE:
+      return {
+        ...state,
+        createdCourse: action.payload,
+        courses:       [...state.courses, action.payload]
+      };
+
+    case actions.CREATE_INSTRUCTOR:
+      return {
+        ...state,
+        courseInstructor: action.payload,
+      };
+
+    case actions.GET_ALL_INSTRUCTORS:
+      return {
+        ...state,
+        allInstructors: action.payload,
+      };
+    
+    case actions.CREATE_SECTION:
+      return {
+        ...state,
+        createdSections: [...state.createdSections, action.payload],
+      };
+
+    case actions.CREATE_VIDEO:
+      return {
+        ...state,
+        createdVideos: [...state.createdVideos, action.payload]
+      };
+
     case actions.CREATE_REVIEW:
-      console.log("reducer", action.payload)
-      
       return {
         ...state,
         courseReviews: [...state.courseReviews, action.payload],
       };
+    
     default:
       return state;
   }

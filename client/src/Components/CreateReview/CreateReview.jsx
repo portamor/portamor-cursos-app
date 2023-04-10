@@ -1,27 +1,26 @@
+import * as actions    from "../../Redux/actions"
+import * as constants  from "../../constants/createReviewConstants";
+import CustomButton    from "../CustomButton/CustomButton";
 import React           from "react";
-import { useState }    from "react";
+import { REVIEW }      from "../../constants";
+import styles          from "./CreateReview.module.css"
+import { StarFill }    from 'react-bootstrap-icons';
 import { useDispatch } from "react-redux";
-//---Components
-import { StarFill } from 'react-bootstrap-icons';
-import CustomButton from "../CustomButton/CustomButton";
-//---Styles
-import styles from "./CreateReview.module.css"
-//---utils,constants
-import * as actions   from "../../Redux/actions"
-import * as constants from "../../constants/createReviewConstants";
-import { REVIEW }     from "../../constants";
-import * as utils     from "../../utils";
+import { useState }    from "react";
+import * as utils      from "../../utils";
 
 const CreateReview = ({ courseId, userId}) => {
   const dispatch = useDispatch();
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors]         = useState({});
+  
+ const user = JSON.parse(localStorage.getItem("user"));
 
   const [formValues, setFormValues] = useState({
-    title: "",
-    comment: "",
+    title:       "",
+    comment:     "",
     stars_value: 0,
-    userId: "d85ac82c-d989-43c0-a7ec-e17baa6d51b9",
-    courseId: courseId,
+    userId:      user.id,
+    courseId:    courseId,
   });
 
   const [ titles ] = useState([

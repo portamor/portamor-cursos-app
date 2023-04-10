@@ -1,20 +1,17 @@
+import * as actions    from "../../Redux/actions";
+import certifiedImg    from "../../images/certified-portamor.svg"
+import * as constants  from "../../constants/classDetailConstants";
+import CustomButton    from "../CustomButton/CustomButton";
 import React           from "react";
 import ReactPlayer     from 'react-player';
+import SelectedData    from "../SelectedData/SelectedData";
+import styles          from "./ClassDetail.module.css";
 import { useDispatch } from "react-redux";
 import { useEffect }   from "react";
 import { useMatch }    from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState }    from "react";
-//----Components
-import certifiedImg from "../../images/certified-portamor.svg"
-import CustomButton from "../CustomButton/CustomButton";
-import SelectedData from "../SelectedData/SelectedData";
-//----Styles
-import styles from "./ClassDetail.module.css";
-//----Actions, Utils, Constants
-import * as actions   from "../../Redux/actions";
-import * as utils     from "../../utils";
-import * as constants from "../../constants/classDetailConstants";
+import * as utils      from "../../utils";
 
 const ClassDetail = (props) => {
   const dispatch = useDispatch();
@@ -24,7 +21,7 @@ const ClassDetail = (props) => {
 
   useEffect(() => {
     dispatch(actions.getCourseDetail(courseId));
-    dispatch(actions.getVideoById(videoId));
+    videoId !== 0 && dispatch(actions.getVideoById(videoId));
   }, [courseId, videoId, dispatch])
 
   const videoDetail  = useSelector((state) => state.videoDetail);
