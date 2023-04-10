@@ -1,17 +1,17 @@
+import * as actions    from "../../../Redux/actions"
+import * as constants  from "../../../constants";
+import CustomButton    from "../../CustomButton/CustomButton";
 import React           from "react";
 import { useState }    from "react";
 import { useDispatch } from "react-redux";
-//---Components
-import CustomButton from "../CustomButton/CustomButton";
-//---actions, utils, constatns
-import * as actions from "../../Redux/actions"
-import * as utils   from "../../utils"
-import { VIDEO }    from "../../constants";
-//---styles
-import styles from './CreateVideo.module.css'
+import { useSelector } from "react-redux";
+import styles          from './CreateVideo.module.css'
+import * as utils      from "../../../utils"
 
-const CreateVideo = () => {
-  const dispatch = useDispatch();
+const CreateVideo = ({ setActualForm }) => {
+  const dispatch          = useDispatch();
+  const sectionToAddVideo = useSelector(state => state.sectionToAddVideo);
+
   const [errors, setErrors] = useState({});
   const [formValues, setFormValues] = useState({
     videoTitle: "",
@@ -21,7 +21,7 @@ const CreateVideo = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    const formErrors = utils.validate(formValues, VIDEO);
+    const formErrors = utils.validate(formValues, constants.VIDEO);
 
     setFormValues({
       ...formValues,
@@ -39,15 +39,14 @@ const CreateVideo = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const formErrors = utils.validate(formValues, VIDEO);
+    const formErrors = utils.validate(formValues, constants.VIDEO);
 
     if (Object.keys(formErrors).length !== 0) {
       setErrors(formErrors);
       return;
     } 
 
-    /* Hardcode */
-    const sectionId = "c43e4d03-b096-4cea-96b0-67f5d5cd6c4a"
+    const sectionId = sectionToAddVideo.id
     dispatch(actions.createVideo(formValues, sectionId))
 
     setFormValues({
@@ -56,6 +55,8 @@ const CreateVideo = () => {
       videoDescription: "",
     })
   };
+
+  const handleBackButton = () => setActualForm(constants.SELECT_SECTION_FORM);
 
   return (
     <form 
@@ -110,6 +111,7 @@ const CreateVideo = () => {
         <CustomButton 
         primary={false}
         type={"submit"}
+        onClick={handleBackButton}
         content={"VOLVER"} />
       </div>
 

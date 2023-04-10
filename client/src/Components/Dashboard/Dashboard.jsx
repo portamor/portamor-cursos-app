@@ -1,30 +1,46 @@
-import React, { useState } from "react";
-import FormCourse from "./FormCourse";
-import FormSectionCreate from "./FormSection";
-import styles from './formCourse.module.css'
+import React                   from "react";
+import * as constants          from "../../constants";
+import ChooseInstructor        from "../ChooseInstructor/ChooseInstructor";
+import ChooseSectionToAddVideo from "../ChooseSection/ChooseSection";
+import { CreateCourse }        from "../Forms";
+import { CreateInstructor }    from "../Forms";
+import { CreateSection }       from "../Forms";
+import { CreateVideo }         from "../Forms";
+import { useState }            from "react";
+import ShowCreatedVideo        from "../ShowCreatedVideos/ShowCreatedVideos";
+import styles                  from "./Dashboard.module.css"
 
 const Dashboard = () => {
+  const [actualForm, setActualForm] = useState(constants.SELECT_COURSE_FORM);
 
-    const [formularioActual, setFormularioActual] = useState(null);
+  return (
+    <div className={styles.div_dashboard} >
+      { actualForm === constants.SELECT_COURSE_FORM && <CreateCourse setActualForm={setActualForm} /> }
 
-
-    return (
-        <div className={styles.div_dashboard} >
-            <div>
-            <button className={styles.button_d} onClick={() => setFormularioActual("A")} >Crear Curso</button>
-            <button className={styles.button_d} onClick={() => setFormularioActual("B")} >Crear Seccion</button>
-            <button className={styles.button_d} onClick={() => setFormularioActual("C")} >Añadir Video</button>
+      { 
+        actualForm === constants.SELECT_INSTRUCTOR_FORM && (
+        <div className={styles["instructor-container"]}>
+          <CreateInstructor setActualForm={setActualForm} /> 
+          <ChooseInstructor setActualForm={setActualForm} />
         </div>
+      )}
 
-                {formularioActual === 'A' && <FormCourse /> }
-                {formularioActual=== 'B' && <FormSectionCreate />}
-
-
-            
-            
+      { 
+        actualForm === constants.SELECT_SECTION_FORM && (
+        <div className={styles["instructor-container"]}>
+          <CreateSection           setActualForm={setActualForm} />
+          <ChooseSectionToAddVideo setActualForm={setActualForm} />
         </div>
-    )
+      )}
 
+      { actualForm === constants.SELECT_VIDEO_FORM && (
+        <div className={styles["video-container"]}>
+          <CreateVideo setActualForm={setActualForm} /> 
+          <ShowCreatedVideo /> 
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default Dashboard;

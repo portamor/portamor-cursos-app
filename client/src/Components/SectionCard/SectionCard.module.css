@@ -1,0 +1,38 @@
+@keyframes opacityin {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.section-card-main {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: fit-content;
+  width: 450px;
+  padding: 10px 10px 10px;
+  border-radius: 10px;
+  box-shadow: 0px 6px 10px 0.3px #bcbbbb; 
+  font-family: 'Montserrat', sans-serif;
+  animation-name: opacityin;
+  animation-duration: 1s;
+}
+
+.section-card-main h2 {
+  overflow-x: scroll;
+  width: 300px;
+}
+
+@media(max-width: 750px) {
+  .section-card-main {
+    width: 340px;
+  }
+  .section-card-main h2 {
+    overflow-x: scroll;
+    max-width: 150px;
+  }
+}
