@@ -136,10 +136,12 @@ export function getSectionInCreatedSections (sectionId) {
   }
 };
 
-export function createVideo(payload, sectionId) {
+export function createVideo(payload, sectionId, setActualForm) {
   return async (dispatch) => {
     try {
       const createdVideo = await axios.post(`http://localhost:3001/videos/${sectionId}`, payload);
+
+      alert(`El video ${createdVideo.data.data.videoTitle} fue creado con exito`);
 
       dispatch({ type: actions.CREATE_VIDEO, payload: createdVideo.data.data });
     } catch (error) {
