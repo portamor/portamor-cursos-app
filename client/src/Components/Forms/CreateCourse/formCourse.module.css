@@ -35,6 +35,10 @@
   height: 100px;
 }
 
+.input_container span {
+  margin-top: -30px;
+}
+
 @media(max-width: 670px) {
   .input,
   .input_container textarea {

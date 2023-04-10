@@ -1,10 +1,10 @@
-import React            from "react";
-import { useState }     from "react";
-import { useForm }      from "react-hook-form";
-import { useDispatch }  from 'react-redux'
 import { createCourse } from '../../../Redux/actions'
+import CustomButton     from "../../CustomButton/CustomButton";
+import { useDispatch }  from 'react-redux'
+import { useForm }      from "react-hook-form";
+import { useState }     from "react";
+import React            from "react";
 import styles           from "./formCourse.module.css";
-import CustomButton from "../../CustomButton/CustomButton";
 
 const FormCourse = ({ setActualForm }) => {
     const dispatch = useDispatch()
@@ -50,7 +50,8 @@ const FormCourse = ({ setActualForm }) => {
     
         <div className={styles.input_container} >
           <label className={styles.label} htmlFor="rating">Calificación:</label>
-          <input type="number" id="rating" {...register("rating", { required: "Este campo es requerido" })} className={styles.input} />
+          <input type="number" id="rating" {...register("rating", { min: 0, max: 5 })} className={styles.input} />
+          <span>* El valor de la calificacion debe estar entre 1 y 5</span>
         </div>
     
         <div className={styles.materials_container} >
