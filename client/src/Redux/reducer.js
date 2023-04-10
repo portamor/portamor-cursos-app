@@ -1,18 +1,20 @@
 import * as actions from "../constants/actionsContants";
 
 const initialState = {
-  allInstructors:   [],
-  createdCourse:    {},
-  createdSections:  [],
-  courses:          [],
-  courseDetail:     {},
-  courseInstructor: {},
-  courseSections:   [],
-  courseUsers:      [],
-  courseReviews:    [],
-  videoDetail:      {},
-  sectionToAddVideo:{},
-  sectionVideos:    [],
+  allInstructors:         [],
+  createdCourse:          {},
+  createdSections:        [],
+  createdVideos:          [],
+  videosOfCreatedSection: [],
+  courses:                [],
+  courseDetail:           {},
+  courseInstructor:       {},
+  courseSections:         [],
+  courseUsers:            [],
+  courseReviews:          [],
+  videoDetail:            {},
+  sectionToAddVideo:      {},
+  sectionVideos:          [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -43,6 +45,14 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         sectionToAddVideo: foundSection,
+      };
+      
+    case actions.GET_VIDEOS_OF_CREATED_SECTION:
+      const foundVideos = state.createdVideos.filter(video => video.SectionId === action.payload);
+  
+      return {
+        ...state,
+        videosOfCreatedSection: foundVideos,
       };
       
     case actions.GET_USERS_BY_COURSE_ID:
@@ -97,7 +107,7 @@ function rootReducer(state = initialState, action) {
     case actions.CREATE_VIDEO:
       return {
         ...state,
-        sectionVideos: [...state.sectionVideos, action.payload]
+        createdVideos: [...state.createdVideos, action.payload]
       };
 
     case actions.CREATE_REVIEW:

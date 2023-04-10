@@ -126,7 +126,7 @@ export function createSection(name, courseId) {
   }
 };
 
-export const getSectionInCreatedSections = (sectionId) => {
+export function getSectionInCreatedSections (sectionId) {
   return async function (dispatch) {
     try {
       return dispatch({ type: actions.GET_SECTION_IN_CREATED_SECTIONS, payload: sectionId })
@@ -142,6 +142,16 @@ export function createVideo(payload, sectionId) {
       const createdVideo = await axios.post(`http://localhost:3001/videos/${sectionId}`, payload);
 
       dispatch({ type: actions.CREATE_VIDEO, payload: createdVideo.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
+export function getVideosOfCreatedSection(sectionId) {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: actions.GET_VIDEOS_OF_CREATED_SECTION, payload: sectionId });
     } catch (error) {
       console.log(error.message);
     }
