@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import VideoCard       from "../VideoCard/VideoCard";   
-import styles          from "./ShowCreatedVideos.module.css"
 import * as actions    from "../../Redux/actions"
+import { useDispatch } from "react-redux";
+import { useEffect }   from "react";
+import { useSelector } from "react-redux";
+import React           from "react";
+import styles          from "./ShowCreatedVideos.module.css"
+import VideoCard       from "../VideoCard/VideoCard";   
 
-const ShowCreatedVideo = ({ setActualForm }) => {
+const ShowCreatedVideo = () => {
   const dispatch = useDispatch();
 
   const videosOfCreatedSection = useSelector(state => state.videosOfCreatedSection);
@@ -13,7 +14,7 @@ const ShowCreatedVideo = ({ setActualForm }) => {
 
    useEffect(()=>{
     dispatch(actions.getVideosOfCreatedSection(sectionToAddVideo.id))
-   }, [sectionToAddVideo, dispatch])
+   }, [sectionToAddVideo, videosOfCreatedSection, dispatch])
   
   return (
     <div className={styles["show-videos-main"]}>
