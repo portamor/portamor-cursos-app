@@ -1,14 +1,14 @@
 import React                   from "react";
-import { useState }            from "react";
+import * as constants          from "../../constants";
+import ChooseInstructor        from "../ChooseInstructor/ChooseInstructor";
+import ChooseSectionToAddVideo from "../ChooseSection/ChooseSection";
 import { CreateCourse }        from "../Forms";
 import { CreateInstructor }    from "../Forms";
 import { CreateSection }       from "../Forms";
 import { CreateVideo }         from "../Forms";
-import * as constants          from "../../constants";
-import ChooseInstructor        from "../ChooseInstructor/ChooseInstructor";
-import styles                  from "./Dashboard.module.css"
-import ChooseSectionToAddVideo from "../ChooseSection/ChooseSection";
+import { useState }            from "react";
 import ShowCreatedVideo        from "../ShowCreatedVideos/ShowCreatedVideos";
+import styles                  from "./Dashboard.module.css"
 
 const Dashboard = () => {
   const [actualForm, setActualForm] = useState(constants.SELECT_COURSE_FORM);
