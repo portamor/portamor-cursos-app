@@ -6,7 +6,6 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 100;
-  
 }
 
 .modal {
@@ -22,10 +21,11 @@
   max-width: 90%;
   max-height: 90%;
   overflow: auto;
-  padding: 50px 50px 50px 50px;
-}
-.modal h1{
-  text-align: center;
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .closeButton {
@@ -38,23 +38,17 @@
   border: none;
   font-size: 1.8rem;
   cursor: pointer;
-  transition: background-color 0.2s;
 }
 
 .closeButton:hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.modal-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
 .buttonsContainer{
+  height: 100%;
   display: flex;
-  padding: 50px 50px 50px 50px;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .registerButton{
@@ -78,7 +72,7 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .modal {
     max-width: 80%;
     max-height: 80%;
@@ -92,4 +86,4 @@
     max-height: 90%;
     padding: 20px;
   }
-}
+} */

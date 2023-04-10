@@ -1,9 +1,14 @@
-import React       from "react";
-import {NavLink}   from "react-router-dom";
-import {useEffect} from "react";
-import {useRef}    from "react";
-import {useState}  from "react";
-import Styles      from "./Navbar.module.css";
+import { logout}       from "../../Redux/actions";
+import {loginSuccess}  from "../../Redux/actions";
+import Modal           from "../Modal/Modal";
+import {NavLink}       from "react-router-dom";
+import React           from "react";
+import Styles          from "./Navbar.module.css";
+import { useDispatch } from "react-redux";
+import { useEffect }   from "react";
+import { useRef }      from "react";
+import { useState }    from "react";
+import { useSelector } from "react-redux";
 
 export const NavBar = () => {
   const hamburguerRef = useRef(null);
@@ -72,11 +77,10 @@ export const NavBar = () => {
     }
   };
 
-
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
     navMenuRef.current.classList.toggle("active");
-  };
+  }
 
   return (
     <nav className={`${Styles["nav-container"]} ${menuOpen ? Styles["active"] : ""}`}>
@@ -103,6 +107,32 @@ export const NavBar = () => {
           activeClassName="active" >
           Mis cursos
         </NavLink>
+
+
+        {isLoggedIn ? (
+        <li className={Styles["container-link-ico"]}>
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/5509/5509651.png"
+            alt="cerrar sesion"
+            width={40}
+            height={40}
+            onClick={handleLogout}
+          />
+          <span>Cerrar sesión</span>
+        </li>
+        ) 
+        : 
+        (
+          <span onClick={() => setShowModal(true)} className={Styles["nav-link"]}>Iniciar sesión</span>
+        )}
+        
+        {showModal && (
+          <Modal onClose={handleCloseModal} onRegister={handleRegisterButtonClick} onLogin={handleLoginButtonClick}>
+          </Modal>
+        )}
+
+
+
 
         {isMobile && (
           <button

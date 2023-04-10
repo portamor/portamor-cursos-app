@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React           from 'react';
+import { useState }    from 'react';
 import { useDispatch } from 'react-redux';
-import { postUser } from '../../Redux/actions';
-import Styles from "../StyleSheet/RegisterUser.module.css"
-
+import { postUser }    from '../../Redux/actions';
+import Styles          from "./RegisterUser.module.css"
+import CustomButton from '../CustomButton/CustomButton';
 
 const RegisterUser = () => {
   const dispatch = useDispatch();
@@ -59,7 +60,6 @@ const RegisterUser = () => {
     return d.toISOString().slice(0, 10) === dateString;
   };
   
-
   const handleRegister = async (event) => {
     event.preventDefault();
     if (validateForm()) {
@@ -86,7 +86,7 @@ const RegisterUser = () => {
         <input type="date" id="birthday" value={birthday} onChange={(event) => setBirthday(event.target.value)} />
         {formErrors.brithday && <p className={Styles["error-message"]}>{formErrors.brithday}</p>}
       </div>
-      <button type="submit">Registrarse</button>
+      <CustomButton type={"submit"} content={"Registrarme"} primary={true} disabled={false} />
     </form>
   );
 };

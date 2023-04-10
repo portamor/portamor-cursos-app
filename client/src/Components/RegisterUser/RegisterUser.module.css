@@ -1,0 +1,78 @@
+.register-container {
+  width: 400px;
+  margin-bottom: 10%;
+}
+
+@media(max-width: 670px) {
+  .register-container  {
+    width: 300px;    
+  }
+}
+
+.name-input-container {
+  margin-top: 8%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.name-input-container input {
+  border: 3px solid #eb575a;
+  border-radius: 8px;
+  height: 25px;
+}
+
+.lastname-input-container {
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.lastname-input-container input {
+  border: 3px solid #eb575a;
+  border-radius: 8px;
+  height: 25px;
+}
+
+.birthday-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.birthday-input-container input {
+  border: 3px solid #eb575a;
+  border-radius: 8px;
+  height: 25px;
+  width: 160px;
+  margin-bottom: 5%;
+}
+
+
+.birthday-input-container input,
+.name-input-container input,
+.lastname-input-container input {
+  border-radius: 5px;
+  outline: none;
+  resize: none;
+  appearance: none;
+  padding: 10px 0;
+  padding-left: 5px;
+  font-size: 18px;
+  width: 100%;
+  border: none;
+  box-shadow: 0px 6px 10px 0.3px #bcbbbb; 
+}
+
+@media(max-width: 670px) {
+  .birthday-input-container input,
+  .name-input-container input,
+  .lastname-input-container input  {
+    width: 100%;    
+  }
+}

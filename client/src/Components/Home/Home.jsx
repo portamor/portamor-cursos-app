@@ -1,24 +1,15 @@
-import React from "react";
-import { useEffect } from "react";
-
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { getCourses } from "../../Redux/actions";
-
-import CourseAccordion from "../CourseAccordion/CourseAccordion";
-import CourseCard from "../CourseCard/CourseCard";
-import NavFilter from "../NavFilter/NavFilter";
-import ReviewCard from "../ReviewCard/ReviewCard";
-
-import Styles from "../StyleSheet/Home.module.css";
-
-// example sections to accordion
-import { courseSections } from "../DataBase/Json";
-
+import CourseCard    from "../CourseCard/CourseCard";
+import NavFilter     from "../NavFilter/NavFilter";
+import {getCourses}  from "../../Redux/actions";
+import React         from "react";
+import Styles        from "./Home.module.css";
+import {useDispatch} from "react-redux";
+import {useEffect}   from "react";
+import {useSelector} from "react-redux";
 
 const Home = () => {
-  const courses = useSelector((state) => state?.courses);
   const dispatch = useDispatch();
+  const courses  = useSelector(state => state?.courses);
 
   useEffect(() => {
     dispatch(getCourses());
@@ -31,27 +22,18 @@ const Home = () => {
         <NavFilter />
       </div>
       <div className={Styles["cards-home"]}>
-  {Array.isArray(courses) && courses.map((el) => {
-    return <CourseCard key={el.id} id={el.id} image={el.image} title={el.title} />;
-  })}
-</div>
-
-      {/* <ReviewCard 
-      image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2BetQecEPZPH1770yc9Wtm2_yr90fGe1S0JkPrDXLnA&s"
-      name="Wilmer Rafael Castro"
-      title="RECOMENDADO" 
-      content="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet possimus totam harum. Veritatis facilis quasi consequuntur qui culpa! Quas, repellendus autem fugit officiis eius provident obcaecati a corrupti cum magnam?
-      " 
-      satisfaction={3} />
-      <ReviewCard 
-      image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2BetQecEPZPH1770yc9Wtm2_yr90fGe1S0JkPrDXLnA&s"
-      name="Wilmer Rafael Castro"
-      title="Excelente" 
-      content="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eveniet possimus totam harum. Veritatis facilis quasi consequuntur qui culpa! Quas, repellendus autem fugit officiis eius provident obcaecati a corrupti cum magnam?
-      " 
-      satisfaction={5} /> */}
-
-      {/* <CourseAccordion sections={courseSections} /> */}
+        {Array.isArray(courses) &&
+          courses.map(el => {
+            return (
+              <CourseCard
+                key={el.id}
+                id={el.id}
+                image={el.image}
+                title={el.title}
+              />
+            );
+          })}
+      </div>
     </div>
   );
 };
