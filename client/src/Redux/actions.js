@@ -40,6 +40,18 @@ export function getSectionsByCourseId(courseId) {
   };
 }
 
+export const getCoursesByGenre = (genre) => async (dispatch) => {
+  try {
+    const res = await axios.get(`http://localhost:3001/courses/genre/${genre}`);  
+    dispatch({
+      type: 'GET_COURSES_BY_GENRE',
+      payload: res.data.data
+    });
+    } catch (error) {
+      console.log("Error en getCoursesByGenre/actions", error);
+    }
+};
+
 export function getReviewsByCourseId(courseId) {
   return async function (dispatch) {
     try {
@@ -94,6 +106,45 @@ export function postUser(payload) {
     return response;
   };
 };
+
+export const getUserByCode = (code) => async (dispatch) => {
+  
+  try {
+    const response = await axios.get(`http://localhost:3001/users?code=${code}`);
+    const user = response.data.data[0];
+    if (user) {
+      localStorage.setItem('user', JSON.stringify(user));
+      dispatch(loginSuccess(user));
+      return user;
+    } else {
+      return null;
+    }
+  } catch (error) {
+    dispatch(loginFail(error.message));
+    throw error;
+  }
+};
+
+export const loginSuccess = (user) => {
+  localStorage.setItem('isLoggedIn', 'true');
+  localStorage.setItem('user', JSON.stringify(user));
+  return {
+    type: 'LOGIN_SUCCESS',
+    payload: user,
+  };
+};
+
+export const logout = () => {
+  localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('user');
+  return {
+    type: 'LOGOUT',
+  };
+};
+export const loginFail = (error) => ({
+  type: 'LOGIN_FAIL',
+  payload: error,
+});
 
 export function createCourse(payload, setActualForm) {
   return async function (dispatch) {

@@ -4,6 +4,8 @@ const morgan       = require('morgan')
 const session      = require('express-session');
 const cors         = require('cors');
 const router       = require('./routes/index')
+const http         = require('http')
+const { Server }           = require('socket.io')
 require("dotenv").config();
 require('./database.js')
 
@@ -36,6 +38,10 @@ server.use((req, res, next) => {
   
   server.use("/", router);
 
+
+  
+  
+  
   // Error catching endware.
 server.use((err, req, res, next) => {
     // eslint-disable-line no-unused-vars
@@ -45,5 +51,22 @@ server.use((err, req, res, next) => {
     res.status(status).send(message);
   });
 
+  //Socket Connection
 
-module.exports = server
+  const serverApp = http.createServer(server);
+  const io = new Server(serverApp,{
+    cors: {
+      origin: "*"
+    },
+  });
+
+  io.on("connection", (socket) => {
+    socket.on("message", (message, user)=>{
+      socket.broadcast.emit("message",{
+        body: message,
+        from: user
+      });
+    });
+  });
+
+module.exports = serverApp

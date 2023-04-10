@@ -13,16 +13,48 @@ const initialState = {
   courseUsers:            [],
   courseReviews:          [],
   videoDetail:            {},
+  user:                   [],
+  isLoggedIn:             false,
+  user:                   null,
+  error:                  null,
   sectionToAddVideo:      {},
   sectionVideos:          [],
 };
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
+
+    case "LOGIN_SUCCESS":
+      return {
+        ...state,
+        isLoggedIn: true,
+        user: action.payload,
+        error: null,
+      };
+    case "LOGIN_FAIL":
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: null,
+        error: action.payload,
+      };
+    case "LOGOUT":
+      return {
+        ...state,
+        isLoggedIn: false,
+        user: null,
+        error: null,
+      };
+
     case "GET_COURSES":
       return {
         ...state,
         courses: action.payload,
+      };
+    case 'GET_COURSES_BY_GENRE':
+      return {
+        ...state,
+        courses: action.payload
       };
 
     case actions.GET_COURSE_DETAIL:
@@ -36,25 +68,23 @@ function rootReducer(state = initialState, action) {
         ...state,
         courseSections: action.payload,
       };
-
-    case actions.GET_SECTION_IN_CREATED_SECTIONS:
-      const sectionId = action.payload;
-
-      const foundSection = state.createdSections.find((section) => section.id === sectionId)
-
-      return {
-        ...state,
-        sectionToAddVideo: foundSection,
-      };
-      
-    case actions.GET_VIDEOS_OF_CREATED_SECTION:
-      const foundVideos = state.createdVideos.filter(video => video.SectionId === action.payload);
+      case actions.GET_SECTION_IN_CREATED_SECTIONS:
+        const sectionId = action.payload;
   
-      return {
-        ...state,
-        videosOfCreatedSection: foundVideos,
-      };
-      
+        const foundSection = state.createdSections.find((section) => section.id === sectionId)
+  
+        return {
+          ...state,
+          sectionToAddVideo: foundSection,
+        };
+        
+      case actions.GET_VIDEOS_OF_CREATED_SECTION:
+        const foundVideos = state.createdVideos.filter(video => video.SectionId === action.payload);
+    
+        return {
+          ...state,
+          videosOfCreatedSection: foundVideos,
+        };
     case actions.GET_USERS_BY_COURSE_ID:
       return {
         ...state,
