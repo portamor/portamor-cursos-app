@@ -1,13 +1,14 @@
-import React                from "react";
-import { useState }         from "react";
-import { CreateCourse }     from "../Forms";
-import { CreateInstructor } from "../Forms";
-import { CreateSection }    from "../Forms";
-import { CreateVideo }      from "../Forms";
-import * as constants       from "../../constants";
-import ChooseInstructor     from "../ChooseInstructor/ChooseInstructor";
-import styles               from "./Dashboard.module.css"
+import React                   from "react";
+import { useState }            from "react";
+import { CreateCourse }        from "../Forms";
+import { CreateInstructor }    from "../Forms";
+import { CreateSection }       from "../Forms";
+import { CreateVideo }         from "../Forms";
+import * as constants          from "../../constants";
+import ChooseInstructor        from "../ChooseInstructor/ChooseInstructor";
+import styles                  from "./Dashboard.module.css"
 import ChooseSectionToAddVideo from "../ChooseSection/ChooseSection";
+import ShowCreatedVideo        from "../ShowCreatedVideos/ShowCreatedVideos";
 
 const Dashboard = () => {
   const [actualForm, setActualForm] = useState(constants.SELECT_COURSE_FORM);
@@ -32,7 +33,12 @@ const Dashboard = () => {
         </div>
       )}
 
-      { actualForm === constants.SELECT_VIDEO_FORM   && <CreateVideo   setActualForm={setActualForm} /> }
+      { actualForm === constants.SELECT_VIDEO_FORM && (
+        <div className={styles["video-container"]}>
+          <CreateVideo setActualForm={setActualForm} /> 
+          <ShowCreatedVideo /> 
+        </div>
+      )}
     </div>
   )
 }
