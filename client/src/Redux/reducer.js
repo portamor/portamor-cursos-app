@@ -80,6 +80,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         courseDetail: action.payload,
       };
+    
+    case actions.GET_COURSES_OF_USER: 
+      return {
+        ...state,
+        courses: action.payload
+      }
       
     case actions.GET_SECTIONS_BY_COURSE_ID:
       return {
