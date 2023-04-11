@@ -67,7 +67,6 @@ const Certificate = ({data}) => {
   const dia = fechaActual.getDate();
   const anio = fechaActual.getFullYear();
   const fechaActualString = `${dia} de ${mesNombre} del ${anio}`;
-  console.log(fechaActualString);
   
   return (
   <Document >
