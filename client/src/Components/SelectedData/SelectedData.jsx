@@ -12,6 +12,7 @@ import * as constants from "../../constants/classDetailConstants";
 import * as actions   from "../../Redux/actions";
 //styles
 import styles from "./SelectedData.module.css";
+import DownloadCertificate from "../Certificate/DownaldCertificate";
 
 const SelectedData = ({courseDetail, courseId, selectedButtonContent}) => {
   const dispatch = useDispatch();
@@ -79,10 +80,15 @@ const SelectedData = ({courseDetail, courseId, selectedButtonContent}) => {
 
     case constants.PREGUNTAS_FRECUENTES:
       return <div>Preguntas frecuentes</div>;
+    
+    case constants.DESCARGA_CERTIFICADO:
+    return <DownloadCertificate title={courseDetail?.title} />
 
     default:
       return null;
   }
 };
+
+
 
 export default SelectedData;

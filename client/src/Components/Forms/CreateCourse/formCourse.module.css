@@ -16,6 +16,22 @@
   font-size: 20px;
   font-family: 700;
 }
+.labeltwo {
+  height: max-content;
+  width: 250px;
+  padding: 0px;
+  font-size: 20px;
+  font-family: 700; 
+  margin: 0 10%; 
+  border: none;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 13px 20px;
+  background-color: transparent;
+  border: solid 2px #EB575A ;
+  color: #EB575A;
+}
 
 .input,
 .input_container textarea {
@@ -60,5 +76,58 @@
 .materials_container input {
   margin-bottom: 30px;
   padding: 10px;
+}
+
+.buttonDesc {
+  margin: 0 30%; 
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  height: fit-content;
+  width: fit-content;
+  padding: 13px 20px;
+  background-color: transparent;
+  border: solid 2px #EB575A ;
+  color: #EB575A;
+}
+
+.select {
+  height: max-content;
+  width: 200px;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 13px 20px;
+  background-color: transparent;
+  border: 2px solid #EB575A;
+  border-radius: 8px;
+  color: #EB575A;
+  appearance: none; /* quitar el estilo nativo del select */
+  -webkit-appearance: none; /* quitar el estilo nativo del select para Safari */
+}
+
+/* Estilos para el icono de la flecha */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  color: #EB575A;
+  pointer-events: none;
+}
+
+/* Estilos para el hover del select */
+.select:hover {
+  background-color: #EB575A;
+  color: #fff;
+}
+
+/* Estilos para el focus del select */
+.select:focus {
+  outline: none;
+  box-shadow: 0 0 2px 2px rgba(235, 87, 90, 0.3);
 }
 

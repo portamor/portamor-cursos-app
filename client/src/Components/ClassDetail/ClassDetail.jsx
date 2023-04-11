@@ -12,6 +12,7 @@ import { useMatch }    from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState }    from "react";
 import * as utils      from "../../utils";
+import DownloadCertificate from "../Certificate/DownaldCertificate";
 
 const ClassDetail = (props) => {
   const dispatch = useDispatch();
@@ -93,6 +94,10 @@ const ClassDetail = (props) => {
             primary={secondSelectedButton === constants.PREGUNTAS_FRECUENTES ? true : false}
             content={constants.PREGUNTAS_FRECUENTES}
             onClick={() => handleSecondSelectData(constants.PREGUNTAS_FRECUENTES)} />
+            <CustomButton 
+            primary={secondSelectedButton === constants.DESCARGA_CERTIFICADO ? true : false}
+            content={constants.DESCARGA_CERTIFICADO}
+            onClick={() => handleSecondSelectData(constants.DESCARGA_CERTIFICADO)} />
           </div>
 
           <div className={styles["cards-container"]}>
@@ -114,6 +119,7 @@ const ClassDetail = (props) => {
             selectedButtonContent={firstSelectedButton} />
         }
       </div>
+
     </div>
 
   )

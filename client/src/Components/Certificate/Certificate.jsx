@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
 
 
 
-const Certificate = ({data}) => {
+const Certificate = ({tipo, name, numero, title}) => {
  
   const fechaActual = new Date();
   const mesNombre = fechaActual.toLocaleString('es-ES', { month: 'long' });
@@ -74,10 +74,10 @@ const Certificate = ({data}) => {
       <View style={styles.section}>
         <Image style={styles.logo} src={bg} />
         <Text style={styles.title}>Certifica que</Text>
-        <Text style={styles.name} >{data.name}</Text>
-        {data.dni? (<Text>Documento oficial {data.tipo}:{data.dni}</Text>) : ''}
+        <Text style={styles.name} >{name}</Text>
+        {numero? (<Text>Documento oficial {tipo} : {numero}</Text>) : ''}
         <Text style={styles.description} > culmino el curso en linea </Text>
-        <Text style={styles.name}>{data.cursoName}</Text>
+        <Text style={styles.name} >{title}</Text>
         <Text style={styles.description}>
           Reconociendo su excelente desempeño en la realización de tareas y cumplimiento de objetivos del curso
         </Text>
