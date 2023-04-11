@@ -35,6 +35,20 @@ export function getCourseDetail(courseId) {
   };
 }
 
+export function getCoursesOfUser(userId) {
+  return async function (dispatch) {
+    try {
+      const foundCourses = await axios.get(`http://localhost:3001/users/my-courses/${userId}`);
+
+      console.log("actions", foundCourses.data.data)
+
+      return dispatch({ type: actions.GET_COURSES_OF_USER, payload: foundCourses.data.data });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+}
+
 export function getSectionsByCourseId(courseId) {
   return async function (dispatch) {
     try {
@@ -148,6 +162,7 @@ export const logout = () => {
     type: 'LOGOUT',
   };
 };
+
 export const loginFail = (error) => ({
   type: 'LOGIN_FAIL',
   payload: error,
