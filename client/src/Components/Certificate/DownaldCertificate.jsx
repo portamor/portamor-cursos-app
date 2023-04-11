@@ -35,15 +35,17 @@ const DownloadCertificate = ({title}) => {
   return (
     <div className={styles.form} >
       <div className={styles["cards-container"]} >
-<p>Para solicitar certificado ingresa tu identificación</p>
+<p className={styles.labeltwo} >Para solicitar certificado ingresa tu identificación oficial.</p>
 </div> 
+<br />
       <div className={styles.input_container} >
-        <label htmlFor="tipo_identificacion">Tipo de identificación oficial:</label>
+        <label htmlFor="tipo_identificacion" className={styles.label} >Tipo de identificación oficial:</label>
         <select
           id="tipo_identificacion"
           name="tipo_identificacion"
           value={tipoIdentificacion}
           onChange={handleIdentificacion}
+          className={styles.select}
         >
           <option value=""></option>
           <option value="dni">DNI</option>
