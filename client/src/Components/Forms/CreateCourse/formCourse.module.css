@@ -62,3 +62,18 @@
   padding: 10px;
 }
 
+.buttonDesc {
+  margin: 0 30%; 
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  height: fit-content;
+  width: fit-content;
+  padding: 13px 20px;
+  background-color: transparent;
+  border: solid 2px #EB575A ;
+  color: #EB575A;
+}

@@ -15,7 +15,7 @@ const initialState = {
   videoDetail:            {},
   user:                   [],
   isLoggedIn:             false,
-  user:                   null,
+  // user:                   null,
   error:                  null,
   sectionToAddVideo:      {},
   sectionVideos:          [],
