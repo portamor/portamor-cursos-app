@@ -7,7 +7,7 @@ const initialState = {
   createdVideos:          [],
   videosOfCreatedSection: [],
   courses:                [],
-  pageSize:               20,
+  pageSize:               9,
   courseDetail:           {},
   courseInstructor:       {},
   courseSections:         [],
