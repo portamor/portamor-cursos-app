@@ -67,6 +67,15 @@
 }
 
 
+@media (max-width: 768px) {
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: inherit;
+  }
+}
+
+
 .pagination__item--selected {
   background-color: #eb575a;
   color: #fff;

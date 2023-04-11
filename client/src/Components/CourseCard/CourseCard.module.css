@@ -1,10 +1,10 @@
 .button-link {
   text-decoration: none;
+  width: 400px;
+  height: 400px;
 }
 
 .course-card {
-  width: 400px;
-  height: 400px;
   background: #e5e4da;
   border-radius: 8px;
   transition: all 0.2s ease-in-out;
@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 20px;
 }
 
 .course-card:hover {
@@ -19,8 +20,8 @@
 }
 
 .course-card img {
-  width: 399px;
-  height: 180px;
+  width: 100%;
+  height: 200px;
   border-radius: 8px 8px 0 0;
 }
 
@@ -44,28 +45,29 @@
 }
 
 @media (max-width: 768px) {
+  .button-link {
+    width: 300px;
+  }
+  
   .course-card {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    padding: 0px;
-    width: 300px;
-    height: 406px;
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    background: #e5e4da;
-    border-radius: 12px 12px 12px 12px;
+    align-items: center;
+    padding-bottom: 20px;
   }
 
   .course-image img {
     width: 100%;
-    height: auto;
-    border-radius: 12px 12px 0 0;
   }
 
-  .course-h3 button {
+  .card-button {
+    background-color: #EB575A;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 700;
     width: 80%;
-    margin-left: 10%;
   }
 }
