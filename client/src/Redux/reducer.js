@@ -7,18 +7,23 @@ const initialState = {
   createdVideos:          [],
   videosOfCreatedSection: [],
   courses:                [],
+  pageSize:               9,
   courseDetail:           {},
   courseInstructor:       {},
   courseSections:         [],
   courseUsers:            [],
   courseReviews:          [],
-  videoDetail:            {},
-  user:                   [],
-  isLoggedIn:             false,
-  // user:                   null,
+  currentPage:            1,
   error:                  null,
+  isLoggedIn:             false,
+  error:                  null,
+  user:                   [],
+  user:                   null,
   sectionToAddVideo:      {},
   sectionVideos:          [],
+  totalCourses:           0,
+  totalPages:             1,
+  videoDetail:            {},
 };
 
 function rootReducer(state = initialState, action) {
@@ -46,11 +51,24 @@ function rootReducer(state = initialState, action) {
         error: null,
       };
 
-    case "GET_COURSES":
+    case actions.GET_COURSES:
+      const {
+        data,
+        currentPage,
+        pageSize,
+        totalCourses,
+        totalPages
+      } = action.payload
+
       return {
         ...state,
-        courses: action.payload,
+        courses:      data,
+        currentPage:  currentPage,
+        pageSize:     pageSize,
+        totalCourses: totalCourses,
+        totalPages:   totalPages,
       };
+
     case 'GET_COURSES_BY_GENRE':
       return {
         ...state,

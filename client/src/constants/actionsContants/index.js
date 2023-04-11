@@ -1,4 +1,5 @@
 //---- GET
+export const GET_COURSES                     = "GET_COURSES";
 export const GET_COURSE_DETAIL               = "GET_COURSE_DETAIL";
 export const GET_INSTRUCTOR_BY_ID            = "GET_INSTRUCTOR_BY_ID";
 export const GET_REVIEWS_BY_COURSE_ID        = "GET_REVIEWS_BY_COURSE_ID";
