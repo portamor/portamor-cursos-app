@@ -40,8 +40,6 @@ export function getCoursesOfUser(userId) {
     try {
       const foundCourses = await axios.get(`http://localhost:3001/users/my-courses/${userId}`);
 
-      console.log("actions", foundCourses.data.data)
-
       return dispatch({ type: actions.GET_COURSES_OF_USER, payload: foundCourses.data.data });
     } catch (error) {
       console.log(error.message);
@@ -72,6 +70,12 @@ export const getCoursesByGenre = (genre) => async (dispatch) => {
     console.log("Error en getCoursesByGenre/actions", error);
   }
 };
+
+
+export function resetPaginated(courseId) {
+  return async (dispatch) =>  dispatch({ type: actions.RESET_PAGINATED });
+}
+
 
 export function getReviewsByCourseId(courseId) {
   return async function (dispatch) {
