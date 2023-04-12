@@ -22,4 +22,6 @@ export const CREATE_REVIEW      = "CREATE_REVIEW";
 //---- PUT
 export const ADD_INSTRUCTOR_TO_COURSE = "ADD_INSTRUCTOR_TO_COURSE";
 
+export const RESET_PAGINATED = "RESET_PAGINATED"
+
 
