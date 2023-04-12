@@ -94,7 +94,10 @@ function rootReducer(state = initialState, action) {
     case actions.GET_COURSES_OF_USER: 
       return {
         ...state,
-        courses: action.payload
+        courses: action.payload,
+        currentPage:  1,
+        pageSize:     9,
+        totalCourses: action.payload.length,
       }
       
     case actions.GET_SECTIONS_BY_COURSE_ID:
