@@ -8,7 +8,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { useState }      from "react";
 import { useDispatch }   from "react-redux";
 
-function Login() {
+function Login({onSuccess}) {
   const [code, setCode] = useState("");
   const [showModal, setShowModal] = useState(true); 
   const dispatch = useDispatch();
@@ -21,7 +21,7 @@ function Login() {
     event.preventDefault();
     try {
       const user = await dispatch(getUserByCode(code));
-
+      onSuccess()
       if (user !== null) {
         dispatch(loginSuccess(user));
         setShowModal(false);

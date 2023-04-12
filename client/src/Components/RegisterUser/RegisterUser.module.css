@@ -81,6 +81,11 @@
   box-shadow: 0px 6px 10px 0.3px #bcbbbb; 
 }
 
+.buttonClass {
+  color: #eb575a;
+  background-color: #eb575a;
+}
+
 @media(max-width: 670px) {
   .birthday-input-container input,
   .name-input-container input,

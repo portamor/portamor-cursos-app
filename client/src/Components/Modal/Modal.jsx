@@ -22,8 +22,12 @@ function Modal({ onClose }) {
     setShowContent(true);
   };
 
-  const registerForm = showRegisterForm ? <RegisterUser /> : null;
-  const loginForm = showLoginForm ? <Login /> : null;
+  const handleRegisterSuccess = () => {
+    onClose(); 
+  };
+
+  const registerForm = showRegisterForm ? <RegisterUser onSuccess={handleRegisterSuccess} /> : null;
+  const loginForm = showLoginForm ? <Login onSuccess={handleRegisterSuccess} /> : null;
   const content = showContent ? (registerForm || loginForm) : null;
 
   return (
@@ -37,7 +41,7 @@ function Modal({ onClose }) {
         {!showContent && (
           <div className={styles.buttonsContainer}>
             {!showLoginForm    && <CustomButton content={"Registrarme"} primary={false} onClick={onRegister} /> }
-            {!showRegisterForm && <CustomButton content={"Iniciar sesion"} primary={true} onClick={onLogin}  />  }
+            {!showRegisterForm && <CustomButton content={"Iniciar sesion"} primary={true} onClick={onLogin} />  }
           </div>
         )}
       </div>

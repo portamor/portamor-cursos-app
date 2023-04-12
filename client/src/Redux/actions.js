@@ -157,8 +157,6 @@ export function createCourse(payload, setActualForm) {
   return async function (dispatch) {
     try {
       const response = await axios.post("http://localhost:3001/courses", payload)
-
-      alert('Se ha creado el curso correctamente')
       
       //Change form in dashboard
       setActualForm(constants.SELECT_INSTRUCTOR_FORM);
@@ -174,8 +172,6 @@ export function createSection(name, courseId) {
   return async function (dispatch) {
     try {
       const createdSection = await axios.post(`http://localhost:3001/section/${courseId}`,{name} )
-
-      alert(`La sección ${createdSection.data.data.name} se ha creado con éxito`);
 
       return dispatch({ type: actions.CREATE_SECTION, payload: createdSection.data.data })
     } catch (error) {
@@ -198,8 +194,6 @@ export function createVideo(payload, sectionId, setActualForm) {
   return async (dispatch) => {
     try {
       const createdVideo = await axios.post(`http://localhost:3001/videos/${sectionId}`, payload);
-
-      alert(`El video ${createdVideo.data.data.videoTitle} fue creado con exito`);
 
       dispatch({ type: actions.CREATE_VIDEO, payload: createdVideo.data.data });
     } catch (error) {
@@ -247,8 +241,6 @@ export function addInstructorToCourse(instructorId, courseId, setActualForm) {
       const response = await axios.put(`http://localhost:3001/instructor/add-course/${instructorId}`, {
         courseId: courseId 
       })
-
-      alert(response.data.message)
 
       setActualForm(constants.SELECT_SECTION_FORM);
 
