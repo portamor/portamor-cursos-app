@@ -69,10 +69,20 @@ function rootReducer(state = initialState, action) {
         totalPages:   totalPages,
       };
 
+    case actions.RESET_PAGINATED: 
+      return {
+        currentPage:  1,
+        pageSize:     9,
+        totalCourses: action.payload.length,
+      }
+
     case 'GET_COURSES_BY_GENRE':
       return {
         ...state,
-        courses: action.payload
+        courses:      action.payload,
+        currentPage:  1,
+        pageSize:     9,
+        totalCourses: action.payload.length,
       };
 
     case actions.GET_COURSE_DETAIL:
@@ -80,29 +90,40 @@ function rootReducer(state = initialState, action) {
         ...state,
         courseDetail: action.payload,
       };
+    
+    case actions.GET_COURSES_OF_USER: 
+      return {
+        ...state,
+        courses: action.payload,
+        currentPage:  1,
+        pageSize:     9,
+        totalCourses: action.payload.length,
+      }
       
     case actions.GET_SECTIONS_BY_COURSE_ID:
       return {
         ...state,
         courseSections: action.payload,
       };
-      case actions.GET_SECTION_IN_CREATED_SECTIONS:
-        const sectionId = action.payload;
-  
-        const foundSection = state.createdSections.find((section) => section.id === sectionId)
-  
-        return {
-          ...state,
-          sectionToAddVideo: foundSection,
-        };
-        
-      case actions.GET_VIDEOS_OF_CREATED_SECTION:
-        const foundVideos = state.createdVideos.filter(video => video.SectionId === action.payload);
     
-        return {
-          ...state,
-          videosOfCreatedSection: foundVideos,
-        };
+    case actions.GET_SECTION_IN_CREATED_SECTIONS:
+      const sectionId = action.payload;
+
+      const foundSection = state.createdSections.find((section) => section.id === sectionId)
+
+      return {
+        ...state,
+        sectionToAddVideo: foundSection,
+      };
+        
+    case actions.GET_VIDEOS_OF_CREATED_SECTION:
+      const foundVideos = state.createdVideos.filter(video => video.SectionId === action.payload);
+  
+      return {
+        ...state,
+        videosOfCreatedSection: foundVideos,
+      };
+    
     case actions.GET_USERS_BY_COURSE_ID:
       return {
         ...state,

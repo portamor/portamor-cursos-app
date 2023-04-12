@@ -1,13 +1,14 @@
-import styles          from "./Paginated.module.css"
 import CourseCard      from "../CourseCard/CourseCard";
 import { getCourses }  from "../../Redux/actions";
+import NavFilter       from "../NavFilter/NavFilter";
 import React           from "react";
+import styles          from "./Paginated.module.css"
 import { useDispatch } from "react-redux";
 import { useEffect }   from "react";
 import { useSelector } from "react-redux";
 import { useState }    from "react";
 
-const Paginated = () => {
+const Paginated = ({ actualPage }) => {
   const dispatch      = useDispatch();
   const courses       = useSelector((state) => state.courses);
   const currentPage   = useSelector((state) => state.currentPage);
@@ -30,8 +31,8 @@ const Paginated = () => {
   );
 
   useEffect(() => {
-    dispatch(getCourses(currentPage, pageSize));
-  }, [dispatch, currentPage, pageSize]);
+    !courses.length && dispatch(getCourses(currentPage, pageSize));
+  }, [dispatch, courses.length, currentPage, pageSize]);
 
   const handlePrevPage = () => {
     const pastNumber = parseInt(currentPage) - 1;
@@ -77,6 +78,8 @@ const Paginated = () => {
 
         <button className={styles["paginated-number"]} onClick={handleNextPage}>{">"}</button>
       </div>
+
+      { actualPage=== "HOME" && <NavFilter actualPage={"HOME"}/> }
 
       <div className={styles["cards-container"]}>
         {Array.isArray(courses) && courses.map(el => 
