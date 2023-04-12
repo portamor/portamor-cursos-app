@@ -30,12 +30,12 @@ const NavFilter = ({ actualPage }) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [actualPage, dispatch, pageSize]);
+  }, [actualPage, dispatch, pageSize, selectedGenre]);
 
 
   function handleFilterClick(e) {
     if (e === "") {
-      dispatch(getCourses());
+      dispatch(getCourses(1, pageSize));
     } else {
       dispatch(getCoursesByGenre(e));
     }
