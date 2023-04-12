@@ -19,11 +19,11 @@ module.exports = sequelize => {
         allowNull: false,
       },
       image: {
-        type: DataTypes.STRING,
+        type: DataTypes.TEXT,
         allowNull: false,
       },
       genre: {
-        type: DataTypes.ENUM("Actividad Fisica", "Participacion Social", "Bienestar Mental", "Alimentacion Saludable"),
+        type: DataTypes.STRING,
         allowNull: true,
       },
       type: {

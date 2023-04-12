@@ -6,7 +6,8 @@ const videoController = require('../controllers/videosController')
 videoRouter.post('/:sectionId', videoController.postVideos)
 
 // --- GET
-videoRouter.get('/', videoController.getVideos)
+videoRouter.get('/',         videoController.getVideos)
+videoRouter.get('/:idVideo', videoController.getVideoById)
 
 // ---- PUT
 videoRouter.put('/:idVideo',         videoController.putVideoId)

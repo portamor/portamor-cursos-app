@@ -15,10 +15,18 @@ const createCourse = async (data) => {
   return createdCourse;
 };
 
-const getAllCourses = async () => {
-  const allCoursesFound = await Courses.findAll();
+const getAllCourses = async (page, size) => {
+  const allCoursesFound = await Courses.findAll({
+    limit: size,
+    offset: (page - 1) * size
+  });
 
   return allCoursesFound;
+};
+
+const getTotalOfCourses = async (page, size) => {
+  const totalCourses = await Courses.count();
+  return totalCourses;
 };
 
 const getCourseById = async (id) => {
@@ -32,6 +40,14 @@ const getCourseById = async (id) => {
 const getCourseByTitle = async (title) => {
   const foundCourse = await Courses.findAll({
     where: { title: { [Op.iLike]: `%${title}%` } },
+    order: [["title", "ASC"]],
+  });
+  return foundCourse;
+};
+
+const getCourseByTitleExactly = async (title) => {
+  const foundCourse = await Courses.findAll({
+    where: { title: title },
     order: [["title", "ASC"]],
   });
   return foundCourse;
@@ -51,10 +67,10 @@ const getCourseByType = async (type) => {
 
 const getCourseBygenre = async (genre) => {
   const foundCourse = await Courses.findAll({
-    where: { genre: { [Op.iLike]: `${genre}`} },
+    where: { genre: genre },
     order: [["title", "ASC"]],
   });
-  
+
   return foundCourse;
 };
 
@@ -83,6 +99,7 @@ const restoreACourse = async (id) => {
 module.exports = {
   getCourseById,
   getAllCourses,
+  getTotalOfCourses,
   getCourseByTitle,
   getCourseByType,
   getCourseBygenre,
@@ -90,4 +107,5 @@ module.exports = {
   updateCourse,
   deleteACourse,
   restoreACourse,
+  getCourseByTitleExactly
 };

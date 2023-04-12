@@ -1,13 +1,24 @@
 import React  from "react";
 import styles from "./CustomButton.module.css";
 
-const CustomButton = ({content, primary, type}) => {
-  const customCssClassName = primary === true ? "important" : "secondary";
+const CustomButton = ({content, primary, type, name, disabled, onClick}) => {
+  let customCssClassName = primary === true ? "important" : "secondary";
+
+  if(type === "submit") customCssClassName += "-submit";
   
+  if(type === "submit" && primary === false) customCssClassName += "-secondary";
+
+  if(disabled) customCssClassName += "-secondary";
+
+  if(content === "VOLVER") customCssClassName = "undisabled"
+
   return (
-    <button 
-    type={type}
-    className={styles["custom-button-main-" + customCssClassName]}>
+    <button
+    name      = {name}
+    disabled  = {disabled}
+    type      = {type}
+    onClick   = {onClick}
+    className = {styles["custom-button-main-" + customCssClassName]} >
       {content}
     </button>
   )
