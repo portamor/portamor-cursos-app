@@ -84,7 +84,7 @@ const RegisterUser = () => {
       <div className={Styles["birthday-input-container"]}>
         <label for="birthday">Fecha de cumpleaños: </label>
         <input type="date" id="birthday" value={birthday} onChange={(event) => setBirthday(event.target.value)} />
-        {formErrors.brithday && <p className={Styles["error-message"]}>{formErrors.brithday}</p>}
+        {formErrors.birthday && <p className={Styles["error-message"]}>{formErrors.birthday}</p>}
       </div>
       <CustomButton type={"submit"} content={"Registrarme"} primary={true} disabled={false} />
     </form>

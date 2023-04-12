@@ -11,14 +11,24 @@ import { useDispatch }   from "react-redux";
 function Login() {
   const [code, setCode] = useState("");
   const [showModal, setShowModal] = useState(true); 
+  const [codeError, setCodeError] = useState(null);
   const dispatch = useDispatch();
 
   const handleCodeChange = (event) => {
     setCode(event.target.value);
   };
 
+  const validateCode = (code) => {
+    const codeRegex = /^[a-zA-Z0-9]{6,}$/;
+    return codeRegex.test(code);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!validateCode(code)) {
+      setCodeError("El código debe contener solo letras y números y tener al menos 6 caracteres.");
+      return;
+    }
     try {
       const user = await dispatch(getUserByCode(code));
 
@@ -44,7 +54,6 @@ function Login() {
       console.error(error);
     }
   };
-  
   return (
     <div>
       {showModal && (
