@@ -18,7 +18,7 @@ const NavFilter = ({ actualPage }) => {
 
 
   useEffect(() => {
-    actualPage === "HOME"  && dispatch(getCourses(1, pageSize))
+    actualPage === "HOME" && selectedGenre === "" && dispatch(getCourses(1, pageSize))
 
     function handleResize() {
       setIsMobile(window.innerWidth < 839);
