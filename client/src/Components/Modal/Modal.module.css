@@ -80,3 +80,19 @@
 .registerButton:hover {
   background-color: rgba(0, 0, 0, 0.4);
 }
+.linkModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;    
+  margin: 0 auto;
+  width: 130px;
+  height: 57px;
+  border-radius: 16px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18.4302px;
+  line-height: 33px;
+  color: #eb575a;
+  text-decoration: none;
+}
