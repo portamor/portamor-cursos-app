@@ -4,6 +4,7 @@ import React        from 'react';
 import RegisterUser from '../RegisterUser/RegisterUser';
 import styles       from './Modal.module.css';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function Modal({ onClose }) {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -37,6 +38,7 @@ function Modal({ onClose }) {
           X
         </button>
         <h1>Bienvenidos!</h1>
+        <Link className={styles.linkModal} to="/"> Inicio</Link>
         {content && <div className={styles.modalContent}>{content}</div>}
         {!showContent && (
           <div className={styles.buttonsContainer}>
@@ -45,6 +47,7 @@ function Modal({ onClose }) {
           </div>
         )}
       </div>
+      
     </div>
   );
 }

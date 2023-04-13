@@ -5,9 +5,9 @@ const reviewRouter     = Router()
 // ---- POST
 reviewRouter.post('/', reviewController.postReview);
 //----- GET
-reviewRouter.get('/:courseId',  reviewController.getAllReviewsByCourseId)
+reviewRouter.get('/:courseId', reviewController.getAllReviewsByCourseId)
 //----- PUT
-reviewRouter.put('/:reviewId', reviewController.putReview)
+reviewRouter.put('/:reviewId',         reviewController.putReview)
 reviewRouter.put('/restore/:reviewId', reviewController.restoreReview)
 //----- DELETE
 reviewRouter.delete('/:reviewId', reviewController.deleteReview)

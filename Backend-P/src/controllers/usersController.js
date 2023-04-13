@@ -59,6 +59,24 @@ const getUsersByCourseId = async (req, res) => {
   }
 };
 
+const getCoursesOfUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    
+    const foundUser = await userService.userById(userId);
+
+    if(!foundUser) throw new Error(`No se ha encontrado ningun usuario con el ID: ${userId}`)
+
+    const { Courses } = foundUser;
+
+    if(!Courses.length) throw new Error("No se ha encontrado ningun curso al que esté inscripto");
+
+    res.status(200).json({ message: "Cursos encontrados con exito", data: Courses })
+  } catch (error) {
+    res.status(404).json({message: error.message})
+  }
+}
+
 const postUser = async (req, res) => {
   const { name, lastName, birthday } = req.body;
   try {
@@ -167,6 +185,7 @@ module.exports = {
   postUser,
   getUsers,
   getUsersByCourseId,
+  getCoursesOfUser,
   userPut,
   postInscription,
   getUserById,

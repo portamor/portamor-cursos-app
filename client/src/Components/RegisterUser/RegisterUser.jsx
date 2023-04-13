@@ -128,6 +128,7 @@ const RegisterUser = ({ onSuccess }) => {
       </div>
       <div className={Styles["birthday-input-container"]}>
         <label for="birthday">Fecha de cumpleaños: </label>
+
         <input
           type="date"
           id="birthday"
@@ -137,6 +138,7 @@ const RegisterUser = ({ onSuccess }) => {
         {formErrors.brithday && (
           <p className={Styles["error-message"]}>{formErrors.brithday}</p>
         )}
+
       </div>
       <CustomButton
         type={"submit"}
