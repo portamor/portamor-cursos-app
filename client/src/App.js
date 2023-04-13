@@ -10,6 +10,7 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import Chat from "./Components/ChatSala/ChatSala";
 import Certificate from "./Components/Certificate/Certificate";
 import Modal from "./Components/Modal/Modal";
+import MyCourses from "./Components/MyCourses/MyCourses";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -30,6 +31,7 @@ function App() {
               <Route exact path="/certificado" element={<Certificate />} />
               <Route exact path="/dashboard" element={<Dashboard />} />
               <Route exact path="/chat" element={<Chat />} />
+              <Route exact path="/cursos" Component={MyCourses} />
             </>
           ) : (
             <Route path="*" element={<Modal onClose={() => setShowModal(false)} />} />
