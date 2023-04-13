@@ -1,6 +1,7 @@
 //---- GET
 export const GET_COURSES                     = "GET_COURSES";
 export const GET_COURSE_DETAIL               = "GET_COURSE_DETAIL";
+export const GET_COURSES_OF_USER             = "GET_COURSES_OF_USER"
 export const GET_INSTRUCTOR_BY_ID            = "GET_INSTRUCTOR_BY_ID";
 export const GET_REVIEWS_BY_COURSE_ID        = "GET_REVIEWS_BY_COURSE_ID";
 export const GET_SECTIONS_BY_COURSE_ID       = "GET_SECTIONS_BY_COURSE_ID";
@@ -20,5 +21,7 @@ export const CREATE_REVIEW      = "CREATE_REVIEW";
 
 //---- PUT
 export const ADD_INSTRUCTOR_TO_COURSE = "ADD_INSTRUCTOR_TO_COURSE";
+
+export const RESET_PAGINATED = "RESET_PAGINATED"
 
 

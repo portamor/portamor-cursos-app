@@ -1,0 +1,37 @@
+@keyframes opacityin {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.my-courses-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 100px;
+  animation-name: opacityin;
+  animation-duration: 1s;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding-top: 30px;
+  list-style-type: none;
+}
+
+
+@media (max-width: 768px) {
+  .cards-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: inherit;
+  }
+}

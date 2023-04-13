@@ -6,11 +6,11 @@ const courseRouter      = Router();
 courseRouter.post("/", coursesController.postCourse);
 
 // ---- GET
-courseRouter.get("/",       coursesController.getAllCourses);
-courseRouter.get("/id/:id", coursesController.getCourseById)
-courseRouter.get("/title",  coursesController.getCourseByTitle);
-courseRouter.get("/type",   coursesController.getCourseByType);
-courseRouter.get("/genre/:genre",  coursesController.getCourseByGenre);
+courseRouter.get("/",             coursesController.getAllCourses);
+courseRouter.get("/id/:id",       coursesController.getCourseById)
+courseRouter.get("/title",        coursesController.getCourseByTitle);
+courseRouter.get("/type",         coursesController.getCourseByType);
+courseRouter.get("/genre/:genre", coursesController.getCourseByGenre);
 
 // ---- PUT
 courseRouter.put("/:id",         coursesController.putCourse);
