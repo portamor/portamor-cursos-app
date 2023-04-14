@@ -80,6 +80,7 @@
 .registerButton:hover {
   background-color: rgba(0, 0, 0, 0.4);
 }
+
 .linkModal {
   display: flex;
   justify-content: center;
@@ -96,3 +97,4 @@
   color: #eb575a;
   text-decoration: none;
 }
+

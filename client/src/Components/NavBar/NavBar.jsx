@@ -1,13 +1,13 @@
-import { logout}       from "../../Redux/actions";
-import {loginSuccess}  from "../../Redux/actions";
-import Modal           from "../Modal/Modal";
-import {NavLink}       from "react-router-dom";
-import React           from "react";
-import Styles          from "./Navbar.module.css";
+import { logout } from "../../Redux/actions";
+import { loginSuccess } from "../../Redux/actions";
+import Modal from "../Modal/Modal";
+import { NavLink } from "react-router-dom";
+import React from "react";
+import Styles from "./Navbar.module.css";
 import { useDispatch } from "react-redux";
-import { useEffect }   from "react";
-import { useRef }      from "react";
-import { useState }    from "react";
+import { useEffect } from "react";
+import { useRef } from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export const NavBar = () => {
@@ -18,6 +18,8 @@ export const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const user = useSelector((state) => state.user);
+  const isAdmin = user?.admin;
 
   useEffect(() => {
     const isLoggedInInLocalStorage = localStorage.getItem("isLoggedIn");
@@ -33,18 +35,24 @@ export const NavBar = () => {
       }
     }
   }, []);
-  
 
-  const handleLogout = () => {
+
+  const handleLogout = (e) => {
+    e.preventDefault()
     dispatch(logout());
-    return window.location.replace("/");
+        // Manipula el historial del navegador
+        window.history.pushState({}, '', '/');
+        // Recarga la página sin renderizar la aplicación
+        window.location.reload();
+    // return window.location.replace("/");
   };
 
-  const handleLoginButtonClick = () =>setShowModal(true);
+
+  const handleLoginButtonClick = () => setShowModal(true);
 
   const handleCloseModal = () => setShowModal(false);
 
-  const handleRegisterButtonClick = () => setShowModal(false); 
+  const handleRegisterButtonClick = () => setShowModal(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 975);
@@ -84,7 +92,7 @@ export const NavBar = () => {
       />
       <div
         className={`${Styles["nav-menu"]} ${menuOpen ? Styles["active"] : ""}`}
-        ref={navMenuRef} > 
+        ref={navMenuRef} >
         <NavLink
           className={Styles["nav-link"]}
           exact
@@ -101,13 +109,26 @@ export const NavBar = () => {
         </NavLink>
 
 
+        {isAdmin && (
+          <NavLink
+            className={Styles["nav-link"]}
+            exact
+            to="/dashboard"
+            activeClassName="active"
+          >
+            Admin
+          </NavLink>
+        )}
+
+
+
         {isLoggedIn ? (
-        <span onClick={handleLogout} className={Styles["nav-link"]}>Cerrar sesión</span>
-        ) 
-        : 
-        <span onClick={() => setShowModal(true)} className={Styles["nav-link"]}>Iniciar sesión</span>
+          <span onClick={handleLogout} className={Styles["nav-link"]}>Cerrar sesión</span>
+        )
+          :
+          <span onClick={() => setShowModal(true)} className={Styles["nav-link"]}>Iniciar sesión</span>
         }
-        
+
         {showModal && (
           <Modal onClose={handleCloseModal} onRegister={handleRegisterButtonClick} onLogin={handleLoginButtonClick}>
           </Modal>

@@ -8,7 +8,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { useState }      from "react";
 import { useDispatch }   from "react-redux";
 
-function Login() {
+function Login({onSuccess}) {
   const [code, setCode] = useState("");
   const [showModal, setShowModal] = useState(true); 
   const [codeError, setCodeError] = useState(null);
@@ -27,12 +27,18 @@ function Login() {
     event.preventDefault();
     if (!validateCode(code)) {
       setCodeError("El código debe contener solo letras y números y tener al menos 6 caracteres.");
-      return;
+      Swal.fire({
+        icon: 'error',
+        title: codeError,
+        text: 'El código ingresado no es válido. Por favor, intenta nuevamente.',
+        confirmButtonText: 'Aceptar'
+      });
+      return 
     }
     try {
       const user = await dispatch(getUserByCode(code));
-
-      if (user !== null) {
+      onSuccess()
+      if (user) {
         dispatch(loginSuccess(user));
         setShowModal(false);
         Swal.fire({

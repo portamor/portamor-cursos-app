@@ -1,6 +1,7 @@
 import axios          from "axios";
 import * as actions   from "../constants/actionsContants"
 import * as constants from "../constants";
+import Swal from "sweetalert2";
 
 export function getCourses(page, size) {
   return async function (dispatch) {
@@ -33,7 +34,23 @@ export function getCourseDetail(courseId) {
       console.log(error.message);
     }
   };
-}
+};
+
+export function getVideosCourse(id) {
+  return async function (dispatch) {
+    try {
+      const videosOfCourse = await axios.get(
+        `http://localhost:3001/courses/videos/${id}`
+      );
+      return dispatch({
+        type: actions.GET_VIDEOS_COURSE,
+        payload: videosOfCourse.data.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
 export function getCoursesOfUser(userId) {
   return async function (dispatch) {
@@ -146,7 +163,7 @@ export const getUserByCode = (code) => async (dispatch) => {
     }
   } catch (error) {
     dispatch(loginFail(error.message));
-    throw error;
+    return null
   }
 };
 
@@ -170,14 +187,13 @@ export const logout = () => {
 export const loginFail = (error) => ({
   type: 'LOGIN_FAIL',
   payload: error,
+  
 });
 
 export function createCourse(payload, setActualForm) {
   return async function (dispatch) {
     try {
       const response = await axios.post("http://localhost:3001/courses", payload)
-
-      alert('Se ha creado el curso correctamente')
       
       //Change form in dashboard
       setActualForm(constants.SELECT_INSTRUCTOR_FORM);
@@ -193,8 +209,6 @@ export function createSection(name, courseId) {
   return async function (dispatch) {
     try {
       const createdSection = await axios.post(`http://localhost:3001/section/${courseId}`,{name} )
-
-      alert(`La sección ${createdSection.data.data.name} se ha creado con éxito`);
 
       return dispatch({ type: actions.CREATE_SECTION, payload: createdSection.data.data })
     } catch (error) {
@@ -217,8 +231,6 @@ export function createVideo(payload, sectionId, setActualForm) {
   return async (dispatch) => {
     try {
       const createdVideo = await axios.post(`http://localhost:3001/videos/${sectionId}`, payload);
-
-      alert(`El video ${createdVideo.data.data.videoTitle} fue creado con exito`);
 
       dispatch({ type: actions.CREATE_VIDEO, payload: createdVideo.data.data });
     } catch (error) {
@@ -267,8 +279,6 @@ export function addInstructorToCourse(instructorId, courseId, setActualForm) {
         courseId: courseId 
       })
 
-      alert(response.data.message)
-
       setActualForm(constants.SELECT_SECTION_FORM);
 
       dispatch({ type: actions.ADD_INSTRUCTOR_TO_COURSE, payload: response.data.data });
@@ -285,7 +295,7 @@ export function createReview(payload) {
 
       dispatch({ type: actions.CREATE_REVIEW, payload: createdReview.data.data });
     } catch (error) {
-      console.log(error.message);
+    // console.log(error.message);
     }
   };
 }
@@ -300,4 +310,37 @@ export function getAllInstructors(payload) {
       console.log(error.message);
     }
   };
+}
+
+export function createVideoState (payload) {
+  return async (dispatch) => {
+    try {
+      const createVideoState = await axios.post("http://localhost:3001/state", payload)
+      dispatch({type: actions.POST_VIDEOS_STATE, payload: createVideoState.data.data })
+    } catch (error) {
+      console.log(error.message);
+    }  
+  }
+}
+
+export function getVideoState(userId, videoId) {
+  return async (dispatch) => {
+    try {
+      const getVideoState = await axios.get(`http://localhost:3001/state/${userId}/${videoId}`)
+      dispatch({type: actions.GET_VIDEOS_STATE, payload: getVideoState.data.data })
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+};
+
+export function getVideoStateCourse(userId, courseId) {
+  return async (dispatch) => {
+    try {
+      const getStateCourse = await axios.get(`http://localhost:3001/state/${userId}/${courseId}`)
+      dispatch({type: actions.GET_VIDEOS_STATE_COURSE, payload: getStateCourse.data.data })
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 }
