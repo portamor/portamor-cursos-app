@@ -1,6 +1,7 @@
 import * as actions     from "../../Redux/actions";
 import CourseCard       from "../CourseCard/CourseCard";
 import certificateImg   from "../../images/certificate.png"
+import * as constants  from "../../constants/classDetailConstants";
 import FormInscription  from "../FormInsciption/FormInscription";
 import InstructorDetail from "../InstructorDetail/InstructorDetail";
 import Modal            from "../Modal/Modal";
@@ -16,18 +17,19 @@ import { useSelector }  from "react-redux";
 import { useState }     from 'react';
 import usersImg         from "../../images/users-icon.svg"
 import * as utils       from "../../utils"
+import SelectedContent from "./SelectedContent/SelectedContent";
 
 export const CourseDetail = () => {
   // const [showModal, setShowModal] = useState(false);
   // const isLoggedIn = useSelector((state) => state.isLoggedIn);
   // const [showInscriptionModal, setShowInscriptionModal] = useState(false);
-  
   const dispatch = useDispatch();
   const match    = useMatch('/detalle-curso/:courseId');
   const courseId = match.params.courseId;
 
   const courseDetail    = useSelector((state) => state.courseDetail);
   const courseSections  = useSelector((state) => state.courseSections);
+  const courseUsers     = useSelector((state) => state.courseUsers);
   const instructor      = useSelector((state) => state.courseInstructor);
   const instructorStars = utils.getStarsRating(instructor.score)
   
@@ -35,8 +37,13 @@ export const CourseDetail = () => {
   useEffect(() => {
     dispatch(actions.getCourseDetail(courseId));
     dispatch(actions.getInstructorById(courseDetail.InstructorId));  
-    dispatch(actions.getSectionsByCourseId(courseId)) 
+    dispatch(actions.getSectionsByCourseId(courseId));
+    dispatch(actions.getUsersByCourseId(courseId));
   }, [courseId, dispatch, courseDetail.InstructorId])
+
+  const [selectedButton, setSelectedButton] = useState(constants.VISION_GENERAL);
+
+  const handleSelectContent = (selectedButtonContent) => setSelectedButton(selectedButtonContent);
 
 
   // function handleInscriptionModalClick() {
@@ -54,7 +61,6 @@ export const CourseDetail = () => {
       <div className={styles["course-detail-head"]}>
         <div className={styles["course-detail-head-container"]}>
 
-
           <div className={styles["head-instructor-container"]}>
             <div className={styles["instructor-name-container"]}>
               <img src={instructor.profile_picture} alt="instructor-course-detail" className={styles["instructor-head-picture"]}/>
@@ -66,29 +72,35 @@ export const CourseDetail = () => {
             <span className={styles["stars-container"]}> {instructorStars} </span>
           </div>
 
-
-
           <div className={styles["course-detail-h1-container"]}>
             <h1 className={styles["course-title"]}>{courseDetail.title}</h1>
           </div>
 
           <div className={styles["course-detail-students-container"]}>
             <img className={styles["picture"]} src={usersImg} alt="user-card"/>
-            <h3>0 Estudiantes</h3>
+            <h3>{courseUsers.length} Estudiantes</h3>
           </div>
         </div>
       </div>
 
+      <div className={styles["buttons-select-container"]}>
+        <div className={styles["buttons-container"]}>
+          <button onClick={() => handleSelectContent(constants.VISION_GENERAL)}>Vision General</button>
+          <button onClick={() => handleSelectContent(constants.PREGUNTAS_FRECUENTES)}>Preguntas Frecuentes</button>
+          <button onClick={() => handleSelectContent(constants.COMENTARIOS)}>Comentarios</button>
+        </div>
+      </div>
+
+      
+
       <div className={styles["course-detail-container"]}>
-        <div className={styles["course-detail-info-container"]}>
+        {/* <div className={styles["course-detail-info-container"]}>
           <div className={styles["course-detail-info"]}>
             <div className={styles["course-detail-h1-container"]}>
               <h1>Introduccion</h1>
             </div>
             <h4>¡Bienvenidos y bienvenidas a nuestro Taller de {courseDetail.title}!</h4>
-            <span>
-              Curso donde se proporcionará conocimientos necesarios y actualizados sobre nutrición y alimentación en el adulto mayor, así como herramientas de trabajo útiles, que permitan conocer el estado nutricional en la tercera edad y recomendaciones en distintas situaciones fisiopatológicas (Enfermedades Crónicas No Transmisibles),  de forma que puedan aplicarse.
-            </span>
+            <span>{courseDetail.description}</span>
           </div>
           
           <div className={styles["course-detail-info-instructor"]}>
@@ -169,7 +181,15 @@ export const CourseDetail = () => {
             id={courseDetail.id}
             image={courseDetail.image}
             title={courseDetail.title} />
-        </div>
+        </div> */}
+
+      {
+        selectedButton && 
+        <SelectedContent 
+          courseId={courseId}
+          courseDetail={courseDetail} 
+          selectedButtonContent={selectedButton} />
+      }
       </div>
         
     </div>

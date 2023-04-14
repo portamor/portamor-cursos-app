@@ -94,6 +94,20 @@
   color: #000;
 }
 
+.buttons-select-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+}
+
+.buttons-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .course-detail-container {
   display: flex;
 }
@@ -109,6 +123,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .course-detail-h1-container {
@@ -126,8 +141,7 @@
   color: #000;
   font-size: 18px;
   font-weight: 500;
-  width: 65%;
-  height: fit-content;
+  max-width: 65%;
   margin-bottom: 20px;
 }
 
@@ -182,7 +196,6 @@
 .sections-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .course-detail-sections,
