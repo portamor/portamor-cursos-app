@@ -14,7 +14,7 @@ import { useDispatch }  from "react-redux";
 import { useEffect }    from 'react';
 import { useMatch }     from "react-router-dom";
 import { useSelector }  from "react-redux";
-
+import CourseDetailCard from "../CourseDetailCard/CourseDetailCard";
 
 export default function GeneralVision() {
   const dispatch = useDispatch();
@@ -119,7 +119,7 @@ export default function GeneralVision() {
 
         <div className={styles["course-space"]}></div>
         <div className={styles["course-card-container"]}>
-          <CourseCard
+          <CourseDetailCard 
             key={courseDetail.id}
             id={courseDetail.id}
             image={courseDetail.image}

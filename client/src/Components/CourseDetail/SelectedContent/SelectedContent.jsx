@@ -20,7 +20,7 @@ const SelectedContent = ({ courseDetail, courseId, selectedButtonContent }) => {
 
   switch (selectedButtonContent) {
     case constants.VISION_GENERAL:
-      return<GeneralVision />
+      return <GeneralVision />
 
     case constants.COMENTARIOS:
       if(!courseReviews.length) dispatch(actions.getReviewsByCourseId(courseId));

@@ -77,9 +77,15 @@ export const CourseDetail = () => {
 
       <div className={styles["buttons-select-container"]}>
         <div className={styles["buttons-container"]}>
-          <button onClick={() => handleSelectContent(constants.VISION_GENERAL)}>Vision General</button>
-          <button onClick={() => handleSelectContent(constants.PREGUNTAS_FRECUENTES)}>Preguntas Frecuentes</button>
-          <button onClick={() => handleSelectContent(constants.COMENTARIOS)}>Comentarios</button>
+          <button 
+          className={constants.VISION_GENERAL === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
+          onClick={() => handleSelectContent(constants.VISION_GENERAL)}>Vision General</button>
+          <button 
+          className={constants.PREGUNTAS_FRECUENTES === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
+          onClick={() => handleSelectContent(constants.PREGUNTAS_FRECUENTES)}>Preguntas Frecuentes</button>
+          <button 
+          className={constants.COMENTARIOS === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
+          onClick={() => handleSelectContent(constants.COMENTARIOS)}>Comentarios</button>
         </div>
       </div>
 

@@ -116,6 +116,24 @@
   justify-content: center;
 }
 
+.selected-button, 
+.button-not-selected {
+  background-color: transparent;
+  border: none;
+  border-top: solid 5px #EB575A;
+  cursor: pointer;
+  font-size: 18px;
+  height: fit-content;
+  width: fit-content;
+  padding: 20px 30px;
+  margin-top: -22px;
+}
+
+.button-not-selected {
+  background-color: rgba(230, 229, 218, 0.73);
+  border-top: none;
+}
+
 .course-detail-container {
   display: flex;
 }
