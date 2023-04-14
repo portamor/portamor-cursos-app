@@ -1,0 +1,62 @@
+@keyframes opacityin {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.course-accordion-head{
+  font-size: 24px;
+  text-align: center;
+  height: 85px;
+  font-weight: 700;
+  animation-name: opacityin;
+  animation-duration: 1s;
+}
+
+.course-accordion {
+  width: 500px;
+  /* background: #D9D9D9; */
+}
+
+@media(max-width: 769px) {
+  .course-accordion {
+    width: 370px;
+  }
+}
+
+.course-accordion h2{
+  margin: 0;
+}
+
+.course-accordion-summary {
+  background-color: #f4f2f2;
+}
+
+.course-accordion-summary-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.course-accordion-li {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: solid 2px#f4f2f2;
+}
+
+.course-accordion-li-div {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 15px;
+}
+
+.course-accordion-class-link {
+  text-decoration: none;
+  color: #000;
+}
+

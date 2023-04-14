@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;600&display=swap');
 
 @keyframes opacityin {
   from {
@@ -21,7 +21,7 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   animation-name: opacityin;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
 }
 
 @media(max-width: 750px) {
