@@ -37,10 +37,16 @@ export const NavBar = () => {
   }, []);
 
 
-  const handleLogout = () => {
+  const handleLogout = (e) => {
+    e.preventDefault()
     dispatch(logout());
-    return window.location.replace("/");
+        // Manipula el historial del navegador
+        window.history.pushState({}, '', '/');
+        // Recarga la página sin renderizar la aplicación
+        window.location.reload();
+    // return window.location.replace("/");
   };
+
 
   const handleLoginButtonClick = () => setShowModal(true);
 

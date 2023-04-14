@@ -1,6 +1,7 @@
 import axios          from "axios";
 import * as actions   from "../constants/actionsContants"
 import * as constants from "../constants";
+import Swal from "sweetalert2";
 
 export function getCourses(page, size) {
   return async function (dispatch) {
@@ -162,7 +163,7 @@ export const getUserByCode = (code) => async (dispatch) => {
     }
   } catch (error) {
     dispatch(loginFail(error.message));
-    throw error;
+    return null
   }
 };
 
@@ -186,6 +187,7 @@ export const logout = () => {
 export const loginFail = (error) => ({
   type: 'LOGIN_FAIL',
   payload: error,
+  
 });
 
 export function createCourse(payload, setActualForm) {
