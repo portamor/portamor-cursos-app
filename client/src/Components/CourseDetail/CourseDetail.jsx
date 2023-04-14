@@ -12,9 +12,6 @@ import * as utils      from "../../utils"
 import SelectedContent from "./SelectedContent/SelectedContent";
 
 export const CourseDetail = () => {
-  // const [showModal, setShowModal] = useState(false);
-  // const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  // const [showInscriptionModal, setShowInscriptionModal] = useState(false);
   const dispatch = useDispatch();
   const match    = useMatch('/detalle-curso/:courseId');
   const courseId = match.params.courseId;
@@ -36,16 +33,6 @@ export const CourseDetail = () => {
   const [selectedButton, setSelectedButton] = useState(constants.VISION_GENERAL);
 
   const handleSelectContent = (selectedButtonContent) => setSelectedButton(selectedButtonContent);
-
-
-  // function handleInscriptionModalClick() {
-  //   if (isLoggedIn) {
-  //     setShowInscriptionModal(true);
-  //   } else {
-  //     setShowModal(true);
-  //   }
-  // }
-
 
   return (
     <div className={styles["course-detail-main"]}>

@@ -17,6 +17,20 @@ import { useSelector }  from "react-redux";
 import CourseDetailCard from "../CourseDetailCard/CourseDetailCard";
 
 export default function GeneralVision() {
+  // const [showModal, setShowModal] = useState(false);
+  // const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  // const [showInscriptionModal, setShowInscriptionModal] = useState(false);
+
+  
+
+  // function handleInscriptionModalClick() {
+  //   if (isLoggedIn) {
+  //     setShowInscriptionModal(true);
+  //   } else {
+  //     setShowModal(true);
+  //   }
+  // }
+
   const dispatch = useDispatch();
   const match    = useMatch('/detalle-curso/:courseId');
   const courseId = match.params.courseId;
@@ -121,9 +135,7 @@ export default function GeneralVision() {
         <div className={styles["course-card-container"]}>
           <CourseDetailCard 
             key={courseDetail.id}
-            id={courseDetail.id}
-            image={courseDetail.image}
-            title={courseDetail.title} />
+            courseId={courseId} />
         </div>
     </>
     

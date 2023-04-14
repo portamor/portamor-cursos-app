@@ -1,16 +1,12 @@
-
+import * as actions    from "../../../Redux/actions";
+import * as constants  from "../../../constants/classDetailConstants";
+import CourseCard      from "../../CourseCard/CourseCard";
+import GeneralVision   from "../GeneralVision/GeneralVision";
 import React           from "react";
+import ReviewCard      from "../../ReviewCard/ReviewCard";
+import styles          from "./SelectedContent.module.css";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-//----Components
-import ReviewCard       from "../../ReviewCard/ReviewCard";
-import GeneralVision    from "../GeneralVision/GeneralVision";
-//----Actions, Utils, Constants
-import * as constants from "../../../constants/classDetailConstants";
-import * as actions   from "../../../Redux/actions";
-//styles
-import styles from "./SelectedContent.module.css";
-import CourseCard from "../../CourseCard/CourseCard";
 
 const SelectedContent = ({ courseDetail, courseId, selectedButtonContent }) => {
   const dispatch = useDispatch();
