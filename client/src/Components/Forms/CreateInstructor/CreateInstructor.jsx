@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useState }    from "react";
 import * as utils      from "../../../utils"
+import Swal from "sweetalert2";
 
 const CreateInstructor = ({ setActualForm }) => {
   const dispatch       = useDispatch();
@@ -85,8 +86,12 @@ const CreateInstructor = ({ setActualForm }) => {
     } 
 
     dispatch(actions.createInstructor(formValues, setActualForm));
-
-    setIsDisabledSubmit(true);
+    //   Swal.fire({
+    //     icon: "success",
+    //     title: `Instructor creado con éxito`,
+    //     showConfirmButton: false,
+    //     timer: 1500})
+    // setIsDisabledSubmit(true);
 
     setFormValues({
       name: "",

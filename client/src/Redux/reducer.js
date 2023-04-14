@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 import * as actions from "../constants/actionsContants";
 
 const initialState = {
@@ -16,7 +17,6 @@ const initialState = {
   currentPage:            1,
   error:                  null,
   isLoggedIn:             false,
-  error:                  null,
   user:                   [],
   user:                   null,
   sectionToAddVideo:      {},
@@ -24,6 +24,9 @@ const initialState = {
   totalCourses:           0,
   totalPages:             1,
   videoDetail:            {},
+  videosOfCourse:         [],
+  videoState:             [],
+  videoStateCourse:       []
 };
 
 function rootReducer(state = initialState, action) {
@@ -184,6 +187,23 @@ function rootReducer(state = initialState, action) {
         ...state,
         courseReviews: [...state.courseReviews, action.payload],
       };
+
+      case actions.GET_VIDEOS_COURSE:
+        return {
+          ...state,
+          videosOfCourse: [action.payload],
+        };
+
+        case actions.GET_VIDEOS_STATE:
+          return {
+            ...state,
+            videoState: [ action.payload],
+          };
+          case actions.GET_VIDEOS_STATE_COURSE:
+            return {
+              ...state,
+              videoStateCourse: [ action.payload],
+            };
     
     default:
       return state;

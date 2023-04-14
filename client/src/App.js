@@ -15,6 +15,8 @@ import MyCourses from "./Components/MyCourses/MyCourses";
 function App() {
   const [showModal, setShowModal] = useState(false);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const user = useSelector((state) => state.user);
+  const isAdmin = user?.admin;
 
   return (
     <div>
@@ -29,7 +31,6 @@ function App() {
               <Route exact path="/clase/:courseId/:videoId" element={<ClassDetail />} />
               <Route exact path="/certificadown" element={<DownloadCertificate />} />
               <Route exact path="/certificado" element={<Certificate />} />
-              <Route exact path="/dashboard" element={<Dashboard />} />
               <Route exact path="/chat" element={<Chat />} />
               <Route exact path="/cursos" Component={MyCourses} />
             </>
@@ -37,6 +38,9 @@ function App() {
             <Route path="*" element={<Modal onClose={() => setShowModal(false)} />} />
 
           )}
+           {isAdmin && (
+          <Route exact path="/dashboard" element={<Dashboard />} />
+           )}
         </Routes>
       </BrowserRouter>
       {showModal && (

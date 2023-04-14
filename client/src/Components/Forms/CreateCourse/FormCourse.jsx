@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import React from "react";
 import styles from "./formCourse.module.css";
+import Swal from "sweetalert2";
 
 const FormCourse = ({ setActualForm }) => {
   const dispatch = useDispatch();
@@ -29,7 +30,21 @@ const FormCourse = ({ setActualForm }) => {
 
   const onSubmit = (data) => {
     data.image = formValues.image
-    dispatch(createCourse(data, setActualForm));
+    const response = dispatch(createCourse(data, setActualForm));
+    if (response !== null) {
+      Swal.fire({
+        icon: "success",
+        title: `Curso creado con éxito`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Hubo un error al crear el curso",
+        confirmButtonText: "Aceptar",
+      });
+    }
     reset();
   };
 
