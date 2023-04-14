@@ -27,12 +27,18 @@ function Login({onSuccess}) {
     event.preventDefault();
     if (!validateCode(code)) {
       setCodeError("El código debe contener solo letras y números y tener al menos 6 caracteres.");
-      return;
+      Swal.fire({
+        icon: 'error',
+        title: codeError,
+        text: 'El código ingresado no es válido. Por favor, intenta nuevamente.',
+        confirmButtonText: 'Aceptar'
+      });
+      return 
     }
     try {
       const user = await dispatch(getUserByCode(code));
       onSuccess()
-      if (user !== null) {
+      if (user) {
         dispatch(loginSuccess(user));
         setShowModal(false);
         Swal.fire({
