@@ -10,6 +10,9 @@ export const GET_VIDEOS_OF_CREATED_SECTION   = "GET_VIDEOS_OF_CREATED_SECTION"
 export const GET_USERS_BY_COURSE_ID          = "GET_USERS_BY_COURSE_ID";
 export const GET_VIDEO_BY_ID                 = "GET_VIDEO_BY_ID";
 export const GET_ALL_INSTRUCTORS             = "GET_ALL_INSTRUCTORS"
+export const GET_VIDEOS_COURSE               = "GET_VIDEOS_COURSE";
+export const GET_VIDEOS_STATE                = "GET_VIDEOS_STATE";
+export const GET_VIDEOS_STATE_COURSE         = "GET_VIDEOS_STATE_COURSE";
 
 
 //---- POST 
@@ -18,6 +21,7 @@ export const CREATE_INSTRUCTOR  = "CREATE_INSTRUCTOR";
 export const CREATE_SECTION     = "CREATE_SECTION"
 export const CREATE_VIDEO       = "CREATE_VIDEO";
 export const CREATE_REVIEW      = "CREATE_REVIEW";
+export const POST_VIDEOS_STATE  = "POST_VIDEOS_STATE"
 
 //---- PUT
 export const ADD_INSTRUCTOR_TO_COURSE = "ADD_INSTRUCTOR_TO_COURSE";

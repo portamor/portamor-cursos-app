@@ -110,6 +110,20 @@ const getCourseByGenre = async (req, res) => {
   }
 };
 
+const getCourseVideo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const foundVideos = await courseService.getCourseVideos(id);
+    if (!foundVideos)
+      throw new Error(`No se ha encontrado ningun video`);
+    res
+      .status(200)
+      .json({ message: "Cursos encontrado con exito", data: foundVideos });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 const putCourse = async (req, res) => {
   try {
     const { id } = req.params;
@@ -169,6 +183,8 @@ const restoreCourse = async (req, res) => {
   }
 };
 
+
+
 module.exports = {
   postCourse,
   getAllCourses,
@@ -178,5 +194,6 @@ module.exports = {
   getCourseByGenre,
   putCourse,
   deleteACourse,
-  restoreCourse
+  restoreCourse,
+  getCourseVideo
 };

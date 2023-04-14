@@ -42,7 +42,8 @@ const {
     Courses,
     Review,
     Videos,
-    Sections
+    Sections,
+    VideoState
 } = sequelize.models;
 
 // ---- Users - Review

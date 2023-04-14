@@ -33,7 +33,23 @@ export function getCourseDetail(courseId) {
       console.log(error.message);
     }
   };
-}
+};
+
+export function getVideosCourse(id) {
+  return async function (dispatch) {
+    try {
+      const videosOfCourse = await axios.get(
+        `http://localhost:3001/courses/videos/${id}`
+      );
+      return dispatch({
+        type: actions.GET_VIDEOS_COURSE,
+        payload: videosOfCourse.data.data,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
 export function getCoursesOfUser(userId) {
   return async function (dispatch) {
@@ -285,7 +301,7 @@ export function createReview(payload) {
 
       dispatch({ type: actions.CREATE_REVIEW, payload: createdReview.data.data });
     } catch (error) {
-      console.log(error.message);
+    // console.log(error.message);
     }
   };
 }
@@ -300,4 +316,37 @@ export function getAllInstructors(payload) {
       console.log(error.message);
     }
   };
+}
+
+export function createVideoState (payload) {
+  return async (dispatch) => {
+    try {
+      const createVideoState = await axios.post("http://localhost:3001/state", payload)
+      dispatch({type: actions.POST_VIDEOS_STATE, payload: createVideoState.data.data })
+    } catch (error) {
+      console.log(error.message);
+    }  
+  }
+}
+
+export function getVideoState(userId, videoId) {
+  return async (dispatch) => {
+    try {
+      const getVideoState = await axios.get(`http://localhost:3001/state/${userId}/${videoId}`)
+      dispatch({type: actions.GET_VIDEOS_STATE, payload: getVideoState.data.data })
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+};
+
+export function getVideoStateCourse(userId, courseId) {
+  return async (dispatch) => {
+    try {
+      const getStateCourse = await axios.get(`http://localhost:3001/state/${userId}/${courseId}`)
+      dispatch({type: actions.GET_VIDEOS_STATE_COURSE, payload: getStateCourse.data.data })
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 }
