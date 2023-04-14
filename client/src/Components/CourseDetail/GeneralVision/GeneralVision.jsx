@@ -71,7 +71,7 @@ export default function GeneralVision() {
                 {courseSections && courseSections.map((section, index) => {
                   return (
                     <div>
-                      <p>Modulo {index + 1}</p>
+                      <p>Modulo {index + 1}:</p>
                       <p>{section.name}</p>
                     </div>
                   )
@@ -105,23 +105,26 @@ export default function GeneralVision() {
             </div>
           </div>
 
-          <div className={styles["description-portamor"]}>
-            <h2>PORTAMOR</h2>
-            <p>Somos una Comunidad que empodera al adulto mayor por un envejecimiento activo y saludable a través de nuestra plataforma interactiva de aprendizaje integral.</p>
+            
+          <div className={styles["description-portamor-main"]}>
+            <div className={styles["description-portamor"]}>
+              <h2>PORTAMOR</h2>
+              <p>Somos una Comunidad que empodera al adulto mayor por un envejecimiento activo y saludable a través de nuestra plataforma interactiva de aprendizaje integral.</p>
 
-            <h2>METODOLOGIA</h2>
-            <p>Los cursos serán desarrollados sobre la base de una metodología interactiva que promueve el autoaprendizaje y el trabajo colaborativo, complementada con presentaciones del especialista de cada sesión.</p>
-          </div>
-      </div>
+              <h2>METODOLOGIA</h2>
+              <p>Los cursos serán desarrollados sobre la base de una metodología interactiva que promueve el autoaprendizaje y el trabajo colaborativo, complementada con presentaciones del especialista de cada sesión.</p>
+            </div>
+          </div >
+        </div>
 
-      <div className={styles["course-space"]}></div>
-      <div className={styles["course-card-container"]}>
-        <CourseCard
-          key={courseDetail.id}
-          id={courseDetail.id}
-          image={courseDetail.image}
-          title={courseDetail.title} />
-      </div>
+        <div className={styles["course-space"]}></div>
+        <div className={styles["course-card-container"]}>
+          <CourseCard
+            key={courseDetail.id}
+            id={courseDetail.id}
+            image={courseDetail.image}
+            title={courseDetail.title} />
+        </div>
     </>
     
   )

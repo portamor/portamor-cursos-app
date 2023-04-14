@@ -1,22 +1,14 @@
-import * as actions     from "../../Redux/actions";
-import CourseCard       from "../CourseCard/CourseCard";
-import certificateImg   from "../../images/certificate.png"
+import * as actions    from "../../Redux/actions";
 import * as constants  from "../../constants/classDetailConstants";
-import FormInscription  from "../FormInsciption/FormInscription";
-import InstructorDetail from "../InstructorDetail/InstructorDetail";
-import Modal            from "../Modal/Modal";
-import ModalInscription from "../ModalInscription/ModalInscription";
-import { NavLink }      from "react-router-dom";
-import React            from 'react';
-import RegisterUser     from "../RegisterUser/RegisterUser"
-import styles           from "./CourseDetail.module.css"
-import { useDispatch }  from "react-redux";
-import { useEffect }    from 'react';
-import { useMatch }     from "react-router-dom";
-import { useSelector }  from "react-redux";
-import { useState }     from 'react';
-import usersImg         from "../../images/users-icon.svg"
-import * as utils       from "../../utils"
+import React           from 'react';
+import styles          from "./CourseDetail.module.css"
+import { useDispatch } from "react-redux";
+import { useEffect }   from 'react';
+import { useMatch }    from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useState }    from 'react';
+import usersImg        from "../../images/users-icon.svg"
+import * as utils      from "../../utils"
 import SelectedContent from "./SelectedContent/SelectedContent";
 
 export const CourseDetail = () => {
