@@ -16,7 +16,6 @@ const initialState = {
   currentPage:            1,
   error:                  null,
   isLoggedIn:             false,
-  error:                  null,
   user:                   [],
   user:                   null,
   sectionToAddVideo:      {},

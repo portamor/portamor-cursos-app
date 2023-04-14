@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useForm }     from "react-hook-form";
 import { useSelector } from "react-redux";
 import styles          from './FormSection.module.css'
+import Swal from "sweetalert2";
 
 const FormSectionCreate = () => {
   const dispatch      = useDispatch();
@@ -12,7 +13,21 @@ const FormSectionCreate = () => {
   const { handleSubmit, register, reset } = useForm();
 
   const onSubmit = (data) => {
-    dispatch(createSection(data.name, createdCourse.id));
+    const response = dispatch(createSection(data.name, createdCourse.id));
+    if (response !== null) {
+      Swal.fire({
+        icon: "success",
+        title: `Sección creada con éxito`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Hubo un error al crear Sessión",
+        confirmButtonText: "Aceptar",
+      });
+    }
     reset();
   };
 

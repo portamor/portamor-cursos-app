@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import styles          from './CreateVideo.module.css'
 import * as utils      from "../../../utils"
+import Swal from "sweetalert2";
 
 const CreateVideo = ({ setActualForm }) => {
   const dispatch          = useDispatch();
@@ -47,7 +48,22 @@ const CreateVideo = ({ setActualForm }) => {
     } 
 
     const sectionId = sectionToAddVideo.id
-    dispatch(actions.createVideo(formValues, sectionId))
+    const response = dispatch(actions.createVideo(formValues, sectionId))
+
+    if (response !== null) {
+      Swal.fire({
+        icon: "success",
+        title: `Video posteado con éxito`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Hubo un error al crear el video",
+        confirmButtonText: "Aceptar",
+      });
+    }
 
     setFormValues({
       videoTitle: "",

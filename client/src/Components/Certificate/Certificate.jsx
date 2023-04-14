@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
 });
 
 
-
 const Certificate = ({tipo, name, numero, title}) => {
  
   const fechaActual = new Date();
