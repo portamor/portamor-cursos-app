@@ -95,12 +95,13 @@ const FormCourse = ({ setActualForm }) => {
         <label className={styles.label} htmlFor="genre">
           Género:
         </label>
-        <input
-          type="text"
-          id="genre"
-          {...register("genre", { required: "Este campo es requerido" })}
-          className={styles.input}
-        />
+        <select id="genre" {...register("genre", { required: "Este campo es requerido" })} className={styles.input}>
+          <option value="">Seleccione un género</option>
+          <option value="Actividad Física">Actividad Física</option>
+          <option value="Participación Social">Participación Social</option>
+          <option value="Bienestar Mental">Bienestar Mental</option>
+          <option value="Alimentación Saludable">Alimentación Saludable</option>
+        </select>
       </div>
 
       <div className={styles.input_container}>
@@ -122,8 +123,11 @@ const FormCourse = ({ setActualForm }) => {
         <input
           type="number"
           id="rating"
+          min={1}
+          max={5}
           {...register("rating", { min: 0, max: 5 })}
           className={styles.input}
+          step="1"
         />
         <span>* El valor de la calificacion debe estar entre 1 y 5</span>
       </div>
