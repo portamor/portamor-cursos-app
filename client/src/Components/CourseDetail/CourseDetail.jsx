@@ -10,6 +10,7 @@ import { useState }    from 'react';
 import usersImg        from "../../images/users-icon.svg"
 import * as utils      from "../../utils"
 import SelectedContent from "./SelectedContent/SelectedContent";
+import { Link } from "react-router-dom";
 
 export const CourseDetail = () => {
   const dispatch = useDispatch();
@@ -20,8 +21,10 @@ export const CourseDetail = () => {
   const courseSections  = useSelector((state) => state.courseSections);
   const courseUsers     = useSelector((state) => state.courseUsers);
   const instructor      = useSelector((state) => state.courseInstructor);
-  const instructorStars = utils.getStarsRating(instructor.score)
-  
+  const instructorStars = utils.getStarsRating(instructor.score)  
+
+  let firstVideoId;
+  if(courseSections[0] && courseSections[0].Videos[0].id) firstVideoId = courseSections[0].Videos[0].id
 
   useEffect(() => {
     dispatch(actions.getCourseDetail(courseId));
@@ -73,6 +76,8 @@ export const CourseDetail = () => {
           <button 
           className={constants.COMENTARIOS === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
           onClick={() => handleSelectContent(constants.COMENTARIOS)}>Comentarios</button>
+        <Link className={styles["link-classes-button"]} to={`/clase/${courseId}/${firstVideoId}`}>Ir a las clases</Link>
+
         </div>
       </div>
 
