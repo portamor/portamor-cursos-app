@@ -47,6 +47,9 @@ function Login({onSuccess}) {
           showConfirmButton: false,
           timer: 1800
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       } else {
         console.error('No se encontró el usuario');
         Swal.fire({
@@ -60,6 +63,7 @@ function Login({onSuccess}) {
       console.error(error);
     }
   };
+
   return (
     <div>
       {showModal && (

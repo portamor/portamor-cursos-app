@@ -40,11 +40,8 @@ export const NavBar = () => {
   const handleLogout = (e) => {
     e.preventDefault()
     dispatch(logout());
-        // Manipula el historial del navegador
         window.history.pushState({}, '', '/');
-        // Recarga la página sin renderizar la aplicación
         window.location.reload();
-    // return window.location.replace("/");
   };
 
 
