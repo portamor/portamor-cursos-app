@@ -1,7 +1,6 @@
-.button-link {
+.course-card-main {
   text-decoration: none;
   width: 300px;
-  height: 400px;
 }
 
 .course-card {
@@ -39,6 +38,13 @@
   text-decoration: none;
 }
 
+.course-details-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
 .card-button {
   background-color: #EB575A;
   border: none;
@@ -47,7 +53,9 @@
   cursor: pointer;
   font-size: 20px;
   font-weight: 700;
-  width: 95%;
+  width: 80%;
+  text-align: center;
+  text-decoration: none;
   padding: 10px 20px;
 }
 

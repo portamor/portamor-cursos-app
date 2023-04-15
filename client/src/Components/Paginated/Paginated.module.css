@@ -25,6 +25,7 @@
   align-items: center;
   list-style-type: none;
   width: 300px;
+  margin-top: 40px;
 }
 
 @media(max-width: 750px) {
@@ -63,10 +64,9 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 70px;
   list-style-type: none;
 }
-
 
 @media (max-width: 768px) {
   .cards-container {
@@ -75,7 +75,6 @@
     justify-content: inherit;
   }
 }
-
 
 .pagination__item--selected {
   background-color: #eb575a;
@@ -88,14 +87,3 @@
   cursor: not-allowed;
   list-style-type: none;
 }
-
-@media only screen and (max-width: 768px) {
-  /* .pagination {
-    flex-wrap: wrap;
-  }
-
-  .pagination__item {
-    margin: 5px;
-  } */
-}
-
