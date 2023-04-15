@@ -1,4 +1,4 @@
-import React           from "react";
+import React, { useEffect }           from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 //----Components
@@ -7,6 +7,7 @@ import CreateReview     from "../CreateReview/CreateReview";
 import InstructorDetail from "../InstructorDetail/InstructorDetail";
 import ReviewCard       from "../ReviewCard/ReviewCard";
 import UserCard         from "../UserCard/UserCard";
+import FYQ              from "../CourseDetail/FYQAccordion/FYQAccordion";  
 //----Actions, Utils, Constants
 import * as constants from "../../constants/classDetailConstants";
 import * as actions   from "../../Redux/actions";
@@ -21,39 +22,44 @@ const SelectedData = ({courseDetail, courseId, selectedButtonContent}) => {
   const courseReviews  = useSelector((state) => state.courseReviews);
   const courseSections = useSelector((state) => state.courseSections);
 
+  useEffect(() => {
+    dispatch(actions.getSectionsByCourseId(courseId));
+    !courseReviews.length && dispatch(actions.getReviewsByCourseId(courseId));
+    !courseUsers.length && dispatch(actions.getUsersByCourseId(courseId));
+    !courseDetail && dispatch(actions.getCourseDetail(courseId));
+  }, [dispatch, courseId, courseDetail, courseReviews.length, courseUsers.length])
+
   switch (selectedButtonContent) {
     case constants.VER_TEMARIO:
-      if(!courseSections.length) dispatch(actions.getSectionsByCourseId(courseId)) 
-
       return <CourseAccordion sections={courseSections} courseId={courseId}/>
     
     case constants.SOBRE_EL_INSTRUCTOR:
       return <InstructorDetail instructorId={courseDetail.InstructorId}/>;
 
     case constants.COMENTARIOS:
-      if(!courseReviews.length) dispatch(actions.getReviewsByCourseId(courseId));
-
-      const reviews = courseReviews && courseReviews.map((review) => 
-        <ReviewCard 
-        key         = {review.id}
-        id          = {review.id}
-        title       = {review.title}
-        comment     = {review.comment}
-        stars_value = {review.stars_value} />
-      );
 
       return (
         <div>
           <CreateReview courseId={courseId}/>
           <div className={styles["reviews-container"]} >
-            {reviews}
+            {
+            courseReviews && courseReviews[0] && courseReviews[0].CourseId && courseReviews[0].CourseId === courseDetail.id ?
+            courseReviews.map((review) => 
+            <ReviewCard 
+            key         = {review.id}
+            id          = {review.id}
+            title       = {review.title}
+            comment     = {review.comment}
+            stars_value = {review.stars_value} />
+            )
+            :
+            <p>No se han hecho comentarios de este curso todavia.</p>
+        }
           </div>
         </div>
       )
     
     case constants.MATERIALES:
-      if(!courseDetail) dispatch(actions.getCourseDetail(courseId));
-
       const materials = courseDetail.materials.map((material) => 
         <h2 className={styles["info-component-material-title"]}>
           {material} <br />
@@ -67,7 +73,6 @@ const SelectedData = ({courseDetail, courseId, selectedButtonContent}) => {
       </div>;
 
     case constants.PARTICIPANTES:
-      if(!courseUsers.length) dispatch(actions.getUsersByCourseId(courseId));
 
       const partipants = courseUsers && courseUsers.map((user) => 
         <UserCard 
@@ -79,7 +84,11 @@ const SelectedData = ({courseDetail, courseId, selectedButtonContent}) => {
       return partipants;
 
     case constants.PREGUNTAS_FRECUENTES:
-      return <div>Preguntas frecuentes</div>;
+      return (
+        <div className={styles["fyq-container"]} >
+          <FYQ />
+        </div>
+      );
     
     case constants.DESCARGA_CERTIFICADO:
     return <DownloadCertificate title={courseDetail?.title} />

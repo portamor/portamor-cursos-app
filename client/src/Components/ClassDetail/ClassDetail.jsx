@@ -37,7 +37,7 @@ const ClassDetail = (props) => {
   const courseRating = utils.getStarsRating(courseDetail.rating);
 
   const [firstSelectedButton, setFirstSelectedButton]   = useState(constants.VER_TEMARIO);
-  const [secondSelectedButton, setSecondSelectedButton] = useState(constants.COMENTARIOS);
+  const [secondSelectedButton, setSecondSelectedButton] = useState(constants.PREGUNTAS_FRECUENTES);
   const [allVideosWatched, setAllVideosWatched] = useState(false);
 
   const handleFirstSelectData  = (selectedButtonContent) => setFirstSelectedButton(selectedButtonContent);

@@ -25,7 +25,7 @@ const SelectedContent = ({ courseDetail, courseId, selectedButtonContent }) => {
       return <GeneralVision />
 
     case constants.COMENTARIOS:
-      const isEqualToCourseId = courseReviews && courseReviews[0] && courseReviews[0].CourseId && courseReviews[0].CourseId === courseId
+      const isEqualToCourseId = courseReviews && courseReviews[0] && courseReviews[0].CourseId && courseReviews[0].CourseId === courseId;
 
       return (
         <div className={styles["reviews-main-container"]}>
