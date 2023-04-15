@@ -32,12 +32,10 @@ const ClassDetail = (props) => {
   const courseDetail = useSelector((state) => state.courseDetail);
   const videosCourse = useSelector((state) => state?.videosOfCourse.flat());
   const videosState  = useSelector((state) => state?.videoStateCourse.flat());
-
-
   const courseRating = utils.getStarsRating(courseDetail.rating);
 
   const [firstSelectedButton, setFirstSelectedButton]   = useState(constants.VER_TEMARIO);
-  const [secondSelectedButton, setSecondSelectedButton] = useState(constants.PREGUNTAS_FRECUENTES);
+  const [secondSelectedButton, setSecondSelectedButton] = useState(constants.COMENTARIOS);
   const [allVideosWatched, setAllVideosWatched] = useState(false);
 
   const handleFirstSelectData  = (selectedButtonContent) => setFirstSelectedButton(selectedButtonContent);
@@ -50,13 +48,13 @@ const ClassDetail = (props) => {
     courseId: courseId
     }
   
-    useEffect(() => {
-      if (videosState.length >= videosCourse.length - 1) {
-        setAllVideosWatched(true);
-      } else {
-        setAllVideosWatched(false);
-      }
-    }, [videosState, videosCourse]);
+    // useEffect(() => {
+    //   if (videosState.length >= videosCourse.length - 1) {
+    //     setAllVideosWatched(true);
+    //   } else {
+    //     setAllVideosWatched(false);
+    //   }
+    // }, [videosState.length, videosCourse]);
     
 
 

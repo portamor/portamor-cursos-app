@@ -21,7 +21,18 @@ div {
   border-bottom: solid 2px rgba(203, 202, 202, 0.73);
   color: #424242;
 }
-
+.ver-clases{
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  border: #eb575a solid 5px;
+  border-radius: 25px;
+  width: 70%;
+  min-width: 800px;
+  color: #424242;
+  font-size: 25px;
+  cursor:pointer;
+}
 @media (max-width: 900px) {
   .course-detail-h1-container{
     min-width: 0;

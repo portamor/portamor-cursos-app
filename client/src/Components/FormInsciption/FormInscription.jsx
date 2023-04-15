@@ -40,6 +40,9 @@ const FormInscription = ({ courseId, accessToken, onCloseModal }) => {
           icon: 'success',
         });
         onCloseModal();
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
       } else {
         Swal.fire({
           title: 'Error en la inscripción',

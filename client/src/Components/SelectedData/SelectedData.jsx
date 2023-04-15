@@ -27,7 +27,7 @@ const SelectedData = ({courseDetail, courseId, selectedButtonContent}) => {
     !courseReviews.length && dispatch(actions.getReviewsByCourseId(courseId));
     !courseUsers.length && dispatch(actions.getUsersByCourseId(courseId));
     !courseDetail && dispatch(actions.getCourseDetail(courseId));
-  }, [dispatch, courseId, courseDetail, courseReviews.length, courseUsers.length])
+  }, [dispatch, courseId, courseDetail, courseReviews.length, courseUsers.length, courseSections.length])
 
   switch (selectedButtonContent) {
     case constants.VER_TEMARIO:
