@@ -135,6 +135,7 @@ export default function GeneralVision() {
         <div className={styles["course-card-container"]}>
           <CourseDetailCard 
             key={courseDetail.id}
+            image={courseDetail.image}
             courseId={courseId} />
         </div>
     </>
