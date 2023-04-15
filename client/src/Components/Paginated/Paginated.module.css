@@ -40,7 +40,7 @@
   cursor: pointer;
   background-color: rgb(227, 227, 227);
   padding: 10px;
-  border-radius: 30%;
+  border-radius: 5px;
   border: none;
   color: #7b7b7b;
   transition: all 0.2s ease-in-out;
