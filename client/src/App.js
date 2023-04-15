@@ -11,6 +11,7 @@ import Chat from "./Components/ChatSala/ChatSala";
 import Certificate from "./Components/Certificate/Certificate";
 import Modal from "./Components/Modal/Modal";
 import MyCourses from "./Components/MyCourses/MyCourses";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -42,6 +43,7 @@ function App() {
           <Route exact path="/dashboard" element={<Dashboard />} />
            )}
         </Routes>
+        <Footer />
       </BrowserRouter>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
