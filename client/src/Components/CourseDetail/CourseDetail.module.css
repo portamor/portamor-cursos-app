@@ -7,6 +7,11 @@
   border-bottom: solid 2px rgba(203, 202, 202, 0.73);
 }
 
+.modales-courses{
+  margin-top: -8%;
+  margin-right: 65%;
+  margin-left: 15%;
+}
 @media (max-width: 750px) {
   .course-detail-main {
     margin-top: 30px;

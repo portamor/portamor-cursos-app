@@ -4,12 +4,14 @@ import React           from 'react';
 import styles          from "./CourseDetail.module.css"
 import { useDispatch } from "react-redux";
 import { useEffect }   from 'react';
-import { useMatch }    from "react-router-dom";
+import { useMatch, NavLink }    from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState }    from 'react';
 import usersImg        from "../../images/users-icon.svg"
 import * as utils      from "../../utils"
 import SelectedContent from "./SelectedContent/SelectedContent";
+
+
 
 export const CourseDetail = () => {
   const dispatch = useDispatch();
@@ -54,7 +56,6 @@ export const CourseDetail = () => {
           <div className={styles["course-detail-h1-container"]}>
             <h1 className={styles["course-title"]}>{courseDetail.title}</h1>
           </div>
-
           <div className={styles["course-detail-students-container"]}>
             <img className={styles["picture"]} src={usersImg} alt="user-card"/>
             <h3>{courseUsers.length} Estudiantes</h3>
