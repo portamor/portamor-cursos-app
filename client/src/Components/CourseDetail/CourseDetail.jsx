@@ -4,13 +4,15 @@ import React           from 'react';
 import styles          from "./CourseDetail.module.css"
 import { useDispatch } from "react-redux";
 import { useEffect }   from 'react';
-import { useMatch, NavLink }    from "react-router-dom";
+import { useMatch }    from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState }    from 'react';
 import usersImg        from "../../images/users-icon.svg"
 import * as utils      from "../../utils"
 import SelectedContent from "./SelectedContent/SelectedContent";
-
+import { Link } from "react-router-dom";
+import Modal            from "../Modal/Modal";
+import ModalInscription from "../ModalInscription/ModalInscription";
 
 
 export const CourseDetail = () => {
@@ -18,23 +20,52 @@ export const CourseDetail = () => {
   const match    = useMatch('/detalle-curso/:courseId');
   const courseId = match.params.courseId;
 
+  const userId = useSelector((state) => state.user?.id)
+  const courses         = useSelector((state) => state.courses);
   const courseDetail    = useSelector((state) => state.courseDetail);
   const courseSections  = useSelector((state) => state.courseSections);
   const courseUsers     = useSelector((state) => state.courseUsers);
   const instructor      = useSelector((state) => state.courseInstructor);
-  const instructorStars = utils.getStarsRating(instructor.score)
-  
+  const instructorStars = utils.getStarsRating(instructor.score)  
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+
+  let firstVideoId;
+  if(courseSections[0] && courseSections[0].Videos[0].id) firstVideoId = courseSections[0].Videos[0].id
 
   useEffect(() => {
     dispatch(actions.getCourseDetail(courseId));
     dispatch(actions.getInstructorById(courseDetail.InstructorId));  
     dispatch(actions.getSectionsByCourseId(courseId));
     dispatch(actions.getUsersByCourseId(courseId));
+    dispatch(actions.getCourses());
   }, [courseId, dispatch, courseDetail.InstructorId])
 
   const [selectedButton, setSelectedButton] = useState(constants.VISION_GENERAL);
 
   const handleSelectContent = (selectedButtonContent) => setSelectedButton(selectedButtonContent);
+
+
+  //diame
+  const [showModal, setShowModal] = useState(false);
+  const [showInscriptionModal, setShowInscriptionModal] = useState(false);
+  const [isEnrolled, setIsEnrolled] = useState(false);
+
+  useEffect(() => {
+    if (courses.some((course) => course.id === courseId && course.userId === userId)) {
+      setIsEnrolled(true);
+    }
+  }, [courses, courseId, userId]);
+
+  const userIsEnrolled = userId && courses.some((course) => course.id === courseId && course.userId === userId.id);
+  
+
+  function handleInscriptionModalClick() {
+    if (isLoggedIn) {
+      setShowInscriptionModal(true);
+    } else {
+      setShowModal(true);
+    }
+  }
 
   return (
     <div className={styles["course-detail-main"]}>
@@ -74,10 +105,17 @@ export const CourseDetail = () => {
           <button 
           className={constants.COMENTARIOS === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
           onClick={() => handleSelectContent(constants.COMENTARIOS)}>Comentarios</button>
+
+           {isLoggedIn && !userIsEnrolled ? (
+              <ModalInscription courseId={courseDetail.id} />
+              ) 
+              : 
+              (
+                userIsEnrolled && <Link className={styles["link-classes-button"]} to={`/clase/${courseId}/${firstVideoId}`}>Ir a las clases</Link>
+              )
+            }
         </div>
       </div>
-
-      
 
       <div className={styles["course-detail-container"]}>
         {

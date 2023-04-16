@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;600&display=swap");
 
 @keyframes opacityin {
   from {
@@ -21,7 +21,8 @@ div {
   border-bottom: solid 2px rgba(203, 202, 202, 0.73);
   color: #424242;
 }
-.ver-clases{
+
+.ver-clases {
   display: flex;
   justify-content: center;
   margin-top: 30px;
@@ -31,14 +32,14 @@ div {
   min-width: 800px;
   color: #424242;
   font-size: 25px;
-  cursor:pointer;
+  cursor: pointer;
 }
+
 @media (max-width: 900px) {
-  .course-detail-h1-container{
+  .course-detail-h1-container {
     min-width: 0;
   }
 }
-
 
 .course-detail-info {
   display: flex;
@@ -100,7 +101,6 @@ div {
   background-color: rgba(230, 229, 218, 0.73);
 }
 
-
 @media (max-width: 900px) {
   .instructor-description {
     width: 80%;
@@ -133,7 +133,6 @@ div {
   max-width: 236px;
   border-radius: 50%;
 }
-
 
 @media (max-width: 900px) {
   .instructor-picture {
@@ -267,7 +266,7 @@ div {
   .course-space {
     display: none;
   }
-  
+
   .course-card-container {
     display: none;
   }

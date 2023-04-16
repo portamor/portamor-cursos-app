@@ -64,6 +64,18 @@ const Paginated = ({ actualPage }) => {
 
   return (
     <div className={styles["paginated-main"]}>
+      { actualPage=== "HOME" && <NavFilter actualPage={"HOME"}/> }
+
+      <div className={styles["cards-container"]}>
+        {Array.isArray(courses) && courses.map(el => 
+          <CourseCard
+            key={el.id}
+            id={el.id}
+            image={el.image}
+            title={el.title} />
+        )}
+      </div> 
+
       <div className={styles["paginated-numbers-container"]}>
         <button className={styles["paginated-number"]} onClick={handlePrevPage}>{"<"}</button>
 
@@ -78,18 +90,6 @@ const Paginated = ({ actualPage }) => {
 
         <button className={styles["paginated-number"]} onClick={handleNextPage}>{">"}</button>
       </div>
-
-      { actualPage=== "HOME" && <NavFilter actualPage={"HOME"}/> }
-
-      <div className={styles["cards-container"]}>
-        {Array.isArray(courses) && courses.map(el => 
-          <CourseCard
-            key={el.id}
-            id={el.id}
-            image={el.image}
-            title={el.title} />
-        )}
-      </div> 
     </div>
   );
 };

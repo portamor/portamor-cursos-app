@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React           from 'react';
+import { useState }    from 'react';
 import FormInscription from '../FormInsciption/FormInscription';
-import styles from "./ModalInscription.module.css"
-import CustomButton from '../CustomButton/CustomButton';
+import styles          from "./ModalInscription.module.css"
 
 const ModalInscription = (props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -18,7 +18,7 @@ const ModalInscription = (props) => {
   
   return (
     <>
-      <h1 className={styles["ver-clases"]} onClick={handleOpenModal}>Inscribete ahora a este curso! 👆</h1>
+      <button className={styles["ver-clases"]} onClick={handleOpenModal}>Inscribete</button>
 
       {modalIsOpen && ( 
         <div>
