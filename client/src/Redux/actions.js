@@ -19,7 +19,12 @@ export function getCourses(page, size) {
         },
       });
     } catch (error) {
-      console.log("Error en getCourses/actions", error);
+      return dispatch({
+        type: actions.GET_COURSES,
+        payload: {
+          data: [],
+        },
+      });
     }
   };
 }
@@ -31,7 +36,7 @@ export function getCourseDetail(courseId) {
 
       return dispatch({ type: actions.GET_COURSE_DETAIL, payload: courseDetail.data.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_COURSE_DETAIL, payload: {} });
     }
   };
 };
@@ -42,12 +47,9 @@ export function getVideosCourse(id) {
       const videosOfCourse = await axios.get(
         `http://localhost:3001/courses/videos/${id}`
       );
-      return dispatch({
-        type: actions.GET_VIDEOS_COURSE,
-        payload: videosOfCourse.data.data,
-      });
+      return dispatch({ type: actions.GET_VIDEOS_COURSE, payload: videosOfCourse.data.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_VIDEOS_COURSE, payload: [] });
     }
   };
 };
@@ -57,9 +59,11 @@ export function getCoursesOfUser(userId) {
     try {
       const foundCourses = await axios.get(`http://localhost:3001/users/my-courses/${userId}`);
 
+      console.log(foundCourses.data.data)
+
       return dispatch({ type: actions.GET_COURSES_OF_USER, payload: foundCourses.data.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_COURSES_OF_USER, payload: [] });
     }
   };
 }
@@ -71,7 +75,7 @@ export function getSectionsByCourseId(courseId) {
 
       return dispatch({ type: actions.GET_SECTIONS_BY_COURSE_ID, payload: foundSections.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_SECTIONS_BY_COURSE_ID, payload: [] });
     }
   };
 }
@@ -79,12 +83,12 @@ export function getSectionsByCourseId(courseId) {
 export const getCoursesByGenre = (genre) => async (dispatch) => {
   try {
     const res = await axios.get(`http://localhost:3001/courses/genre/${genre}`);  
-    dispatch({
-      type: 'GET_COURSES_BY_GENRE',
-      payload: res.data.data
-    });
+
+    console.log(res.data.data)
+
+    return dispatch({ type: 'GET_COURSES_BY_GENRE', payload: res.data.data});
   } catch (error) {
-    console.log("Error en getCoursesByGenre/actions", error);
+    dispatch({ type: 'GET_COURSES_BY_GENRE', payload: [] });
   }
 };
 
@@ -101,7 +105,7 @@ export function getReviewsByCourseId(courseId) {
 
       return dispatch({ type: actions.GET_REVIEWS_BY_COURSE_ID, payload: foundReviews.data.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_REVIEWS_BY_COURSE_ID, payload: [] });
     }
   };
 }
@@ -113,7 +117,7 @@ export function getInstructorById(id) {
 
       return dispatch({ type: actions.GET_INSTRUCTOR_BY_ID, payload: foundInstructor.data.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_INSTRUCTOR_BY_ID, payload: {} });
     }
   };
 }
@@ -125,7 +129,7 @@ export function getUsersByCourseId(courseId) {
 
       return dispatch({ type: actions.GET_USERS_BY_COURSE_ID, payload: foundUsers.data.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_USERS_BY_COURSE_ID, payload: [] });
     }
   };
 }
@@ -137,7 +141,7 @@ export function getVideoById(id) {
 
       return dispatch({ type: actions.GET_VIDEO_BY_ID, payload: foundVideo.data.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_VIDEO_BY_ID, payload: {} });
     }
   };
 }
