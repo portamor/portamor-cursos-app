@@ -5,9 +5,10 @@ const createCourse = async (data) => {
   const createdCourse = await Courses.create({
     title:       data.title,
     description: data.description,
+    duration:    data.duration,
+    level:       data.level,  
     image:       data.image,
     genre:       data.genre,
-    type:        data.type,
     rating:      data.rating,
     materials:   data.materials,
   });

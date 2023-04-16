@@ -14,12 +14,12 @@ import { useState }    from "react";
 import * as utils      from "../../utils";
 
 const ClassDetail = (props) => {
-  const dispatch = useDispatch();
-  const match    = useMatch('/clase/:courseId/:videoId');
-  const courseId = match.params.courseId;
-  const videoId  = match.params.videoId;
-  const userDetail   = useSelector((state) => state?.user);
-  const userId   = userDetail.id;
+  const dispatch    = useDispatch();
+  const match       = useMatch('/clase/:courseId/:videoId');
+  const courseId    = match.params.courseId;
+  const videoId     = match.params.videoId;
+  const userDetail  = useSelector((state) => state?.user);
+  const userId      = userDetail.id;
 
   useEffect(() => {
     dispatch(actions.getCourseDetail(courseId));
@@ -32,12 +32,10 @@ const ClassDetail = (props) => {
   const courseDetail = useSelector((state) => state.courseDetail);
   const videosCourse = useSelector((state) => state?.videosOfCourse.flat());
   const videosState  = useSelector((state) => state?.videoStateCourse.flat());
-
-
   const courseRating = utils.getStarsRating(courseDetail.rating);
 
   const [firstSelectedButton, setFirstSelectedButton]   = useState(constants.VER_TEMARIO);
-  const [secondSelectedButton, setSecondSelectedButton] = useState(constants.COMENTARIOS);
+  const [secondSelectedButton, setSecondSelectedButton] = useState(constants.PREGUNTAS_FRECUENTES);
   const [allVideosWatched, setAllVideosWatched] = useState(false);
 
   const handleFirstSelectData  = (selectedButtonContent) => setFirstSelectedButton(selectedButtonContent);
@@ -49,19 +47,17 @@ const ClassDetail = (props) => {
     watched: true ,
     courseId: courseId
     }
-  
+
     useEffect(() => {
       if (videosState.length >= videosCourse.length - 1) {
         setAllVideosWatched(true);
       } else {
         setAllVideosWatched(false);
       }
-    }, [videosState, videosCourse]);
-    
+    }, [videosState.length,  videosCourse.length ]);
 
 
   const handleEnd = async () => {
-    console.log('terminó');
     dispatch(actions.createVideoState(payload))
     if (videosState.length >= videosCourse.length-1 ) {
       setAllVideosWatched(true)

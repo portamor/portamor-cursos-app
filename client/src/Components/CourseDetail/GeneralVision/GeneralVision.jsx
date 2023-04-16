@@ -23,14 +23,11 @@ export default function GeneralVision({ accessToken }) {
 
 
   const dispatch = useDispatch();
-  const match = useMatch('/detalle-curso/:courseId');
+  const match    = useMatch('/detalle-curso/:courseId');
   const courseId = match.params.courseId;
-  const navigate = useNavigate();
-  const [isEnrolled, setIsEnrolled] = useState(false);
 
-
-  const userId = useSelector((state) => state.user?.id)
-  const courseDetail = useSelector((state) => state.courseDetail);
+  const userId         = useSelector((state) => state.user?.id)
+  const courseDetail   = useSelector((state) => state.courseDetail);
   const courseSections = useSelector((state) => state.courseSections);
   const instructor = useSelector((state) => state.courseInstructor);
   const courses = useSelector((state) => state.courses);
@@ -182,11 +179,6 @@ export default function GeneralVision({ accessToken }) {
             <img src={certificateImg} alt="certificate-detail" className={styles["certificate-img"]} />
             <p>“Al final del curso podrás descargar un certificado virtual que acredite que has lo has finalizado con éxito”</p>
           </div>
-          {userIsEnrolled && (
-            <div className={styles["ver-clases"]}>
-              <h1 onClick={handleClick}>Ver Clases!</h1>
-            </div>
-          )}
         </div>
 
 
@@ -205,6 +197,7 @@ export default function GeneralVision({ accessToken }) {
       <div className={styles["course-card-container"]}>
         <CourseDetailCard
           key={courseDetail.id}
+          image={courseDetail.image}
           courseId={courseId} />
       </div>
     </>

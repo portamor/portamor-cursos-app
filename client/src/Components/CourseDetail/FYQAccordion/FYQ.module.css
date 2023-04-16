@@ -1,0 +1,49 @@
+@keyframes opacityin {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+.course-accordion-summary-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.course-accordion-summary-content h2 {
+  font-size: 20px;
+  font-weight: 500;
+  width: 100%;
+  color: #e30b0f;
+}
+
+.course-accordion {
+  font-size: 18px;
+  text-align: start;
+  width: 140%;
+  animation-name: opacityin;
+  animation-duration: 0.5s;
+  padding: 20px;
+}
+
+@media(max-width: 769px) {
+  .course-accordion {
+    width: 100%;
+  }
+}
+
+.course-accordion h2{
+  margin: 0;
+}
+
+.answer {
+  width: 80%;
+  font-size: 18px;
+}
+

@@ -92,16 +92,14 @@ export const NavBar = () => {
         ref={navMenuRef} >
         <NavLink
           className={Styles["nav-link"]}
-          exact
           to="/"
-          activeClassName="active" >
+          activeclassname="active" >
           Inicio
         </NavLink>
         <NavLink
           className={Styles["nav-link"]}
-          exact
           to="/cursos"
-          activeClassName="active" >
+          activeclassname="active" >
           Mis cursos
         </NavLink>
 
