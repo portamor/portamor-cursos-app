@@ -24,6 +24,7 @@ const Paginated = ({ actualPage, courses }) => {
     pageNumbers.push(i);
   }
 
+
   const numbersToShow = pageNumbers.slice(
     minLimitNumberPage,
     maxLimitNumberPage
@@ -59,7 +60,7 @@ const Paginated = ({ actualPage, courses }) => {
 
   return (
     <div className={styles["paginated-main"]}>
-      { actualPage=== "HOME" && <NavFilter actualPage={"HOME"}/> }
+      {/* { actualPage=== "HOME" && <NavFilter actualPage={"HOME"}/> } */}
 
       <div className={styles["cards-container"]}>
         {courses.length ? courses.map(el => 
