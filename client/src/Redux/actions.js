@@ -115,6 +115,7 @@ export function getInstructorById(id) {
 
       return dispatch({ type: actions.GET_INSTRUCTOR_BY_ID, payload: foundInstructor.data.data });
     } catch (error) {
+      Promise.reject(error);
       return dispatch({ type: actions.GET_INSTRUCTOR_BY_ID, payload: {} });
     }
   };
@@ -375,7 +376,7 @@ export function createVideoState (payload) {
       const createVideoState = await axios.post("http://localhost:3001/state", payload)
       dispatch({type: actions.POST_VIDEOS_STATE, payload: createVideoState.data.data })
     } catch (error) {
-      console.log(error.message);
+      return;
     }  
   }
 }
@@ -386,7 +387,7 @@ export function getVideoState(userId, videoId) {
       const getVideoState = await axios.get(`http://localhost:3001/state/${userId}/${videoId}`)
       dispatch({type: actions.GET_VIDEOS_STATE, payload: getVideoState.data.data })
     } catch (error) {
-      console.log(error.message);
+      dispatch({type: actions.GET_VIDEOS_STATE, payload: {} })
     }
   }
 };
@@ -397,7 +398,7 @@ export function getVideoStateCourse(userId, courseId) {
       const getStateCourse = await axios.get(`http://localhost:3001/state/${userId}/${courseId}`)
       dispatch({type: actions.GET_VIDEOS_STATE_COURSE, payload: getStateCourse.data.data })
     } catch (error) {
-      console.log(error.message);
+      return;
     }
   }
 }
