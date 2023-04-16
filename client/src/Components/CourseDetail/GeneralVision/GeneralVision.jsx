@@ -1,44 +1,22 @@
-import * as actions from "../../../Redux/actions";
-import CourseCard from "../../CourseCard/CourseCard";
-import certificateImg from "../../../images/certificate.png"
-import * as constants from "../../../constants/classDetailConstants";
-import InstructorDetail from "../../InstructorDetail/InstructorDetail";
-import Modal from "../../Modal/Modal";
-import ModalInscription from "../../ModalInscription/ModalInscription";
-import { NavLink } from "react-router-dom";
-import React from 'react';
-import styles from "./GeneralVision.module.css";
-import { useDispatch } from "react-redux";
-import { useEffect, useState } from 'react';
-import { useMatch } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-
+import * as actions     from "../../../Redux/actions";
+import certificateImg   from "../../../images/certificate.png"
+import React            from 'react';
+import styles           from "./GeneralVision.module.css";
+import { useDispatch }  from "react-redux";
+import { useEffect }    from 'react';
+import { useMatch }     from "react-router-dom";
+import { useSelector }  from "react-redux";
 import CourseDetailCard from "../CourseDetailCard/CourseDetailCard";
-import CustomButton from "../../CustomButton/CustomButton";
 
 export default function GeneralVision() {
-
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  const [showModal, setShowModal] = useState(false);
-  const [showInscriptionModal, setShowInscriptionModal] = useState(false);
-
-
-
   const dispatch = useDispatch();
-  const match = useMatch('/detalle-curso/:courseId');
+  const match    = useMatch('/detalle-curso/:courseId');
   const courseId = match.params.courseId;
-  const navigate = useNavigate();
-  const [isEnrolled, setIsEnrolled] = useState(false);
 
-
-  const userId = useSelector((state) => state.user?.id)
-  const courseDetail = useSelector((state) => state.courseDetail);
+  const userId         = useSelector((state) => state.user?.id)
+  const courseDetail   = useSelector((state) => state.courseDetail);
   const courseSections = useSelector((state) => state.courseSections);
-  const instructor = useSelector((state) => state.courseInstructor);
-  const courses = useSelector((state) => state.courses);
-
-
+  const instructor     = useSelector((state) => state.courseInstructor);
 
   useEffect(() => {
     dispatch(actions.getCourseDetail(courseId));
@@ -47,59 +25,9 @@ export default function GeneralVision() {
     dispatch(actions.getCoursesOfUser(userId))
   }, [courseId, dispatch, courseDetail.InstructorId, userId])
 
-  useEffect(() => {
-    if (courses.some((course) => course.id === courseId && course.userId === userId)) {
-      setIsEnrolled(true);
-    }
-  }, [courses, courseId, userId]);
-
-  const userIsEnrolled = userId && courses.some((course) => course.id === courseId && course.userId === userId.id);
-
-  function handleClick() {
-    navigate(`/clase/${courseId}/0`);
-  }
-
-  function handleInscriptionModalClick() {
-    if (isLoggedIn) {
-      setShowInscriptionModal(true);
-    } else {
-      setShowModal(true);
-    }
-  }
-
-  function handleModalClose() {
-    setShowModal(false);
-  }
-
-  function handleInscriptionModalClose() {
-    setShowInscriptionModal(false);
-  }<h1 onClick={handleInscriptionModalClick}> Inscribete ahora a este curso! </h1>
-
   return (
     <>
       <div className={styles["course-detail-info-container"]}>
-      <div className={styles["course-detail-info"]}>
-      <div>
-      {isLoggedIn ? (
-              <ModalInscription courseId={courseDetail.id} />
-            ) : (
-              <h1 className={styles["ver-clases"]} onClick={handleInscriptionModalClick}>Inicia sesion para inscribirte a este curso! 👆</h1>
-              )}
-            {showModal && (
-              <Modal onClose={() => setShowModal(false)}>
-                <Modal />
-              </Modal>
-            )}
-
-            {showInscriptionModal && (
-              <Modal onClose={() => setShowInscriptionModal(false)}>
-                <ModalInscription />
-              </Modal>
-            )}
-            </div>
-    </div>
-
-
         <div className={styles["course-detail-info"]}>
           <div className={styles["course-detail-h1-container"]}>
             <h1>Introduccion</h1>
@@ -168,11 +96,6 @@ export default function GeneralVision() {
             <img src={certificateImg} alt="certificate-detail" className={styles["certificate-img"]} />
             <p>“Al final del curso podrás descargar un certificado virtual que acredite que has lo has finalizado con éxito”</p>
           </div>
-          {userIsEnrolled && (
-            <div className={styles["ver-clases"]}>
-              <h1 onClick={handleClick}>Ver Clases!</h1>
-            </div>
-          )}
         </div>
 
 
@@ -191,6 +114,7 @@ export default function GeneralVision() {
       <div className={styles["course-card-container"]}>
         <CourseDetailCard
           key={courseDetail.id}
+          image={courseDetail.image}
           courseId={courseId} />
       </div>
     </>

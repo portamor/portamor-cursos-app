@@ -8,7 +8,7 @@
   }
 }
 
-.class-detail-main  {
+.class-detail-main {
   width: 100%;
   animation-name: opacityin;
   animation-duration: 1s;
@@ -22,14 +22,14 @@
   padding-bottom: 30px;
 }
 
-@media(max-width: 1123px) {
+@media (max-width: 1123px) {
   .course-title {
     font-size: 30px;
   }
 }
 
 .course-title-color {
-  color: #EB575A;
+  color: #eb575a;
 }
 
 .video-description-container {
@@ -38,7 +38,7 @@
   margin-bottom: 30px;
 }
 
-@media(max-width: 1123px) {
+@media (max-width: 1123px) {
   .video-description-container {
     flex-direction: column;
     align-items: center;
@@ -50,11 +50,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 700px ;
-  height: 423px ;
+  width: 700px;
+  height: 423px;
 }
 
-@media(max-width: 1123px) {
+@media (max-width: 1123px) {
   .react-player {
     width: 100%;
     height: 250px;
@@ -68,7 +68,7 @@
   gap: 15px;
 }
 
-@media(max-width: 1123px) {
+@media (max-width: 1123px) {
   .description-container {
     max-width: 80%;
     align-items: center;
@@ -80,15 +80,17 @@
   font-weight: 800;
 }
 
-@media(max-width: 1123px) {
-  .description-title { font-size: 30px; }
+@media (max-width: 1123px) {
+  .description-title {
+    font-size: 30px;
+  }
 }
 
 .description-text {
-  max-width:500px;
+  max-width: 500px;
 }
 
-@media(max-width: 1123px) {
+@media (max-width: 1123px) {
   .description-text {
     max-width: 80%;
   }
@@ -111,13 +113,12 @@
   justify-content: space-evenly;
 }
 
-
-@media(max-width: 1123px) {
+@media (max-width: 1123px) {
   .secciones-temario-container {
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    flex-flow: row wrap-reverse
+    flex-flow: row wrap-reverse;
   }
 }
 
@@ -125,7 +126,7 @@
   width: 50%;
 }
 
-@media(max-width: 1123px) {
+@media (max-width: 1123px) {
   .buttons-and-cards-container {
     width: 80%;
   }
@@ -139,20 +140,20 @@
   margin-bottom: 20px;
 }
 
-@media(max-width: 1123px) {
+@media (max-width: 1123px) {
   .buttons-container {
-    width: 80%;
+    width: 120%;
   }
 }
 
-@media(max-width: 845px) {
+@media (max-width: 845px) {
   .buttons-container {
     width: 400px;
   }
   .buttons-sections-container {
-   flex-direction: column;
-   align-items: center;
-   gap: 15px;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
   }
 }
 
