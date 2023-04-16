@@ -8,9 +8,8 @@ import { useEffect }   from "react";
 import { useSelector } from "react-redux";
 import { useState }    from "react";
 
-const Paginated = ({ actualPage }) => {
+const Paginated = ({ actualPage, courses }) => {
   const dispatch      = useDispatch();
-  const courses       = useSelector((state) => state.courses);
   const currentPage   = useSelector((state) => state.currentPage);
   const pageSize      = useSelector((state) => state.pageSize);
   const totalCourses  = useSelector((state) => state.totalCourses);
@@ -29,10 +28,6 @@ const Paginated = ({ actualPage }) => {
     minLimitNumberPage,
     maxLimitNumberPage
   );
-
-  useEffect(() => {
-    !courses.length && dispatch(getCourses(currentPage, pageSize));
-  }, [dispatch, courses.length, currentPage, pageSize]);
 
   const handlePrevPage = () => {
     const pastNumber = parseInt(currentPage) - 1;
@@ -67,13 +62,16 @@ const Paginated = ({ actualPage }) => {
       { actualPage=== "HOME" && <NavFilter actualPage={"HOME"}/> }
 
       <div className={styles["cards-container"]}>
-        {Array.isArray(courses) && courses.map(el => 
+        {courses.length ? courses.map(el => 
           <CourseCard
             key={el.id}
             id={el.id}
             image={el.image}
             title={el.title} />
-        )}
+        )
+      :
+        <h2 className={styles["title-not-found"]}>No se ha encontrado ningun curso</h2>
+      }
       </div> 
 
       <div className={styles["paginated-numbers-container"]}>
