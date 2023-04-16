@@ -199,12 +199,22 @@ export function createCourse(payload, setActualForm) {
     try {
       const response = await axios.post("http://localhost:3001/courses", payload)
       
-      //Change form in dashboard
+      Swal.fire({
+        icon: "success",
+        title: `Curso creado con éxito`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+
       setActualForm(constants.SELECT_INSTRUCTOR_FORM);
 
       return dispatch({ type: actions.CREATE_COURSE , payload: response.data.data })
     } catch (error) {
-      console.log(error.message);
+      Swal.fire({
+        icon: "error",
+        title: `El servidor ha respondido con el siguiente error: ${error.response.data.message}`,
+        confirmButtonText: "Aceptar",
+      });
     }
   }
 };

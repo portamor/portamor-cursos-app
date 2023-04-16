@@ -29,22 +29,10 @@ const FormCourse = ({ setActualForm }) => {
   };
 
   const onSubmit = (data) => {
-    data.image = formValues.image
-    const response = dispatch(createCourse(data, setActualForm));
-    if (response !== null) {
-      Swal.fire({
-        icon: "success",
-        title: `Curso creado con éxito`,
-        showConfirmButton: false,
-        timer: 1500
-      });
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Hubo un error al crear el curso",
-        confirmButtonText: "Aceptar",
-      });
-    }
+    data.image = formValues.image;
+
+    dispatch(createCourse(data, setActualForm));
+
     reset();
   };
 
