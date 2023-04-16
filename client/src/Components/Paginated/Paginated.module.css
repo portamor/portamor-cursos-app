@@ -76,6 +76,12 @@
   }
 }
 
+.title-not-found {
+  margin-top: 70px;
+  width: 100%;
+  text-align: center;
+}
+
 .pagination__item--selected {
   background-color: #eb575a;
   color: #fff;

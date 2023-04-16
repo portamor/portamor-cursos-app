@@ -86,12 +86,6 @@ const CreateInstructor = ({ setActualForm }) => {
     } 
 
     dispatch(actions.createInstructor(formValues, setActualForm));
-    //   Swal.fire({
-    //     icon: "success",
-    //     title: `Instructor creado con éxito`,
-    //     showConfirmButton: false,
-    //     timer: 1500})
-    // setIsDisabledSubmit(true);
 
     setFormValues({
       name: "",

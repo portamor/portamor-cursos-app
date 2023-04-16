@@ -25,7 +25,7 @@
   font-family: 700; 
   margin: 0 10%; 
   border: none;
-  border-radius: 8px;
+  border-radius: 2px;
   font-size: 20px;
   font-weight: 700;
   padding: 13px 20px;
@@ -36,17 +36,17 @@
 
 .input,
 .input_container textarea {
-  border-radius: 5px;
+  border-radius: 2px;
   outline: none;
   resize: none;
   appearance: none;
   padding: 15px;
   font-size: 18px;
   width: 100%;
-  border: #EB575A 2px solid;
-  border-radius: 15px;
+  border: none;
+  border-radius: 3px;
   margin-bottom: 40px;
-  box-shadow: 0px 6px 10px 0.3px #bcbbbb;
+  box-shadow: 0px 6px 10px 0.3px #cfcfcf;
 }
 
 .input_container textarea {
