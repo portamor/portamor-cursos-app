@@ -13,21 +13,7 @@ const FormSectionCreate = () => {
   const { handleSubmit, register, reset } = useForm();
 
   const onSubmit = (data) => {
-    const response = dispatch(createSection(data.name, createdCourse.id));
-    if (response !== null) {
-      Swal.fire({
-        icon: "success",
-        title: `Sección creada con éxito`,
-        showConfirmButton: false,
-        timer: 1500
-      });
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Hubo un error al crear Sessión",
-        confirmButtonText: "Aceptar",
-      });
-    }
+    dispatch(createSection(data.name, createdCourse.id));
     reset();
   };
 

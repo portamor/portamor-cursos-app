@@ -53,7 +53,7 @@ const postVideos = async (req, res) => {
     });
     res
       .status(200)
-      .json({ message: "Video posteado con éxtio", data: createVideo });
+      .json({ message: "Video creado con éxtio", data: createVideo });
   } catch (error) {
     res.status(402).json({ messege: error.message });
   }
