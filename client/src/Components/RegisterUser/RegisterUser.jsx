@@ -1,10 +1,10 @@
-import React           from 'react';
-import { useState }    from 'react';
+import React from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { postUser }    from '../../Redux/actions';
-import Styles          from "./RegisterUser.module.css"
-import CustomButton    from '../CustomButton/CustomButton';
-import Swal            from 'sweetalert2'
+import { postUser } from '../../Redux/actions';
+import Styles from "./RegisterUser.module.css"
+import CustomButton from '../CustomButton/CustomButton';
+import Swal from 'sweetalert2'
 
 const RegisterUser = ({ onSuccess }) => {
   const dispatch = useDispatch();
@@ -72,38 +72,48 @@ const RegisterUser = ({ onSuccess }) => {
           postUser({ name, lastName, birthday, code })
         );
         const userCode = response.data.data.code;
+        const authToken = response.data.data.token;
+        localStorage.setItem("auth_token", authToken);
         onSuccess();
         if (response !== null) {
           Swal.fire({
             icon: "success",
-            title: `Su codigo ${userCode}`,
-            text: "Ese sera su codigo para iniciar sesión, le recomendamos anotarlo",
+            title: `Su código ${userCode}`,
+            text:
+              "Ese será su código para iniciar sesión, le recomendamos anotarlo",
             showConfirmButton: false,
+            timer: 5000,
+          }).then(() => {
+            window.location("/");
+            Swal.showValidationMessage("Presione Aceptar para continuar");
           });
-          setTimeout(() => {
-            Swal.update({
-              showConfirmButton: true,
-              confirmButtonText: "Aceptar",
-            });
-          }, 5000);
         } else {
           Swal.fire({
             icon: "error",
             title: "Usuario registrado anteriormente",
-            text: "Si usted se registro con anterioridad por favor inicie sesión con su codigo.",
+            text:
+              "Si usted se registró con anterioridad por favor inicie sesión con su código.",
             confirmButtonText: "Aceptar",
           });
         }
       } catch (error) {
-        console.error(error);
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Error al registrar usuario",
+          text: "Ya existe un usuario con ese codigo, intente de nuevo",
+          confirmButtonText: "Aceptar",
+        });
       }
     }
   };
 
+
+
   return (
     <form className={Styles["register-container"]} onSubmit={handleRegister}>
       <div className={Styles["name-input-container"]}>
-        <label for="name">Nombre: </label>
+        <label id="name">Nombre: </label>
         <input
           type="text"
           id="name"
@@ -115,7 +125,7 @@ const RegisterUser = ({ onSuccess }) => {
         )}
       </div>
       <div className={Styles["lastname-input-container"]}>
-        <label for="lastName">Apellido: </label>
+        <label id="lastName">Apellido: </label>
         <input
           type="text"
           id="lastName"
@@ -127,7 +137,7 @@ const RegisterUser = ({ onSuccess }) => {
         )}
       </div>
       <div className={Styles["birthday-input-container"]}>
-        <label for="birthday">Fecha de cumpleaños: </label>
+        <label id="birthday">Fecha de cumpleaños: </label>
 
         <input
           type="date"

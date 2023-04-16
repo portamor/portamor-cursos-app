@@ -4,7 +4,7 @@ import React           from 'react';
 import styles          from "./CourseDetail.module.css"
 import { useDispatch } from "react-redux";
 import { useEffect }   from 'react';
-import { useMatch, NavLink }    from "react-router-dom";
+import { useMatch }    from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState }    from 'react';
 import usersImg        from "../../images/users-icon.svg"

@@ -1,11 +1,7 @@
 import * as actions from "../../../Redux/actions";
-import CourseCard from "../../CourseCard/CourseCard";
 import certificateImg from "../../../images/certificate.png"
 import * as constants from "../../../constants/classDetailConstants";
-import InstructorDetail from "../../InstructorDetail/InstructorDetail";
 import Modal from "../../Modal/Modal";
-import ModalInscription from "../../ModalInscription/ModalInscription";
-import { NavLink } from "react-router-dom";
 import React from 'react';
 import styles from "./GeneralVision.module.css";
 import { useDispatch } from "react-redux";
@@ -13,11 +9,12 @@ import { useEffect, useState } from 'react';
 import { useMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
 import CourseDetailCard from "../CourseDetailCard/CourseDetailCard";
-import CustomButton from "../../CustomButton/CustomButton";
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
-export default function GeneralVision() {
+
+export default function GeneralVision({ accessToken }) {
 
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const [showModal, setShowModal] = useState(false);
@@ -37,7 +34,7 @@ export default function GeneralVision() {
   const courseSections = useSelector((state) => state.courseSections);
   const instructor = useSelector((state) => state.courseInstructor);
   const courses = useSelector((state) => state.courses);
-
+  const user = useSelector((state) => state.user)
 
 
   useEffect(() => {
@@ -59,45 +56,62 @@ export default function GeneralVision() {
     navigate(`/clase/${courseId}/0`);
   }
 
-  function handleInscriptionModalClick() {
+  async function handleInscriptionClick() {
     if (isLoggedIn) {
-      setShowInscriptionModal(true);
+      const userId = user.id;
+      const courseId = courseDetail.id;
+      const response = await fetch(`http://localhost:3001/users/inscription/${userId}/${courseId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`,
+        },
+      });
+
+      if (response.ok) {
+        Swal.fire({
+          title: 'Inscripción exitosa',
+          text: `${user.name} se ha inscripto al curso ${courseDetail.title}`,
+          icon: 'success',
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      } else {
+        Swal.fire({
+          title: 'Error en la inscripción',
+          text: 'Hubo un error al inscribir al usuario al curso',
+          icon: 'error',
+        });
+      }
     } else {
       setShowModal(true);
     }
   }
 
+
   function handleModalClose() {
     setShowModal(false);
   }
 
-  function handleInscriptionModalClose() {
-    setShowInscriptionModal(false);
-  }<h1 onClick={handleInscriptionModalClick}> Inscribete ahora a este curso! </h1>
-
   return (
     <>
       <div className={styles["course-detail-info-container"]}>
-      <div className={styles["course-detail-info"]}>
-      <div>
-      {isLoggedIn ? (
-              <ModalInscription courseId={courseDetail.id} />
+        <div className={styles["course-detail-info"]}>
+          <div>
+            {isLoggedIn ? (
+              <h1 className={styles["ver-clases"]} onClick={handleInscriptionClick}> Inscribete ahora a este curso! </h1>
             ) : (
-              <h1 className={styles["ver-clases"]} onClick={handleInscriptionModalClick}>Inicia sesion para inscribirte a este curso! 👆</h1>
-              )}
+              <h1 className={styles["ver-clases"]} onClick={handleInscriptionClick}>Inicia sesion para inscribirte a este curso! 👆</h1>
+            )}
             {showModal && (
               <Modal onClose={() => setShowModal(false)}>
                 <Modal />
               </Modal>
             )}
 
-            {showInscriptionModal && (
-              <Modal onClose={() => setShowInscriptionModal(false)}>
-                <ModalInscription />
-              </Modal>
-            )}
-            </div>
-    </div>
+          </div>
+        </div>
 
 
         <div className={styles["course-detail-info"]}>
