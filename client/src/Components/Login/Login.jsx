@@ -59,6 +59,7 @@ function Login({onSuccess}) {
           confirmButtonText: 'Aceptar'
         });
       }
+      onSuccess()
     } catch (error) {
       console.error(error);
     }

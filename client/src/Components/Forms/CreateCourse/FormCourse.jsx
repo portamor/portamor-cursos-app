@@ -106,12 +106,24 @@ const FormCourse = ({ setActualForm }) => {
 
       <div className={styles.input_container}>
         <label className={styles.label} htmlFor="type">
-          Tipo:
+          Duración:
         </label>
         <input
           type="text"
-          id="type"
-          {...register("type", { required: "Este campo es requerido" })}
+          id="duration"
+          {...register("duration", { required: "Este campo es requerido" })}
+          className={styles.input}
+        />
+      </div>
+
+      <div className={styles.input_container}>
+        <label className={styles.label} htmlFor="type">
+          Nivel:
+        </label>
+        <input
+          type="text"
+          id="level"
+          {...register("level", { required: "Este campo es requerido" })}
           className={styles.input}
         />
       </div>
