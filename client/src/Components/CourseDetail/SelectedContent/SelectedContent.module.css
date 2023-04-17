@@ -31,11 +31,22 @@
   justify-content: center;
   width: 50%;
   margin-left: 30px;
+  max-height: 700px;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  overflow-y: scroll;
 }
 
 @media (max-width: 1300px) {
   .reviews-container {
     margin-left: 0;
+  }
+}
+
+@media (max-width: 769px) {
+  .reviews-container {
+    overflow-y: hidden;
+    max-height: fit-content;
   }
 }
 
