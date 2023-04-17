@@ -402,3 +402,47 @@ export function getVideoStateCourse(userId, courseId) {
     }
   }
 }
+
+
+export function editCourse(id, data) {
+  return async (dispatch) => {
+    try {
+      const editC = await axios.put(`http://localhost:3001/courses/${id}`, data);
+      dispatch({ type: actions.EDIT_COURSE, payload: editC.data.data });
+      Swal.fire({
+        icon: "success",
+        title: editC.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: `El servidor ha respondido con el siguiente error: ${error.response.data.message}`,
+        confirmButtonText: "Aceptar",
+      });
+    }
+  };
+};
+
+export function deleteCourse(id) {
+   return async  (dispatch) => {
+    try {
+      const deleteCourse = await axios.delete(`http://localhost:3001/courses/${id}`)
+      dispatch({ type: actions.DELETE_COURSE, payload: deleteCourse.data.data });
+      Swal.fire({
+        icon: "success",
+        title: deleteCourse.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+      
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: `El servidor ha respondido con el siguiente error: ${error.response.data.message}`,
+        confirmButtonText: "Aceptar",
+      });
+    }
+   }
+}

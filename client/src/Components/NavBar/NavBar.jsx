@@ -102,20 +102,15 @@ export const NavBar = () => {
           activeclassname="active" >
           Mis cursos
         </NavLink>
-
-
         {isAdmin && (
           <NavLink
             className={Styles["nav-link"]}
-            exact
             to="/dashboard"
-            activeClassName="active"
+            activeclassname="active"
           >
             Admin
           </NavLink>
         )}
-
-
 
         {isLoggedIn ? (
           <span onClick={handleLogout} className={Styles["nav-link"]}>Cerrar sesión</span>

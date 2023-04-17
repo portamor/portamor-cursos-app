@@ -25,7 +25,11 @@ export const POST_VIDEOS_STATE  = "POST_VIDEOS_STATE"
 
 //---- PUT
 export const ADD_INSTRUCTOR_TO_COURSE = "ADD_INSTRUCTOR_TO_COURSE";
+export const EDIT_COURSE              = "EDIT_COURSE"
 
+//--- DELETE 
+export const DELETE_COURSE            = "DELETE_COURSE"
+        
 export const RESET_PAGINATED = "RESET_PAGINATED"
 
 
