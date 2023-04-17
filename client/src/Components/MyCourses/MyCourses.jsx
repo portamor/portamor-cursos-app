@@ -3,11 +3,13 @@ import Paginated       from "../Paginated/Paginated";
 import React           from "react";
 import styles          from "./MyCourses.module.css";
 import { useEffect }   from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const MyCourses = () => {
   const dispatch = useDispatch();
   const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
+
+  const courses = useSelector((state) => state.courses);
 
   useEffect(() => {
     dispatch(actions.resetPaginated())
@@ -16,7 +18,7 @@ const MyCourses = () => {
 
   return (
     <div className={styles["my-courses-main"]}>
-      <Paginated /> 
+      <Paginated courses={courses}/> 
     </div>
   );
 };

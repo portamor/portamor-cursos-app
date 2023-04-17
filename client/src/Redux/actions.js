@@ -19,7 +19,12 @@ export function getCourses(page, size) {
         },
       });
     } catch (error) {
-      console.log("Error en getCourses/actions", error);
+      return dispatch({
+        type: actions.GET_COURSES,
+        payload: {
+          data: [],
+        },
+      });
     }
   };
 }
@@ -31,7 +36,7 @@ export function getCourseDetail(courseId) {
 
       return dispatch({ type: actions.GET_COURSE_DETAIL, payload: courseDetail.data.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_COURSE_DETAIL, payload: {} });
     }
   };
 };
@@ -42,12 +47,9 @@ export function getVideosCourse(id) {
       const videosOfCourse = await axios.get(
         `http://localhost:3001/courses/videos/${id}`
       );
-      return dispatch({
-        type: actions.GET_VIDEOS_COURSE,
-        payload: videosOfCourse.data.data,
-      });
+      return dispatch({ type: actions.GET_VIDEOS_COURSE, payload: videosOfCourse.data.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_VIDEOS_COURSE, payload: [] });
     }
   };
 };
@@ -59,7 +61,7 @@ export function getCoursesOfUser(userId) {
 
       return dispatch({ type: actions.GET_COURSES_OF_USER, payload: foundCourses.data.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_COURSES_OF_USER, payload: [] });
     }
   };
 }
@@ -71,7 +73,7 @@ export function getSectionsByCourseId(courseId) {
 
       return dispatch({ type: actions.GET_SECTIONS_BY_COURSE_ID, payload: foundSections.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_SECTIONS_BY_COURSE_ID, payload: [] });
     }
   };
 }
@@ -79,12 +81,12 @@ export function getSectionsByCourseId(courseId) {
 export const getCoursesByGenre = (genre) => async (dispatch) => {
   try {
     const res = await axios.get(`http://localhost:3001/courses/genre/${genre}`);  
-    dispatch({
-      type: 'GET_COURSES_BY_GENRE',
-      payload: res.data.data
-    });
+
+    console.log(res.data.data)
+
+    return dispatch({ type: 'GET_COURSES_BY_GENRE', payload: res.data.data});
   } catch (error) {
-    console.log("Error en getCoursesByGenre/actions", error);
+    dispatch({ type: 'GET_COURSES_BY_GENRE', payload: [] });
   }
 };
 
@@ -101,7 +103,7 @@ export function getReviewsByCourseId(courseId) {
 
       return dispatch({ type: actions.GET_REVIEWS_BY_COURSE_ID, payload: foundReviews.data.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_REVIEWS_BY_COURSE_ID, payload: [] });
     }
   };
 }
@@ -113,7 +115,8 @@ export function getInstructorById(id) {
 
       return dispatch({ type: actions.GET_INSTRUCTOR_BY_ID, payload: foundInstructor.data.data });
     } catch (error) {
-      console.log(error.message);
+      Promise.reject(error);
+      return dispatch({ type: actions.GET_INSTRUCTOR_BY_ID, payload: {} });
     }
   };
 }
@@ -125,7 +128,7 @@ export function getUsersByCourseId(courseId) {
 
       return dispatch({ type: actions.GET_USERS_BY_COURSE_ID, payload: foundUsers.data.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_USERS_BY_COURSE_ID, payload: [] });
     }
   };
 }
@@ -137,7 +140,7 @@ export function getVideoById(id) {
 
       return dispatch({ type: actions.GET_VIDEO_BY_ID, payload: foundVideo.data.data });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: actions.GET_VIDEO_BY_ID, payload: {} });
     }
   };
 }
@@ -195,12 +198,22 @@ export function createCourse(payload, setActualForm) {
     try {
       const response = await axios.post("http://localhost:3001/courses", payload)
       
-      //Change form in dashboard
+      Swal.fire({
+        icon: "success",
+        title: response.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+
       setActualForm(constants.SELECT_INSTRUCTOR_FORM);
 
       return dispatch({ type: actions.CREATE_COURSE , payload: response.data.data })
     } catch (error) {
-      console.log(error.message);
+      Swal.fire({
+        icon: "error",
+        title: `El servidor ha respondido con el siguiente error: ${error.response.data.message}`,
+        confirmButtonText: "Aceptar",
+      });
     }
   }
 };
@@ -210,42 +223,56 @@ export function createSection(name, courseId) {
     try {
       const createdSection = await axios.post(`http://localhost:3001/section/${courseId}`,{name} )
 
-      return dispatch({ type: actions.CREATE_SECTION, payload: createdSection.data.data })
+      Swal.fire({
+        icon: "success",
+        title: createdSection.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+
+      return dispatch({ type: actions.CREATE_SECTION, payload: createdSection.data.data });
     } catch (error) {
-      console.log(error.message);
+      Swal.fire({
+        icon: "error",
+        title: `El servidor ha respondido con el siguiente error: ${error.response.data.message}`,
+        confirmButtonText: "Aceptar",
+      });
     }
   }
 };
 
 export function getSectionInCreatedSections (sectionId) {
   return async function (dispatch) {
-    try {
-      return dispatch({ type: actions.GET_SECTION_IN_CREATED_SECTIONS, payload: sectionId })
-    } catch (error) {
-      console.log(error.message);
-    }
+    return dispatch({ type: actions.GET_SECTION_IN_CREATED_SECTIONS, payload: sectionId })
   }
 };
 
-export function createVideo(payload, sectionId, setActualForm) {
+export function createVideo(payload, sectionId) {
   return async (dispatch) => {
     try {
       const createdVideo = await axios.post(`http://localhost:3001/videos/${sectionId}`, payload);
 
+      Swal.fire({
+        icon: "success",
+        title: createdVideo.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+
       dispatch({ type: actions.CREATE_VIDEO, payload: createdVideo.data.data });
     } catch (error) {
-      console.log(error.message);
+      Swal.fire({
+        icon: "error",
+        title: `El servidor ha respondido con el siguiente error: ${error.response.data.message}`,
+        confirmButtonText: "Aceptar",
+      });
     }
   };
 }
 
 export function getVideosOfCreatedSection(sectionId) {
   return async (dispatch) => {
-    try {
-      dispatch({ type: actions.GET_VIDEOS_OF_CREATED_SECTION, payload: sectionId });
-    } catch (error) {
-      console.log(error.message);
-    }
+    dispatch({ type: actions.GET_VIDEOS_OF_CREATED_SECTION, payload: sectionId });
   };
 }
 
@@ -261,13 +288,22 @@ export function createInstructor(payload, setActualForm) {
         courseId:        payload.courseId
       });
 
-      alert(`Instructor ${createdInstructor.data.data.name} creado con exito`)
+      Swal.fire({
+        icon: "success",
+        title: createdInstructor.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
 
       setActualForm(constants.SELECT_SECTION_FORM);
 
       dispatch({ type: actions.CREATE_INSTRUCTOR, payload: createdInstructor.data.data });
     } catch (error) {
-      console.log(error.message);
+      Swal.fire({
+        icon: "error",
+        title: `El servidor ha respondido con el siguiente error: ${error.response.data.message}`,
+        confirmButtonText: "Aceptar",
+      });
     }
   };
 }
@@ -279,11 +315,22 @@ export function addInstructorToCourse(instructorId, courseId, setActualForm) {
         courseId: courseId 
       })
 
+      Swal.fire({
+        icon: "success",
+        title: response.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+
       setActualForm(constants.SELECT_SECTION_FORM);
 
       dispatch({ type: actions.ADD_INSTRUCTOR_TO_COURSE, payload: response.data.data });
     } catch (error) {
-      console.log(error.message);
+      Swal.fire({
+        icon: "error",
+        title: `El servidor ha respondido con el siguiente error: ${error.response.data.message}`,
+        confirmButtonText: "Aceptar",
+      });
     }
   };
 }
@@ -293,9 +340,20 @@ export function createReview(payload) {
     try {
       const createdReview = await axios.post("http://localhost:3001/review", payload);
 
+      Swal.fire({
+        icon: "success",
+        title: createdReview.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+
       dispatch({ type: actions.CREATE_REVIEW, payload: createdReview.data.data });
     } catch (error) {
-    // console.log(error.message);
+      Swal.fire({
+        icon: "error",
+        title: `El servidor ha respondido con el siguiente error: ${error.response.data.message}`,
+        confirmButtonText: "Aceptar",
+      });
     }
   };
 }
@@ -307,7 +365,7 @@ export function getAllInstructors(payload) {
 
       dispatch({ type: actions.GET_ALL_INSTRUCTORS, payload: foundInstructors.data.data });
     } catch (error) {
-      console.log(error.message);
+      dispatch({ type: actions.GET_ALL_INSTRUCTORS, payload: [] });
     }
   };
 }
@@ -318,7 +376,7 @@ export function createVideoState (payload) {
       const createVideoState = await axios.post("http://localhost:3001/state", payload)
       dispatch({type: actions.POST_VIDEOS_STATE, payload: createVideoState.data.data })
     } catch (error) {
-      console.log(error.message);
+      return;
     }  
   }
 }
@@ -329,7 +387,7 @@ export function getVideoState(userId, videoId) {
       const getVideoState = await axios.get(`http://localhost:3001/state/${userId}/${videoId}`)
       dispatch({type: actions.GET_VIDEOS_STATE, payload: getVideoState.data.data })
     } catch (error) {
-      console.log(error.message);
+      dispatch({type: actions.GET_VIDEOS_STATE, payload: {} })
     }
   }
 };
@@ -340,7 +398,51 @@ export function getVideoStateCourse(userId, courseId) {
       const getStateCourse = await axios.get(`http://localhost:3001/state/${userId}/${courseId}`)
       dispatch({type: actions.GET_VIDEOS_STATE_COURSE, payload: getStateCourse.data.data })
     } catch (error) {
-      console.log(error.message);
+      return;
     }
   }
+}
+
+
+export function editCourse(id, data) {
+  return async (dispatch) => {
+    try {
+      const editC = await axios.put(`http://localhost:3001/courses/${id}`, data);
+      dispatch({ type: actions.EDIT_COURSE, payload: editC.data.data });
+      Swal.fire({
+        icon: "success",
+        title: editC.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: `El servidor ha respondido con el siguiente error: ${error.response.data.message}`,
+        confirmButtonText: "Aceptar",
+      });
+    }
+  };
+};
+
+export function deleteCourse(id) {
+   return async  (dispatch) => {
+    try {
+      const deleteCourse = await axios.delete(`http://localhost:3001/courses/${id}`)
+      dispatch({ type: actions.DELETE_COURSE, payload: deleteCourse.data.data });
+      Swal.fire({
+        icon: "success",
+        title: deleteCourse.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+      
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: `El servidor ha respondido con el siguiente error: ${error.response.data.message}`,
+        confirmButtonText: "Aceptar",
+      });
+    }
+   }
 }

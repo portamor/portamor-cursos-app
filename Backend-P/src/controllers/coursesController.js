@@ -20,7 +20,7 @@ const postCourse = async (req, res) => {
 
     res.status(200).json({ message: "Curso creado con exito", data: createdCourse});
   } catch (error) {
-    res.status(400).json({message: 'El servidor ha respondido con el siguiente error '+ error.message});
+    res.status(400).json({message: error.message});
   }
 };
 

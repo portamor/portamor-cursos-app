@@ -37,7 +37,6 @@ export const CourseDetail = () => {
     dispatch(actions.getInstructorById(courseDetail.InstructorId));  
     dispatch(actions.getSectionsByCourseId(courseId));
     dispatch(actions.getUsersByCourseId(courseId));
-    dispatch(actions.getCourses());
   }, [courseId, dispatch, courseDetail.InstructorId])
 
   const [selectedButton, setSelectedButton] = useState(constants.VISION_GENERAL);

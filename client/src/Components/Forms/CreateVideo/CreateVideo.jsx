@@ -48,22 +48,7 @@ const CreateVideo = ({ setActualForm }) => {
     } 
 
     const sectionId = sectionToAddVideo.id
-    const response = dispatch(actions.createVideo(formValues, sectionId))
-
-    if (response !== null) {
-      Swal.fire({
-        icon: "success",
-        title: `Video posteado con éxito`,
-        showConfirmButton: false,
-        timer: 1500
-      });
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Hubo un error al crear el video",
-        confirmButtonText: "Aceptar",
-      });
-    }
+    dispatch(actions.createVideo(formValues, sectionId))
 
     setFormValues({
       videoTitle: "",
