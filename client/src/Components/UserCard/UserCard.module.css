@@ -20,6 +20,7 @@
   font-family: 'Montserrat', sans-serif;
   animation-name: opacityin;
   animation-duration: 1s;
+  margin-bottom: 30px;
 }
 
 @media(max-width: 750px) {
