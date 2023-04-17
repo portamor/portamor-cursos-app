@@ -25,6 +25,13 @@
   color: white;
   cursor: pointer;
 } 
+.nav-hello {
+  font-size: 30px;
+  margin: 0 40px;
+  text-decoration: none;
+  color: white;
+  cursor: auto;
+} 
 
 @media screen and (max-width: 975px) {
   .nav-container {

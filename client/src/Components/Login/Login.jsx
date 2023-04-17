@@ -48,7 +48,7 @@ function Login({onSuccess}) {
           timer: 1800
         });
         setTimeout(() => {
-          window.location.reload();
+          // window.location.reload();
         }, 3000);
       } else {
         console.error('No se encontró el usuario');
