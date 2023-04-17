@@ -90,12 +90,16 @@ export const NavBar = () => {
         height={60}
         className={Styles["adulto-mayor-img"]}
       />
-      <img
-        src={redLogo}
-        alt="logo-red-header"
-        width={200}
-        height={60}
-      />
+      <NavLink
+        to="/"
+        activeclassname="active" >
+          <img
+            src={redLogo}
+            alt="logo-red-header"
+            width={200}
+            height={60}
+          />
+        </NavLink>
       <div
         className={`${Styles["nav-menu"]} ${menuOpen ? Styles["active"] : ""}`}
         ref={navMenuRef} >

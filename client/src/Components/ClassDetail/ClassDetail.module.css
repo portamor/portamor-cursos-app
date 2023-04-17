@@ -162,4 +162,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  max-height: 500px;
+  margin-top: 20px;
+}
+
+@media(max-width: 750px) {
+  .cards-container {
+    max-height: fit-content;
+    overflow-y: hidden;
+  }
 }
