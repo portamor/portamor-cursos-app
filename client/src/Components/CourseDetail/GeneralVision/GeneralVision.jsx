@@ -8,8 +8,8 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from 'react';
 import { useMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import CourseDetailCard from "../CourseDetailCard/CourseDetailCard";
+import { inscribeUser } from "../../../Redux/actions";
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
@@ -25,6 +25,7 @@ export default function GeneralVision({ accessToken }) {
   const dispatch = useDispatch();
   const match    = useMatch('/detalle-curso/:courseId');
   const courseId = match.params.courseId;
+  const [isEnrolled, setIsEnrolled] = useState(false);
 
   const userId         = useSelector((state) => state.user?.id)
   const courseDetail   = useSelector((state) => state.courseDetail);
@@ -49,35 +50,23 @@ export default function GeneralVision({ accessToken }) {
 
   const userIsEnrolled = userId && courses.some((course) => course.id === courseId && course.userId === userId.id);
 
-  function handleClick() {
-    navigate(`/clase/${courseId}/0`);
-  }
-
   async function handleInscriptionClick() {
     if (isLoggedIn) {
-      const userId = user.id;
-      const courseId = courseDetail.id;
-      const response = await fetch(`http://localhost:3001/users/inscription/${userId}/${courseId}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}`,
-        },
-      });
-
-      if (response.ok) {
+      try {
+        const response = await dispatch(inscribeUser(userId, courseId, accessToken, user, courseDetail));
         Swal.fire({
           title: 'Inscripción exitosa',
-          text: `${user.name} se ha inscripto al curso ${courseDetail.title}`,
+          text: response.message,
           icon: 'success',
+          timer: 1800
         });
         setTimeout(() => {
           window.location.reload();
         }, 3000);
-      } else {
+      } catch (error) {
         Swal.fire({
           title: 'Error en la inscripción',
-          text: 'Hubo un error al inscribir al usuario al curso',
+          text: error.message,
           icon: 'error',
         });
       }
@@ -85,11 +74,10 @@ export default function GeneralVision({ accessToken }) {
       setShowModal(true);
     }
   }
+  
+  
+  
 
-
-  function handleModalClose() {
-    setShowModal(false);
-  }
 
   return (
     <>

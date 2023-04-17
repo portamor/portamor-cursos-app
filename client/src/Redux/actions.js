@@ -29,6 +29,30 @@ export function getCourses(page, size) {
   };
 }
 
+
+export const inscribeUser = (userId, courseId, accessToken, user, courseDetail) => async () => {
+  try {
+    const response = await axios.post(`http://localhost:3001/users/inscription/${userId}/${courseId}`, {}, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`,
+      },
+    });
+
+    if (response.status === 200) {
+      return {
+        success: true,
+        message: `${user.name} se ha inscripto al curso ${courseDetail.title}`,
+      };
+    } else {
+      throw new Error('Hubo un error al inscribir al usuario al curso');
+    }
+  } catch (error) {
+    throw new Error('Hubo un error al inscribir al usuario al curso');
+  }
+};
+
+
 export function getCourseDetail(courseId) {
   return async function (dispatch) {
     try {
