@@ -29,6 +29,32 @@ export function getCourses(page, size) {
   };
 }
 
+export const getUsersById = (id) => async (dispatch) => {
+  try {
+    const response = await axios.get(`http://localhost:3001/users/${id}`);
+    dispatch({ type: 'GET_USERS_ID', payload: response.data.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUsers = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`http://localhost:3001/users`);
+    dispatch({ type: 'GET_USERS_SUCCESS', payload: response.data.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteUser = (userId) => async (dispatch) => {
+  try {
+    const response = await axios.delete(`http://localhost:3001/users/${userId}`);
+    dispatch({ type: 'DELETE_USER_SUCCESS', payload: response.data.message });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const inscribeUser = (userId, courseId, accessToken, user, courseDetail) => async () => {
   try {

@@ -48,8 +48,7 @@ export default function GeneralVision({ accessToken }) {
     }
   }, [courses, courseId, userId]);
 
-  const userIsEnrolled = userId && courses.some((course) => course.id === courseId && course.userId === userId.id);
-
+  
   async function handleInscriptionClick() {
     if (isLoggedIn) {
       try {
@@ -61,8 +60,8 @@ export default function GeneralVision({ accessToken }) {
           timer: 1800
         });
         setTimeout(() => {
-          window.location.reload();
-        }, 3000);
+          window.location.href = window.location.href;
+        }, 2000);
       } catch (error) {
         Swal.fire({
           title: 'Error en la inscripción',

@@ -18,7 +18,7 @@ export const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.currentUser);
   const isAdmin = user?.admin;
 
   useEffect(() => {
@@ -41,7 +41,6 @@ export const NavBar = () => {
     e.preventDefault()
     dispatch(logout());
         window.history.pushState({}, '', '/');
-        window.location.reload();
   };
 
 

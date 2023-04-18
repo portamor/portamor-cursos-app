@@ -40,23 +40,12 @@ export const CourseDetail = () => {
   }, [courseId, dispatch, courseDetail.InstructorId])
 
   const [selectedButton, setSelectedButton] = useState(constants.VISION_GENERAL);
-
   const handleSelectContent = (selectedButtonContent) => setSelectedButton(selectedButtonContent);
 
 
   //diame
   const [isEnrolled, setIsEnrolled] = useState(false);
-
-  useEffect(() => {
-    if (courses.some((course) => course.id === courseId && course.userId === userId)) {
-      setIsEnrolled(true);
-    }
-  }, [courses, courseId, userId]);
-
   const userIsEnrolled = userId && courses.some((course) => course.id === courseId && course.userId === userId.id);
-
-
-
 
   return (
     <div className={styles["course-detail-main"]}>
@@ -97,9 +86,10 @@ export const CourseDetail = () => {
             className={constants.COMENTARIOS === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
             onClick={() => handleSelectContent(constants.COMENTARIOS)}>Comentarios</button>
 
-          {userIsEnrolled && (<Link className={styles["link-classes-button"]} to={`/clase/${courseId}/${firstVideoId}`}>Ir a las clases</Link>
-          )
-          }
+          {userIsEnrolled && (
+            <Link updateEnrolledStatus={setIsEnrolled} className={styles["link-classes-button"]} to={`/clase/${courseId}/${firstVideoId}` }>Ir a las clases</Link>
+          )}
+
         </div>
       </div>
 

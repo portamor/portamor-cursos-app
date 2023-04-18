@@ -9,13 +9,15 @@ import { CreateVideo }         from "../Forms";
 import { useState }            from "react";
 import ShowCreatedVideo        from "../ShowCreatedVideos/ShowCreatedVideos";
 import styles                  from "./Dashboard.module.css"
+import FormSelector from "../FormSelector/FormSelector";
 
 const Dashboard = () => {
   const [actualForm, setActualForm] = useState(constants.SELECT_COURSE_FORM);
 
   return (
     <div className={styles.div_dashboard} >
-      { actualForm === constants.SELECT_COURSE_FORM && <CreateCourse setActualForm={setActualForm} /> }
+      <FormSelector/>
+      {/* { actualForm === constants.SELECT_COURSE_FORM && <CreateCourse setActualForm={setActualForm} /> }
 
       { 
         actualForm === constants.SELECT_INSTRUCTOR_FORM && (
@@ -38,7 +40,7 @@ const Dashboard = () => {
           <CreateVideo setActualForm={setActualForm} /> 
           <ShowCreatedVideo /> 
         </div>
-      )}
+      )} */}
     </div>
   )
 }
