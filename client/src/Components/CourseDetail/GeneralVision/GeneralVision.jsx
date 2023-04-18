@@ -48,7 +48,7 @@ export default function GeneralVision() {
             </div>
             <div className={styles["instructor-description"]}>
               <h4>Mensaje que te gustaria dejar a la comunidad emprendedora de Portamor:</h4>
-              <span>Emprender es un camino muy bonito, lleno de satisfacción y orgullo por las metas que logramos. Pero también puede ser difícil a veces y debemos aprender a controlar la frustración para respirar un momento y luego seguir adelante. Lo más importante para cualquier emprendimiento, es la validación: sea cual sea tu producto, pregunta a tu público qué piensa, cómo puedes mejorar, etc. Este feedback te ayudará a llegar más lejos, evitará gastos innecesarios y te ayudará a tener más clientes.</span>
+              <span>{instructor.description}</span>
             </div>
           </div>
         </div>
