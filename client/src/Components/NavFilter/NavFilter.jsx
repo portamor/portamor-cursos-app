@@ -60,11 +60,11 @@ const NavFilter = ({ actualPage }) => {
         <CustomButton 
         content={"Actividad Fisica"}
         primary={selectedGenre === "Actividad Fisica" ? true : false}
-        onClick={() => handleFilterClick("Actividad Fisica")} />
+        onClick={() => handleFilterClick("Actividad Física")} />
         <CustomButton 
         content={"Participacion Social"}
         primary={selectedGenre === "Participacion Social" ? true : false}
-        onClick={() => handleFilterClick("Participacion Social")} />
+        onClick={() => handleFilterClick("Participación Social")} />
         <CustomButton 
         content={"Bienestar Mental"}
         primary={selectedGenre === "Bienestar Mental" ? true : false}
@@ -72,7 +72,7 @@ const NavFilter = ({ actualPage }) => {
         <CustomButton 
         content={"Alimentacion Saludable"}
         primary={selectedGenre === "Alimentacion Saludable" ? true : false}
-        onClick={() => handleFilterClick("Alimentacion Saludable")} />
+        onClick={() => handleFilterClick("Alimentación Saludable")} />
       </ul>
 
       <select
@@ -80,10 +80,10 @@ const NavFilter = ({ actualPage }) => {
         value={selectedGenre}
         onChange={handleSelectChange} >
         <option value="">Todos</option>
-        <option value="Actividad Fisica">Actividad Física</option>
+        <option value="Actividad Física">Actividad Física</option>
         <option value="Participacion Social">Participación Social</option>
         <option value="Bienestar Mental">Bienestar Mental</option>
-        <option value="Alimentacion Saludable">Alimentación Saludable</option>
+        <option value="Alimentación Saludable">Alimentación Saludable</option>
       </select>
     </div>
   );
