@@ -1,6 +1,6 @@
 const { Users, Courses, course_Inscription } = require("../database.js");
 
-const createUser = async (name, lastName, code, birthday) => {
+const createUser = async (name, lastName, code, birthday, admin) => {
   const searchUser = await userByNameLastNameBirthday(name, lastName, birthday)
   const verificate = await userByCode(code);
   if (verificate.length) {
@@ -11,6 +11,7 @@ const createUser = async (name, lastName, code, birthday) => {
     lastName,
     birthday,
     code,
+    admin,
   });
   return newUser;
 };
