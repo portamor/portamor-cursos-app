@@ -20,6 +20,7 @@ export const NavBar = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const user = useSelector((state) => state.user);
   const isAdmin = user?.admin;
+  const name = user?.name
 
   useEffect(() => {
     const isLoggedInInLocalStorage = localStorage.getItem("isLoggedIn");
@@ -34,7 +35,7 @@ export const NavBar = () => {
         }
       }
     }
-  }, []);
+  }, [dispatch]);
 
 
   const handleLogout = (e) => {
@@ -110,6 +111,9 @@ export const NavBar = () => {
           >
             Admin
           </NavLink>
+        )}
+        {name && (
+          <span className={Styles["nav-hello"]} >Hola {name}</span>
         )}
 
         {isLoggedIn ? (
