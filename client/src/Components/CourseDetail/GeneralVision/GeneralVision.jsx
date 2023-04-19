@@ -18,7 +18,7 @@ export default function GeneralVision({ accessToken }) {
 
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const [showModal, setShowModal] = useState(false);
-  const [showInscriptionModal, setShowInscriptionModal] = useState(false);
+
 
 
 
@@ -27,7 +27,7 @@ export default function GeneralVision({ accessToken }) {
   const courseId = match.params.courseId;
   const [isEnrolled, setIsEnrolled] = useState(false);
 
-  const userId         = useSelector((state) => state.user?.id)
+  const userId = useSelector((state) => state.user?.id);
   const courseDetail   = useSelector((state) => state.courseDetail);
   const courseSections = useSelector((state) => state.courseSections);
   const instructor = useSelector((state) => state.courseInstructor);
@@ -48,7 +48,8 @@ export default function GeneralVision({ accessToken }) {
     }
   }, [courses, courseId, userId]);
 
-  
+ 
+
   async function handleInscriptionClick() {
     if (isLoggedIn) {
       try {
@@ -60,8 +61,8 @@ export default function GeneralVision({ accessToken }) {
           timer: 1800
         });
         setTimeout(() => {
-          window.location.href = window.location.href;
-        }, 2000);
+          window.location.reload();
+        }, 3000);
       } catch (error) {
         Swal.fire({
           title: 'Error en la inscripción',

@@ -18,7 +18,7 @@ export const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  const user = useSelector((state) => state.currentUser);
+  const user = useSelector((state) => state.user);
   const isAdmin = user?.admin;
 
   useEffect(() => {

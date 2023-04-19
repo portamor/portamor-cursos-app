@@ -58,6 +58,7 @@ export const deleteUser = (userId) => async (dispatch) => {
 
 export const inscribeUser = (userId, courseId, accessToken, user, courseDetail) => async () => {
   try {
+    console.log(userId)
     const response = await axios.post(`http://localhost:3001/users/inscription/${userId}/${courseId}`, {}, {
       headers: {
         'Content-Type': 'application/json',

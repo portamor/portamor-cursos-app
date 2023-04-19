@@ -40,12 +40,14 @@ export const CourseDetail = () => {
   }, [courseId, dispatch, courseDetail.InstructorId])
 
   const [selectedButton, setSelectedButton] = useState(constants.VISION_GENERAL);
+
   const handleSelectContent = (selectedButtonContent) => setSelectedButton(selectedButtonContent);
 
 
   //diame
   const [isEnrolled, setIsEnrolled] = useState(false);
   const userIsEnrolled = userId && courses.some((course) => course.id === courseId && course.userId === userId.id);
+
 
   return (
     <div className={styles["course-detail-main"]}>

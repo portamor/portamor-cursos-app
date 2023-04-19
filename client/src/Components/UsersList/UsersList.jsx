@@ -9,7 +9,7 @@ import usersImg from "../../images/users-icon.svg"
 
 function UsersList({ id }) {
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.user.users);
+  const users = useSelector((state) => state.totaluser);
 
   const totalUsers = users ? users.length : 0;
 

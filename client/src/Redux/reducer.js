@@ -18,7 +18,8 @@ const initialState = {
   error: null,
   isLoggedIn: false,
   user: [],
-  currentUser: null,
+  user: null,
+  totaluser: [],
   sectionToAddVideo: {},
   sectionVideos: [],
   totalCourses: 0,
@@ -33,19 +34,15 @@ const initialState = {
 function rootReducer(state = initialState, action) {
   switch (action.type) {
 
-    case 'DELETE_USER_SUCCESS':
+    case 'GET_USERS_SUCCESS':
       return {
         ...state,
-        message: action.payload
+        totaluser: action.payload
       };
-    case 'GET_USERS_SUCCESS':
-      return { ...state, 
-        user: { users: action.payload } }
-        case 'GET_USERS_ID':
-          return {
-            ...state,
-            user: action.payload,
-          }
+    case 'GET_USERS_ID':
+      return {
+        totaluser: action.payload
+      };
     case 'INSCRIBE_USER_REQUEST':
       return {
         ...state,
@@ -65,21 +62,21 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         isLoggedIn: true,
-        currentUser: action.payload,
+        user: action.payload,
         error: null,
       };
     case "LOGIN_FAIL":
       return {
         ...state,
         isLoggedIn: false,
-        currentUser: null,
+        user: null,
         error: action.payload,
       };
     case "LOGOUT":
       return {
         ...state,
         isLoggedIn: false,
-        currentUser: null,
+        user: null,
         error: null,
       };
 

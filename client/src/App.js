@@ -16,7 +16,7 @@ import Footer from "./Components/Footer/Footer";
 function App() {
   const [showModal, setShowModal] = useState(false);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  const user = useSelector((state) => state.currentUser);
+  const user = useSelector((state) => state.user);
   const isAdmin = user?.admin;
 
   return (
