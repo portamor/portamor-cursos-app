@@ -1,40 +1,40 @@
-import * as actions    from "../../Redux/actions";
-import * as constants  from "../../constants/classDetailConstants";
-import React           from 'react';
-import styles          from "./CourseDetail.module.css"
+import * as actions from "../../Redux/actions";
+import * as constants from "../../constants/classDetailConstants";
+import React from 'react';
+import styles from "./CourseDetail.module.css"
 import { useDispatch } from "react-redux";
-import { useEffect }   from 'react';
-import { useMatch }    from "react-router-dom";
+import { useEffect } from 'react';
+import { useMatch } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState }    from 'react';
-import usersImg        from "../../images/users-icon.svg"
-import * as utils      from "../../utils"
+import { useState } from 'react';
+import usersImg from "../../images/users-icon.svg"
+import * as utils from "../../utils"
 import SelectedContent from "./SelectedContent/SelectedContent";
 import { Link } from "react-router-dom";
-import Modal            from "../Modal/Modal";
-import ModalInscription from "../ModalInscription/ModalInscription";
+
+
 
 
 export const CourseDetail = () => {
   const dispatch = useDispatch();
-  const match    = useMatch('/detalle-curso/:courseId');
+  const match = useMatch('/detalle-curso/:courseId');
   const courseId = match.params.courseId;
 
   const userId = useSelector((state) => state.user?.id)
-  const courses         = useSelector((state) => state.courses);
-  const courseDetail    = useSelector((state) => state.courseDetail);
-  const courseSections  = useSelector((state) => state.courseSections);
-  const courseUsers     = useSelector((state) => state.courseUsers);
-  const instructor      = useSelector((state) => state.courseInstructor);
-  const instructorStars = utils.getStarsRating(instructor.score)  
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const courses = useSelector((state) => state.courses);
+  const courseDetail = useSelector((state) => state.courseDetail);
+  const courseSections = useSelector((state) => state.courseSections);
+  const courseUsers = useSelector((state) => state.courseUsers);
+  const instructor = useSelector((state) => state.courseInstructor);
+  const instructorStars = utils.getStarsRating(instructor.score)
+
 
   let firstVideoId;
-  if(courseSections[0] && courseSections[0].Videos[0].id) firstVideoId = courseSections[0].Videos[0].id
+  if (courseSections[0] && courseSections[0].Videos[0].id) firstVideoId = courseSections[0].Videos[0].id
 
   useEffect(() => {
     dispatch(actions.getCourseDetail(courseId));
-    dispatch(actions.getInstructorById(courseDetail.InstructorId));  
+    dispatch(actions.getInstructorById(courseDetail.InstructorId));
     dispatch(actions.getSectionsByCourseId(courseId));
     dispatch(actions.getUsersByCourseId(courseId));
   }, [courseId, dispatch, courseDetail.InstructorId])
@@ -45,26 +45,9 @@ export const CourseDetail = () => {
 
 
   //diame
-  const [showModal, setShowModal] = useState(false);
-  const [showInscriptionModal, setShowInscriptionModal] = useState(false);
   const [isEnrolled, setIsEnrolled] = useState(false);
-
-  useEffect(() => {
-    if (courses.some((course) => course.id === courseId && course.userId === userId)) {
-      setIsEnrolled(true);
-    }
-  }, [courses, courseId, userId]);
-
   const userIsEnrolled = userId && courses.some((course) => course.id === courseId && course.userId === userId.id);
-  
 
-  function handleInscriptionModalClick() {
-    if (isLoggedIn) {
-      setShowInscriptionModal(true);
-    } else {
-      setShowModal(true);
-    }
-  }
 
   return (
     <div className={styles["course-detail-main"]}>
@@ -74,7 +57,7 @@ export const CourseDetail = () => {
 
           <div className={styles["head-instructor-container"]}>
             <div className={styles["instructor-name-container"]}>
-              <img src={instructor.profile_picture} alt="instructor-course-detail" className={styles["instructor-head-picture"]}/>
+              <img src={instructor.profile_picture} alt="instructor-course-detail" className={styles["instructor-head-picture"]} />
               <div>
                 <p>Instructor</p>
                 <h2 className={styles["head-instructor-name"]}>{instructor.name}</h2>
@@ -87,7 +70,7 @@ export const CourseDetail = () => {
             <h1 className={styles["course-title"]}>{courseDetail.title}</h1>
           </div>
           <div className={styles["course-detail-students-container"]}>
-            <img className={styles["picture"]} src={usersImg} alt="user-card"/>
+            <img className={styles["picture"]} src={usersImg} alt="user-card" />
             <h3>{courseUsers.length} Estudiantes</h3>
           </div>
         </div>
@@ -95,37 +78,33 @@ export const CourseDetail = () => {
 
       <div className={styles["buttons-select-container"]}>
         <div className={styles["buttons-container"]}>
-          <button 
-          className={constants.VISION_GENERAL === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
-          onClick={() => handleSelectContent(constants.VISION_GENERAL)}>Vision General</button>
-          <button 
-          className={constants.PREGUNTAS_FRECUENTES === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
-          onClick={() => handleSelectContent(constants.PREGUNTAS_FRECUENTES)}>Preguntas Frecuentes</button>
-          <button 
-          className={constants.COMENTARIOS === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
-          onClick={() => handleSelectContent(constants.COMENTARIOS)}>Comentarios</button>
+          <button
+            className={constants.VISION_GENERAL === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
+            onClick={() => handleSelectContent(constants.VISION_GENERAL)}>Vision General</button>
+          <button
+            className={constants.PREGUNTAS_FRECUENTES === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
+            onClick={() => handleSelectContent(constants.PREGUNTAS_FRECUENTES)}>Preguntas Frecuentes</button>
+          <button
+            className={constants.COMENTARIOS === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
+            onClick={() => handleSelectContent(constants.COMENTARIOS)}>Comentarios</button>
 
-           {isLoggedIn && !userIsEnrolled ? (
-              <ModalInscription courseId={courseDetail.id} />
-              ) 
-              : 
-              (
-                userIsEnrolled && <Link className={styles["link-classes-button"]} to={`/clase/${courseId}/${firstVideoId}`}>Ir a las clases</Link>
-              )
-            }
+          {userIsEnrolled && (
+            <Link updateEnrolledStatus={setIsEnrolled} className={styles["link-classes-button"]} to={`/clase/${courseId}/${firstVideoId}` }>Ir a las clases</Link>
+          )}
+
         </div>
       </div>
 
       <div className={styles["course-detail-container"]}>
         {
-          selectedButton && 
-          <SelectedContent 
+          selectedButton &&
+          <SelectedContent
             courseId={courseId}
-            courseDetail={courseDetail} 
+            courseDetail={courseDetail}
             selectedButtonContent={selectedButton} />
         }
       </div>
-        
+
     </div>
   )
 };

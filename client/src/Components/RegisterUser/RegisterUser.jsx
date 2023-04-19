@@ -1,5 +1,5 @@
-import React           from 'react';
-import { useState }    from 'react';
+import React from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginSuccess, postUser }    from '../../Redux/actions';
 import Styles          from "./RegisterUser.module.css"
@@ -72,13 +72,20 @@ const RegisterUser = ({ onSuccess }) => {
           postUser({ name, lastName, birthday, code })
         );
         const userCode = response.data.data.code;
+        const authToken = response.data.data.token;
+        localStorage.setItem("auth_token", authToken);
         onSuccess();
         if (response !== null) {
           Swal.fire({
             icon: "success",
-            title: `Su codigo ${userCode}`,
-            text: "Ese sera su codigo para iniciar sesión, le recomendamos anotarlo",
+            title: `Su código ${userCode}`,
+            text:
+              "Ese será su código para iniciar sesión, le recomendamos anotarlo",
             showConfirmButton: false,
+            timer: 5000,
+          }).then(() => {
+            window.location("/");
+            Swal.showValidationMessage("Presione Aceptar para continuar");
           });
           setTimeout(() => {
             Swal.update({
@@ -91,15 +98,24 @@ const RegisterUser = ({ onSuccess }) => {
           Swal.fire({
             icon: "error",
             title: "Usuario registrado anteriormente",
-            text: "Si usted se registro con anterioridad por favor inicie sesión con su codigo.",
+            text:
+              "Si usted se registró con anterioridad por favor inicie sesión con su código.",
             confirmButtonText: "Aceptar",
           });
         }
       } catch (error) {
-        console.error(error);
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Error al registrar usuario",
+          text: "Ya existe un usuario con ese codigo, intente de nuevo",
+          confirmButtonText: "Aceptar",
+        });
       }
     }
   };
+
+
 
   return (
     <form className={Styles["register-container"]} onSubmit={handleRegister}>

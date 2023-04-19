@@ -44,7 +44,6 @@ export const NavBar = () => {
     e.preventDefault()
     dispatch(logout());
         window.history.pushState({}, '', '/');
-        window.location.reload();
   };
 
 
