@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { useState } from "react";
+import adultoMayorLogo from "../../images/adulto-mayor-logo.svg"
+import redLogo from "../../images/LogoRed.svg"
 import { useSelector } from "react-redux";
 
 export const NavBar = () => {
@@ -20,6 +22,7 @@ export const NavBar = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const user = useSelector((state) => state.user);
   const isAdmin = user?.admin;
+  const name = user?.name
 
   useEffect(() => {
     const isLoggedInInLocalStorage = localStorage.getItem("isLoggedIn");
@@ -34,7 +37,7 @@ export const NavBar = () => {
         }
       }
     }
-  }, []);
+  }, [dispatch]);
 
 
   const handleLogout = (e) => {
@@ -81,11 +84,22 @@ export const NavBar = () => {
   return (
     <nav className={`${Styles["nav-container"]} ${menuOpen ? Styles["active"] : ""}`}>
       <img
-        src="https://res.cloudinary.com/dsjsbp6qy/image/upload/v1679065705/Dshop/Dise%C3%B1o_sin_t%C3%ADtulo__19_-removebg-preview-removebg-preview_gvpsgd.png"
-        alt="logo"
+        src={adultoMayorLogo}
+        alt="adultomayor-header"
         width={200}
         height={60}
+        className={Styles["adulto-mayor-img"]}
       />
+      <NavLink
+        to="/"
+        activeclassname="active" >
+          <img
+            src={redLogo}
+            alt="logo-red-header"
+            width={200}
+            height={60}
+          />
+        </NavLink>
       <div
         className={`${Styles["nav-menu"]} ${menuOpen ? Styles["active"] : ""}`}
         ref={navMenuRef} >
@@ -110,6 +124,9 @@ export const NavBar = () => {
             Admin
           </NavLink>
         )}
+        {name && (
+          <span className={Styles["nav-hello"]} >Hola {name}</span>
+        )}
 
         {isLoggedIn ? (
           <span onClick={handleLogout} className={Styles["nav-link"]}>Cerrar sesión</span>
@@ -127,21 +144,21 @@ export const NavBar = () => {
 
 
         {isMobile && (
-          <button
-            className={Styles["button-salirMenu"]}
+          <span
+          className={Styles["nav-link"]}
             onClick={handleHamburguerClick}
           >
             Salir del Menú
-          </button>
+          </span>
         )}
       </div>
 
-      {isMobile && (
-        <button
-          className={`${Styles["mobile-menu-button"]} ${menuOpen ? Styles["active"] : ""}`}
+      {isMobile && !menuOpen && (
+        <span
+        className={Styles["nav-link"]}
           onClick={handleMenuClick} >
           Menú
-        </button>
+        </span>
       )}
     </nav>
   );

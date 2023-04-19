@@ -1,17 +1,19 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import NavBar from "./Components/NavBar/NavBar";
-import CourseDetail from "./Components/CourseDetail/CourseDetail";
-import Home from "./Components/Home/Home";
-import ClassDetail from "./Components/ClassDetail/ClassDetail";
+import Chat                from "./Components/ChatSala/ChatSala";
+import Certificate         from "./Components/Certificate/Certificate";
+import ClassDetail         from "./Components/ClassDetail/ClassDetail";
+import CourseDetail        from "./Components/CourseDetail/CourseDetail";
+import Dashboard           from "./Components/Dashboard/Dashboard";
 import DownloadCertificate from "./Components/Certificate/DownaldCertificate";
-import Dashboard from "./Components/Dashboard/Dashboard";
-import Chat from "./Components/ChatSala/ChatSala";
-import Certificate from "./Components/Certificate/Certificate";
-import Modal from "./Components/Modal/Modal";
-import MyCourses from "./Components/MyCourses/MyCourses";
-import Footer from "./Components/Footer/Footer";
+import Home                from "./Components/Home/Home";
+import Footer              from "./Components/Footer/Footer";
+import MyCourses           from "./Components/MyCourses/MyCourses";
+import Modal               from "./Components/Modal/Modal";
+import NavBar              from "./Components/NavBar/NavBar";
+import { BrowserRouter }   from "react-router-dom";
+import { Route }           from "react-router-dom";
+import { Routes }          from "react-router-dom";
+import { useSelector }     from "react-redux";
+import { useState }        from "react";
 
 function App() {
   const [showModal, setShowModal] = useState(false);

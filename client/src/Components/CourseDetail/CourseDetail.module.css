@@ -3,6 +3,7 @@
   flex-direction: column;
   font-size: 18px;
   width: 100%;
+  margin-top: 70px;
   padding-bottom: 50px;
   border-bottom: solid 2px rgba(203, 202, 202, 0.73);
 }
@@ -69,6 +70,7 @@
 
 .instructor-head-picture {
   max-height: 80px;
+  border-radius: 50%;
 }
 
 .stars-container {

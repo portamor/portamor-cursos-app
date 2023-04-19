@@ -1,10 +1,10 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { postUser } from '../../Redux/actions';
-import Styles from "./RegisterUser.module.css"
-import CustomButton from '../CustomButton/CustomButton';
-import Swal from 'sweetalert2'
+import { loginSuccess, postUser }    from '../../Redux/actions';
+import Styles          from "./RegisterUser.module.css"
+import CustomButton    from '../CustomButton/CustomButton';
+import Swal            from 'sweetalert2'
 
 const RegisterUser = ({ onSuccess }) => {
   const dispatch = useDispatch();
@@ -87,6 +87,13 @@ const RegisterUser = ({ onSuccess }) => {
             window.location("/");
             Swal.showValidationMessage("Presione Aceptar para continuar");
           });
+          setTimeout(() => {
+            Swal.update({
+              showConfirmButton: true,
+              confirmButtonText: "Aceptar",
+            });
+          }, 5000);
+          dispatch(loginSuccess(response.data.data))
         } else {
           Swal.fire({
             icon: "error",
@@ -113,7 +120,7 @@ const RegisterUser = ({ onSuccess }) => {
   return (
     <form className={Styles["register-container"]} onSubmit={handleRegister}>
       <div className={Styles["name-input-container"]}>
-        <label id="name">Nombre: </label>
+        <label htmlFor="name">Nombre: </label>
         <input
           type="text"
           id="name"
@@ -125,7 +132,7 @@ const RegisterUser = ({ onSuccess }) => {
         )}
       </div>
       <div className={Styles["lastname-input-container"]}>
-        <label id="lastName">Apellido: </label>
+        <label htmlFor="lastName">Apellido: </label>
         <input
           type="text"
           id="lastName"
@@ -137,7 +144,7 @@ const RegisterUser = ({ onSuccess }) => {
         )}
       </div>
       <div className={Styles["birthday-input-container"]}>
-        <label id="birthday">Fecha de cumpleaños: </label>
+        <label htmlFor="birthday">Fecha de cumpleaños: </label>
 
         <input
           type="date"
