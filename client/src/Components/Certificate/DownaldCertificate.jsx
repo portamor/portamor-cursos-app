@@ -3,8 +3,7 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 import Certificate from './Certificate';
 import { useSelector } from "react-redux";
 import CustomButton from '../CustomButton/CustomButton';
-import styles from '../Forms/CreateCourse/formCourse.module.css'
-
+import styles from './DownloadCertificate.module.css'
 
 const DownloadCertificate = ({title}) => {
   const user = useSelector((state)=> state?.user)
@@ -35,9 +34,9 @@ const DownloadCertificate = ({title}) => {
   return (
     <div className={styles.form} >
       <div className={styles["cards-container"]} >
-<p className={styles.labeltwo} >Para solicitar certificado ingresa tu identificación oficial.</p>
-</div> 
-<br />
+  <p className={styles.labeltwo} >Para solicitar certificado ingresa tu identificación oficial.</p>
+  </div> 
+  <br />
       <div className={styles.input_container} >
         <label htmlFor="tipo_identificacion" className={styles.label} >Tipo de identificación oficial:</label>
         <select
@@ -47,7 +46,7 @@ const DownloadCertificate = ({title}) => {
           onChange={handleIdentificacion}
           className={styles.select}
         >
-          <option value=""></option>
+          <option value="">Seleccione una opcion</option>
           <option value="dni">DNI</option>
           <option value="pasaporte">Pasaporte</option>
           <option value="credencial_escolar">Credencial escolar</option>
@@ -65,7 +64,7 @@ const DownloadCertificate = ({title}) => {
         type="button" 
         content={"Guardar"} />
       </div>
-      <div className={styles.input} >
+      <div className={styles.pdf} >
       {isReadyToGenerate && (
         <button className={styles.buttonDesc} >
         <PDFDownloadLink

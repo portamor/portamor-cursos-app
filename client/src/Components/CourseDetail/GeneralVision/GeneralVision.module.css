@@ -252,6 +252,7 @@ div {
 .course-space {
   visibility: hidden;
   width: 110%;
+  z-index: 1;
 }
 
 .course-card-container {
@@ -260,6 +261,7 @@ div {
   top: 170px;
   margin-right: 20px;
   margin-left: 20%;
+  z-index: 1;
 }
 
 @media (max-width: 1300px) {

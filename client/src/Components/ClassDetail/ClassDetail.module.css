@@ -12,6 +12,7 @@
   width: 100%;
   animation-name: opacityin;
   animation-duration: 1s;
+  margin-top: 70px;
   margin-bottom: 70px;
 }
 
@@ -161,4 +162,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  max-height: 500px;
+  margin-top: 20px;
+}
+
+@media(max-width: 750px) {
+  .cards-container {
+    max-height: fit-content;
+    overflow-y: hidden;
+  }
 }
