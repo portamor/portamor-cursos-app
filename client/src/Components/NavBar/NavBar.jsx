@@ -124,9 +124,6 @@ export const NavBar = () => {
             Admin
           </NavLink>
         )}
-        {name && (
-          <span className={Styles["nav-hello"]} >Hola {name}</span>
-        )}
 
         {isLoggedIn ? (
           <span onClick={handleLogout} className={Styles["nav-link"]}>Cerrar sesión</span>
@@ -134,6 +131,9 @@ export const NavBar = () => {
           :
           <span onClick={() => setShowModal(true)} className={Styles["nav-link"]}>Iniciar sesión</span>
         }
+          {name && (
+            <span title={`Tu codigo es ${user.code}`} className={Styles["nav-hello"]} >Hola {name}</span>
+          )}
 
         {showModal && (
           <Modal onClose={handleCloseModal} onRegister={handleRegisterButtonClick} onLogin={handleLoginButtonClick}>
