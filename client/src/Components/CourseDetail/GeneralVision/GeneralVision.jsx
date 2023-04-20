@@ -34,6 +34,7 @@ export default function GeneralVision({ accessToken }) {
   const courses = useSelector((state) => state.courses);
   const user = useSelector((state) => state.user)
 
+  const userIsEnrolled = userId && courses.some((course) => course.id === courseId && course.userId === userId.id);
 
   useEffect(() => {
     dispatch(actions.getCourseDetail(courseId));
@@ -84,10 +85,10 @@ export default function GeneralVision({ accessToken }) {
       <div className={styles["course-detail-info-container"]}>
         <div className={styles["course-detail-info"]}>
           <div>
-            {isLoggedIn ? (
-              <h1 className={styles["ver-clases"]} onClick={handleInscriptionClick}> Inscribete ahora a este curso! </h1>
+            {isLoggedIn ? !userIsEnrolled && (
+              <h1 className={styles["ver-clases"]} onClick={handleInscriptionClick}> Inscribete ahora a este curso </h1>
             ) : (
-              <h1 className={styles["ver-clases"]} onClick={handleInscriptionClick}>Inicia sesion para inscribirte a este curso! 👆</h1>
+              <h1 className={styles["ver-clases"]} onClick={handleInscriptionClick}>Inicia sesion para inscribirte a este curso</h1>
             )}
             {showModal && (
               <Modal onClose={() => setShowModal(false)}>

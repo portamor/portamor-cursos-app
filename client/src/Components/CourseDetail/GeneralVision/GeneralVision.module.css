@@ -23,16 +23,18 @@ div {
 }
 
 .ver-clases {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  border: #eb575a solid 5px;
-  border-radius: 25px;
-  width: 70%;
-  min-width: 800px;
-  color: #424242;
-  font-size: 25px;
+  background-color: #EB575A;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  height: fit-content;
+  width: fit-content;
+  padding: 13px 20px;
+  font-family: "Montserrat", sans-serif;
 }
 
 @media (max-width: 900px) {
