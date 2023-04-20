@@ -1,9 +1,7 @@
 import Chat                from "./Components/ChatSala/ChatSala";
-import Certificate         from "./Components/Certificate/Certificate";
 import ClassDetail         from "./Components/ClassDetail/ClassDetail";
 import CourseDetail        from "./Components/CourseDetail/CourseDetail";
 import Dashboard           from "./Components/Dashboard/Dashboard";
-import DownloadCertificate from "./Components/Certificate/DownaldCertificate";
 import Home                from "./Components/Home/Home";
 import Footer              from "./Components/Footer/Footer";
 import MyCourses           from "./Components/MyCourses/MyCourses";
@@ -32,9 +30,9 @@ function App() {
           {isLoggedIn ? (
             <>
               <Route exact path="/clase/:courseId/:videoId" element={<ClassDetail />} />
-              <Route exact path="/certificadown" element={<DownloadCertificate />} />
-              <Route exact path="/certificado" element={<Certificate />} />
-              <Route exact path="/chat" element={<Chat />} />
+              {/* <Route exact path="/certificadown" element={<DownloadCertificate />} />
+              <Route exact path="/certificado" element={<Certificate />} />*/}
+              <Route exact path="/chat" element={<Chat />} /> 
               <Route exact path="/cursos" Component={MyCourses} />
             </>
           ) : (
