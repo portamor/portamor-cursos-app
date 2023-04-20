@@ -25,7 +25,8 @@ function Login({onSuccess}) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!validateCode(code)) {
+    const uppercaseCode = code.toUpperCase(); 
+    if (!validateCode(uppercaseCode)) {
       setCodeError("El código debe contener solo letras y números y tener al menos 6 caracteres.");
       Swal.fire({
         icon: 'error',
@@ -36,7 +37,7 @@ function Login({onSuccess}) {
       return 
     }
     try {
-      const user = await dispatch(getUserByCode(code));
+      const user = await dispatch(getUserByCode(uppercaseCode));
       onSuccess()
       if (user) {
         dispatch(loginSuccess(user));
@@ -47,9 +48,6 @@ function Login({onSuccess}) {
           showConfirmButton: false,
           timer: 1800
         });
-        setTimeout(() => {
-          window.location.reload();
-        }, 3000);
       } else {
         console.error('No se encontró el usuario');
         Swal.fire({
@@ -64,6 +62,7 @@ function Login({onSuccess}) {
       console.error(error);
     }
   };
+  
 
   return (
     <div>

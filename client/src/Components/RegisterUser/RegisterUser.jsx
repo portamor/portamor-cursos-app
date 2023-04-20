@@ -1,7 +1,7 @@
-import React           from 'react';
-import { useState }    from 'react';
+import React from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { postUser }    from '../../Redux/actions';
+import { loginSuccess, postUser }    from '../../Redux/actions';
 import Styles          from "./RegisterUser.module.css"
 import CustomButton    from '../CustomButton/CustomButton';
 import Swal            from 'sweetalert2'
@@ -76,34 +76,40 @@ const RegisterUser = ({ onSuccess }) => {
         if (response !== null) {
           Swal.fire({
             icon: "success",
-            title: `Su codigo ${userCode}`,
-            text: "Ese sera su codigo para iniciar sesión, le recomendamos anotarlo",
-            showConfirmButton: false,
-          });
-          setTimeout(() => {
-            Swal.update({
-              showConfirmButton: true,
-              confirmButtonText: "Aceptar",
-            });
-          }, 5000);
+            title: `Su código ${userCode}`,
+            text:
+              "Ese será su código para iniciar sesión, le recomendamos anotarlo",
+            showConfirmButton: true,
+            confirmButtonText: "Aceptar",
+          })
+          dispatch(loginSuccess(response.data.data))
         } else {
           Swal.fire({
             icon: "error",
             title: "Usuario registrado anteriormente",
-            text: "Si usted se registro con anterioridad por favor inicie sesión con su codigo.",
+            text:
+              "Si usted se registró con anterioridad por favor inicie sesión con su código.",
             confirmButtonText: "Aceptar",
           });
         }
       } catch (error) {
-        console.error(error);
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Error al registrar usuario",
+          text: "Ya existe un usuario con ese codigo, intente de nuevo",
+          confirmButtonText: "Aceptar",
+        });
       }
     }
   };
 
+
+
   return (
     <form className={Styles["register-container"]} onSubmit={handleRegister}>
       <div className={Styles["name-input-container"]}>
-        <label for="name">Nombre: </label>
+        <label htmlFor="name">Nombre: </label>
         <input
           type="text"
           id="name"
@@ -115,7 +121,7 @@ const RegisterUser = ({ onSuccess }) => {
         )}
       </div>
       <div className={Styles["lastname-input-container"]}>
-        <label for="lastName">Apellido: </label>
+        <label htmlFor="lastName">Apellido: </label>
         <input
           type="text"
           id="lastName"
@@ -127,7 +133,7 @@ const RegisterUser = ({ onSuccess }) => {
         )}
       </div>
       <div className={Styles["birthday-input-container"]}>
-        <label for="birthday">Fecha de cumpleaños: </label>
+        <label htmlFor="birthday">Fecha de cumpleaños: </label>
 
         <input
           type="date"

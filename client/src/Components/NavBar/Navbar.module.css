@@ -38,6 +38,13 @@
   cursor: pointer;
   position: relative;
 } 
+.nav-hello {
+  font-size: 20px;
+  margin: 0 40px;
+  text-decoration: none;
+  color: #eb575a;
+  cursor:pointer;
+} 
 
 .nav-link::after {
   content: "";

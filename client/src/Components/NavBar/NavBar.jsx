@@ -22,6 +22,7 @@ export const NavBar = () => {
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const user = useSelector((state) => state.user);
   const isAdmin = user?.admin;
+  const name = user?.name
 
   useEffect(() => {
     const isLoggedInInLocalStorage = localStorage.getItem("isLoggedIn");
@@ -36,14 +37,13 @@ export const NavBar = () => {
         }
       }
     }
-  }, []);
+  }, [dispatch]);
 
 
   const handleLogout = (e) => {
     e.preventDefault()
     dispatch(logout());
         window.history.pushState({}, '', '/');
-        window.location.reload();
   };
 
 
@@ -131,6 +131,9 @@ export const NavBar = () => {
           :
           <span onClick={() => setShowModal(true)} className={Styles["nav-link"]}>Iniciar sesión</span>
         }
+          {name && (
+            <span title={`Tu codigo es ${user.code}`} className={Styles["nav-hello"]} >Hola {name}</span>
+          )}
 
         {showModal && (
           <Modal onClose={handleCloseModal} onRegister={handleRegisterButtonClick} onLogin={handleLoginButtonClick}>
