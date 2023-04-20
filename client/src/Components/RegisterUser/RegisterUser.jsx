@@ -72,8 +72,6 @@ const RegisterUser = ({ onSuccess }) => {
           postUser({ name, lastName, birthday, code })
         );
         const userCode = response.data.data.code;
-        const authToken = response.data.data.token;
-        localStorage.setItem("auth_token", authToken);
         onSuccess();
         if (response !== null) {
           Swal.fire({
@@ -81,18 +79,9 @@ const RegisterUser = ({ onSuccess }) => {
             title: `Su código ${userCode}`,
             text:
               "Ese será su código para iniciar sesión, le recomendamos anotarlo",
-            showConfirmButton: false,
-            timer: 5000,
-          }).then(() => {
-            window.location("/");
-            Swal.showValidationMessage("Presione Aceptar para continuar");
-          });
-          setTimeout(() => {
-            Swal.update({
-              showConfirmButton: true,
-              confirmButtonText: "Aceptar",
-            });
-          }, 5000);
+            showConfirmButton: true,
+            confirmButtonText: "Aceptar",
+          })
           dispatch(loginSuccess(response.data.data))
         } else {
           Swal.fire({
