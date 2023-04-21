@@ -19,12 +19,9 @@
 
 @media screen and (max-width: 600px) {
   .containerFormSelector {
-    display: flex;
     flex-direction: column;
-    width: fit-content;
-  }
-  .containerFormSelector button {
-    width: 50%;
-    margin: 5px auto;
+    align-items: center;
+    gap: 20px;
+    width: 300px;
   }
 }
