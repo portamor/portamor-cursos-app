@@ -10,7 +10,7 @@
   }
 }
 
-div {
+.course-detail-info-container {
   animation-name: opacityin;
   animation-duration: 0.5s;
 }
@@ -83,6 +83,7 @@ div {
 
 .course-detail-info-instructor-container {
   display: flex;
+  gap: 20px;
   justify-content: center;
   align-items: center;
   margin: 20px 0;
@@ -133,6 +134,7 @@ div {
 
 .instructor-picture {
   max-width: 236px;
+  max-height: 236px;
   border-radius: 50%;
 }
 
@@ -164,11 +166,12 @@ div {
 
 .course-detail-materials ol {
   margin: 20px 0;
-  font-size: 18px;
+  font-size: 20px;
   color: #424242;
 }
 
 .modules-container {
+  font-size: 20px;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -184,6 +187,15 @@ div {
   display: flex;
   flex-direction: column;
   align-items: start;
+}
+
+.course-detail-materials span {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.course-detail-materials li {
+  font-size: 20px;
 }
 
 .certificate-portamor {
@@ -253,7 +265,7 @@ div {
 /* course card */
 .course-space {
   visibility: hidden;
-  width: 110%;
+  width: 70%;
   z-index: 1;
 }
 

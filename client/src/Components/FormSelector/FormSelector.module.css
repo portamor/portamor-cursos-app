@@ -1,20 +1,30 @@
+.form-selector-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
 .containerFormSelector {
-    display: flex;
-    justify-content: space-evenly;
-    list-style: none;
-  }
-  .selected {
-    background-color: #eb5759;
-    color: white;
-  }
- 
-  @media screen and (max-width: 600px) {
-    .containerFormSelector {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  width: 600px;
+}
+
+.selected {
+  background-color: #eb5759;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .containerFormSelector {
     display: flex;
     flex-direction: column;
-    }
-    .containerFormSelector button {
+    width: fit-content;
+  }
+  .containerFormSelector button {
     width: 50%;
     margin: 5px auto;
-    }
-    }
+  }
+}

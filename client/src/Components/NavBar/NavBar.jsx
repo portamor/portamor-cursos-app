@@ -96,8 +96,7 @@ export const NavBar = () => {
           <img
             src={redLogo}
             alt="logo-red-header"
-            width={200}
-            height={60}
+            className={Styles["logo-red-header"]}
           />
         </NavLink>
       <div

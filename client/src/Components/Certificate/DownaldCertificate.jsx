@@ -60,7 +60,7 @@ const DownloadCertificate = ({title}) => {
           onChange={handleIdentificacion}
           className={Styles.input}
         />
-        <label htmlFor="tipo_identificacion" className={Styles.labeltwo} >Tipo de identificación oficial:</label>
+        <label htmlFor="tipo_identificacion" className={Styles.labelIdentification} >Tipo de identificación oficial:</label>
         <select
           id="tipo_identificacion"
           name="tipo_identificacion"
@@ -68,7 +68,7 @@ const DownloadCertificate = ({title}) => {
           onChange={handleIdentificacion}
           className={Styles.selectC}
         >
-          <option value=""></option>
+          <option value="">Selecciona una identificacion</option>
           <option value="dni">DNI</option>
           <option value="pasaporte">Pasaporte</option>
           <option value="credencial_escolar">Credencial escolar</option>
