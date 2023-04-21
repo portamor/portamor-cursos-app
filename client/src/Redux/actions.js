@@ -3,10 +3,12 @@ import * as actions   from "../constants/actionsContants"
 import * as constants from "../constants";
 import Swal from "sweetalert2";
 
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+
 export function getCourses(page, size) {
   return async function (dispatch) {
     try {
-      const { data } = await axios.get(`http://localhost:3001/courses?page=${page}&size=${size}`);
+      const { data } = await axios.get(`/courses?page=${page}&size=${size}`);
 
       return dispatch({
         type: actions.GET_COURSES,
@@ -31,7 +33,7 @@ export function getCourses(page, size) {
 
 export const getUsersById = (id) => async (dispatch) => {
   try {
-    const response = await axios.get(`http://localhost:3001/users/${id}`);
+    const response = await axios.get(`/users/${id}`);
     dispatch({ type: 'GET_USERS_ID', payload: response.data.data });
   } catch (error) {
     console.log(error);
@@ -40,7 +42,7 @@ export const getUsersById = (id) => async (dispatch) => {
 
 export const getUsers = () => async (dispatch) => {
   try {
-    const response = await axios.get(`http://localhost:3001/users`);
+    const response = await axios.get(`/users`);
     dispatch({ type: 'GET_USERS_SUCCESS', payload: response.data.data });
   } catch (error) {
     console.log(error);
@@ -49,7 +51,7 @@ export const getUsers = () => async (dispatch) => {
 
 export const deleteUser = (userId) => async (dispatch) => {
   try {
-    const response = await axios.delete(`http://localhost:3001/users/${userId}`);
+    const response = await axios.delete(`/users/${userId}`);
     dispatch({ type: 'DELETE_USER_SUCCESS', payload: response.data.message });
   } catch (error) {
     console.log(error);
@@ -59,7 +61,7 @@ export const deleteUser = (userId) => async (dispatch) => {
 export const inscribeUser = (userId, courseId, accessToken, user, courseDetail) => async () => {
   try {
     console.log(userId)
-    const response = await axios.post(`http://localhost:3001/users/inscription/${userId}/${courseId}`, {}, {
+    const response = await axios.post(`/users/inscription/${userId}/${courseId}`, {}, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
@@ -83,7 +85,7 @@ export const inscribeUser = (userId, courseId, accessToken, user, courseDetail) 
 export function getCourseDetail(courseId) {
   return async function (dispatch) {
     try {
-      const courseDetail = await axios.get(`http://localhost:3001/courses/id/${courseId}`);
+      const courseDetail = await axios.get(`/courses/id/${courseId}`);
 
       return dispatch({ type: actions.GET_COURSE_DETAIL, payload: courseDetail.data.data });
     } catch (error) {
@@ -96,7 +98,7 @@ export function getVideosCourse(id) {
   return async function (dispatch) {
     try {
       const videosOfCourse = await axios.get(
-        `http://localhost:3001/courses/videos/${id}`
+        `/courses/videos/${id}`
       );
       return dispatch({ type: actions.GET_VIDEOS_COURSE, payload: videosOfCourse.data.data });
     } catch (error) {
@@ -108,7 +110,7 @@ export function getVideosCourse(id) {
 export function getCoursesOfUser(userId) {
   return async function (dispatch) {
     try {
-      const foundCourses = await axios.get(`http://localhost:3001/users/my-courses/${userId}`);
+      const foundCourses = await axios.get(`/users/my-courses/${userId}`);
 
       return dispatch({ type: actions.GET_COURSES_OF_USER, payload: foundCourses.data.data });
     } catch (error) {
@@ -120,7 +122,7 @@ export function getCoursesOfUser(userId) {
 export function getSectionsByCourseId(courseId) {
   return async function (dispatch) {
     try {
-      const foundSections = await axios.get(`http://localhost:3001/section/course/${courseId}`);
+      const foundSections = await axios.get(`/section/course/${courseId}`);
 
       return dispatch({ type: actions.GET_SECTIONS_BY_COURSE_ID, payload: foundSections.data });
     } catch (error) {
@@ -131,7 +133,7 @@ export function getSectionsByCourseId(courseId) {
 
 export const getCoursesByGenre = (genre) => async (dispatch) => {
   try {
-    const res = await axios.get(`http://localhost:3001/courses/genre/${genre}`);  
+    const res = await axios.get(`/courses/genre/${genre}`);  
 
     console.log(res.data.data)
 
@@ -150,7 +152,7 @@ export function resetPaginated(courseId) {
 export function getReviewsByCourseId(courseId) {
   return async function (dispatch) {
     try {
-      const foundReviews = await axios.get(`http://localhost:3001/review/${courseId}`);
+      const foundReviews = await axios.get(`/review/${courseId}`);
 
       return dispatch({ type: actions.GET_REVIEWS_BY_COURSE_ID, payload: foundReviews.data.data });
     } catch (error) {
@@ -162,7 +164,7 @@ export function getReviewsByCourseId(courseId) {
 export function getInstructorById(id) {
   return async function (dispatch) {
     try {
-      const foundInstructor = await axios.get(`http://localhost:3001/instructor/${id}`);
+      const foundInstructor = await axios.get(`/instructor/${id}`);
 
       return dispatch({ type: actions.GET_INSTRUCTOR_BY_ID, payload: foundInstructor.data.data });
     } catch (error) {
@@ -175,7 +177,7 @@ export function getInstructorById(id) {
 export function getUsersByCourseId(courseId) {
   return async function (dispatch) {
     try {
-      const foundUsers = await axios.get(`http://localhost:3001/users/course/${courseId}`);
+      const foundUsers = await axios.get(`/users/course/${courseId}`);
 
       return dispatch({ type: actions.GET_USERS_BY_COURSE_ID, payload: foundUsers.data.data });
     } catch (error) {
@@ -187,7 +189,7 @@ export function getUsersByCourseId(courseId) {
 export function getVideoById(id) {
   return async function (dispatch) {
     try {
-      const foundVideo = await axios.get(`http://localhost:3001/videos/${id}`);
+      const foundVideo = await axios.get(`/videos/${id}`);
 
       return dispatch({ type: actions.GET_VIDEO_BY_ID, payload: foundVideo.data.data });
     } catch (error) {
@@ -198,7 +200,7 @@ export function getVideoById(id) {
 
 export function postUser(payload) {
   return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/users", payload);
+    const response = await axios.post("/users", payload);
     return response;
   };
 };
@@ -206,7 +208,7 @@ export function postUser(payload) {
 export const getUserByCode = (code) => async (dispatch) => {
   
   try {
-    const response = await axios.get(`http://localhost:3001/users?code=${code}`);
+    const response = await axios.get(`/users?code=${code}`);
     const user = response.data.data[0];
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));
@@ -247,7 +249,7 @@ export const loginFail = (error) => ({
 export function createCourse(payload, setActualForm) {
   return async function (dispatch) {
     try {
-      const response = await axios.post("http://localhost:3001/courses", payload)
+      const response = await axios.post("/courses", payload)
       
       Swal.fire({
         icon: "success",
@@ -272,7 +274,7 @@ export function createCourse(payload, setActualForm) {
 export function createSection(name, courseId) {
   return async function (dispatch) {
     try {
-      const createdSection = await axios.post(`http://localhost:3001/section/${courseId}`,{name} )
+      const createdSection = await axios.post(`/section/${courseId}`,{name} )
 
       Swal.fire({
         icon: "success",
@@ -301,7 +303,7 @@ export function getSectionInCreatedSections (sectionId) {
 export function createVideo(payload, sectionId) {
   return async (dispatch) => {
     try {
-      const createdVideo = await axios.post(`http://localhost:3001/videos/${sectionId}`, payload);
+      const createdVideo = await axios.post(`/videos/${sectionId}`, payload);
 
       Swal.fire({
         icon: "success",
@@ -330,7 +332,7 @@ export function getVideosOfCreatedSection(sectionId) {
 export function createInstructor(payload, setActualForm) {
   return async (dispatch) => {
     try {
-      const createdInstructor = await axios.post(`http://localhost:3001/instructor`, {
+      const createdInstructor = await axios.post(`/instructor`, {
         name:            payload.name,
         description:     payload.description,
         profile_picture: payload.profile_picture,
@@ -362,7 +364,7 @@ export function createInstructor(payload, setActualForm) {
 export function addInstructorToCourse(instructorId, courseId, setActualForm) {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`http://localhost:3001/instructor/add-course/${instructorId}`, {
+      const response = await axios.put(`/instructor/add-course/${instructorId}`, {
         courseId: courseId 
       })
 
@@ -389,7 +391,7 @@ export function addInstructorToCourse(instructorId, courseId, setActualForm) {
 export function createReview(payload) {
   return async (dispatch) => {
     try {
-      const createdReview = await axios.post("http://localhost:3001/review", payload);
+      const createdReview = await axios.post("/review", payload);
 
       Swal.fire({
         icon: "success",
@@ -412,7 +414,7 @@ export function createReview(payload) {
 export function getAllInstructors(payload) {
   return async (dispatch) => {
     try {
-      const foundInstructors = await axios.get("http://localhost:3001/instructor")
+      const foundInstructors = await axios.get("/instructor")
 
       dispatch({ type: actions.GET_ALL_INSTRUCTORS, payload: foundInstructors.data.data });
     } catch (error) {
@@ -424,7 +426,7 @@ export function getAllInstructors(payload) {
 export function createVideoState (payload) {
   return async (dispatch) => {
     try {
-      const createVideoState = await axios.post("http://localhost:3001/state", payload)
+      const createVideoState = await axios.post("/state", payload)
       dispatch({type: actions.POST_VIDEOS_STATE, payload: createVideoState.data.data })
     } catch (error) {
       return;
@@ -435,7 +437,7 @@ export function createVideoState (payload) {
 export function getVideoState(userId, videoId) {
   return async (dispatch) => {
     try {
-      const getVideoState = await axios.get(`http://localhost:3001/state/${userId}/${videoId}`)
+      const getVideoState = await axios.get(`/state/${userId}/${videoId}`)
       dispatch({type: actions.GET_VIDEOS_STATE, payload: getVideoState.data.data })
     } catch (error) {
       dispatch({type: actions.GET_VIDEOS_STATE, payload: {} })
@@ -446,7 +448,7 @@ export function getVideoState(userId, videoId) {
 export function getVideoStateCourse(userId, courseId) {
   return async (dispatch) => {
     try {
-      const getStateCourse = await axios.get(`http://localhost:3001/state/${userId}/${courseId}`)
+      const getStateCourse = await axios.get(`/state/${userId}/${courseId}`)
       dispatch({type: actions.GET_VIDEOS_STATE_COURSE, payload: getStateCourse.data.data })
     } catch (error) {
       return;
@@ -458,7 +460,7 @@ export function getVideoStateCourse(userId, courseId) {
 export function editCourse(id, data) {
   return async (dispatch) => {
     try {
-      const editC = await axios.put(`http://localhost:3001/courses/${id}`, data);
+      const editC = await axios.put(`/courses/${id}`, data);
       dispatch({ type: actions.EDIT_COURSE, payload: editC.data.data });
       Swal.fire({
         icon: "success",
@@ -479,7 +481,7 @@ export function editCourse(id, data) {
 export function deleteCourse(id) {
    return async  (dispatch) => {
     try {
-      const deleteCourse = await axios.delete(`http://localhost:3001/courses/${id}`)
+      const deleteCourse = await axios.delete(`/courses/${id}`)
       dispatch({ type: actions.DELETE_COURSE, payload: deleteCourse.data.data });
       Swal.fire({
         icon: "success",
