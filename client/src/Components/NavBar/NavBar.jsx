@@ -132,7 +132,7 @@ export const NavBar = () => {
           <span onClick={() => setShowModal(true)} className={Styles["nav-link"]}>Iniciar sesión</span>
         }
           {name && (
-            <span title={`Tu codigo es ${user.code}`} className={Styles["nav-hello"]} >Hola {name}</span>
+            <span title={`Tu codigo es ${user.code}`} className={Styles["nav-hello"]} >Bienvenido {name}</span>
           )}
 
         {showModal && (

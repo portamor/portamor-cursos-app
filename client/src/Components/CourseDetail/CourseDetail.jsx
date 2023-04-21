@@ -28,7 +28,6 @@ export const CourseDetail = () => {
   const instructor = useSelector((state) => state.courseInstructor);
   const instructorStars = utils.getStarsRating(instructor.score)
 
-
   let firstVideoId;
   if (courseSections[0] && courseSections[0].Videos[0].id) firstVideoId = courseSections[0].Videos[0].id
 
@@ -37,7 +36,7 @@ export const CourseDetail = () => {
     dispatch(actions.getInstructorById(courseDetail.InstructorId));
     dispatch(actions.getSectionsByCourseId(courseId));
     dispatch(actions.getUsersByCourseId(courseId));
-  }, [courseId, dispatch, courseDetail.InstructorId])
+  }, [courseId, dispatch, courseDetail.InstructorId, instructor.id])
 
   const [selectedButton, setSelectedButton] = useState(constants.VISION_GENERAL);
 

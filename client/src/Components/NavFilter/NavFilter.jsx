@@ -58,20 +58,20 @@ const NavFilter = ({ actualPage }) => {
         primary={selectedGenre === "" ? true : false}
         onClick={() => handleFilterClick("")} />
         <CustomButton 
-        content={"Actividad Fisica"}
-        primary={selectedGenre === "Actividad Fisica" ? true : false}
+        content={"Actividad Física"}
+        primary={selectedGenre === "Actividad Física" ? true : false}
         onClick={() => handleFilterClick("Actividad Física")} />
         <CustomButton 
-        content={"Participacion Social"}
-        primary={selectedGenre === "Participacion Social" ? true : false}
+        content={"Participación Social"}
+        primary={selectedGenre === "Participación Social" ? true : false}
         onClick={() => handleFilterClick("Participación Social")} />
         <CustomButton 
         content={"Bienestar Mental"}
         primary={selectedGenre === "Bienestar Mental" ? true : false}
         onClick={() => handleFilterClick("Bienestar Mental")} />
         <CustomButton 
-        content={"Alimentacion Saludable"}
-        primary={selectedGenre === "Alimentacion Saludable" ? true : false}
+        content={"Alimentación Saludable"}
+        primary={selectedGenre === "Alimentación Saludable" ? true : false}
         onClick={() => handleFilterClick("Alimentación Saludable")} />
       </ul>
 
