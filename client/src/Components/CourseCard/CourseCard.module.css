@@ -21,6 +21,18 @@
   text-decoration: none;
 }
 
+.admin-options {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  margin-top: 15px;
+  margin-right: 15px;
+}
+
+.admin-options a {
+  margin-right: 15px;
+}
+
 .course-card img {
   width: 100%;
   height: 200px;

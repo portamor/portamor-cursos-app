@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { useEffect }   from "react";
 import { useSelector } from "react-redux";
 import Swal            from "sweetalert2";
+import { Trash } from "react-bootstrap-icons"
+import { Pen } from "react-bootstrap-icons"
 
 const CourseCard = ({ id, title, image }) => {
   const dispatch = useDispatch();
@@ -44,25 +46,26 @@ const CourseCard = ({ id, title, image }) => {
 
   return (
     <div className={Styles["course-card-main"]}>
-        <div className={Styles["course-card"]}>
-          <img src={image} alt="course-card" />
-          <h3>{title}</h3>
-          <div className={Styles["course-details-container"]}>
-            <p>{courseDetail.duration}</p>
-            <p>{courseDetail.level}</p>
+      <div className={Styles["course-card"]}>
+        <img src={image} alt="course-card" />
+        {
+          isAdmin && 
+          <div className={Styles["admin-options"]}>
+            <Link to={`/dashboard`} state={id} > 
+              <Pen color="red" size={"25px"} style={{cursor: "pointer"}} />
+            </Link> 
+            <Trash color="red" size={"25px"} onClick={hadleRemove} style={{cursor: "pointer"}} />  
           </div>
-          <Link to={`/detalle-curso/${id}`} className={Styles["card-button"]}>
-            Ver Más
-          </Link>
-          <br />
-          { isAdmin && ( <Link to={`/dashboard`} className={Styles["card-button"]} state={id} >  Editar   
-        </Link> 
-        )}
-        <br />
-          { isAdmin && ( <button className={Styles["card-button"]} onClick={hadleRemove} >  Eliminar curso   
-        </button> 
-        )}
+        }
+        <h3>{title}</h3>
+        <div className={Styles["course-details-container"]}>
+          <p>{courseDetail.duration}</p>
+          <p>{courseDetail.level}</p>
         </div>
+        <Link to={`/detalle-curso/${id}`} className={Styles["card-button"]}>
+          Ver Más
+        </Link>
+      </div>
     </div>
   );
 };
