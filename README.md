@@ -38,10 +38,10 @@ Las tecnologias usadas para este proyecto son las siguientes: <br>
 
 ## Imagenes del proyecto
 <div align="center">
-  <img width="500"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/233788062-1303704b-153b-4954-b9c6-de77433a177a.png">
-  <img width="500"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/233790023-7c713893-f606-4f55-8e1a-ee635b715df8.png">
-  <img width="500"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/233790082-44486e96-5a08-4ad8-a4ff-45013f737c37.png">
-  <img width="500"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/233790157-f0d72e3c-4941-4ea7-8a96-0ad006bd0d16.png">
+  <img width="400"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/233788062-1303704b-153b-4954-b9c6-de77433a177a.png">
+  <img width="400"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/233790023-7c713893-f606-4f55-8e1a-ee635b715df8.png">
+  <img width="400"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/233790082-44486e96-5a08-4ad8-a4ff-45013f737c37.png">
+  <img width="400"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/233790157-f0d72e3c-4941-4ea7-8a96-0ad006bd0d16.png">
 </div>
 
 ## Empezando
