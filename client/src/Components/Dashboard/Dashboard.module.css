@@ -3,19 +3,5 @@
   flex-direction: column;
   align-items: center;
   padding: 100px 0;
-}
-
-.instructor-container,
-.video-container {
-  display: flex;
-  justify-content: space-evenly;
   width: 100%;
-}
-
-@media(max-width: 900px) {
-  .instructor-container,
-  .video-container {
-    flex-direction: column;
-    align-items: center;
-  }
 }

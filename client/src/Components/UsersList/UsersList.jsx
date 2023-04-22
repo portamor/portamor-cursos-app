@@ -4,8 +4,8 @@ import { deleteUser, getUsers } from '../../Redux/actions';
 import styles from './UserList.module.css';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import CustomButton from '../CustomButton/CustomButton';
 import usersImg from "../../images/users-icon.svg"
+import { Trash } from "react-bootstrap-icons"
 
 function UsersList({ id }) {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ function UsersList({ id }) {
 
 
   return (
-    <div>
+    <div className={styles["user-list-main"]}>
       <h2 className={styles.title}>Lista de usuarios registrados</h2>
       <div className={styles.info}>
         <img className={styles.picture} src={usersImg} alt="user-card" />
@@ -39,18 +39,14 @@ function UsersList({ id }) {
       </div>
       <ul className={styles.list}>
         {users?.map((user, index) => (
-          <li className={`${styles.item} ${index % 2 === 0 ? styles.gris : styles.rosa}`} key={user.id}>
-            <div className={styles.cell}>{user.name}</div>
-            <div className={styles.cell}>{user.lastName}</div>
+          <li className={styles.item} key={user.id}>
+            <h2 className={styles.cell}>{user.name} {user.lastName}</h2>
             <div className={styles.cell}>{user.birthday}</div>
-            <CustomButton content={"Eliminar Usuario ❌"} onClick={() => handleDelete(user.id)} className={styles.button} />
+            <Trash color='red' size={"25px"} onClick={() => handleDelete(user.id)} style={{cursor: "pointer"}} />
           </li>
         ))}
       </ul>
     </div>
-
-
-
   );
 
 }

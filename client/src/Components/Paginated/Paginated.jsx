@@ -68,7 +68,9 @@ const Paginated = ({ actualPage, courses }) => {
             key={el.id}
             id={el.id}
             image={el.image}
-            title={el.title} />
+            title={el.title}
+            duration={el.duration}
+            level={el.level} />
         )
       :
         <h2 className={styles["title-not-found"]}>No se ha encontrado ningun curso</h2>
