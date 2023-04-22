@@ -62,9 +62,9 @@
 
   .select-filter {
     display: inherit;
-    width: 50%;
+    width: 80%;
     height: 57px;
-    margin: 0 auto;
+    margin: 40px auto 0;
     border: none;
     box-shadow: 0px 6px 10px 0.3px #bcbbbb; 
     border-radius: 8px;

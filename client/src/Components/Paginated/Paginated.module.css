@@ -15,6 +15,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  gap: 40px;
 }
 
 .paginated-numbers-container {
@@ -23,6 +25,7 @@
   align-items: center;
   list-style-type: none;
   width: 300px;
+  margin-top: 40px;
 }
 
 @media(max-width: 750px) {
@@ -38,7 +41,7 @@
   cursor: pointer;
   background-color: rgb(227, 227, 227);
   padding: 10px;
-  border-radius: 30%;
+  border-radius: 5px;
   border: none;
   color: #7b7b7b;
   transition: all 0.2s ease-in-out;
@@ -61,11 +64,9 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 30px;
-  padding-top: 30px;
+  gap: 70px;
   list-style-type: none;
 }
-
 
 @media (max-width: 768px) {
   .cards-container {
@@ -75,6 +76,11 @@
   }
 }
 
+.title-not-found {
+  margin-top: 170px;
+  width: 100%;
+  text-align: center;
+}
 
 .pagination__item--selected {
   background-color: #eb575a;
@@ -87,14 +93,3 @@
   cursor: not-allowed;
   list-style-type: none;
 }
-
-@media only screen and (max-width: 768px) {
-  /* .pagination {
-    flex-wrap: wrap;
-  }
-
-  .pagination__item {
-    margin: 5px;
-  } */
-}
-

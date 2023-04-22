@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useState }    from "react";
 import * as utils      from "../../../utils"
+import Swal from "sweetalert2";
 
 const CreateInstructor = ({ setActualForm }) => {
   const dispatch       = useDispatch();
@@ -54,7 +55,6 @@ const CreateInstructor = ({ setActualForm }) => {
         profile_picture: reader.result
       });
     };
-
     reader.readAsDataURL(file);
   };
 
@@ -71,22 +71,17 @@ const CreateInstructor = ({ setActualForm }) => {
       ...formValues,
       score: score,
     });
-
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
     const formErrors = utils.validate(formValues, INSTRUCTOR);
-
     if (Object.keys(formErrors).length !== 0) {
       setErrors(formErrors);
       return;
     } 
 
     dispatch(actions.createInstructor(formValues, setActualForm));
-
-    setIsDisabledSubmit(true);
 
     setFormValues({
       name: "",
@@ -162,7 +157,7 @@ const CreateInstructor = ({ setActualForm }) => {
       {errors.reviews && <p className={styles.danger}>{errors.reviews}</p>}
 
       <div className={styles["create-instructor-input-container"]}>
-        <label htmlFor="description">Escribe una breve descripcion:</label>
+        <label htmlFor="description">Mensaje a la Comunidad: </label>
         <textarea
           maxLength={250}
           id="description"

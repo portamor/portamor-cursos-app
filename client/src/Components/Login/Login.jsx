@@ -8,21 +8,38 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import { useState }      from "react";
 import { useDispatch }   from "react-redux";
 
-function Login() {
+function Login({onSuccess}) {
   const [code, setCode] = useState("");
   const [showModal, setShowModal] = useState(true); 
+  const [codeError, setCodeError] = useState(null);
   const dispatch = useDispatch();
 
   const handleCodeChange = (event) => {
     setCode(event.target.value);
   };
 
+  const validateCode = (code) => {
+    const codeRegex = /^[a-zA-Z0-9]{6,}$/;
+    return codeRegex.test(code);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const uppercaseCode = code.toUpperCase(); 
+    if (!validateCode(uppercaseCode)) {
+      setCodeError("El código debe contener solo letras y números y tener al menos 6 caracteres.");
+      Swal.fire({
+        icon: 'error',
+        title: codeError,
+        text: 'El código ingresado no es válido. Por favor, intenta nuevamente.',
+        confirmButtonText: 'Aceptar'
+      });
+      return 
+    }
     try {
-      const user = await dispatch(getUserByCode(code));
-
-      if (user !== null) {
+      const user = await dispatch(getUserByCode(uppercaseCode));
+      onSuccess()
+      if (user) {
         dispatch(loginSuccess(user));
         setShowModal(false);
         Swal.fire({
@@ -40,11 +57,13 @@ function Login() {
           confirmButtonText: 'Aceptar'
         });
       }
+      onSuccess()
     } catch (error) {
       console.error(error);
     }
   };
   
+
   return (
     <div>
       {showModal && (

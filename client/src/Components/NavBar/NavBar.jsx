@@ -1,13 +1,15 @@
-import { logout}       from "../../Redux/actions";
-import {loginSuccess}  from "../../Redux/actions";
-import Modal           from "../Modal/Modal";
-import {NavLink}       from "react-router-dom";
-import React           from "react";
-import Styles          from "./Navbar.module.css";
+import { logout } from "../../Redux/actions";
+import { loginSuccess } from "../../Redux/actions";
+import Modal from "../Modal/Modal";
+import { NavLink } from "react-router-dom";
+import React from "react";
+import Styles from "./Navbar.module.css";
 import { useDispatch } from "react-redux";
-import { useEffect }   from "react";
-import { useRef }      from "react";
-import { useState }    from "react";
+import { useEffect } from "react";
+import { useRef } from "react";
+import { useState } from "react";
+import adultoMayorLogo from "../../images/adulto-mayor-logo.svg"
+import redLogo from "../../images/LogoRed.svg"
 import { useSelector } from "react-redux";
 
 export const NavBar = () => {
@@ -18,6 +20,9 @@ export const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const user = useSelector((state) => state.user);
+  const isAdmin = user?.admin;
+  const name = user?.name
 
   useEffect(() => {
     const isLoggedInInLocalStorage = localStorage.getItem("isLoggedIn");
@@ -32,19 +37,21 @@ export const NavBar = () => {
         }
       }
     }
-  }, []);
-  
+  }, [dispatch]);
 
-  const handleLogout = () => {
+
+  const handleLogout = (e) => {
+    e.preventDefault()
     dispatch(logout());
-    return window.location.replace("/");
+        window.history.pushState({}, '', '/');
   };
 
-  const handleLoginButtonClick = () =>setShowModal(true);
+
+  const handleLoginButtonClick = () => setShowModal(true);
 
   const handleCloseModal = () => setShowModal(false);
 
-  const handleRegisterButtonClick = () => setShowModal(false); 
+  const handleRegisterButtonClick = () => setShowModal(false);
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 975);
@@ -77,37 +84,56 @@ export const NavBar = () => {
   return (
     <nav className={`${Styles["nav-container"]} ${menuOpen ? Styles["active"] : ""}`}>
       <img
-        src="https://res.cloudinary.com/dsjsbp6qy/image/upload/v1679065705/Dshop/Dise%C3%B1o_sin_t%C3%ADtulo__19_-removebg-preview-removebg-preview_gvpsgd.png"
-        alt="logo"
+        src={adultoMayorLogo}
+        alt="adultomayor-header"
         width={200}
         height={60}
+        className={Styles["adulto-mayor-img"]}
       />
+      <NavLink
+        to="/"
+        activeclassname="active" >
+          <img
+            src={redLogo}
+            alt="logo-red-header"
+            className={Styles["logo-red-header"]}
+          />
+        </NavLink>
       <div
         className={`${Styles["nav-menu"]} ${menuOpen ? Styles["active"] : ""}`}
-        ref={navMenuRef} > 
+        ref={navMenuRef} >
         <NavLink
           className={Styles["nav-link"]}
-          exact
           to="/"
-          activeClassName="active" >
+          activeclassname="active" >
           Inicio
         </NavLink>
         <NavLink
           className={Styles["nav-link"]}
-          exact
           to="/cursos"
-          activeClassName="active" >
+          activeclassname="active" >
           Mis cursos
         </NavLink>
-
+        {isAdmin && (
+          <NavLink
+            className={Styles["nav-link"]}
+            to="/dashboard"
+            activeclassname="active"
+          >
+            Admin
+          </NavLink>
+        )}
 
         {isLoggedIn ? (
-        <span onClick={handleLogout} className={Styles["nav-link"]}>Cerrar sesión</span>
-        ) 
-        : 
-        <span onClick={() => setShowModal(true)} className={Styles["nav-link"]}>Iniciar sesión</span>
+          <span onClick={handleLogout} className={Styles["nav-link"]}>Cerrar sesión</span>
+        )
+          :
+          <span onClick={() => setShowModal(true)} className={Styles["nav-link"]}>Iniciar sesión</span>
         }
-        
+          {name && (
+            <span title={`Tu codigo es ${user.code}`} className={Styles["nav-hello"]} >Bienvenido {name}</span>
+          )}
+
         {showModal && (
           <Modal onClose={handleCloseModal} onRegister={handleRegisterButtonClick} onLogin={handleLoginButtonClick}>
           </Modal>
@@ -117,21 +143,21 @@ export const NavBar = () => {
 
 
         {isMobile && (
-          <button
-            className={Styles["button-salirMenu"]}
+          <span
+          className={Styles["nav-link"]}
             onClick={handleHamburguerClick}
           >
             Salir del Menú
-          </button>
+          </span>
         )}
       </div>
 
-      {isMobile && (
-        <button
-          className={`${Styles["mobile-menu-button"]} ${menuOpen ? Styles["active"] : ""}`}
+      {isMobile && !menuOpen && (
+        <span
+        className={Styles["nav-link"]}
           onClick={handleMenuClick} >
           Menú
-        </button>
+        </span>
       )}
     </nav>
   );

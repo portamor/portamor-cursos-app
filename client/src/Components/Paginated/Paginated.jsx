@@ -1,15 +1,15 @@
-import styles          from "./Paginated.module.css"
 import CourseCard      from "../CourseCard/CourseCard";
 import { getCourses }  from "../../Redux/actions";
+import NavFilter       from "../NavFilter/NavFilter";
 import React           from "react";
+import styles          from "./Paginated.module.css"
 import { useDispatch } from "react-redux";
 import { useEffect }   from "react";
 import { useSelector } from "react-redux";
 import { useState }    from "react";
 
-const Paginated = () => {
+const Paginated = ({ actualPage, courses }) => {
   const dispatch      = useDispatch();
-  const courses       = useSelector((state) => state.courses);
   const currentPage   = useSelector((state) => state.currentPage);
   const pageSize      = useSelector((state) => state.pageSize);
   const totalCourses  = useSelector((state) => state.totalCourses);
@@ -24,14 +24,11 @@ const Paginated = () => {
     pageNumbers.push(i);
   }
 
+
   const numbersToShow = pageNumbers.slice(
     minLimitNumberPage,
     maxLimitNumberPage
   );
-
-  useEffect(() => {
-    dispatch(getCourses(currentPage, pageSize));
-  }, [dispatch, currentPage, pageSize]);
 
   const handlePrevPage = () => {
     const pastNumber = parseInt(currentPage) - 1;
@@ -63,6 +60,23 @@ const Paginated = () => {
 
   return (
     <div className={styles["paginated-main"]}>
+      {/* { actualPage=== "HOME" && <NavFilter actualPage={"HOME"}/> } */}
+
+      <div className={styles["cards-container"]}>
+        {courses.length ? courses.map(el => 
+          <CourseCard
+            key={el.id}
+            id={el.id}
+            image={el.image}
+            title={el.title}
+            duration={el.duration}
+            level={el.level} />
+        )
+      :
+        <h2 className={styles["title-not-found"]}>No se ha encontrado ningun curso</h2>
+      }
+      </div> 
+
       <div className={styles["paginated-numbers-container"]}>
         <button className={styles["paginated-number"]} onClick={handlePrevPage}>{"<"}</button>
 
@@ -77,16 +91,6 @@ const Paginated = () => {
 
         <button className={styles["paginated-number"]} onClick={handleNextPage}>{">"}</button>
       </div>
-
-      <div className={styles["cards-container"]}>
-        {Array.isArray(courses) && courses.map(el => 
-          <CourseCard
-            key={el.id}
-            id={el.id}
-            image={el.image}
-            title={el.title} />
-        )}
-      </div> 
     </div>
   );
 };

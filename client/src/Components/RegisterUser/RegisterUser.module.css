@@ -9,10 +9,10 @@
 }
 
 .register-container {
-  width: 400px;
   margin-bottom: 10%;
   animation-name: opacityin;
   animation-duration: 1s;
+  width: 300px;
 }
 
 @media(max-width: 670px) {
@@ -27,12 +27,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 5px;
 }
 
 .name-input-container input {
   border: 3px solid #eb575a;
   border-radius: 8px;
   height: 25px;
+  width: 100%;
 }
 
 .lastname-input-container {
@@ -41,6 +43,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 5px;
 }
 
 .lastname-input-container input {
@@ -55,6 +58,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 5%;
+  gap: 5px;
 }
 
 .birthday-input-container input {
@@ -62,7 +66,7 @@
   border-radius: 8px;
   height: 25px;
   width: 160px;
-  margin-bottom: 5%;
+  margin-bottom: 30px;
 }
 
 
@@ -79,6 +83,11 @@
   width: 100%;
   border: none;
   box-shadow: 0px 6px 10px 0.3px #bcbbbb; 
+}
+
+.buttonClass {
+  color: #eb575a;
+  background-color: #eb575a;
 }
 
 @media(max-width: 670px) {

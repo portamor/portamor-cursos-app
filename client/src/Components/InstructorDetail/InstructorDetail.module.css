@@ -47,4 +47,7 @@
 
 .instructor-picture {
   max-width: 236px;
+  max-height: 300px;
+  border-radius: 50%;
+  margin-right: 10px;
 }

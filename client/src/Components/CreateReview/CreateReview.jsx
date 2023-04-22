@@ -70,8 +70,7 @@ const CreateReview = ({ courseId, userId}) => {
       title: "",
       comment: "",
       stars_value: 0,
-      // userId: userId,
-      userId: "d85ac82c-d989-43c0-a7ec-e17baa6d51b9",
+      userId: userId,
       courseId: courseId,
     })
   };

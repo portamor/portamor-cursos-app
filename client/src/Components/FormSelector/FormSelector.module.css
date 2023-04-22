@@ -1,0 +1,27 @@
+.form-selector-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.containerFormSelector {
+  display: flex;
+  justify-content: space-evenly;
+  list-style: none;
+  width: 600px;
+}
+
+.selected {
+  background-color: #eb5759;
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .containerFormSelector {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 300px;
+  }
+}

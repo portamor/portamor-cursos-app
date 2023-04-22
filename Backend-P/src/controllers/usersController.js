@@ -28,16 +28,18 @@ const getUserById = async (req, res) => {
   try {
     const { userId } = req.params;
     const userfound = await userService.userById(userId);
-    if (!userfound.length)
-      throw new Error(`No se encontro registro de ${userId} `);
+    if (!userfound) {
+      throw new Error(`No se encontro registro de ${userId}`);
+    }    
     res.status(200).json({
-      message: `Usuario con el is ${userId} se ha encontrado`,
-      userAndCourse,
+      message: `Usuario con el id ${userId} se ha encontrado`,
+      userfound,
     });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
+
 
 const getUsersByCourseId = async (req, res) => {
   try {
@@ -59,8 +61,26 @@ const getUsersByCourseId = async (req, res) => {
   }
 };
 
+const getCoursesOfUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    
+    const foundUser = await userService.userById(userId);
+
+    if(!foundUser) throw new Error(`No se ha encontrado ningun usuario con el ID: ${userId}`)
+
+    const { Courses } = foundUser;
+
+    if(!Courses.length) throw new Error("No se ha encontrado ningun curso al que esté inscripto");
+
+    res.status(200).json({ message: "Cursos encontrados con exito", data: Courses })
+  } catch (error) {
+    res.status(404).json({message: error.message})
+  }
+}
+
 const postUser = async (req, res) => {
-  const { name, lastName, birthday } = req.body;
+  const { name, lastName, birthday, admin } = req.body;
   try {
     let code = name.slice(0, 3) + lastName.slice(0, 3) + birthday.slice(0, 2);
     code = code.toUpperCase();
@@ -80,7 +100,8 @@ const postUser = async (req, res) => {
       name,
       lastName,
       code,
-      birthday
+      birthday,
+      admin
     );
     res
       .status(200)
@@ -167,6 +188,7 @@ module.exports = {
   postUser,
   getUsers,
   getUsersByCourseId,
+  getCoursesOfUser,
   userPut,
   postInscription,
   getUserById,

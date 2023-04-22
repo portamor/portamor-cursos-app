@@ -5,9 +5,10 @@ const createCourse = async (data) => {
   const createdCourse = await Courses.create({
     title:       data.title,
     description: data.description,
+    duration:    data.duration,
+    level:       data.level,  
     image:       data.image,
     genre:       data.genre,
-    type:        data.type,
     rating:      data.rating,
     materials:   data.materials,
   });
@@ -96,6 +97,33 @@ const restoreACourse = async (id) => {
   return restoredCourse;
 };
 
+const getCourseVideos = async (id) => {
+
+  try {
+    const course = await Courses.findByPk(id, {
+      include: [
+        {
+          model: Sections,
+          include: [
+            {
+              model: Videos,
+            },
+          ],
+        },
+      ],
+    });
+    const videos = [];
+    course.Sections.forEach((section) => {
+      section.Videos.forEach((video) => {
+        videos.push(video);
+      });
+    });
+    return videos
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 module.exports = {
   getCourseById,
   getAllCourses,
@@ -107,5 +135,6 @@ module.exports = {
   updateCourse,
   deleteACourse,
   restoreACourse,
-  getCourseByTitleExactly
+  getCourseByTitleExactly,
+  getCourseVideos
 };

@@ -2,19 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.instructor-container,
-.video-container {
-  display: flex;
-  justify-content: space-evenly;
+  padding: 100px 0;
   width: 100%;
-}
-
-@media(max-width: 900px) {
-  .instructor-container,
-  .video-container {
-    flex-direction: column;
-    align-items: center;
-  }
 }

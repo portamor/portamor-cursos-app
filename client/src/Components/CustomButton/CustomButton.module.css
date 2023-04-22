@@ -5,14 +5,16 @@
 .custom-button-main-important-submit-secondary {
   background-color: #EB575A;
   border: none;
-  border-radius: 8px;
+  border-radius: 3px;
   color: #fff;
   cursor: pointer;
   font-size: 14px;
   font-weight: 700;
+  text-align: center;
   height: fit-content;
   width: fit-content;
   padding: 13px 20px;
+  font-family: "Montserrat", sans-serif;
 }
 
 .custom-button-main-undisabled,

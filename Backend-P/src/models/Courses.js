@@ -15,7 +15,15 @@ module.exports = sequelize => {
         allowNull: false,
       },
       description: {
-        type: DataTypes.STRING(300),
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      duration: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      level: {
+        type: DataTypes.STRING,
         allowNull: false,
       },
       image: {
@@ -23,10 +31,6 @@ module.exports = sequelize => {
         allowNull: false,
       },
       genre: {
-        type: DataTypes.STRING,
-        allowNull: true,
-      },
-      type: {
         type: DataTypes.STRING,
         allowNull: true,
       },
