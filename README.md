@@ -65,7 +65,21 @@ git clone https://github.com/seba-pitra/e-commerce-NFT.git
 ```
 npm install
 ```
-3. Empieza tu proyecto localmente:
+3. Posicionado en la carpeta **client**, crea un archivo **.env** con la siguiente informacion:
+```
+REACT_APP_BASE_URL=http://tu-servidor
+```
+4. Posicionado en la carpeta **Backend-P**, crea un archivo **.env** con la siguiente informacion:
+```
+PORT = tu-puerto
+DB_USER = tu-nombre-de-usuario-de-postgres
+DB_PASSWORD = tu-contraseña-de-postgres
+DB_HOST = localhost
+DB_PORT = numero-de-tu-puerto-de-base-de-datos
+DB_NAME = nombre-de-tu-base-de-datos
+```
+
+5. Tanto en la carpeta "Backend-P" como la carpeta "client", empieza tu proyecto localmente:
 ```
 npm start
 ```
