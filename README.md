@@ -3,4 +3,3 @@
 #### - Sebastian Pitra.
 #### - Diamela Lares.
 #### - Lizhana Campos.
-#### - Hernan Rinaldi.
