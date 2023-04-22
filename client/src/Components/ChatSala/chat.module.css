@@ -1,0 +1,78 @@
+/* styles.css */
+
+.chatcontainer {
+    width: 490px;
+    margin: 0;
+    background: #F2F5F8;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;  
+    margin: 100px auto 40px;
+}
+
+.chat-header {
+    padding: 20px;
+    border-bottom: 2px solid white;
+}
+.titleH {
+    color: #eb575a;
+}
+
+.imgen {
+  float: left;
+}
+
+.chatHistory {
+    padding: 30px 30px 20px;
+    border-bottom: 2px solid white;
+    height: 350px;
+    overflow-y: auto;
+}
+  
+  .ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .li {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    word-break: break-all;
+  }
+  
+  .myMessage {
+    background-color: #42c57f3e;
+    color: #000000;
+    float: left;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px 10px 0 10px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+    word-wrap: break-word;
+    font-family:  sans-serif, Haettenschweiler,Impact, 'Arial Narrow Bold';
+  }
+  
+  .receivedMessage {
+    background-color: #46318b30;
+    color: #000000;
+    float: right;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px 10px 10px 0;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+    font-family:  sans-serif, Haettenschweiler,Impact, 'Arial Narrow Bold';
+  }
+  
+  .inputText {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #ccc;
+    font-size: 16px;
+  }
+  

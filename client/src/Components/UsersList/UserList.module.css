@@ -1,0 +1,97 @@
+.user-list-main {
+  max-height: 790px;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+
+.table {
+  border-collapse: collapse;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 1000px;
+}
+
+.table th,
+.table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #ddd;
+}
+
+.title {
+  font-size: 40px;
+  color: #eb575a;
+  margin-bottom: 20px;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list h2 {
+  font-size: 18px;
+  margin: 0;
+  overflow-x: scroll;
+  max-width: 220px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: fit-content;
+  font-size: 18px;
+  color: #5a5a5a;
+  padding: 20px;
+  margin: 10px ;
+  box-shadow: 0px 6px 10px 0.3px #bcbbbb; 
+  font-family: 'Montserrat', sans-serif;
+  animation-name: opacityin;
+  animation-duration: 1s;
+  margin-bottom: 30px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.gris {
+  background-color: #b4b4b4;
+}
+
+.rosa {
+  background-color: #eb5759b4;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  margin: 3%;
+}
+
+.info p {
+  font-weight: 600;
+  color: #666;
+}
+
+.picture {
+  margin: 3%;
+}
+
+@media screen and (max-width: 768px) {
+  .list {
+    font-size: 16px;
+  }
+  .userInfo {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+}

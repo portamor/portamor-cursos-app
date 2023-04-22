@@ -1,33 +1,26 @@
+const courseService     = require("../services/courseService.js");
 const { getCourseById } = require("../services/courseService.js");
-const userService = require("../services/userService.js");
+const userService       = require("../services/userService.js");
 
 const getUsers = async (req, res) => {
-  const { code } = req.query;
-  if (code) {
-    try {
-      const aUserCode = await userService.userByCode(code);
-      if (!aUserCode.length)
-        throw new Error(`No se encontro user con el code ${code}`);
-      res.status(200).json({
-        message: `El usuario con el codigo ${code} ha sido encontrado`,
-        data: aUserCode,
-      });
-    } catch (error) {
-      res.status(404).json({ message: error.message });
-    }
-  }
   try {
+    const { code } = req.query;
+
+    if(code) {
+      const aUserCode = await userService.userByCode(code);
+
+      if (!aUserCode.length) throw new Error(`No se encontro user con el code ${code}`);
+      
+      return res.status(200).json({ message: `Usuario encontrado con exito`, data: aUserCode, });
+    } 
+    
     const allUsers = await userService.getAllUsers();
-    if (allUsers.length) {
-      res
-        .status(200)
-        .json({ message: `Usuarios encontrados con éxito`, data: allUsers });
-    }
-    res.status(201).json({ message: "No hay registros" });
+
+    if (!allUsers.length) throw new Error(`No se encontro user con el code ${code}`);
+    
+    res.status(200).json({ message: `Usuarios encontrados con exito`, data: allUsers });
   } catch (error) {
-    res
-      .status(200)
-      .json({ mesagge: "error al obtener usuarios" + error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 
@@ -35,19 +28,59 @@ const getUserById = async (req, res) => {
   try {
     const { userId } = req.params;
     const userfound = await userService.userById(userId);
-    if (!userfound.length)
-      throw new Error(`No se encontro registro de ${userId} `);
+    if (!userfound) {
+      throw new Error(`No se encontro registro de ${userId}`);
+    }    
     res.status(200).json({
-      message: `Usuario con el is ${userId} se ha encontrado`,
-      userAndCourse,
+      message: `Usuario con el id ${userId} se ha encontrado`,
+      userfound,
     });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
+
+const getUsersByCourseId = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    
+    const foundCourse = await courseService.getCourseById(courseId)
+
+    if(!foundCourse) {
+      throw new Error(`No se ha encontrado ningun curso con este ID: ${courseId}`)
+    }
+
+    const { Users } = await userService.getUsersByCourseId(foundCourse.id)
+
+    if(!Users.length) throw new Error("No se han encontrado opiniones de este curso");
+
+    res.status(200).json({message: "Usuarios encontradas con exito", data: Users})
+  } catch (error) {
+    res.status(404).json({message: error.message})
+  }
+};
+
+const getCoursesOfUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    
+    const foundUser = await userService.userById(userId);
+
+    if(!foundUser) throw new Error(`No se ha encontrado ningun usuario con el ID: ${userId}`)
+
+    const { Courses } = foundUser;
+
+    if(!Courses.length) throw new Error("No se ha encontrado ningun curso al que esté inscripto");
+
+    res.status(200).json({ message: "Cursos encontrados con exito", data: Courses })
+  } catch (error) {
+    res.status(404).json({message: error.message})
+  }
+}
+
 const postUser = async (req, res) => {
-  const { name, lastName, birthday } = req.body;
+  const { name, lastName, birthday, admin } = req.body;
   try {
     let code = name.slice(0, 3) + lastName.slice(0, 3) + birthday.slice(0, 2);
     code = code.toUpperCase();
@@ -67,7 +100,8 @@ const postUser = async (req, res) => {
       name,
       lastName,
       code,
-      birthday
+      birthday,
+      admin
     );
     res
       .status(200)
@@ -153,6 +187,8 @@ const restoreAUser = async (req, res) => {
 module.exports = {
   postUser,
   getUsers,
+  getUsersByCourseId,
+  getCoursesOfUser,
   userPut,
   postInscription,
   getUserById,

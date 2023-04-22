@@ -8,7 +8,7 @@ const postCourse = async (req, res) => {
       throw new Error("Estan faltando valores para crear un curso")
     }
 
-    const foundCourses = await courseService.getCourseByTitle(title);
+    const foundCourses = await courseService.getCourseByTitleExactly(title);
 
     if(foundCourses.length) {
       for (const course of foundCourses) {
@@ -20,17 +20,31 @@ const postCourse = async (req, res) => {
 
     res.status(200).json({ message: "Curso creado con exito", data: createdCourse});
   } catch (error) {
-    res.status(400).json({message: 'error al postear '+ error.message});
+    res.status(400).json({message: error.message});
   }
 };
 
 const getAllCourses = async (req, res) => {
   try {
-    const courses = await courseService.getAllCourses();
+    const { page, size } = req.query;
 
-    if (!courses.length) throw new Error('No se ha encontrado ningun curso')
+    const courses = await courseService.getAllCourses(page, size);
+
+    if (!courses.length) throw new Error('No se ha encontrado ningun curso');
+
+    const totalCourses = await courseService.getTotalOfCourses();
+    const totalPages = Math.ceil(totalCourses / size);
     
-    res.status(200).json({message: "Cursos encontrados con exito", data: courses});
+    res.status(200).json({
+      message: "Cursos encontrados con exito", 
+      data: courses,
+      meta: {
+        currentPage: page,
+        totalCourses,
+        totalPages,
+        pageSize: size
+      }
+    });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -52,7 +66,7 @@ const getCourseById = async (req, res) => {
 
 const getCourseByTitle = async (req, res) => {
   try {
-    const { title } = req.params;
+    const { title } = req.body;
 
     const courseTitle = await courseService.getCourseByTitle(title);
 
@@ -68,7 +82,7 @@ const getCourseByTitle = async (req, res) => {
 
 const getCourseByType = async (req, res) => {
   try {
-    const { type } = req.params;
+    const { type } = req.body;
 
     const foundCourse = await courseService.getCourseByType(type);
 
@@ -91,6 +105,20 @@ const getCourseByGenre = async (req, res) => {
     if(!foundCourses.length) throw new Error(`No se ha encontrado ningun curso con el pilar ${genre}`)
 
     res.status(200).json({message: "Cursos encontrado con exito", data: foundCourses});
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+const getCourseVideo = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const foundVideos = await courseService.getCourseVideos(id);
+    if (!foundVideos)
+      throw new Error(`No se ha encontrado ningun video`);
+    res
+      .status(200)
+      .json({ message: "Cursos encontrado con exito", data: foundVideos });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -155,6 +183,8 @@ const restoreCourse = async (req, res) => {
   }
 };
 
+
+
 module.exports = {
   postCourse,
   getAllCourses,
@@ -164,5 +194,6 @@ module.exports = {
   getCourseByGenre,
   putCourse,
   deleteACourse,
-  restoreCourse
+  restoreCourse,
+  getCourseVideo
 };

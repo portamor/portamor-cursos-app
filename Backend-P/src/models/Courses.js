@@ -15,18 +15,22 @@ module.exports = sequelize => {
         allowNull: false,
       },
       description: {
-        type: DataTypes.STRING(300),
+        type: DataTypes.TEXT,
         allowNull: false,
       },
-      image: {
+      duration: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      genre: {
-        type: DataTypes.ENUM("Actividad Fisica", "Participacion Social", "Bienestar Mental", "Alimentacion Saludable"),
-        allowNull: true,
+      level: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
-      type: {
+      image: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      genre: {
         type: DataTypes.STRING,
         allowNull: true,
       },

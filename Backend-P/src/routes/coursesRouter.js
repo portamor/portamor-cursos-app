@@ -8,9 +8,10 @@ courseRouter.post("/", coursesController.postCourse);
 // ---- GET
 courseRouter.get("/",             coursesController.getAllCourses);
 courseRouter.get("/id/:id",       coursesController.getCourseById)
-courseRouter.get("/title/:title", coursesController.getCourseByTitle);
-courseRouter.get("/type/:type",   coursesController.getCourseByType);
+courseRouter.get("/title",        coursesController.getCourseByTitle);
+courseRouter.get("/type",         coursesController.getCourseByType);
 courseRouter.get("/genre/:genre", coursesController.getCourseByGenre);
+courseRouter.get("/videos/:id",   coursesController.getCourseVideo);
 
 // ---- PUT
 courseRouter.put("/:id",         coursesController.putCourse);

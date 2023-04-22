@@ -1,25 +1,18 @@
-const {Router} = require('express');
-
-const router = Router()
-
-/* ==================== Import Controllers ======================== */
-
+const { Router }      = require('express');
+const userRouter      = Router()
 const usersController = require('../controllers/usersController.js')
 
+userRouter.get('/',                   usersController.getUsers)
+userRouter.get('/:userId',            usersController.getUserById);
+userRouter.get('/course/:courseId',   usersController.getUsersByCourseId);
+userRouter.get('/my-courses/:userId', usersController.getCoursesOfUser);
 
-//.-----GET
-router.get('/', usersController.getUsers)
-router.get('/:userId', usersController.getUserById);
+userRouter.post('/', usersController.postUser)
+userRouter.post('/inscription/:userId/:courseId', usersController.postInscription)
 
-// ----POST
-router.post('/', usersController.postUser)
-router.post('/inscription/:userId/:courseId', usersController.postInscription)
+userRouter.put('/:userId',         usersController.userPut)
+userRouter.put('/restore/:userId', usersController.restoreAUser)
 
-// ----PUT
-router.put('/:userId', usersController.userPut)
-router.put('/restore/:userId')
+userRouter.delete('/:userId', usersController.deleteAuser)
 
-// ----DELETE
-router.delete('/:userId')
-
-module.exports = router;
+module.exports = userRouter;

@@ -1,0 +1,53 @@
+@keyframes opacityin {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.instructor-main {
+  max-width: 474px;
+  padding: 0 0 15px 15px;
+  font-size: 18px;
+  animation-name: opacityin;
+  animation-duration: 1s;
+}
+
+@media(max-width: 750px) {
+  .instructor-main{
+    width: 340px;
+  }
+}
+
+.instructor-title {
+  font-size: 40px;
+}
+
+.instructor-name {
+  font-size: 30px;
+}
+
+.instructor-image-description-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url(../../images/fondo-img.svg);
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.instructor-details-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.instructor-picture {
+  max-width: 236px;
+  max-height: 300px;
+  border-radius: 50%;
+  margin-right: 10px;
+}

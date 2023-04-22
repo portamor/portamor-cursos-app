@@ -36,7 +36,7 @@ const putSection = async ({ id, data }) => {
 };
 
 const getAllSection = async ()=> {
-  const sections = Sections.findAll()
+  const sections = await Sections.findAll()
   return sections
 }
 

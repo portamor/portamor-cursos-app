@@ -1,6 +1,6 @@
 const { Users, Courses, course_Inscription } = require("../database.js");
 
-const createUser = async (name, lastName, code, birthday) => {
+const createUser = async (name, lastName, code, birthday, admin) => {
   const searchUser = await userByNameLastNameBirthday(name, lastName, birthday)
   const verificate = await userByCode(code);
   if (verificate.length) {
@@ -11,6 +11,7 @@ const createUser = async (name, lastName, code, birthday) => {
     lastName,
     birthday,
     code,
+    admin,
   });
   return newUser;
 };
@@ -54,6 +55,14 @@ const userById = async (id) => {
   return userId;
 };
 
+const getUsersByCourseId = async (id) => {
+  const foundCoursefromDB = await Courses.findByPk(id, {
+    include: { model: Users }
+  });
+
+  return foundCoursefromDB;
+};
+
 const updateUser = async ({ id, data }) => {
   const userUpdate = await userById(id);
   if (!userUpdate) {
@@ -82,6 +91,7 @@ module.exports = {
   createUser,
   userByCode,
   userById,
+  getUsersByCourseId,
   getAllUsers,
   updateUser,
   userInscription,

@@ -1,0 +1,289 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;600&display=swap");
+
+@keyframes opacityin {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.course-detail-info-container {
+  animation-name: opacityin;
+  animation-duration: 0.5s;
+}
+
+.course-detail-h1-container {
+  width: 70%;
+  min-width: 800px;
+  border-bottom: solid 2px rgba(203, 202, 202, 0.73);
+  color: #424242;
+}
+
+.ver-clases {
+  background-color: #EB575A;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  height: fit-content;
+  width: fit-content;
+  padding: 13px 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
+@media (max-width: 900px) {
+  .course-detail-h1-container {
+    min-width: 0;
+  }
+}
+
+.course-detail-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 800px) {
+  .course-detail-info {
+    text-align: center;
+  }
+}
+
+.course-detail-h1-container {
+  text-align: start;
+  width: 80%;
+}
+
+.course-detail-info h4 {
+  color: #eb575a;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.course-detail-info span {
+  color: #666666;
+  font-size: 18px;
+  font-weight: 500;
+  max-width: 65%;
+  margin-bottom: 20px;
+}
+
+.course-detail-info-instructor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.course-detail-info-instructor-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+@media (max-width: 900px) {
+  .course-detail-info-instructor-container {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.instructor-description {
+  width: 60%;
+  height: fit-content;
+  padding: 0 15px 20px;
+  border-radius: 8px;
+  background-color: rgba(230, 229, 218, 0.73);
+}
+
+@media (max-width: 900px) {
+  .instructor-description {
+    width: 80%;
+  }
+}
+
+.instructor-description h4 {
+  color: #424242;
+  font-weight: 600;
+}
+
+.instructor-description span {
+  color: #424242;
+  font-size: 18px;
+}
+
+.course-detail-info-instructor-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.course-detail-info-instructor-img h2 {
+  margin: 10px 0 0 0;
+  color: #4c4c4c;
+  font-size: 20px;
+}
+
+.instructor-picture {
+  max-width: 236px;
+  max-height: 236px;
+  border-radius: 50%;
+}
+
+@media (max-width: 900px) {
+  .instructor-picture {
+    max-height: 200px;
+  }
+}
+
+.sections-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.course-detail-sections,
+.course-detail-materials {
+  margin-top: 30px;
+}
+
+@media (max-width: 900px) {
+  .course-detail-sections {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+  }
+}
+
+.course-detail-materials ol {
+  margin: 20px 0;
+  font-size: 20px;
+  color: #424242;
+}
+
+.modules-container {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.materials-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.course-detail-materials {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.course-detail-materials span {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.course-detail-materials li {
+  font-size: 20px;
+}
+
+.certificate-portamor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.certificate-portamor-container {
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: #424242;
+}
+
+@media (max-width: 800px) {
+  .certificate-portamor-container {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+
+.certificate-img {
+  max-width: 300px;
+}
+
+.certificate-portamor-container p {
+  max-width: 400px;
+  font-size: 20px;
+  color: #424242;
+}
+
+@media (max-width: 800px) {
+  .certificate-portamor-container p {
+    width: 50%;
+  }
+}
+
+.description-portamor-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.description-portamor {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  padding: 15px;
+  border-radius: 5spx;
+  background-color: rgba(230, 229, 218, 0.73);
+}
+
+.description-portamor h2 {
+  color: #eb575a;
+}
+
+.description-portamor p {
+  color: #424242;
+  font-size: 18px;
+}
+
+/* course card */
+.course-space {
+  visibility: hidden;
+  width: 70%;
+  z-index: 1;
+}
+
+.course-card-container {
+  position: fixed;
+  right: 0;
+  top: 170px;
+  margin-right: 20px;
+  margin-left: 20%;
+  z-index: 1;
+}
+
+@media (max-width: 1300px) {
+  .course-space {
+    display: none;
+  }
+
+  .course-card-container {
+    display: none;
+  }
+}

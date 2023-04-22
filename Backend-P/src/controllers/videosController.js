@@ -2,7 +2,6 @@ const { getSectionById } = require("../services/sectionService");
 const videoService = require("../services/videoService.js");
 
 
-// Probar manejo de errores, respuesta exitosa y demnas en insomnia, postman, etc
 const getVideos = async (req, res) => {
   try {
     const allVideos = await videoService.getAllVideos();
@@ -17,7 +16,20 @@ const getVideos = async (req, res) => {
   }
 };
 
-// Probar manejo de errores, respuesta exitosa y demnas en insomnia, postman, etc
+const getVideoById = async(req,res) => {
+  try {
+    const { idVideo } = req.params; 
+    
+    const foundVideo = await videoService.getVideoById(idVideo)
+
+    if(!foundVideo) throw new Error(`No se ha encontrado ningun video con el ID: ${idVideo}`)
+
+    res.status(200).json({message: "Video encontrado con exito", data: foundVideo})
+  } catch (error) {
+    res.status(404).json({message: error.message})
+  }
+};
+
 const postVideos = async (req, res) => {
   try {
     const { videoTitle, videoLink, videoDescription } = req.body;
@@ -41,13 +53,12 @@ const postVideos = async (req, res) => {
     });
     res
       .status(200)
-      .json({ message: "Video posteado con éxtio", data: createVideo });
+      .json({ message: "Video creado con éxtio", data: createVideo });
   } catch (error) {
     res.status(402).json({ messege: error.message });
   }
 };
 
-// Probar manejo de errores, respuesta exitosa y demnas en insomnia, postman, etc
 const putVideoId = async (req, res) => {
   try {
     const { idVideo } = req.params; 
@@ -70,11 +81,9 @@ const putVideoId = async (req, res) => {
   }
 };
 
-// Probar manejo de errores, respuesta exitosa y demnas en insomnia, postman, etc
 const deleteAVideo = async (req, res) => {
   try {
     const { idVideo } = req.params;
-    //No se verifica si existe un curso con el id recibido
     const videoById = await videoService.getVideoById(idVideo);
     if (!videoById) {
       throw new Error(`No se encontro el video con id ${idVideo}`);
@@ -87,7 +96,6 @@ const deleteAVideo = async (req, res) => {
   }
 };
 
-// Probar manejo de errores, respuesta exitosa y demnas en insomnia, postman, etc
 const restoreAVideo = async (req, res) => {
   try {
     const { idVideo } = req.params; //Aca recibe 'id' y
@@ -108,6 +116,7 @@ const restoreAVideo = async (req, res) => {
 
 module.exports = {
   getVideos,
+  getVideoById,
   postVideos,
   putVideoId,
   deleteAVideo,
