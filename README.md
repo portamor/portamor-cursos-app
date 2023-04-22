@@ -4,11 +4,14 @@
 <img width="1000"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/233788062-1303704b-153b-4954-b9c6-de77433a177a.png">
 </div>
 
+<br/>
 
 ## Sobre el proyecto
 <p >
 Bienvenidos a la plataforma de educacion online de Portamor diseñada especificamente para los adultos mayores. Nuestra mision es potenciar el envejicimiento activo de las personas con esta accesible oportunidad.  Nuestra misión es proporcionar oportunidades de aprendizaje accesibles, atractivas y estimulantes para los mayores, independientemente de su ubicación o antecedentes.
 </p>
+
+<br/>
 
 ## Caracteristicas
 - Filtros de cursos
@@ -24,6 +27,8 @@ Bienvenidos a la plataforma de educacion online de Portamor diseñada especifica
 - Diseño responsivo
 - Enlaces de administrador protegidos
 
+<br/>
+
 ## Tecnologias usadas 
 Las tecnologias usadas para este proyecto son las siguientes: <br>
 <div align="start">
@@ -36,6 +41,8 @@ Las tecnologias usadas para este proyecto son las siguientes: <br>
   <img align="center" alt="PostgreSQL" height="40" width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original-wordmark.svg" />
 </div>
 
+<br/>
+
 ## Imagenes del proyecto
 <div align="center">
   <img width="400"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/233788062-1303704b-153b-4954-b9c6-de77433a177a.png">
@@ -44,7 +51,9 @@ Las tecnologias usadas para este proyecto son las siguientes: <br>
   <img width="400"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/233790157-f0d72e3c-4941-4ea7-8a96-0ad006bd0d16.png">
 </div>
 
-## Empezando
+<br/>
+
+## Empezar
 This is an example of how you may give instructions on setting up your project locally. To get a local copy up and running follow these example steps.
 
 1. Clonar el repositorio:
@@ -61,17 +70,9 @@ npm install
 npm start
 ```
 
-## Project Images
-Here, some preview images of the project's pages:
+<br/>
 
-<div align="center">
-  <img width="500"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/214103160-3bd705ac-6e88-402e-ae8c-c59aba52ab22.png">
-  <img width="500"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/214112941-99090027-fe10-453f-8950-4da3d5066e1d.png">
-  <img width="500"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/214112133-5bbcf5d9-37cb-4f7c-805b-193700337238.png">
-  <img width="500"  alt="Captura de pantalla 2023-01-17 143635" src="https://user-images.githubusercontent.com/98099690/214112427-5b40a8f6-067a-4257-bed6-2bddd821ee8d.png">
-</div>
-
-## Contribueyndo
+## Contribuir
 Solo puedes colaborar con invitacion del creador de este repositorio, Portamor. Si eres parte del equipo de desarrollo y tienes acceso a este repositorio, estos son los pasos a seguir para unn flujo de Git:
 <br>
 1. Clonar el repositorio
@@ -80,6 +81,8 @@ Solo puedes colaborar con invitacion del creador de este repositorio, Portamor. 
 4. Sube tus cambios a la rama `git push origin your-branch`
 5. Crea un Pull Request
 6. Espera por una revision de codigo
+
+<br/>
 
 ## Contactanos
 <a href="https://www.linkedin.com/in/lizhana-campos/" display="flex" text-align="center">
