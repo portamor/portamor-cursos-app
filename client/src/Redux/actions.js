@@ -36,7 +36,7 @@ export const getUsersById = (id) => async (dispatch) => {
     const response = await axios.get(`/users/${id}`);
     dispatch({ type: 'GET_USERS_ID', payload: response.data.data });
   } catch (error) {
-    console.log(error);
+    dispatch({ type: 'GET_USERS_ID', payload: {} });
   }
 };
 
@@ -45,7 +45,7 @@ export const getUsers = () => async (dispatch) => {
     const response = await axios.get(`/users`);
     dispatch({ type: 'GET_USERS_SUCCESS', payload: response.data.data });
   } catch (error) {
-    console.log(error);
+    dispatch({ type: 'GET_USERS_SUCCESS', payload: [] });
   }
 };
 
@@ -54,13 +54,12 @@ export const deleteUser = (userId) => async (dispatch) => {
     const response = await axios.delete(`/users/${userId}`);
     dispatch({ type: 'DELETE_USER_SUCCESS', payload: response.data.message });
   } catch (error) {
-    console.log(error);
+    return;
   }
 };
 
 export const inscribeUser = (userId, courseId, accessToken, user, courseDetail) => async () => {
   try {
-    console.log(userId)
     const response = await axios.post(`/users/inscription/${userId}/${courseId}`, {}, {
       headers: {
         'Content-Type': 'application/json',
@@ -135,7 +134,6 @@ export const getCoursesByGenre = (genre) => async (dispatch) => {
   try {
     const res = await axios.get(`/courses/genre/${genre}`);  
 
-    console.log(res.data.data)
 
     return dispatch({ type: 'GET_COURSES_BY_GENRE', payload: res.data.data});
   } catch (error) {
@@ -168,7 +166,6 @@ export function getInstructorById(id) {
 
       return dispatch({ type: actions.GET_INSTRUCTOR_BY_ID, payload: foundInstructor.data.data });
     } catch (error) {
-      Promise.reject(error);
       return dispatch({ type: actions.GET_INSTRUCTOR_BY_ID, payload: {} });
     }
   };
