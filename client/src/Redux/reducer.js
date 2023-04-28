@@ -216,6 +216,14 @@ function rootReducer(state = initialState, action) {
         createdVideos: [...state.createdVideos, action.payload]
       };
 
+    case "DELETE_VIDEO":
+      const filteredVideosCreated = state.createdVideos.filter(video => video.id !== action.payload)
+
+      return {
+        ...state,
+        createdVideos: filteredVideosCreated
+      };
+
     case actions.CREATE_REVIEW:
       return {
         ...state,

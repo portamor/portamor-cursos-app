@@ -343,6 +343,29 @@ export function createVideo(payload, sectionId) {
   };
 }
 
+export function deleteVideo(videoId) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`/videos/${videoId}`);
+
+      Swal.fire({
+        icon: "success",
+        title: response.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+
+      return dispatch({ type: "DELETE_VIDEO", payload: videoId });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: `El servidor ha respondido con el siguiente error: ${error.response.data.message}`,
+        confirmButtonText: "Aceptar",
+      });
+    }
+  };
+}
+
 export function getVideosOfCreatedSection(sectionId) {
   return async (dispatch) => {
     dispatch({ type: actions.GET_VIDEOS_OF_CREATED_SECTION, payload: sectionId });
