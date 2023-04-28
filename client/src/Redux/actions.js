@@ -130,6 +130,29 @@ export function getSectionsByCourseId(courseId) {
   };
 }
 
+export function deleteSection(sectionId) {
+  return async function (dispatch) {
+    try {
+      const response = await axios.delete(`/section/${sectionId}`);
+
+      Swal.fire({
+        icon: "success",
+        title: response.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+
+      return dispatch({ type: "DELETE_SECTION", payload: sectionId });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: `El servidor ha respondido con el siguiente error: ${error.response.data.message}`,
+        confirmButtonText: "Aceptar",
+      });
+    }
+  };
+}
+
 export const getCoursesByGenre = (genre) => async (dispatch) => {
   try {
     const res = await axios.get(`/courses/genre/${genre}`);  
