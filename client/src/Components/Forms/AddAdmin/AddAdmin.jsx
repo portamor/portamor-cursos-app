@@ -71,7 +71,6 @@ const AddAdmin = ({ onSuccess }) => {
                 2
             )}`.toUpperCase();
             try {
-                console.log(isAdmin)
                 const response = await dispatch(
                     postUser({ name, lastName, birthday, code, admin: isAdminBoolean })
                 );
@@ -98,7 +97,6 @@ const AddAdmin = ({ onSuccess }) => {
                     });
                 }
             } catch (error) {
-                console.log(error);
                 Swal.fire({
                     icon: "error",
                     title: "Error al registrar usuario",

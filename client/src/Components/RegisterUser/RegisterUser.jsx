@@ -93,7 +93,6 @@ const RegisterUser = ({ onSuccess }) => {
           });
         }
       } catch (error) {
-        console.log(error);
         Swal.fire({
           icon: "error",
           title: "Error al registrar usuario",
