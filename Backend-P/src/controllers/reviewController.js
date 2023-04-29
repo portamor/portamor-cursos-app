@@ -50,11 +50,11 @@ const getAllReviewsByCourseId = async (req, res) => {
 
     const { Reviews } = await reviewService.getReviewsByCourseId(foundCourse.id)
 
-    if(!Reviews.length) throw new Error("No se han encontrado opiniones de este curso");
+    if(!Reviews.length) return res.status(200).json({message: "No se han encontrado opiniones de este curso", data: [] })
 
     res.status(200).json({message: "Opiniones encontradas con exito", data: Reviews})
   } catch (error) {
-    res.status(404).json({message: error.message})
+    res.status(500).json({message: error.message})
   }
 }
 

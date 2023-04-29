@@ -102,7 +102,7 @@ const getCourseByGenre = async (req, res) => {
 
     const foundCourses = await courseService.getCourseBygenre(genre);
 
-    if(!foundCourses.length) throw new Error(`No se ha encontrado ningun curso con el pilar ${genre}`)
+    if(!foundCourses.length) return res.status(200).json({ message: `No se ha encontrado ningun curso con el pilar ${genre}` });
 
     res.status(200).json({message: "Cursos encontrado con exito", data: foundCourses});
   } catch (error) {

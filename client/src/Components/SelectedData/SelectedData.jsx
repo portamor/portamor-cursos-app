@@ -60,8 +60,8 @@ const SelectedData = ({courseDetail, courseId, selectedButtonContent}) => {
       )
     
     case constants.MATERIALES:
-      const materials = courseDetail.materials.map((material) => 
-        <h2 className={styles["info-component-material-title"]}>
+      const materials = courseDetail.materials.map((material, index) => 
+        <h2 className={styles["info-component-material-title"]} key={index}>
           {material} <br />
         </h2>
       )

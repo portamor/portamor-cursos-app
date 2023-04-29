@@ -76,7 +76,7 @@ const deleteASection = async (req, res) => {
 
     await sectionService.deleteSection(foundSection.id);
     
-    res.status(200).json({ message: `Se ha eliminado el curso ${foundSection.name} correctamente` });
+    res.status(200).json({ message: `Se ha eliminado la seccion ${foundSection.name} correctamente` });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

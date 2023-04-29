@@ -18,7 +18,6 @@ const DownloadCertificate = ({title}) => {
   const anio = fechaActual.getFullYear();
   const fechaActualString = `${dia} de ${mesNombre} del ${anio}`;
 
-  console.log(title, 'titlee');
 
   const handleIdentificacion = (event) => {
     const { name, value } = event.target;

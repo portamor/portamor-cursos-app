@@ -81,8 +81,9 @@ const CreateReview = ({ courseId, userId}) => {
         <label htmlFor="title-review">¿Qué tal tu experiencia con el curso?</label>
         <div className={styles["buttons-container"]}>
           {
-            titles.map((title) => (
+            titles.map((title, index) => (
               <CustomButton 
+              key={index}
               type={"button"}
               name={"title-review"}
               content={title}

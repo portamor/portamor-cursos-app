@@ -71,11 +71,11 @@ const getCoursesOfUser = async (req, res) => {
 
     const { Courses } = foundUser;
 
-    if(!Courses.length) throw new Error("No se ha encontrado ningun curso al que esté inscripto");
+    if(!Courses.length) return res.status(200).json({ message: "No se ha encontrado ningun curso al que esté inscripto", data: [] }) 
 
     res.status(200).json({ message: "Cursos encontrados con exito", data: Courses })
   } catch (error) {
-    res.status(404).json({message: error.message})
+    res.status(500).json({message: error.message})
   }
 }
 

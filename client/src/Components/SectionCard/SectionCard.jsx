@@ -1,7 +1,15 @@
+import { useDispatch } from "react-redux";
+import * as actions from "../../Redux/actions";
 import CustomButton from "../CustomButton/CustomButton";
 import styles       from "./SectionCard.module.css"
+import { Trash } from "react-bootstrap-icons";
 
-const SectionCard = ({ name, onClick }) => {
+const SectionCard = ({ id, name, onClick }) => {
+  const dispatch = useDispatch();
+
+  const handleClickTrash = (sectionId) => {
+    dispatch(actions.deleteSection(sectionId))
+  }
 
   return (
     <div className={styles["section-card-main"]}>
@@ -10,6 +18,7 @@ const SectionCard = ({ name, onClick }) => {
       onClick={onClick} 
       content={"Agregar video"} 
       primary={true} />
+      <Trash color="red" size={"25px"} style={{ cursor: "pointer" }} onClick={() => handleClickTrash(id)}/>
     </div>
   );
 };
