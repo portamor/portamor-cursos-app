@@ -13,11 +13,6 @@
   margin-right: 65%;
   margin-left: 15%;
 }
-@media (max-width: 750px) {
-  .course-detail-main {
-    margin-top: 30px;
-  }
-}
 
 .course-detail-head {
   width: 100%;
@@ -38,6 +33,12 @@
   margin-bottom: 30px;
 }
 
+@media (max-width: 700px) {
+  .course-detail-head-container {
+    align-items: center;
+  }
+}
+
 .head-instructor-container {
   display: flex;
   justify-content: space-between;
@@ -45,6 +46,13 @@
   width: 40%;
   font-size: 20px;
   margin: 30px 0;
+}
+
+@media (max-width: 700px) {
+  .head-instructor-container {
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
 .instructor-name-container {
@@ -75,6 +83,7 @@
 
 .stars-container {
   display: flex;
+  font-size: 18px;
 }
 
 .course-detail-h1-container {
@@ -99,6 +108,13 @@
   display: flex;
   gap: 10px;
   width: 100%;
+}
+
+@media (max-width: 700px) {
+  .course-detail-students-container {
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .course-detail-students-container h3 {

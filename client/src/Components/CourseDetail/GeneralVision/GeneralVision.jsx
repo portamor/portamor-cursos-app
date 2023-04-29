@@ -38,9 +38,9 @@ export default function GeneralVision({ accessToken }) {
 
   useEffect(() => {
     dispatch(actions.getCourseDetail(courseId));
-    dispatch(actions.getInstructorById(courseDetail.InstructorId));
+    typeof courseDetail.InstructorId !== "undefined" && dispatch(actions.getInstructorById(courseDetail.InstructorId));
     dispatch(actions.getSectionsByCourseId(courseId));
-    dispatch(actions.getCoursesOfUser(userId))
+    userId && dispatch(actions.getCoursesOfUser(userId))
   }, [courseId, dispatch, courseDetail.InstructorId, userId])
 
   useEffect(() => {
@@ -135,7 +135,7 @@ export default function GeneralVision({ accessToken }) {
             <div className={styles["modules-container"]}>
               {courseSections && courseSections.map((section, index) => {
                 return (
-                  <div>
+                  <div key={section.id}>
                     <p>Modulo {index + 1}:</p>
                     <p>{section.name}</p>
                   </div>
@@ -153,8 +153,10 @@ export default function GeneralVision({ accessToken }) {
           <div className={styles["course-detail-materials"]}>
             <span>Materiales que necesitarás:</span>
             <ol>
-              {courseDetail.materials && courseDetail.materials.map(material =>
-                <li>{material}</li>
+              {courseDetail.materials && courseDetail.materials.map((material, index) =>
+                <li key={index}>
+                  <span>{material}</span>
+                </li>
               )}
             </ol>
           </div>

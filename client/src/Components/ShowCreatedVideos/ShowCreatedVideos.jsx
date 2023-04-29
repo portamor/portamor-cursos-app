@@ -20,7 +20,7 @@ const ShowCreatedVideo = () => {
     <div className={styles["show-videos-main"]}>
       <h1>Videos creados </h1>
       {
-       videosOfCreatedSection.map(video => <VideoCard key={video.id} title={video.videoTitle}/>)
+       videosOfCreatedSection.map(video => <VideoCard key={video.id} id={video.id} title={video.videoTitle}/>)
       }
     </div>
   )

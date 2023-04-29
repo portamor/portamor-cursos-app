@@ -24,6 +24,7 @@ const ChooseSectionToAddVideo = ({ setActualForm }) => {
         createdSections.map(section => 
           <SectionCard 
           key={section.id}
+          id={section.id}
           name={section.name}
           onClick={() => handleAddVideoButton(section.id)} />
         )

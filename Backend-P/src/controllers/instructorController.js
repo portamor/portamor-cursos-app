@@ -30,12 +30,12 @@ const getInstructorById = async (req, res) => {
     const foundInstructor = await instructorService.getInstructorById(instructorId);
 
     if (!foundInstructor) {
-      throw new Error(`No se ha encontrado ningun instructor con el ID: ${instructorId}`)
+      return res.status(200).json({message: "`No se ha encontrado ningun instructor con el ID: ${instructorId}`", data: {} })
     }
 
     res.status(200).json({ message: "Instructor encontrado con exito", data: foundInstructor });
   } catch (error) {
-    res.status(404).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 

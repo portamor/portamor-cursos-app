@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import styles          from './CreateVideo.module.css'
 import * as utils      from "../../../utils"
-import Swal from "sweetalert2";
 
 const CreateVideo = ({ setActualForm }) => {
   const dispatch          = useDispatch();
@@ -86,20 +85,6 @@ const CreateVideo = ({ setActualForm }) => {
           className={styles["video-input"]}
         ></input>
         {errors.videoLink && <p>{errors.videoLink}</p>}
-      </div>
-
-      <div className={styles["create-video-input-container"]}>
-        <label htmlFor="videoDescription">Escribe una breve descripcion:</label>
-        <textarea
-          maxLength={250}
-          id="videoDescription"
-          name="videoDescription"
-          rows="4"
-          value={formValues.videoDescription}
-          onChange={handleChange}
-          className={styles["video-textarea"]}
-        ></textarea>
-        {errors.videoDescription && <p>{errors.videoDescription}</p>}
       </div>
 
       <div className={styles["buttons-container"]}>

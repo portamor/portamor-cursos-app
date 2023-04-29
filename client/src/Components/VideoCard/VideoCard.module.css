@@ -12,6 +12,8 @@
 
 .video-card {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: fit-content;
   min-width: 300px;
   max-width: 500px;

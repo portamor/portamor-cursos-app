@@ -33,7 +33,7 @@ export const CourseDetail = () => {
 
   useEffect(() => {
     dispatch(actions.getCourseDetail(courseId));
-    dispatch(actions.getInstructorById(courseDetail.InstructorId));
+    typeof courseDetail.InstructorId !== "undefined" && dispatch(actions.getInstructorById(courseDetail.InstructorId));
     dispatch(actions.getSectionsByCourseId(courseId));
     dispatch(actions.getUsersByCourseId(courseId));
   }, [courseId, dispatch, courseDetail.InstructorId, instructor.id])
