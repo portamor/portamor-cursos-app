@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import io from "socket.io-client";
 import styles from "./chat.module.css"
 
-const socket = io(`http://localhost:3001`);
+const socket = io(process.env.REACT_APP_BASE_URL);
 
 const Chat = () => {
   const [message, setMessage] = useState("");
