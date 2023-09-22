@@ -1,0 +1,17 @@
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 10px dotted #fbb3b4;
+  border-top: 10px dotted #EB575A;
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
