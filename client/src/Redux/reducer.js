@@ -28,7 +28,8 @@ const initialState = {
   videosOfCourse: [],
   videoState: [],
   videoStateCourse: [],
-  enrolledCourses: []
+  enrolledCourses: [],
+  loadingCourses: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -79,6 +80,11 @@ function rootReducer(state = initialState, action) {
         user: null,
         error: null,
       };
+    case actions.GET_COURSES_LOADING:
+      return {
+        ...state,
+        loadingCourses: true,
+      }
 
     case actions.GET_COURSES:
       const {
@@ -86,7 +92,7 @@ function rootReducer(state = initialState, action) {
         currentPage,
         pageSize,
         totalCourses,
-        totalPages
+        totalPages,
       } = action.payload
 
       return {
@@ -96,10 +102,12 @@ function rootReducer(state = initialState, action) {
         pageSize: pageSize,
         totalCourses: totalCourses,
         totalPages: totalPages,
+        loadingCourses: false,
       };
 
     case actions.RESET_PAGINATED:
       return {
+        // ...state,
         currentPage: 1,
         pageSize: 9,
         totalCourses: action.payload.length,
@@ -112,6 +120,7 @@ function rootReducer(state = initialState, action) {
         currentPage: 1,
         pageSize: 9,
         totalCourses: action.payload.length,
+        loadingCourses: false,
       };
 
     case actions.GET_COURSE_DETAIL:
@@ -127,6 +136,7 @@ function rootReducer(state = initialState, action) {
         currentPage: 1,
         pageSize: 9,
         totalCourses: action.payload.length,
+        loadingCourses: false,
       }
 
     case actions.GET_SECTIONS_BY_COURSE_ID:
