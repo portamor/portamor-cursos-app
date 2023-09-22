@@ -9,8 +9,6 @@ const MyCourses = () => {
   const dispatch = useDispatch();
   const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
 
-  // const courses = useSelector((state) => state.courses);
-
   useEffect(() => {
     dispatch(actions.resetPaginated())
     dispatch(actions.getCoursesOfUser(userFromLocalStorage.id));
