@@ -7,6 +7,7 @@ axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 
 export function getCourses(page, size) {
   return async function (dispatch) {
+    dispatch({ type: actions.GET_COURSES_LOADING })
     try {
       const { data } = await axios.get(`/courses?page=${page}&size=${size}`);
 
@@ -108,6 +109,7 @@ export function getVideosCourse(id) {
 
 export function getCoursesOfUser(userId) {
   return async function (dispatch) {
+    dispatch({ type: actions.GET_COURSES_LOADING })
     try {
       const foundCourses = await axios.get(`/users/my-courses/${userId}`);
 
@@ -154,9 +156,9 @@ export function deleteSection(sectionId) {
 }
 
 export const getCoursesByGenre = (genre) => async (dispatch) => {
+  dispatch({ type: actions.GET_COURSES_LOADING })
   try {
     const res = await axios.get(`/courses/genre/${genre}`);  
-
 
     return dispatch({ type: 'GET_COURSES_BY_GENRE', payload: res.data.data});
   } catch (error) {
