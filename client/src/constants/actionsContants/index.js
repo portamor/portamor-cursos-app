@@ -32,4 +32,7 @@ export const DELETE_COURSE            = "DELETE_COURSE"
         
 export const RESET_PAGINATED = "RESET_PAGINATED"
 
+//---- LOADING ACTIONS
+export const GET_COURSES_LOADING = "GET_COURSES_LOADING";
+
 
