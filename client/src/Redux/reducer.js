@@ -107,10 +107,9 @@ function rootReducer(state = initialState, action) {
 
     case actions.RESET_PAGINATED:
       return {
-        // ...state,
+        ...state,
         currentPage: 1,
         pageSize: 9,
-        totalCourses: action.payload.length,
       }
 
     case 'GET_COURSES_BY_GENRE':
