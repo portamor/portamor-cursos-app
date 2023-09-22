@@ -9,7 +9,7 @@ const MyCourses = () => {
   const dispatch = useDispatch();
   const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
 
-  const courses = useSelector((state) => state.courses);
+  // const courses = useSelector((state) => state.courses);
 
   useEffect(() => {
     dispatch(actions.resetPaginated())
@@ -18,7 +18,7 @@ const MyCourses = () => {
 
   return (
     <div className={styles["my-courses-main"]}>
-      <Paginated courses={courses}/> 
+      <Paginated /> 
     </div>
   );
 };
