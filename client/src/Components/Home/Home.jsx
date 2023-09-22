@@ -8,18 +8,10 @@ import { useSelector } from "react-redux";
 import NavFilter from "../NavFilter/NavFilter";
 
 const Home = () => {
-  const dispatch    = useDispatch();
-  const courses     = useSelector((state) => state.courses);
-  const pageSize    = useSelector((state) => state.pageSize);
-
-  useEffect(() => {
-    !courses.length && dispatch(actions.getCourses(1, pageSize));
-  }, [dispatch, pageSize, courses.length])
-
   return (
     <div className={Styles["home-container"]}>
       <NavFilter actualPage={"HOME"}/>
-      <Paginated actualPage={"HOME"} courses={courses}/>
+      <Paginated />
     </div>
   );
 };
