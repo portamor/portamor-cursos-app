@@ -12,7 +12,6 @@ const NavFilter = ({ actualPage }) => {
   const dispatch = useDispatch();
   const [isMobile, setIsMobile] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState('');
-  const courses = useSelector((state) => state.courses);
 
   const pageSize      = useSelector((state) => state.pageSize);
 
@@ -44,7 +43,7 @@ const NavFilter = ({ actualPage }) => {
   function handleSelectChange(event) {
     setSelectedGenre(event.target.value);
     if (event.target.value === "") {
-      dispatch(getCourses());
+      dispatch(getCourses(1, pageSize));
     } else {
       dispatch(getCoursesByGenre(event.target.value));
     }
