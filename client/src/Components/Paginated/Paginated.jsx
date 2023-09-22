@@ -1,6 +1,7 @@
 import CourseCard      from "../CourseCard/CourseCard";
 import { getCourses }  from "../../Redux/actions";
 import NavFilter       from "../NavFilter/NavFilter";
+import LoadingBox from "../LoadingBox/LoadingBox";
 import React           from "react";
 import styles          from "./Paginated.module.css"
 import { useDispatch } from "react-redux";
@@ -12,8 +13,8 @@ const Paginated = () => {
   const dispatch      = useDispatch();
   const currentPage   = useSelector((state) => state.currentPage);
   const pageSize    = useSelector((state) => state.pageSize);
+  const loadingCourses = useSelector((state) => state.loadingCourses);
   const courses     = useSelector((state) => state.courses);
-
   const totalCourses  = useSelector((state) => state.totalCourses);
   const pageCount     = Math.ceil(totalCourses / pageSize);
   const pageNumbers   = [];
@@ -32,7 +33,7 @@ const Paginated = () => {
   );
 
   useEffect(() => {
-    !courses.length && dispatch(getCourses(1, pageSize));
+    !loadingCourses && !courses.length && dispatch(getCourses(1, pageSize));
   }, [dispatch, pageSize, courses.length])
 
   const handlePrevPage = () => {
@@ -67,7 +68,9 @@ const Paginated = () => {
     <div className={styles["paginated-main"]}>
       <div className={styles["cards-container"]}>
         {
-          courses.length ? courses.map(el => 
+          !loadingCourses
+          ?
+           (courses.length ? courses.map(el => 
             <CourseCard
               key={el.id}
               id={el.id}
@@ -75,25 +78,34 @@ const Paginated = () => {
               title={el.title}
               duration={el.duration}
               level={el.level} />
-          )
+            )
           :
             <h2 className={styles["title-not-found"]}>No se ha encontrado ningun curso</h2>
+          )
+          :
+            <LoadingBox />
         }
       </div> 
 
       <div className={styles["paginated-numbers-container"]}>
-        <button className={styles["paginated-number"]} onClick={handlePrevPage}>{"<"}</button>
+        {
+          !loadingCourses && (
+            <>
+              <button className={styles["paginated-number"]} onClick={handlePrevPage}>{"<"}</button>
 
-        {numbersToShow && numbersToShow.map(number => 
-          <span 
-          key={number} 
-          className={number === parseInt(currentPage) ? styles["current-page"] : styles["paginated-number"] } 
-          onClick={() => handleClickOnIndex(number)}>
-            {number}
-          </span>
-        )}
+              {numbersToShow && numbersToShow.map(number => 
+                <span 
+                key={number} 
+                className={number === parseInt(currentPage) ? styles["current-page"] : styles["paginated-number"] } 
+                onClick={() => handleClickOnIndex(number)}>
+                  {number}
+                </span>
+              )}
 
-        <button className={styles["paginated-number"]} onClick={handleNextPage}>{">"}</button>
+              <button className={styles["paginated-number"]} onClick={handleNextPage}>{">"}</button>
+            </>
+          )
+        }
       </div>
     </div>
   );
