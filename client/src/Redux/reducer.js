@@ -109,7 +109,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         currentPage: 1,
-        pageSize: 9,
+        pageSize: 8,
       }
 
     case 'GET_COURSES_BY_GENRE':
@@ -117,7 +117,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         courses: action.payload,
         currentPage: 1,
-        pageSize: 9,
+        pageSize: 8,
         totalCourses: action.payload.length,
         loadingCourses: false,
       };
@@ -133,7 +133,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         courses: action.payload,
         currentPage: 1,
-        pageSize: 9,
+        pageSize: 8,
         totalCourses: action.payload.length,
         loadingCourses: false,
       }
