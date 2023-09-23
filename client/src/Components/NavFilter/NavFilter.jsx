@@ -1,24 +1,12 @@
-import CustomButton          from "../CustomButton/CustomButton";
-import { getCoursesByGenre } from "../../Redux/actions";
-import { getCourses }        from "../../Redux/actions";
-import React                 from "react";
-import Styles                from "./NavFilter.module.css";
-import { useEffect }         from "react";
-import { useState }          from "react";
-import { useDispatch }       from "react-redux";
-import { useSelector }       from "react-redux";
+import React, { useState, useEffect } from "react";
+import CustomButton from "../CustomButton/CustomButton";
+import Styles from "./NavFilter.module.css";
 
-const NavFilter = ({ actualPage }) => {
-  const dispatch = useDispatch();
+const NavFilter = ({ handleCoursesGenre }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState('');
 
-  const pageSize      = useSelector((state) => state.pageSize);
-
-
   useEffect(() => {
-    actualPage === "HOME" && selectedGenre === "" && dispatch(getCourses(1, pageSize))
-
     function handleResize() {
       setIsMobile(window.innerWidth < 839);
     }
@@ -29,24 +17,15 @@ const NavFilter = ({ actualPage }) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [actualPage, dispatch, pageSize, selectedGenre]);
-
+  }, []);
 
   function handleFilterClick(e) {
-    if (e === "") {
-      dispatch(getCourses(1, pageSize));
-    } else {
-      dispatch(getCoursesByGenre(e));
-    }
     setSelectedGenre(e)
+    handleCoursesGenre(e);
   }
   function handleSelectChange(event) {
     setSelectedGenre(event.target.value);
-    if (event.target.value === "") {
-      dispatch(getCourses(1, pageSize));
-    } else {
-      dispatch(getCoursesByGenre(event.target.value));
-    }
+    handleCoursesGenre(event.target.value);
   }
 
   return (
