@@ -1,13 +1,9 @@
-import CourseCard      from "../CourseCard/CourseCard";
-import { getCourses }  from "../../Redux/actions";
-import NavFilter       from "../NavFilter/NavFilter";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCourses } from "../../Redux/actions";
+import CourseCard from "../CourseCard/CourseCard";
 import LoadingBox from "../LoadingBox/LoadingBox";
-import React           from "react";
-import styles          from "./Paginated.module.css"
-import { useDispatch } from "react-redux";
-import { useEffect }   from "react";
-import { useSelector } from "react-redux";
-import { useState }    from "react";
+import styles from "./Paginated.module.css"
 
 const Paginated = () => {
   const dispatch      = useDispatch();
@@ -32,11 +28,7 @@ const Paginated = () => {
     maxLimitNumberPage
   );
 
-  useEffect(() => {
-    !loadingCourses && !courses.length && dispatch(getCourses(1, pageSize));
-  }, [dispatch, pageSize, courses.length])
-
-  const handlePrevPage = () => {
+    const handlePrevPage = () => {
     const pastNumber = parseInt(currentPage) - 1;
     
     if (pastNumber === 0) return;
