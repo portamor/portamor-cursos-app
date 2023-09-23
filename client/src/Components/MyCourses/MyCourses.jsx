@@ -1,9 +1,8 @@
-import * as actions    from "../../Redux/actions"
-import Paginated       from "../Paginated/Paginated";
-import React           from "react";
-import styles          from "./MyCourses.module.css";
-import { useEffect }   from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import * as actions from "../../Redux/actions"
+import Paginated from "../Paginated/Paginated";
+import styles from "./MyCourses.module.css";
 
 const MyCourses = () => {
   const dispatch = useDispatch();
