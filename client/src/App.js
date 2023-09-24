@@ -20,7 +20,7 @@ function App() {
   const isAdmin = user?.admin;
 
   return (
-    <div>
+    <div className="root-container">
       <BrowserRouter>
         <NavBar />
         <Routes>
