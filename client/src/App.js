@@ -36,7 +36,7 @@ function App() {
               <Route exact path="/cursos" Component={MyCourses} />
             </>
           ) : (
-            <Route path="*" element={<Modal onClose={() => setShowModal(false)} />} />
+            <Route path="*" element={<Modal pathValue={window.location.pathname} onClose={() => setShowModal(false)} />} />
 
           )}
            {isAdmin && (
