@@ -77,28 +77,25 @@ const Paginated = () => {
           :
             <LoadingBox />
         }
-      </div> 
-
-      <div className={styles["paginated-numbers-container"]}>
-        {
-          !loadingCourses && (
-            <>
-              <button className={styles["paginated-number"]} onClick={handlePrevPage}>{"<"}</button>
-
-              {numbersToShow && numbersToShow.map(number => 
-                <span 
-                key={number} 
-                className={number === parseInt(currentPage) ? styles["current-page"] : styles["paginated-number"] } 
-                onClick={() => handleClickOnIndex(number)}>
-                  {number}
-                </span>
-              )}
-
-              <button className={styles["paginated-number"]} onClick={handleNextPage}>{">"}</button>
-            </>
-          )
-        }
       </div>
+      {
+        !loadingCourses && courses.length > pageSize && (
+          <div className={styles["paginated-numbers-container"]}>
+            <button className={styles["paginated-number"]} onClick={handlePrevPage}>{"<"}</button>
+
+            {numbersToShow && numbersToShow.map(number => 
+              <span 
+              key={number} 
+              className={number === parseInt(currentPage) ? styles["current-page"] : styles["paginated-number"] } 
+              onClick={() => handleClickOnIndex(number)}>
+                {number}
+              </span>
+            )}
+
+            <button className={styles["paginated-number"]} onClick={handleNextPage}>{">"}</button>
+          </div>
+        )
+      }
     </div>
   );
 };
