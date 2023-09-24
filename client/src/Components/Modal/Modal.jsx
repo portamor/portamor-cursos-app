@@ -24,7 +24,12 @@ function Modal({ onClose }) {
   };
 
   const handleRegisterSuccess = () => {
-    onClose(); 
+    onClose();
+  };
+
+  const closeModalByX= () => {
+    if (window.location.pathname === '/cursos') window.history.go(-1);
+    onClose();
   };
 
   const registerForm = showRegisterForm ? <RegisterUser onSuccess={handleRegisterSuccess} /> : null;
@@ -34,7 +39,7 @@ function Modal({ onClose }) {
   return (
     <div className={styles.overlay}>
       <div className={styles.modal}>
-        <button className={styles.closeButton} onClick={onClose}>
+        <button className={styles.closeButton} onClick={closeModalByX}>
           X
         </button>
         <h1>Bienvenidos!</h1>
