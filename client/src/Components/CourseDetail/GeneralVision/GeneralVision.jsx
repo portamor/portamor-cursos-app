@@ -1,55 +1,38 @@
-import * as actions from "../../../Redux/actions";
-import certificateImg from "../../../images/certificate.png"
-import * as constants from "../../../constants/classDetailConstants";
-import Modal from "../../Modal/Modal";
-import React from 'react';
-import styles from "./GeneralVision.module.css";
-import { useDispatch } from "react-redux";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { useMatch } from "react-router-dom";
-import { useSelector } from "react-redux";
+import Modal from "../../Modal/Modal";
 import CourseDetailCard from "../CourseDetailCard/CourseDetailCard";
-import { inscribeUser } from "../../../Redux/actions";
+import certificateImg from "../../../images/certificate.png"
 import Swal from 'sweetalert2';
+import { inscribeUser, getCoursesOfUser } from "../../../Redux/actions";
+import styles from "./GeneralVision.module.css";
 import 'sweetalert2/dist/sweetalert2.min.css';
 
-
 export default function GeneralVision({ accessToken }) {
-
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  const [showModal, setShowModal] = useState(false);
-
-
-
 
   const dispatch = useDispatch();
   const match    = useMatch('/detalle-curso/:courseId');
   const courseId = match.params.courseId;
-  const [isEnrolled, setIsEnrolled] = useState(false);
 
+  const [showModal, setShowModal] = useState(false);
+  const [enrolledUser, setEnrolledUser] = useState(false);
+
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const userId = useSelector((state) => state.user?.id);
   const courseDetail   = useSelector((state) => state.courseDetail);
   const courseSections = useSelector((state) => state.courseSections);
   const instructor = useSelector((state) => state.courseInstructor);
-  const courses = useSelector((state) => state.courses);
+  const courseUsers = useSelector((state) => state.courseUsers);
   const user = useSelector((state) => state.user)
 
-  const userIsEnrolled = userId && courses.some((course) => course.id === courseId && course.userId === userId.id);
+  useEffect(() => {
+    userId && dispatch(getCoursesOfUser(userId))
+  }, [dispatch, userId])
 
   useEffect(() => {
-    dispatch(actions.getCourseDetail(courseId));
-    typeof courseDetail.InstructorId !== "undefined" && dispatch(actions.getInstructorById(courseDetail.InstructorId));
-    dispatch(actions.getSectionsByCourseId(courseId));
-    userId && dispatch(actions.getCoursesOfUser(userId))
-  }, [courseId, dispatch, courseDetail.InstructorId, userId])
-
-  useEffect(() => {
-    if (courses.some((course) => course.id === courseId && course.userId === userId)) {
-      setIsEnrolled(true);
-    }
-  }, [courses, courseId, userId]);
-
- 
+    userId && setEnrolledUser(courseUsers.find((user) => user.id === userId));
+  }, [userId, courseUsers]);
 
   async function handleInscriptionClick() {
     if (isLoggedIn) {
@@ -76,16 +59,12 @@ export default function GeneralVision({ accessToken }) {
     }
   }
   
-  
-  
-
-
   return (
     <>
       <div className={styles["course-detail-info-container"]}>
         <div className={styles["course-detail-info"]}>
           <div>
-            {isLoggedIn ? !userIsEnrolled && (
+            {isLoggedIn ? !enrolledUser && (
               <h1 className={styles["ver-clases"]} onClick={handleInscriptionClick}> Inscribete ahora a este curso </h1>
             ) : (
               <h1 className={styles["ver-clases"]} onClick={handleInscriptionClick}>Inicia sesion para inscribirte a este curso</h1>
