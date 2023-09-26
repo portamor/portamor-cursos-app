@@ -9,7 +9,6 @@
 }
 
 .register-container {
-  margin-bottom: 10%;
   animation-name: opacityin;
   animation-duration: 1s;
   width: 300px;
@@ -66,7 +65,7 @@
   border-radius: 8px;
   height: 25px;
   width: 160px;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 
@@ -88,6 +87,14 @@
 .buttonClass {
   color: #eb575a;
   background-color: #eb575a;
+}
+
+.error-message {
+  color: #EB575A;
+  text-align: center;
+  font-style: italic;
+  font-weight: 100;
+  font-size: 0.75rem;
 }
 
 @media(max-width: 670px) {
