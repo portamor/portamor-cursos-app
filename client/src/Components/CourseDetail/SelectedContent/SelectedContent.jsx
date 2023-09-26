@@ -1,24 +1,20 @@
-import * as actions     from "../../../Redux/actions";
-import * as constants   from "../../../constants/classDetailConstants";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import GeneralVision from "../GeneralVision/GeneralVision";
 import CourseDetailCard from "../CourseDetailCard/CourseDetailCard";
-import FYQ              from "../FYQAccordion/FYQAccordion.jsx"; 
-import GeneralVision    from "../GeneralVision/GeneralVision";
-import React            from "react";
-import { useEffect }    from "react";
-import ReviewCard       from "../../ReviewCard/ReviewCard";
-import styles           from "./SelectedContent.module.css";
-import { useDispatch }  from "react-redux";
-import { useSelector }  from "react-redux";
+import ReviewCard from "../../ReviewCard/ReviewCard";
+import FYQ from "../FYQAccordion/FYQAccordion"; 
+import { getReviewsByCourseId } from "../../../Redux/actions";
+import * as constants from "../../../constants/classDetailConstants";
+import styles from "./SelectedContent.module.css";
 
 const SelectedContent = ({ courseDetail, courseId, selectedButtonContent }) => {
-  const dispatch = useDispatch();
-  
-  const courseUsers    = useSelector((state) => state.courseUsers);
+  const dispatch = useDispatch();  
   const courseReviews  = useSelector((state) => state.courseReviews);
 
   useEffect(() => {
-    dispatch(actions.getReviewsByCourseId(courseId));
-  }, [courseId, dispatch])
+    dispatch(getReviewsByCourseId(courseId));
+  }, [dispatch, courseId])
 
   switch (selectedButtonContent) {
     case constants.VISION_GENERAL:
