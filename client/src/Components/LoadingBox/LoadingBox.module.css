@@ -4,6 +4,7 @@
   border: 10px dotted #fbb3b4;
   border-top: 10px dotted #EB575A;
   border-radius: 50%;
+  margin: 50px auto;
   animation: spinner 1.5s linear infinite;
 }
 
