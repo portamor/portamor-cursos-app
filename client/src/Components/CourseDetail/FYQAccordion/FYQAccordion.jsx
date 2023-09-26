@@ -11,7 +11,7 @@ const FYQ = () => {
     <div>
       <Accordion className={styles["course-accordion"]} >
         <AccordionSummary 
-        style={{ "background-color": '#ffffff' }} 
+        style={{ "backgroundColor": '#ffffff' }} 
         expandIcon={<ExpandMoreIcon />}  >
           
           <div className={styles["course-accordion-summary-content"]}>
@@ -25,7 +25,7 @@ const FYQ = () => {
       
       <Accordion className={styles["course-accordion"]} >
         <AccordionSummary 
-        style={{ "background-color": '#ffffff' }} 
+        style={{ "backgroundColor": '#ffffff' }} 
         expandIcon={<ExpandMoreIcon />} 
         className={styles["course-accordion-summary"]} >
           
@@ -39,7 +39,7 @@ const FYQ = () => {
       
       <Accordion className={styles["course-accordion"]} >
         <AccordionSummary 
-        style={{ "background-color": '#ffffff' }} 
+        style={{ "backgroundColor": '#ffffff' }} 
         expandIcon={<ExpandMoreIcon />} 
         className={styles["course-accordion-summary"]} >
           
