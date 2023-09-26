@@ -140,8 +140,8 @@ const RegisterUser = ({ onSuccess }) => {
           value={birthday}
           onChange={(event) => setBirthday(event.target.value)}
         />
-        {formErrors.brithday && (
-          <p className={Styles["error-message"]}>{formErrors.brithday}</p>
+        {formErrors.birthday && (
+          <p className={Styles["error-message"]}>{formErrors.birthday}</p>
         )}
 
       </div>
