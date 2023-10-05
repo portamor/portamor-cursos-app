@@ -1,12 +1,10 @@
+import React, { useState }           from "react";
+import { useDispatch, useSelector } from "react-redux";
+import CustomButton    from "../../CustomButton/CustomButton";
 import * as actions    from "../../../Redux/actions"
 import * as constants  from "../../../constants";
-import CustomButton    from "../../CustomButton/CustomButton";
-import React           from "react";
-import { useState }    from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import styles          from './CreateVideo.module.css'
 import * as utils      from "../../../utils"
+import styles          from './CreateVideo.module.css'
 
 const CreateVideo = ({ setActualForm }) => {
   const dispatch          = useDispatch();
@@ -14,26 +12,28 @@ const CreateVideo = ({ setActualForm }) => {
 
   const [errors, setErrors] = useState({});
   const [formValues, setFormValues] = useState({
+    isVideo: true,
     videoTitle: "",
     videoLink: "",
     videoDescription: "",
   });
 
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    const formErrors = utils.validate(formValues, constants.VIDEO);
-
+    let { name, value } = event.target;
+    if (name === 'isVideo') value = value === 'video' ? true : false;
+    const formErrors = utils.validate({ ...formValues, [name]: value }, constants.VIDEO);
+    
     setFormValues({
       ...formValues,
       [name]: value,
     });
-
+    
     if (Object.keys(formErrors).length !== 0) {
       setErrors(formErrors);
       return;
     } 
     
-    setErrors({})
+    setErrors({});
   };
 
   const handleSubmit = (event) => {
@@ -50,6 +50,7 @@ const CreateVideo = ({ setActualForm }) => {
     dispatch(actions.createVideo(formValues, sectionId))
 
     setFormValues({
+      isVideo: true,
       videoTitle: "",
       videoLink: "",
       videoDescription: "",
@@ -63,7 +64,20 @@ const CreateVideo = ({ setActualForm }) => {
     onSubmit={handleSubmit} 
     className={styles["create-video-main"]} >
       <div className={styles["create-video-input-container"]}>
-        <label htmlFor="videoTitle">Titulo del video:</label>
+        <label htmlFor="isVideo">Tipo de recurso:</label>
+        <select
+          id="isVideo"
+          name="isVideo"
+          value={formValues.isVideo ? 'video' : 'otros'}
+          className={styles["video-input"]}
+          onChange={handleChange}
+        >
+          <option value="video">Video</option>
+          <option value="otros">Otros</option>
+        </select>
+      </div>
+      <div className={styles["create-video-input-container"]}>
+        <label htmlFor="videoTitle">Titulo del recurso:</label>
         <input
           maxLength={50}
           id="videoTitle"
@@ -71,7 +85,7 @@ const CreateVideo = ({ setActualForm }) => {
           value={formValues.videoTitle}
           onChange={handleChange}
           className={styles["video-input"]}
-        ></input>
+        />
         {errors.videoTitle && <p>{errors.videoTitle}</p>}
       </div>
 
@@ -83,7 +97,7 @@ const CreateVideo = ({ setActualForm }) => {
           value={formValues.videoLink}
           onChange={handleChange}
           className={styles["video-input"]}
-        ></input>
+        />
         {errors.videoLink && <p>{errors.videoLink}</p>}
       </div>
 
@@ -91,7 +105,7 @@ const CreateVideo = ({ setActualForm }) => {
         <CustomButton
         disabled={errors.videoTitle || errors.videoLink || errors.videoDescription ? true : false}
         type={"submit"}
-        content={"AÑADIR VIDEO"}
+        content={"AÑADIR RECURSO"}
         primary={true} />
 
         <CustomButton 
