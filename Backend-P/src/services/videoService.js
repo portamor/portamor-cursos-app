@@ -3,11 +3,13 @@ const sectionService = require('../services/sectionService.js')
 const {Op} = require('sequelize')
 
 const createVideo = async ( sectionId,{
+  isVideo,
   videoLink,
   videoTitle,
   videoDescription,
 }) => {
   const newVideo = await Videos.create({
+    isVideo,
     videoTitle,
     videoLink,
     videoDescription,
