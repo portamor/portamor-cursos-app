@@ -32,7 +32,7 @@ const getVideoById = async(req,res) => {
 
 const postVideos = async (req, res) => {
   try {
-    const { videoTitle, videoLink, videoDescription } = req.body;
+    const { isVideo, videoTitle, videoLink, videoDescription } = req.body;
     const { sectionId } = req.params;
     const videoByTitle = await videoService.getVideoByTitle(videoTitle);
     if (videoByTitle.length) {
@@ -47,9 +47,10 @@ const postVideos = async (req, res) => {
     }
 
     const createVideo = await videoService.createVideo( sectionId, {
+      isVideo,
       videoTitle,
       videoLink,
-      videoDescription,
+      videoDescription
     });
     res
       .status(200)

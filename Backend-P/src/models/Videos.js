@@ -9,6 +9,10 @@ module.exports = sequelize => {
             primaryKey: true,
             allowNull: false
       },
+      isVideo: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+      },
       videoTitle: {
         type: DataTypes.STRING,
         allowNull: false
