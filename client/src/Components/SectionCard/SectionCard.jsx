@@ -16,7 +16,7 @@ const SectionCard = ({ id, name, onClick }) => {
       <h2>{ name }</h2>
       <CustomButton 
       onClick={onClick} 
-      content={"Agregar video"} 
+      content={"Agregar Recurso"} 
       primary={true} />
       <Trash color="red" size={"25px"} style={{ cursor: "pointer" }} onClick={() => handleClickTrash(id)}/>
     </div>
