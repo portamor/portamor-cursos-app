@@ -13,3 +13,5 @@
 
 # misc
 .env
+
+postgres_data
