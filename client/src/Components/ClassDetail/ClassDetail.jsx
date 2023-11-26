@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useMatch } from "react-router-dom";
 import ReactPlayer from 'react-player';
+import { BsFullscreen, BsFullscreenExit } from 'react-icons/bs';
 import CustomButton from "../CustomButton/CustomButton";
 import SelectedData from "../SelectedData/SelectedData";
 import * as actions from "../../Redux/actions";
@@ -9,6 +10,7 @@ import * as constants from "../../constants/classDetailConstants";
 import styles from "./ClassDetail.module.css";
 
 const ClassDetail = (props) => {
+  const [fullScreenResource, setFullScreenResource] = useState(false);
   const dispatch    = useDispatch();
   const match       = useMatch('/clase/:courseId/:videoId');
   const courseId    = match.params.courseId;
@@ -57,10 +59,14 @@ const ClassDetail = (props) => {
     }
   };
 
+  const handleFullScreen = () => {
+    setFullScreenResource(!fullScreenResource);
+  };
+
   return (
     <div className={styles["class-detail-main"]}>
       <div className={styles["class-container"]}>
-        <div className={styles["resource-viewer-container"]}>
+        <div className={`${styles["resource-viewer-container"]} ${ fullScreenResource ? styles["resource-viewer-container-fullscreen"] : '' }`}>
           <div className={styles["react-player"]}>
             {
               videoDetail.isVideo ?
@@ -93,14 +99,13 @@ const ClassDetail = (props) => {
           </div>
           {
             !videoDetail.isVideo && (
-              <div className={styles["buttons-container"]}>
-                <CustomButton
-                  primary={true}  
-                  content={'COMPLETADO'}
-                  type={'button'}
-                  onClick={handleEnd}
-                  disabled={false}
-                />
+              <div className={styles["resource-tools"]}>
+                <button type="button" className={styles["text-btn"]} onClick={handleEnd}>COMPLETAR RECURSO</button>
+                <div className={`${styles["fullscreen-btn"]} ${fullScreenResource ? styles["fullscreen-btn_active"] : ''}`}>
+                  {
+                    fullScreenResource ? <BsFullscreenExit onClick={handleFullScreen} /> : <BsFullscreen onClick={handleFullScreen} />
+                  }
+                </div>
               </div>
             )
           }
