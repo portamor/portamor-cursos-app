@@ -59,9 +59,9 @@ export const deleteUser = (userId) => async (dispatch) => {
   }
 };
 
-export const inscribeUser = (userId, courseId, accessToken, user, courseDetail) => async () => {
+export const inscribeUser = (userId, courseId, accessToken, user, courseDetail, payload) => async () => {
   try {
-    const response = await axios.post(`/users/inscription/${userId}/${courseId}`, {}, {
+    const response = await axios.post(`/users/inscription/${userId}/${courseId}`, payload, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
