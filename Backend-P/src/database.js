@@ -43,7 +43,8 @@ const {
     Review,
     Videos,
     Sections,
-    VideoState
+    VideoState,
+    CourseInscription
 } = sequelize.models;
 
 // ---- Users - Review
@@ -52,11 +53,11 @@ Review.belongsTo(Users);
 
 // ---- Inscriptions Relations
 Users.belongsToMany(Courses, {
-  through: 'course_Inscription',
+  through: 'CourseInscription',
 })
 
 Courses.belongsToMany(Users, {
-  through: 'course_Inscription',
+  through: 'CourseInscription',
 })
 
 // ---- Courses Relations

@@ -40,10 +40,13 @@ const userByTelephone = async (telephone, admin) => {
   return userfound;
 };
 
-const userInscription = async (userId, courseId) => {
-  const inscrited = await course_Inscription.create({
+const userInscription = async (userId, courseId, isPaymentCourse, telephone, holderPaymentMethod) => {
+  const inscrited = await CourseInscription.create({
     UserId: userId,
     CourseId: courseId,
+    enrolmentStatus: isPaymentCourse ? 'pendiente' : 'matriculado',
+    telephone: telephone,
+    holderPaymentMethod: holderPaymentMethod,
   });
   return inscrited;
 };

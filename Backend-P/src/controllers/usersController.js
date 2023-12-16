@@ -125,6 +125,7 @@ const postUser = async (req, res) => {
 
 const postInscription = async (req, res) => {
   const { userId, courseId } = req.params;
+  const { telephone, holderPaymentMethod } = req.body;
   try {
     const userFound = await userService.userById(userId);
     if (userFound.length) {
@@ -134,7 +135,7 @@ const postInscription = async (req, res) => {
     if (courseFound.length) {
       throw new Error(`No existe curso con el id ${courseId}`);
     }
-    const inscription = await userService.userInscription(userId, courseId);
+    const inscription = await userService.userInscription(userId, courseId, courseFound.isPaymentCourse, telephone, holderPaymentMethod);
     
     res.status(200).json({
       message: `El usuarion con id ${userId} se ha inscrito correctamente al curso con el id ${courseId}`,
