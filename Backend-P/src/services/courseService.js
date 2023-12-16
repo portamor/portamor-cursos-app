@@ -11,6 +11,7 @@ const createCourse = async (data) => {
     genre:       data.genre,
     rating:      data.rating,
     materials:   data.materials,
+    isPaymentCourse:  data.isPaymentCourse,
   });
 
   return createdCourse;

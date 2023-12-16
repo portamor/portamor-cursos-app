@@ -1,11 +1,10 @@
-import CustomButton from "../../CustomButton/CustomButton";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
-import React from "react";
-import styles from "./formCourse.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import CustomButton from "../../CustomButton/CustomButton";
 import * as actions    from "../../../Redux/actions";
+import styles from "./formCourse.module.css";
 
 
 const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
@@ -41,6 +40,7 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
 
   const onSubmit = (data) => {
     data.image = formValues.image;
+    data.isPaymentCourse = formValues.isPaymentCourse;
     if (id !== null) {
       dispatch(actions.editCourse(id, data));
       reset()
@@ -54,6 +54,7 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
   const agregarMaterial = () => {
     setMaterialesCount(materialesCount + 1);
   };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <div className={styles.input_container}>
@@ -167,7 +168,7 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
           }
         />
       </div>
-  
+
       <div className={styles.input_container}>
         <label className={styles.label} htmlFor="rating">
           Calificación:
@@ -219,6 +220,21 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
         />
       </div>
 
+      <div className={styles.input_container}>
+        <label className={styles.label} htmlFor="isPaymentCourse">
+          ¿Es curso de pago?:
+        </label>
+        <input
+            type="checkbox"
+            id="isPaymentCourse"
+            defaultValue={courseSet?.isPaymentCourse}
+            onChange={(e) => setFormValues({
+              ...formValues,
+              isPaymentCourse: e.target.checked,
+            })}
+        />
+      </div>
+
       <CustomButton
         disabled={false}
         type={"submit"}
@@ -230,173 +246,3 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
 };
 
 export default FormCourse;
-  
-
-
-
-
-// import { createCourse } from "../../../Redux/actions";
-// import CustomButton from "../../CustomButton/CustomButton";
-// import { useDispatch } from "react-redux";
-// import { useForm } from "react-hook-form";
-// import { useState } from "react";
-// import React from "react";
-// import styles from "./formCourse.module.css";
-
-// const FormCourse = ({ setActualForm }) => {
-//   const dispatch = useDispatch();
-//   const { register, handleSubmit, reset } = useForm();
-//   const [materialesCount, setMaterialesCount] = useState(1);
-//   const [formValues, setFormValues] = useState({
-//     image: "",
-//   });
-
-//   const handleUploadFile = async (e) => {
-//     const file = e.target.files[0];
-//     const reader = new FileReader();
-
-//     reader.onload = () => {
-//       setFormValues({
-//         ...formValues,
-//         image: reader.result,
-//       });
-//     };
-//     reader.readAsDataURL(file);
-//   };
-
-//   const onSubmit = (data) => {
-//     data.image = formValues.image;
-
-//     dispatch(createCourse(data, setActualForm));
-
-//     reset();
-//   };
-
-//   const agregarMaterial = () => {
-//     setMaterialesCount(materialesCount + 1);
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-//       <div className={styles.input_container}>
-//         <label className={styles.label} htmlFor="title">
-//           Título:
-//         </label>
-//         <input
-//           type="text"
-//           id="title"
-//           {...register("title", { required: "Este campo es requerido" })}
-//           className={styles.input}
-//         />
-//       </div>
-
-//       <div className={styles.input_container}>
-//         <label className={styles.label} htmlFor="description">
-//           Descripción:
-//         </label>
-//         <textarea
-//           id="description"
-//           {...register("description", { required: "Este campo es requerido" })}
-//           className={styles.input}
-//         />
-//       </div>
-
-//       <div className={styles.input_container}>
-//         <label className={styles.label} htmlFor="image">
-//           Imagen:
-//         </label>
-//         <input
-//           type="file"
-//           id="image"
-//           {...register("image", { required: "Este campo es requerido" })}
-//           className={styles.input}
-//           accept=".jpg,.png,.jpeg"
-//           onChange={handleUploadFile}
-//         />
-//       </div>
-
-//       <div className={styles.input_container}>
-//         <label className={styles.label} htmlFor="genre">
-//           Género:
-//         </label>
-//         <select id="genre" {...register("genre", { required: "Este campo es requerido" })} className={styles.input}>
-//           <option value="">Seleccione un género</option>
-//           <option value="Actividad Física">Actividad Física</option>
-//           <option value="Participación Social">Participación Social</option>
-//           <option value="Bienestar Mental">Bienestar Mental</option>
-//           <option value="Alimentación Saludable">Alimentación Saludable</option>
-//         </select>
-//       </div>
-
-//       <div className={styles.input_container}>
-//         <label className={styles.label} htmlFor="type">
-//           Duración:
-//         </label>
-//         <input
-//           type="text"
-//           id="duration"
-//           {...register("duration", { required: "Este campo es requerido" })}
-//           className={styles.input}
-//         />
-//       </div>
-
-//       <div className={styles.input_container}>
-//         <label className={styles.label} htmlFor="type">
-//           Nivel:
-//         </label>
-//         <input
-//           type="text"
-//           id="level"
-//           {...register("level", { required: "Este campo es requerido" })}
-//           className={styles.input}
-//         />
-//       </div>
-
-//       <div className={styles.input_container}>
-//         <label className={styles.label} htmlFor="rating">
-//           Calificación:
-//         </label>
-//         <input
-//           type="number"
-//           id="rating"
-//           min={1}
-//           max={5}
-//           {...register("rating", { min: 0, max: 5 })}
-//           className={styles.input}
-//           step="1"
-//         />
-//         <span>* El valor de la calificacion debe estar entre 1 y 5</span>
-//       </div>
-
-//       <div className={styles.materials_container}>
-//         <label className={styles.label} htmlFor="materials">
-//           Materiales:
-//         </label>
-//         {[...Array(materialesCount)].map((_, index) => (
-//           <input
-//             key={index}
-//             type="text"
-//             {...register(`materials[${index}]`, {
-//               required: "Este campo es requerido",
-//             })}
-//             className={styles.input}
-//           />
-//         ))}
-//         <CustomButton
-//           type="button"
-//           onClick={agregarMaterial}
-//           content={"Agregar material"}
-//         />
-//       </div>
-
-//       <CustomButton
-//         disabled={false}
-//         type={"submit"}
-//         primary={true}
-//         content={"Crear curso"}
-//       />
-//     </form>
-//   );
-// };
-
-// export default FormCourse;

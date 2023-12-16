@@ -1,14 +1,13 @@
+import React           from "react";
 import * as actions    from "../../Redux/actions";
 import { Link }        from "react-router-dom";
-import { Pen }         from "react-bootstrap-icons"
-import React           from "react";
-import Styles          from "./CourseCard.module.css";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { Pen, Trash }         from "react-bootstrap-icons"
+import PremiumIcon from '../PremiumIcon/PremiumIcon';
+import { useDispatch, useSelector } from "react-redux";
 import Swal            from "sweetalert2";
-import { Trash }       from "react-bootstrap-icons"
+import Styles          from "./CourseCard.module.css";
 
-const CourseCard = ({ id, title, image, duration, level }) => {
+const CourseCard = ({ id, title, image, duration, level, isPaymentCourse }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const isAdmin = user?.admin;
@@ -59,6 +58,12 @@ const CourseCard = ({ id, title, image, duration, level }) => {
         <Link to={`/detalle-curso/${id}`} className={Styles["card-button"]}>
           Ver Más
         </Link>
+        {
+          isPaymentCourse &&
+          <div className={Styles["premium-icon-container"]}>
+            <PremiumIcon />
+          </div>
+        }
       </div>
     </div>
   );
