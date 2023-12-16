@@ -35,7 +35,7 @@ export const CourseDetail = () => {
   }, [dispatch, courseId, courseDetail.InstructorId]);
 
   useEffect(() => {
-    userId && setEnrolledUser(courseUsers.find((user) => user.id === userId));
+    userId && setEnrolledUser(courseUsers.find((user) => user.id === userId && user.CourseInscription.enrolmentStatus === 'matriculado'));
   }, [userId, courseUsers]);
 
   const handleSelectContent = (selectedButtonContent) => setSelectedButton(selectedButtonContent);

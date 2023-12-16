@@ -1,0 +1,60 @@
+.course_payment_box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.form_paymentMethod {
+  display: flex;
+  align-items: center;
+  border: 1px solid red;
+}
+
+.form_paymentMethod > div {
+  padding: 10px;
+  border: 1px solid green;
+}
+
+.form_qr img {
+  width: 190px;
+  height: auto;
+}
+
+.form_information .form {
+  width: 300px;
+  height: 100%;
+  border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input_container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.input {
+  width: 100%;
+  padding: 15px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  resize: none;
+  appearance: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  box-shadow: 0px 6px 10px 0.3px #cfcfcf;
+  box-sizing: border-box;
+}
+
+.input_container {
+  padding: 10px;
+}

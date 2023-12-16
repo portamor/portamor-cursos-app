@@ -37,6 +37,20 @@
   font-family: "Montserrat", sans-serif;
 }
 
+.ver-clases-message {
+  background-color: #fff;
+  border: 1px solid #EB575A;
+  border-radius: 3px;
+  color: #EB575A;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  height: fit-content;
+  width: fit-content;
+  padding: 13px 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
 @media (max-width: 900px) {
   .course-detail-h1-container {
     min-width: 0;

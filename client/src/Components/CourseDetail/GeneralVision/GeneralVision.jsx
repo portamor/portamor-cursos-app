@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useMatch } from "react-router-dom";
 import Modal from "../../Modal/Modal";
 import CourseDetailCard from "../CourseDetailCard/CourseDetailCard";
+import CoursePayment from '../CoursePayment/CoursePayment';
 import certificateImg from "../../../images/certificate.png"
 import Swal from 'sweetalert2';
 import { inscribeUser, getCoursesOfUser } from "../../../Redux/actions";
@@ -17,6 +18,7 @@ export default function GeneralVision({ accessToken }) {
 
   const [showModal, setShowModal] = useState(false);
   const [enrolledUser, setEnrolledUser] = useState(false);
+  const [pendingEnrolledUser, setPendingEnrolledUser] = useState(false);
 
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   const userId = useSelector((state) => state.user?.id);
@@ -31,18 +33,21 @@ export default function GeneralVision({ accessToken }) {
   }, [dispatch, userId])
 
   useEffect(() => {
-    userId && setEnrolledUser(courseUsers.find((user) => user.id === userId));
+    userId && setEnrolledUser(courseUsers.find((user) => user.id === userId && user.CourseInscription.enrolmentStatus === 'matriculado'));
+    userId && setPendingEnrolledUser(courseUsers.find((user) => user.id === userId && user.CourseInscription.enrolmentStatus === 'pendiente'));
   }, [userId, courseUsers]);
 
-  async function handleInscriptionClick() {
+  async function handleInscriptionClick(data = null) {
+    let paymentData = data === null ? { telephone: null, handleInscriptionClick: null } : data;
+
     if (isLoggedIn) {
       try {
-        const response = await dispatch(inscribeUser(userId, courseId, accessToken, user, courseDetail));
+        const response = await dispatch(inscribeUser(userId, courseId, accessToken, user, courseDetail, paymentData));
         Swal.fire({
           title: 'Inscripción exitosa',
           text: response.message,
           icon: 'success',
-          timer: 1800
+          timer: 5000
         });
         setTimeout(() => {
           window.location.reload();
@@ -65,19 +70,24 @@ export default function GeneralVision({ accessToken }) {
         <div className={styles["course-detail-info"]}>
           <div>
             {isLoggedIn ? !enrolledUser && (
-              <h1 className={styles["ver-clases"]} onClick={handleInscriptionClick}> Inscribete ahora a este curso </h1>
+              courseDetail.isPaymentCourse ? (
+                !pendingEnrolledUser ?
+                  <CoursePayment handleInscriptionClick={handleInscriptionClick} />
+                :
+                  <h1 className={styles["ver-clases-message"]}>Su matrícula esta en proceso de activación. Recibirá una notificación al culminar la misma dentro de las próximas 24 horas.</h1>
+              ) : (
+                <h1 className={styles["ver-clases"]} onClick={() => handleInscriptionClick()}> Inscribete ahora a este curso </h1>
+              )
             ) : (
-              <h1 className={styles["ver-clases"]} onClick={handleInscriptionClick}>Inicia sesion para inscribirte a este curso</h1>
+              <h1 className={styles["ver-clases"]} onClick={() => handleInscriptionClick()}>Inicia sesion para inscribirte a este curso</h1>
             )}
             {showModal && (
               <Modal onClose={() => setShowModal(false)}>
                 <Modal />
               </Modal>
             )}
-
           </div>
         </div>
-
 
         <div className={styles["course-detail-info"]}>
           <div className={styles["course-detail-h1-container"]}>
