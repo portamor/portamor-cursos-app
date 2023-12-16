@@ -80,7 +80,7 @@ const getCoursesOfUser = async (req, res) => {
 }
 
 const postUser = async (req, res) => {
-  const { name, lastName, birthday, admin } = req.body;
+  const { name, lastName, birthday, admin, telephone } = req.body;
   try {
     let code = name.slice(0, 3) + lastName.slice(0, 3) + birthday.slice(0, 2);
     code = code.toUpperCase();
@@ -89,20 +89,32 @@ const postUser = async (req, res) => {
       lastName,
       birthday
     );
+
     if (searchUser.length) {
       throw new Error("Ya existe un usuario con esos datos");
     }
+
+    if (admin) {
+      const searchUserTelephone = await userService.userByTelephone(telephone, admin);
+      if (searchUserTelephone.length) {
+        throw new Error("Ya existe un usuario administrador con este mismo teléfono.");
+      }
+    }
+
     const userCode = await userService.userByCode(code);
     if (userCode.length) {
       code = code + "-P";
     }
+
     const createUser = await userService.createUser(
       name,
       lastName,
       code,
       birthday,
-      admin
+      admin,
+      telephone
     );
+
     res
       .status(200)
       .json({ message: `Usuario creado con éxito`, data: createUser });
@@ -123,6 +135,7 @@ const postInscription = async (req, res) => {
       throw new Error(`No existe curso con el id ${courseId}`);
     }
     const inscription = await userService.userInscription(userId, courseId);
+    
     res.status(200).json({
       message: `El usuarion con id ${userId} se ha inscrito correctamente al curso con el id ${courseId}`,
       data: inscription,

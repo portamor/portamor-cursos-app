@@ -30,6 +30,11 @@ module.exports = sequelize => {
             type: DataTypes.BOOLEAN,
             defaultValue: false
         },
+        telephone: {
+            type: DataTypes.STRING,
+            defaultValue: '',
+            unique: true,
+        }
         },
         { timestamps: false,
             paranoid: true, }

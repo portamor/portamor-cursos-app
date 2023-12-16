@@ -1,17 +1,18 @@
-const { Users, Courses, course_Inscription } = require("../database.js");
+const { Users, Courses, CourseInscription } = require("../database.js");
 
-const createUser = async (name, lastName, code, birthday, admin) => {
-  const searchUser = await userByNameLastNameBirthday(name, lastName, birthday)
+const createUser = async (name, lastName, code, birthday, admin, telephone) => {
   const verificate = await userByCode(code);
   if (verificate.length) {
     code = code + "-P";
   }
+
   const newUser = await Users.create({
     name,
     lastName,
     birthday,
     code,
     admin,
+    telephone,
   });
   return newUser;
 };
@@ -24,6 +25,18 @@ const userByNameLastNameBirthday = async (name, lastName, birthday) => {
       birthday: birthday,
     },
   });
+  return userfound;
+};
+
+const userByTelephone = async (telephone, admin) => {
+  const userfound = await Users.findAll(
+    {
+      where: {
+        admin: admin,
+        telephone: telephone
+      }
+    }
+  );
   return userfound;
 };
 
@@ -97,5 +110,6 @@ module.exports = {
   userInscription,
   deleteUser,
   restoreUser,
-  userByNameLastNameBirthday
+  userByNameLastNameBirthday,
+  userByTelephone
 };

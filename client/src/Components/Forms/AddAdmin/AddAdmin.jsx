@@ -11,6 +11,7 @@ const AddAdmin = ({ onSuccess }) => {
     const [lastName, setLastName] = useState('');
     const [birthday, setBirthday] = useState('');
     const [isAdmin, setIsAdmin] = useState(false);
+    const [telephone, setTelephone] = useState('');
     const [formErrors, setFormErrors] = useState({});
 
     const validateForm = () => {
@@ -47,6 +48,19 @@ const AddAdmin = ({ onSuccess }) => {
             isValid = false;
         }
 
+        if (isAdmin) {
+            if (!telephone) {
+                errors.telephone = 'Debe ingresar un número de teléfono celular';
+                isValid = false;
+            } else if (telephone.length < 9) {
+                errors.telephone = "El numero de teléfono debe tener almenos 9 dígitos";
+                isValid = false;
+            } else if (!/^[0-9]+$/.test(telephone)) {
+                errors.telephone = "El número de teléfono debe contener sólo números";
+                isValid = false;
+            }
+        }
+
         setFormErrors(errors);
         return isValid;
     };
@@ -72,7 +86,7 @@ const AddAdmin = ({ onSuccess }) => {
             )}`.toUpperCase();
             try {
                 const response = await dispatch(
-                    postUser({ name, lastName, birthday, code, admin: isAdminBoolean })
+                    postUser({ name, lastName, birthday, code, admin: isAdminBoolean, telephone })
                 );
                 
                 const userCode = response.data.data.code;
@@ -158,6 +172,22 @@ const AddAdmin = ({ onSuccess }) => {
                 />
 
             </div>
+            {
+                isAdmin && (
+                    <div className={Styles["lastname-input-container"]}>
+                        <label>Teléfono:</label>
+                        <input
+                            type="text"
+                            id="telephone"
+                            value={telephone}
+                            onChange={(event) => setTelephone(event.target.value)}
+                        />
+                        {formErrors.telephone && (
+                            <p className={Styles["error-message"]}>{formErrors.telephone}</p>
+                        )}
+                    </div>
+                )
+            }
 
 
             <CustomButton
