@@ -42,6 +42,10 @@ module.exports = sequelize => {
         type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: true,
       },
+      isPaymentCourse: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     { timestamps: true, paranoid: true }
   );
