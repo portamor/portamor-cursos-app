@@ -49,3 +49,21 @@
   display: flex;
   justify-content: space-between;
 }
+
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.whatsapp svg {
+  width: 40px;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,.4));
+}
+
+.whatsapp circle {
+  fill: #25d366;
+}
+.whatsapp path {
+  fill: #25d366;
+}
