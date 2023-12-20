@@ -51,7 +51,7 @@ export default function GeneralVision({ accessToken }) {
         });
         setTimeout(() => {
           window.location.reload();
-        }, 3000);
+        }, 5000);
       } catch (error) {
         Swal.fire({
           title: 'Error en la inscripción',
