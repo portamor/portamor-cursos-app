@@ -71,7 +71,7 @@ export const inscribeUser = (userId, courseId, accessToken, user, courseDetail, 
     if (response.status === 200) {
       return {
         success: true,
-        message: `${user.name} se ha inscripto al curso ${courseDetail.title}`,
+        message: response.data.message,
       };
     } else {
       throw new Error('Hubo un error al inscribir al usuario al curso');
