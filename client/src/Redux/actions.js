@@ -61,7 +61,7 @@ export const deleteUser = (userId) => async (dispatch) => {
 
 export const inscribeUser = (userId, courseId, accessToken, user, courseDetail, payload) => async () => {
   try {
-    const response = await axios.post(`/users/inscription/${userId}/${courseId}`, payload, {
+    const response = await axios.post(`/inscriptions/${userId}/${courseId}`, payload, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessToken}`,
@@ -80,7 +80,6 @@ export const inscribeUser = (userId, courseId, accessToken, user, courseDetail, 
     throw new Error('Hubo un error al inscribir al usuario al curso');
   }
 };
-
 
 export function getCourseDetail(courseId) {
   return async function (dispatch) {

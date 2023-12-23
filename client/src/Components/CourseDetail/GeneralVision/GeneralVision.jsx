@@ -47,11 +47,11 @@ export default function GeneralVision({ accessToken }) {
           title: 'Inscripción exitosa',
           text: response.message,
           icon: 'success',
-          timer: 5000
+          timer: !paymentData.telephone ? 3000 : 5000
         });
         setTimeout(() => {
           window.location.reload();
-        }, 5000);
+        }, !paymentData.telephone ? 3000 : 5000);
       } catch (error) {
         Swal.fire({
           title: 'Error en la inscripción',
@@ -74,7 +74,7 @@ export default function GeneralVision({ accessToken }) {
                 !pendingEnrolledUser ?
                   <CoursePayment handleInscriptionClick={handleInscriptionClick} />
                 :
-                  <h1 className={styles["ver-clases-message"]}>Su matrícula esta en proceso de activación. Recibirá una notificación al culminar la misma dentro de las próximas 24 horas.</h1>
+                  <h1 className={styles["ver-clases-message"]}>Su matrícula esta en proceso de activación. Se activará dentro de los próximos minutos. Refrescar la página web para visualizar la opcion IR A CLASES en el menu superior a este mensaje.</h1>
               ) : (
                 <h1 className={styles["ver-clases"]} onClick={() => handleInscriptionClick()}> Inscribete ahora a este curso </h1>
               )
