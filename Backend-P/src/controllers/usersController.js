@@ -1,7 +1,7 @@
-const courseService     = require("../services/courseService.js");
 const { getCourseById } = require("../services/courseService.js");
 const userService       = require("../services/userService.js");
 
+// USER ROUTES
 const getUsers = async (req, res) => {
   try {
     const { code } = req.query;
@@ -40,12 +40,11 @@ const getUserById = async (req, res) => {
   }
 };
 
-
 const getUsersByCourseId = async (req, res) => {
   try {
     const { courseId } = req.params;
     
-    const foundCourse = await courseService.getCourseById(courseId)
+    const foundCourse = await getCourseById(courseId)
 
     if(!foundCourse) {
       throw new Error(`No se ha encontrado ningun curso con este ID: ${courseId}`)
@@ -80,7 +79,8 @@ const getCoursesOfUser = async (req, res) => {
 }
 
 const postUser = async (req, res) => {
-  const { name, lastName, birthday, admin, telephone } = req.body;
+  const { name, lastName, birthday, admin } = req.body;
+
   try {
     let code = name.slice(0, 3) + lastName.slice(0, 3) + birthday.slice(0, 2);
     code = code.toUpperCase();
@@ -94,13 +94,6 @@ const postUser = async (req, res) => {
       throw new Error("Ya existe un usuario con esos datos");
     }
 
-    if (admin) {
-      const searchUserTelephone = await userService.userByTelephone(telephone, admin);
-      if (searchUserTelephone.length) {
-        throw new Error("Ya existe un usuario administrador con este mismo teléfono.");
-      }
-    }
-
     const userCode = await userService.userByCode(code);
     if (userCode.length) {
       code = code + "-P";
@@ -111,36 +104,12 @@ const postUser = async (req, res) => {
       lastName,
       code,
       birthday,
-      admin,
-      telephone
+      admin
     );
 
     res
       .status(200)
       .json({ message: `Usuario creado con éxito`, data: createUser });
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
-
-const postInscription = async (req, res) => {
-  const { userId, courseId } = req.params;
-  const { telephone, holderPaymentMethod } = req.body;
-  try {
-    const userFound = await userService.userById(userId);
-    if (userFound.length) {
-      throw new Error(`No existe usuario con el id ${userId}`);
-    }
-    const courseFound = await getCourseById(courseId);
-    if (courseFound.length) {
-      throw new Error(`No existe curso con el id ${courseId}`);
-    }
-    const inscription = await userService.userInscription(userId, courseId, courseFound.isPaymentCourse, telephone, holderPaymentMethod);
-    
-    res.status(200).json({
-      message: `El usuarion con id ${userId} se ha inscrito correctamente al curso con el id ${courseId}`,
-      data: inscription,
-    });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -204,8 +173,7 @@ module.exports = {
   getUsersByCourseId,
   getCoursesOfUser,
   userPut,
-  postInscription,
   getUserById,
   deleteAuser,
-  restoreAUser,
+  restoreAUser
 };
