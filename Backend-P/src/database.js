@@ -44,7 +44,8 @@ const {
     Videos,
     Sections,
     VideoState,
-    CourseInscription
+    CourseInscription,
+    PaymentDevice
 } = sequelize.models;
 
 // ---- Users - Review
