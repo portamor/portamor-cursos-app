@@ -1,19 +1,18 @@
-const { Users, Courses, CourseInscription } = require("../database.js");
+const { Users, Courses } = require("../database.js");
 
-const createUser = async (name, lastName, code, birthday, admin, telephone) => {
+const createUser = async (name, lastName, code, birthday, admin) => {
   const verificate = await userByCode(code);
   if (verificate.length) {
     code = code + "-P";
   }
-
   const newUser = await Users.create({
     name,
     lastName,
     birthday,
     code,
-    admin,
-    telephone,
+    admin
   });
+
   return newUser;
 };
 
@@ -26,29 +25,6 @@ const userByNameLastNameBirthday = async (name, lastName, birthday) => {
     },
   });
   return userfound;
-};
-
-const userByTelephone = async (telephone, admin) => {
-  const userfound = await Users.findAll(
-    {
-      where: {
-        admin: admin,
-        telephone: telephone
-      }
-    }
-  );
-  return userfound;
-};
-
-const userInscription = async (userId, courseId, isPaymentCourse, telephone, holderPaymentMethod) => {
-  const inscrited = await CourseInscription.create({
-    UserId: userId,
-    CourseId: courseId,
-    enrolmentStatus: isPaymentCourse ? 'pendiente' : 'matriculado',
-    telephone: telephone,
-    holderPaymentMethod: holderPaymentMethod,
-  });
-  return inscrited;
 };
 
 const getAllUsers = async () => {
@@ -110,9 +86,7 @@ module.exports = {
   getUsersByCourseId,
   getAllUsers,
   updateUser,
-  userInscription,
   deleteUser,
   restoreUser,
   userByNameLastNameBirthday,
-  userByTelephone
 };

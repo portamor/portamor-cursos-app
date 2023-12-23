@@ -8,7 +8,6 @@ userRouter.get('/course/:courseId',   usersController.getUsersByCourseId);
 userRouter.get('/my-courses/:userId', usersController.getCoursesOfUser);
 
 userRouter.post('/', usersController.postUser)
-userRouter.post('/inscription/:userId/:courseId', usersController.postInscription)
 
 userRouter.put('/:userId',         usersController.userPut)
 userRouter.put('/restore/:userId', usersController.restoreAUser)
