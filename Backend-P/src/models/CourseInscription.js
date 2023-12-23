@@ -8,7 +8,7 @@ module.exports = sequelize => {
             allowNull: false
         },
         telephone: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: true
         },
         holderPaymentMethod: {
