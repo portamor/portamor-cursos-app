@@ -12,15 +12,35 @@ const CoursePayment = ({handleInscriptionClick}) => {
     holderPaymentMethod: null
   });
 
-  const onSubmit = (data) => {
-    handleInscriptionClick(data)
-    reset()
-  };
+  const [formErrors, setFormErrors] = useState({});
 
-  const isSubmitDisabled = () => {
-    if (formValues.telephone === '' || formValues.holderPaymentMethod === '') return true;
-    if (formValues.telephone === null || formValues.holderPaymentMethod === null) return true;
-    return false;
+  const validateForm = () => {
+    let errors = {};
+    let isValid = true;
+
+    if (!formValues.telephone || formValues.telephone === '') {
+        errors.telephone = 'Debe ingresar un número de teléfono celular';
+        isValid = false;
+    } else if (formValues.telephone.length < 9) {
+        errors.telephone = "El numero de teléfono debe tener almenos 9 dígitos";
+        isValid = false;
+    } else if (!/^[0-9]+$/.test(formValues.telephone)) {
+        errors.telephone = "El número de teléfono debe contener sólo números";
+        isValid = false;
+    }
+
+    if (!formValues.holderPaymentMethod || formValues.holderPaymentMethod === '') {
+      errors.holderPaymentMethod = 'Debe ingresar un el nombre del titular del número de teléfono celular';
+      isValid = false;
+    }
+
+    setFormErrors(errors);
+    return isValid;
+  }
+
+  const onSubmit = (data) => {
+    validateForm() && handleInscriptionClick(data)
+    reset()
   };
 
   return (
@@ -46,6 +66,9 @@ const CoursePayment = ({handleInscriptionClick}) => {
                   telephone: e.target.value,
                 })}
             />
+            {formErrors.telephone && (
+              <p className={styles["error-message"]}>{formErrors.telephone}</p>
+            )}
           </div>
       
           <div className={styles.input_container}>
@@ -61,10 +84,13 @@ const CoursePayment = ({handleInscriptionClick}) => {
                   holderPaymentMethod: e.target.value,
                 })}
             />
+            {formErrors.holderPaymentMethod && (
+            <p className={styles["error-message"]}>{formErrors.holderPaymentMethod}</p>
+          )}
           </div>
 
           <CustomButton
-            disabled={isSubmitDisabled()}
+            disabled={false}
             type={"submit"}
             primary={true}
             content={"Inscribirme"}

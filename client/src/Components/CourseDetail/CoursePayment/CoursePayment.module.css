@@ -10,12 +10,10 @@
 .form_paymentMethod {
   display: flex;
   align-items: center;
-  border: 1px solid red;
 }
 
 .form_paymentMethod > div {
   padding: 10px;
-  border: 1px solid green;
 }
 
 .form_qr img {
@@ -26,7 +24,6 @@
 .form_information .form {
   width: 300px;
   height: 100%;
-  border: 1px solid blue;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,4 +54,12 @@
 
 .input_container {
   padding: 10px;
+}
+
+.error-message {
+  color: #EB575A;
+  text-align: center;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 0.75rem;
 }

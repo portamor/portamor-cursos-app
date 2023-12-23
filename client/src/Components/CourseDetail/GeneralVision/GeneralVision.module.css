@@ -38,6 +38,8 @@
 }
 
 .ver-clases-message {
+  width: 80%;
+  max-width: 800px;
   background-color: #EB575A;
   border: 1px solid #EB575A;
   border-radius: 3px;
