@@ -13,3 +13,4 @@
 
 # misc
 .env
+.firebase-adminsdk.json
