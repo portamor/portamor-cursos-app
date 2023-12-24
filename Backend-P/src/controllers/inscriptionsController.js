@@ -7,7 +7,7 @@ const inscriptionsService = require("../services/inscriptionsService.js")
 const admin = require("firebase-admin");
 
 const initFirabase = () => {
-  const serviceAccount = require('../keys/portamornotificaciones-firebase-adminsdk-te5ws-85a2a1dede.json');
+  const serviceAccount = require(`../keys/${process.env.FIREBASE_ADMINSDK}`);
 
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
