@@ -16,8 +16,6 @@ const initFirabase = () => {
 
 initFirabase();
 
-const FCM = require("fcm-node");
-
 // INSCRIPTIONS ROUTES
 const postInscription = async (req, res) => {
   const { userId, courseId } = req.params;
