@@ -22,7 +22,7 @@ module.exports = sequelize => {
             unique: true
         },
         },
-        { timestamps: false,
+        { timestamps: true,
             paranoid: true, }
     )
 }
