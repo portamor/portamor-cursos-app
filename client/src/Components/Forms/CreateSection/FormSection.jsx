@@ -7,13 +7,13 @@ import { useSelector } from "react-redux";
 import styles          from './FormSection.module.css'
 import Swal from "sweetalert2";
 
-const FormSectionCreate = () => {
+const FormSectionCreate = ({ id }) => {
   const dispatch      = useDispatch();
   const createdCourse = useSelector(state => state.createdCourse)
   const { handleSubmit, register, reset } = useForm();
 
   const onSubmit = (data) => {
-    dispatch(createSection(data.name, createdCourse.id));
+    dispatch(createSection(data.name, id));
     reset();
   };
 

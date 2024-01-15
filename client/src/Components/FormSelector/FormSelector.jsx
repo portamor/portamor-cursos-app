@@ -4,6 +4,7 @@ import AddAdmin from "../Forms/AddAdmin/AddAdmin";
 import UsersList from "../UsersList/UsersList";
 import styles from "./FormSelector.module.css"
 import CreateCourses from "../CreateCourse/CreateCourse";
+import FormSection from "../Forms/CreateSection/FormSection";
 
 const FormSelector = () => {
   const [selectedForm, setSelectedForm] = useState("createCourse");
@@ -27,11 +28,16 @@ const FormSelector = () => {
         primary={selectedForm === "createCourse"}
         content={"Crear Curso"} 
         onClick={() => handleFormSelection("createCourse")} />
+        <CustomButton 
+        primary={selectedForm === "FormSection"}
+        content={"Crear Seccion"} 
+        onClick={() => handleFormSelection("FormSection")} />
       </div>
 
       {selectedForm === "addAdmin" && <AddAdmin />}
       {selectedForm === "userList" && <UsersList />}
       {selectedForm === "createCourse" && <CreateCourses />}
+      {selectedForm === "FormSection" && <FormSection />}
     </div>
   );
 };
