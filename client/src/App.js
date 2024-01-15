@@ -37,7 +37,6 @@ function App() {
             </>
           ) : (
             <Route path="*" element={<Modal pathValue={window.location.pathname} onClose={() => setShowModal(false)} />} />
-
           )}
            {isAdmin && (
           <Route exact path="/dashboard" element={<Dashboard />} />

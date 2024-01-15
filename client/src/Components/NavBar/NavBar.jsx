@@ -40,10 +40,10 @@ export const NavBar = () => {
   }, [dispatch]);
 
 
-  const handleLogout = (e) => {
-    e.preventDefault()
+  const handleLogout = () => {
     dispatch(logout());
-        window.history.pushState({}, '', '/');
+    window.history.pushState({}, 'home', '/');
+    window.history.go(-1 * (window.history.length - 1));
   };
 
 

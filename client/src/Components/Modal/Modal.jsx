@@ -6,7 +6,7 @@ import styles       from './Modal.module.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function Modal({ onClose }) {
+function Modal({ onClose, pathValue }) {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showContent, setShowContent] = useState(false);
@@ -28,7 +28,7 @@ function Modal({ onClose }) {
   };
 
   const closeModalByX= () => {
-    if (window.location.pathname === '/cursos') window.history.go(-1);
+    if (pathValue === '/') window.history.go(-1);
     onClose();
   };
 
