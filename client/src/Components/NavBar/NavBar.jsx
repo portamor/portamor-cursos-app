@@ -42,8 +42,8 @@ export const NavBar = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    window.history.pushState({}, 'home', '/');
-    window.history.go(-1 * (window.history.length - 1));
+    window.history.pushState(null, null, '/');
+    window.location.reload();
   };
 
 
