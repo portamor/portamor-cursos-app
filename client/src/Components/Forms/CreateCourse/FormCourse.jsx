@@ -18,7 +18,7 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
   const [formValues, setFormValues] = useState({
     image: "",
   });
-  const courseSet = useSelector((state)=> state?.courseDetail)
+  const courseSet = useSelector((state)=> state?.courseDetail);
 
   const handleUploadFile = async (e) => {
     const file = e.target.files[0];
@@ -65,7 +65,7 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
           id="title"
           {...register("title", { required: "Este campo es requerido" })}
           className={styles.input}
-          defaultValue={courseSet?.title || ""}
+          defaultValue={(id != null) ? (courseSet?.title || "") : ""}
           onChange={(e) =>
             setFormValues({
               ...formValues,
@@ -82,7 +82,7 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
           id="description"
           {...register("description", { required: "Este campo es requerido" })}
           className={styles.input}
-          defaultValue={courseSet?.description || ""}
+          defaultValue={(id != null) ? (courseSet?.description || "") : ""}
           onChange={(e) =>
             setFormValues({
               ...formValues,
@@ -114,7 +114,7 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
           id="genre"
           {...register("genre", { required: "Este campo es requerido" })}
           className={styles.input}
-          defaultValue={courseSet?.genre || ""}
+          defaultValue={(id != null) ? (courseSet?.genre || "") : ""}
           onChange={(e) =>
             setFormValues({
               ...formValues,
@@ -139,7 +139,7 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
           id="duration"
           {...register("duration", { required: "Este campo es requerido" })}
           className={styles.input}
-          defaultValue={courseSet?.duration || ""}
+          defaultValue={(id != null) ? (courseSet?.duration || "") : ""}
           onChange={(e) =>
             setFormValues({
               ...formValues,
@@ -158,7 +158,7 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
           id="level"
           {...register("level", { required: "Este campo es requerido" })}
           className={styles.input}
-          defaultValue={courseSet?.level || ""}
+          defaultValue={(id != null) ? (courseSet?.level || "") : ""}
           onChange={(e) =>
             setFormValues({
               ...formValues,
@@ -180,7 +180,7 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
           {...register("rating", { min: 0, max: 5 })}
           className={styles.input}
           step="1"
-          defaultValue={courseSet?.rating || ""}
+          defaultValue={(id != null) ? (courseSet?.rating || "") : ""}
           onChange={(e) =>
             setFormValues({
               ...formValues,
@@ -203,7 +203,7 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
               required: "Este campo es requerido",
             })}
             className={styles.input}
-            defaultValue={courseSet?.materials || ""}
+            defaultValue={(id != null) ? (courseSet?.materials || "") : ""}
             onChange={(e) =>
               setFormValues({
                 ...formValues,
