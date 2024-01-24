@@ -15,7 +15,7 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
   const { register, handleSubmit, reset } = useForm();
   const [materialesCount, setMaterialesCount] = useState(1);
   const [formValues, setFormValues] = useState({
-    image: "",
+    image: ""
   });
   const courseSet = useSelector((state)=> state?.courseDetail)
 
@@ -41,6 +41,8 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
   const onSubmit = (data) => {
     data.image = formValues.image;
     data.isPaymentCourse = formValues.isPaymentCourse;
+    data.duration = '3 Meses';
+    data.level = 'Básico';
     if (id !== null) {
       dispatch(actions.editCourse(id, data));
       reset()
@@ -129,44 +131,6 @@ const FormCourse = ({ setActualForm }) => { // agregamos el prop "editData"
           <option value="Bienestar Mental">Bienestar Mental</option>
           <option value="Alimentación Saludable">Alimentación Saludable</option>
         </select>
-      </div>
-  
-      <div className={styles.input_container}>
-        <label className={styles.label} htmlFor="type">
-          Duración:
-        </label>
-        <input
-          type="text"
-          id="duration"
-          {...register("duration", { required: "Este campo es requerido" })}
-          className={styles.input}
-          defaultValue={courseSet?.duration || ""}
-          onChange={(e) =>
-            setFormValues({
-              ...formValues,
-              duration: e.target.value,
-            })
-          }
-        />
-      </div>
-  
-      <div className={styles.input_container}>
-        <label className={styles.label} htmlFor="type">
-          Nivel:
-        </label>
-        <input
-          type="text"
-          id="level"
-          {...register("level", { required: "Este campo es requerido" })}
-          className={styles.input}
-          defaultValue={courseSet?.level || ""}
-          onChange={(e) =>
-            setFormValues({
-              ...formValues,
-              level: e.target.value,
-            })
-          }
-        />
       </div>
 
       <div className={styles.input_container}>

@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal            from "sweetalert2";
 import Styles          from "./CourseCard.module.css";
 
-const CourseCard = ({ id, title, image, duration, level, isPaymentCourse }) => {
+const CourseCard = ({ id, title, image, isPaymentCourse }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const isAdmin = user?.admin;
@@ -51,10 +51,6 @@ const CourseCard = ({ id, title, image, duration, level, isPaymentCourse }) => {
           </div>
         }
         <h3>{title}</h3>
-        <div className={Styles["course-details-container"]}>
-          <p>{duration}</p>
-          <p>{level}</p>
-        </div>
         <Link to={`/detalle-curso/${id}`} className={Styles["card-button"]}>
           Ver Más
         </Link>
