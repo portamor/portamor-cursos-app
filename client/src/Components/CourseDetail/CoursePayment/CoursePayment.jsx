@@ -1,5 +1,6 @@
 import styles from './CoursePayment.module.css';
-import YapeQR from '../../../images/yapeQR.png';
+import YapeQR from '../../../images/yapeQR.jpeg';
+import PlinQR from '../../../images/plinQR.jpeg'
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import CustomButton from "../../CustomButton/CustomButton";
@@ -46,10 +47,11 @@ const CoursePayment = ({handleInscriptionClick}) => {
   return (
     <div className={styles.course_payment_box}>
       <h2>Inscribete a este curso pagando por Yape o Plin</h2>
-      <p>Una vez finalizado el pago, ingrese su información, y seleccione botón <strong>"Inscribirme"</strong></p>
+      <p>Una vez finalizado el pago, ingrese su información, y seleccione el botón <strong>"Inscribirme"</strong></p>
       <div className={styles.form_paymentMethod}>
         <div className={styles.form_qr}>
           <img src={YapeQR} alt='Yape QR' />
+          <img src={PlinQR} alt='Plin QR' />
         </div>
         <div className={styles.form_information}>
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
