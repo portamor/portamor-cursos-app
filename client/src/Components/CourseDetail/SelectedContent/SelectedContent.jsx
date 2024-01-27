@@ -22,7 +22,7 @@ const SelectedContent = ({ courseDetail, courseId, selectedButtonContent }) => {
       return <GeneralVision />
     
     case constants.INSCRIBIRME:
-      return <PaymentInscription registerBtnRef={registerBtnRef} />
+      return <PaymentInscription />
 
     case constants.COMENTARIOS:
       const isEqualToCourseId = courseReviews && courseReviews[0] && courseReviews[0].CourseId && courseReviews[0].CourseId === courseId;
