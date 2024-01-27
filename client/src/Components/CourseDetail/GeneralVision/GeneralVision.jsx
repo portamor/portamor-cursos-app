@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useMatch } from "react-router-dom";
 import Modal from "../../Modal/Modal";
 import CourseDetailCard from "../CourseDetailCard/CourseDetailCard";
-import CoursePayment from '../CoursePayment/CoursePayment';
 import certificateImg from "../../../images/certificate.png"
 import Swal from 'sweetalert2';
 import { inscribeUser, getCoursesOfUser } from "../../../Redux/actions";
@@ -37,8 +36,8 @@ export default function GeneralVision({ accessToken }) {
     userId && setPendingEnrolledUser(courseUsers.find((user) => user.id === userId && user.CourseInscription.enrolmentStatus === 'pendiente'));
   }, [userId, courseUsers]);
 
-  async function handleInscriptionClick(data = null) {
-    let paymentData = data === null ? { telephone: null, handleInscriptionClick: null } : data;
+  async function handleInscriptionClick() {
+    const paymentData = { telephone: null, holderPaymentMethod: null };
 
     if (isLoggedIn) {
       try {
@@ -47,11 +46,11 @@ export default function GeneralVision({ accessToken }) {
           title: 'Inscripción exitosa',
           text: response.message,
           icon: 'success',
-          timer: !paymentData.telephone ? 3000 : 5000
+          timer: 3000
         });
         setTimeout(() => {
           window.location.reload();
-        }, !paymentData.telephone ? 3000 : 5000);
+        }, 3000);
       } catch (error) {
         Swal.fire({
           title: 'Error en la inscripción',
@@ -69,18 +68,19 @@ export default function GeneralVision({ accessToken }) {
       <div className={styles["course-detail-info-container"]}>
         <div className={styles["course-detail-info"]}>
           <div>
-            {isLoggedIn ? !enrolledUser && (
-              courseDetail.isPaymentCourse ? (
-                !pendingEnrolledUser ?
-                  <CoursePayment handleInscriptionClick={handleInscriptionClick} />
-                :
-                  <h1 className={styles["ver-clases-message"]}>Su matrícula esta en proceso de activación. Se activará dentro de los próximos minutos. Refrescar la página web para visualizar la opcion IR A CLASES en el menu superior a este mensaje.</h1>
+            {
+              !courseDetail.isPaymentCourse ? (
+                isLoggedIn ? !enrolledUser && (
+                  <h1 className={styles["ver-clases"]} onClick={() => handleInscriptionClick()}> Inscribete ahora a este curso </h1>
+                ) : (
+                  <h1 className={styles["ver-clases"]} onClick={() => handleInscriptionClick()}>Inicia sesion para inscribirte a este curso</h1>
+                )
               ) : (
-                <h1 className={styles["ver-clases"]} onClick={() => handleInscriptionClick()}> Inscribete ahora a este curso </h1>
+                pendingEnrolledUser && (
+                  <h1 className={styles["ver-clases-message"]}>Su matrícula esta en proceso de activación. Se activará dentro de los próximos minutos. Refrescar la página para visualizar la opcion IR A CLASES en el menu superior a este mensaje.</h1>
+                )
               )
-            ) : (
-              <h1 className={styles["ver-clases"]} onClick={() => handleInscriptionClick()}>Inicia sesion para inscribirte a este curso</h1>
-            )}
+            }
             {showModal && (
               <Modal onClose={() => setShowModal(false)}>
                 <Modal />
