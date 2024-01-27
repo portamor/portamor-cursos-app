@@ -74,13 +74,19 @@ export const CourseDetail = () => {
               <button
                 className={constants.VISION_GENERAL === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
                 onClick={() => handleSelectContent(constants.VISION_GENERAL)}>Vision General</button>
+              {
+                courseDetail.isPaymentCourse && !enrolledUser && (
+                  <button
+                    className={constants.INSCRIBIRME === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
+                    onClick={() => handleSelectContent(constants.INSCRIBIRME)}>Inscribirme</button>
+                )
+              }
               <button
                 className={constants.PREGUNTAS_FRECUENTES === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
                 onClick={() => handleSelectContent(constants.PREGUNTAS_FRECUENTES)}>Preguntas Frecuentes</button>
               <button
                 className={constants.COMENTARIOS === selectedButton ? styles["selected-button"] : styles["button-not-selected"]}
                 onClick={() => handleSelectContent(constants.COMENTARIOS)}>Comentarios</button>
-
               {
                 enrolledUser && (
                   <Link className={styles["link-classes-button"]} to={`/clase/${courseId}/${firstVideoId}` }>Ir a las clases</Link>

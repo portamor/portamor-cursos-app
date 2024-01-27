@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import GeneralVision from "../GeneralVision/GeneralVision";
+import PaymentInscription from "../PaymentInscription/PaymentInscription";
 import CourseDetailCard from "../CourseDetailCard/CourseDetailCard";
 import ReviewCard from "../../ReviewCard/ReviewCard";
 import FYQ from "../FYQAccordion/FYQAccordion"; 
@@ -19,6 +20,9 @@ const SelectedContent = ({ courseDetail, courseId, selectedButtonContent }) => {
   switch (selectedButtonContent) {
     case constants.VISION_GENERAL:
       return <GeneralVision />
+    
+    case constants.INSCRIBIRME:
+      return <PaymentInscription registerBtnRef={registerBtnRef} />
 
     case constants.COMENTARIOS:
       const isEqualToCourseId = courseReviews && courseReviews[0] && courseReviews[0].CourseId && courseReviews[0].CourseId === courseId;
