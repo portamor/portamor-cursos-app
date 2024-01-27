@@ -68,8 +68,6 @@ const Paginated = () => {
               id={el.id}
               image={el.image}
               title={el.title}
-              duration={el.duration}
-              level={el.level}
               isPaymentCourse={el.isPaymentCourse}
             />
             )
