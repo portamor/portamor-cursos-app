@@ -48,7 +48,7 @@ const postInscription = async (req, res) => {
 
 const sendPendingNotification = async (notificationMessage) => {
   const firstDeviceToken = await getAllPaymentDevices();
-  const deviceToken = firstDeviceToken ? firstDeviceToken[0].dataValues.deviceToken : 'withoutdevicetocken';
+  const deviceToken = firstDeviceToken[0] ? firstDeviceToken[0].dataValues.deviceToken : 'withoutdevicetocken';
   const message = {
     token: deviceToken,
     notification: {
