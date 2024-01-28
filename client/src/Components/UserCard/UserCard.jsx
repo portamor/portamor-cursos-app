@@ -15,9 +15,14 @@ const UserCard = (props) => {
       <div className={styles["info-user-container"]}>
         <h2>{props.name} {props.lastName}</h2>
         <p className={styles["user-description"]}>
-          {props.description} 
+          {!props.editMode && props.description} 
         </p>
-        {props.instructor && <CustomButton onClick={props.onClick} content={"SELECCIONAR"} primary={true}/>}
+        {
+        props.instructor && (
+          props.editMode ? <CustomButton onClick={props.onClick} content={"EDITAR"} primary={true}/>
+          : <CustomButton onClick={props.onClick} content={"SELECCIONAR"} primary={true}/>
+        )
+        }
       </div>
 
     </div>

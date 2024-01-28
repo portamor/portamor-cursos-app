@@ -405,6 +405,36 @@ export function createInstructor(payload, setActualForm) {
   };
 }
 
+export function updateInstructor(payload) {
+  return async (dispatch) => {
+    try {
+      const updatedInstructor = await axios.put(`/instructor/${payload.id}`, {
+        name:            payload.name,
+        description:     payload.description,
+        profile_picture: payload.profile_picture,
+        score:           payload.score,
+        reviews:         payload.reviews,
+        courseId:        payload.courseId
+      });
+
+      Swal.fire({
+        icon: "success",
+        title: updatedInstructor.data.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+
+      dispatch({ type: actions.UPDATE_INSTRUCTOR, payload: updatedInstructor.data.data });
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: `El servidor ha respondido con el siguiente error: ${error.response.data.message}`,
+        confirmButtonText: "Aceptar",
+      });
+    }
+  };
+}
+
 export function addInstructorToCourse(instructorId, courseId, setActualForm) {
   return async (dispatch) => {
     try {

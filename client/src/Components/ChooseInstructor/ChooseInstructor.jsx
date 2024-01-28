@@ -6,19 +6,22 @@ import UserCard        from "../UserCard/UserCard";
 import styles          from "./ChooseInstructor.module.css"
 import * as actions    from "../../Redux/actions"
 
-
-const ChooseInstructor = ({ setActualForm }) => {
+const ChooseInstructor = ({ setActualForm, editMode, handleInstructorById, instructorName }) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(actions.getAllInstructors());
-  },[dispatch]);
-  
   const allInstructors = useSelector(state => state.allInstructors);
   const createdCourse  = useSelector(state => state.createdCourse);
+
+  useEffect(() => {
+    dispatch(actions.getAllInstructors()); 
+  },[dispatch, instructorName]);
   
   const handleSelectInstructorToCourse = (instructorId) => {
     dispatch(actions.addInstructorToCourse(instructorId, createdCourse.id, setActualForm));
+  };
+
+  const handleInstructorByIdOnChoose = (instructorId) => {
+    handleInstructorById(instructorId);
   };
 
   return (
@@ -31,8 +34,12 @@ const ChooseInstructor = ({ setActualForm }) => {
           key={instructor.id}
           image={instructor.profile_picture} 
           instructor={true}
-          onClick={() => handleSelectInstructorToCourse(instructor.id)}
-          description={instructor.description} />  
+          onClick={() => (
+            editMode ? handleInstructorByIdOnChoose(instructor.id)
+            : handleSelectInstructorToCourse(instructor.id)
+          )}
+          description={instructor.description}
+          editMode={editMode} />  
         )
       }
     </div>

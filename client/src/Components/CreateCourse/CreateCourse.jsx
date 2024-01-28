@@ -22,7 +22,7 @@ const CreateCourses = () => {
         actualForm === constants.SELECT_INSTRUCTOR_FORM && (
         <div className={styles["instructor-container"]}>
           <CreateInstructor setActualForm={setActualForm} /> 
-          <ChooseInstructor setActualForm={setActualForm} />
+          <ChooseInstructor setActualForm={setActualForm} editMode={false} />
         </div>
       )}
 
