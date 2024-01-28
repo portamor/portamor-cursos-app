@@ -18,6 +18,7 @@ export const GET_VIDEOS_STATE_COURSE         = "GET_VIDEOS_STATE_COURSE";
 //---- POST 
 export const CREATE_COURSE      = "CREATE_COURSE"
 export const CREATE_INSTRUCTOR  = "CREATE_INSTRUCTOR";
+export const UPDATE_INSTRUCTOR  = "UPDATED_INSTRUCTOR";
 export const CREATE_SECTION     = "CREATE_SECTION"
 export const CREATE_VIDEO       = "CREATE_VIDEO";
 export const CREATE_REVIEW      = "CREATE_REVIEW";
